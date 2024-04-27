@@ -1,0 +1,10 @@
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\bin\Debug\TestesMatrizes.exe
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\bin\Debug\TestesMatrizes.pdb
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\bin\Debug\IpeaMatrix.dll
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\bin\Debug\IpeaMatrix.pdb
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\obj\Debug\ResolveAssemblyReference.cache
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\obj\Debug\TestesMatrizes.Form1.resources
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\obj\Debug\TestesMatrizes.Properties.Resources.resources
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\obj\Debug\TestesMatrizes.csproj.GenerateResource.Cache
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\obj\Debug\TestesMatrizes.exe
+C:\Alex\IpeaMatrix\TestesMatrizes\TestesMatrizes\obj\Debug\TestesMatrizes.pdb

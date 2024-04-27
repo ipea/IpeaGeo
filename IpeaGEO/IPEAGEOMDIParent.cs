@@ -1,0 +1,729 @@
+﻿using System;
+using System.IO;
+using System.Windows.Forms;
+using IpeaGeo.Web;
+
+namespace IpeaGeo
+{
+    public partial class IPEAGEOMDIParent : Form
+    {
+        public int m_axis_info_count = 0;
+        private int childFormNumber = 0;
+        public SharpMap.Layers.VectorLayer layMapa;
+
+        //tentativa
+        Classes.clsArmazenamentoDados salvar = new Classes.clsArmazenamentoDados();
+
+        public IPEAGEOMDIParent()
+        {
+            InitializeComponent();
+
+            if (!File.Exists("IPEAGEODataConfig.xml"))
+                IpeaDataSelection.createXmlDataConfig();
+        } // constructor
+        
+        private void OpenFile(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+
+                //frmMapaTematico mapa_tem = new frmMapaTematico();
+                //mapa_tem.ClearXML();
+
+                //openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+
+                openFileDialog.Filter = "ShapeFile (*.shp)|*.shp|All Files (*.*)|*.*";
+                string FileName = "";
+                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    FileName = openFileDialog.FileName;
+                    Cursor.Current = Cursors.WaitCursor;
+                    frmMapa frmMapa = new frmMapa();
+                    frmMapa.Text = "Layer Principal [" + Path.GetFileNameWithoutExtension(FileName) + "]";
+                    frmMapa.Name = Path.GetFileNameWithoutExtension(FileName);
+                    frmMapa.MdiParent = this;
+                    frmMapa.strEnderecoMapa = FileName;
+
+                    //Coloca as variaveis do mapa
+                    clsMapa clsMapa = new clsMapa();
+                    frmMapa.strVariaveisMapa = clsMapa.informacaoVariaveis(FileName, 0);
+                    frmMapa.Show();
+                    Cursor.Current = Cursors.Default;
+
+                    //Guarda as variáveis utilizadas para salvar o projeto
+                    fileshape = Path.GetFileNameWithoutExtension(FileName);
+                    shapeFiles = new string[1];
+                    shapeFiles[0] = Path.GetFileName(FileName);
+
+                    //frmMapa mapa = new frmMapa();
+                    //mapa.clear();
+
+                    //frmMapaTematico mapa_tem = new frmMapaTematico();
+                    //mapa_tem.ClearXML();
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LayoutMdi(MdiLayout.Cascade);
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        
+        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LayoutMdi(MdiLayout.TileVertical);
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LayoutMdi(MdiLayout.TileHorizontal);
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LayoutMdi(MdiLayout.ArrangeIcons);
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form childForm in MdiChildren)
+            {
+                childForm.Close();
+            }
+        }
+
+        private void MDIParent1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                Form1 frmAbertura = new Form1();
+                frmAbertura.MdiParent = this;
+                frmAbertura.Show();
+                if (MdiChildren.Length > 0 && MdiChildren[0].Text != "IpeaGEO 1.0.1")
+                {
+                    foreach (frmMapa childForm in MdiChildren)
+                    {
+                        try
+                        {
+                            childForm.mapImage1.Map.ZoomToExtents();
+                            childForm.mapImage1.Refresh();
+                        }
+                        catch (Exception)
+                        {
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        #region Abrir Dados
+        public string appPath = Path.GetDirectoryName(Application.ExecutablePath);
+        private static string[] shapeFiles;
+        private static string[] dataFiles;// = new string[1];
+        private static string fileshape;
+
+        [Obsolete("This method need to be implemented out of this class.")]
+        public void AbrirDados(DataResource resource)
+        {
+            shapeFiles = new string[resource.shapeExt.Length];
+            dataFiles = new string[1];
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            for(int k = 0; k < resource.shapeExt.Length; k++)
+                shapeFiles[k] = String.Format("{0}{1}", resource.shapeFile, resource.shapeExt[k]);
+
+            dataFiles[0] = resource.dataFile; 
+            fileshape = resource.shapeFile;
+
+            if (!salvar.Leitura_efetuada)
+                //salvar.CapturaDados(resource.shapeFile, resource.dataFile, shapeFiles, dataFiles);
+ 
+            if(IpeaDataSelection.openData(resource))
+            {
+                string fileName = String.Format(@"{0}\malhas\{1}", appPath, resource.shapeFile);
+                frmMapa frmMapa = new frmMapa();
+                frmMapa.Text = "Layer Principal [" + Path.GetFileNameWithoutExtension(fileName) + "]";
+                frmMapa.Name = Path.GetFileNameWithoutExtension(fileName);
+                frmMapa.MdiParent = this;
+                frmMapa.strEnderecoMapa = fileName + ".shp";
+
+                //Coloca as variaveis do mapa
+                clsMapa clsMapa = new clsMapa();
+                frmMapa.strVariaveisMapa = clsMapa.informacaoVariaveis(fileName + ".shp", 0);
+                frmMapa.Show();
+                frmMapa.HabilitaFuncoesBasesDadosIPEA = true;
+
+                frmMapa mapa = new frmMapa();
+                mapa.clear();
+            } // if
+            Cursor.Current = Cursors.Default;
+        } // AbrirDados()
+
+        [Obsolete("This method need to be implemented out of this class.")]
+        public void AbrirDados(DataResourceItem item, string url)
+        {
+            shapeFiles = new string[item.shapeExt.Length];
+            dataFiles = new string[1];
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            for (int k = 0; k < item.shapeExt.Length; k++)
+                shapeFiles[k] = String.Format("{0}.{1}", item.shapeFile, item.shapeExt[k]);
+
+            dataFiles[0] = item.dataFile;
+            fileshape = item.shapeFile;
+
+            if (!salvar.Leitura_efetuada)
+                //salvar.CapturaDados(item.shapeFile, item.dataFile, shapeFiles, dataFiles);
+
+            if (IpeaDataSelection.openData(item, url))
+            {
+                string fileName = String.Format(@"{0}\malhas\{1}", appPath, item.shapeFile); 
+                frmMapa frmMapa = new frmMapa();
+                frmMapa.Text = "Layer Principal [" + Path.GetFileNameWithoutExtension(fileName) + "]";
+                frmMapa.Name = Path.GetFileNameWithoutExtension(fileName);
+                frmMapa.MdiParent = this;
+                frmMapa.strEnderecoMapa = fileName + ".shp";
+
+                //Coloca as variaveis do mapa
+                clsMapa clsMapa = new clsMapa();
+                frmMapa.strVariaveisMapa = clsMapa.informacaoVariaveis(fileName + ".shp", 0);
+                frmMapa.Show();
+                frmMapa.HabilitaFuncoesBasesDadosIPEA = true;
+
+                frmMapa mapa = new frmMapa();
+                mapa.clear();
+            } // if
+            Cursor.Current = Cursors.Default;
+        } // AbrirDados()
+
+        #endregion
+
+        private void MDIParent1_MaximizedBoundsChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MdiChildren.Length > 0 && MdiChildren[0].Text != "IpeaGEO 1.0.1")
+                {
+                    foreach (Form childForm in MdiChildren)
+                    {
+                        try
+                        {
+                            if (childForm is frmMapa)
+                            {
+                                ((frmMapa)childForm).mapImage1.Map.ZoomToExtents();
+                                ((frmMapa)childForm).mapImage1.Refresh();
+                            }
+                        }
+                        catch 
+                        {
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void MDIParent1_MaximumSizeChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MdiChildren.Length > 0 && MdiChildren[0].Text != "IpeaGEO 1.0.1")
+                {
+                    foreach (Form childForm in MdiChildren)
+                    {
+                        try
+                        {
+                            if (childForm is frmMapa)
+                            {
+                                ((frmMapa)childForm).mapImage1.Map.ZoomToExtents();
+                                ((frmMapa)childForm).mapImage1.Refresh();
+                            }
+                        }
+                        catch 
+                        {
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void MDIParent1_Move(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MdiChildren.Length > 0 && MdiChildren[0].Text != "IpeaGEO 1.0.1")
+                {
+                    foreach (Form childForm in MdiChildren)
+                    {
+                        try
+                        {
+                            if (childForm is frmMapa)
+                            {
+                                ((frmMapa)childForm).mapImage1.Map.ZoomToExtents();
+                                ((frmMapa)childForm).mapImage1.Refresh();
+                            }
+                        }
+                        catch 
+                        {
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void MDIParent1_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MdiChildren.Length > 0 && MdiChildren[0].Text != "IpeaGEO 1.0.1")
+                {
+                    foreach (Form childForm in MdiChildren)
+                    {
+                        try
+                        {
+                            if (childForm is frmMapa)
+                            {
+                                ((frmMapa)childForm).mapImage1.Map.ZoomToExtents();
+                                ((frmMapa)childForm).mapImage1.Refresh();
+                            }
+                        }
+                        catch 
+                        {
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void crosssectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.RegressoesEspaciais.FormRegressaoGMMConley frm = new IpeaGeo.RegressoesEspaciais.FormRegressaoGMMConley();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void hierárquicosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.frmCluster frm = new IpeaGeo.frmCluster();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void cálculoDeTaxasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormCalculoTaxas frm = new IpeaGeo.Modelagem.FormCalculoTaxas();
+                frm.MdiParent = this;
+                frm.Show();                
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void regressãoLinearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormLinearRegression frm = new IpeaGeo.Modelagem.FormLinearRegression();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void dadosDePainelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.RegressoesEspaciais.FormRegressaoDadosPainelEspacial frm = new IpeaGeo.RegressoesEspaciais.FormRegressaoDadosPainelEspacial();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void propensityScoreMatchingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormPropensityScore frm = new IpeaGeo.Modelagem.FormPropensityScore();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void regressãoComDadosBináriosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormRegressaoDadosBinarios frm = new IpeaGeo.Modelagem.FormRegressaoDadosBinarios();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void regressaoLinearComDadosDePainelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormDadosPainelNaoEspacial frm = new IpeaGeo.Modelagem.FormDadosPainelNaoEspacial();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void distribuiçõesContínuasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormDistribuicoesParametrics frm = new IpeaGeo.Modelagem.FormDistribuicoesParametrics();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void descriçãoDosDadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.RegressoesEspaciais.FormAnalisesBasicas frm = new IpeaGeo.RegressoesEspaciais.FormAnalisesBasicas();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void distribuiçõesDiscretasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormDistribuicoesDiscretas frm = new IpeaGeo.Modelagem.FormDistribuicoesDiscretas();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        IpeaGeo.RegressoesEspaciais.FormAreasMinimasComparaveis frm = new IpeaGeo.RegressoesEspaciais.FormAreasMinimasComparaveis();
+
+        private void compatibilizaçãoDeVariáveisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.RegressoesEspaciais.FormAreasMinimasComparaveis frm = new IpeaGeo.RegressoesEspaciais.FormAreasMinimasComparaveis();
+                frm.MdiParent = this;
+                frm.Show();   
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void kMeansToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.K_means frm = new IpeaGeo.Modelagem.K_means();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void análiseDeComponentesPrincipaisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.ComponentesPrincipais.FormComponentesPrincipais frm = new IpeaGeo.Modelagem.ComponentesPrincipais.FormComponentesPrincipais();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void análiseFatorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.frmAnaliseFatorial frm = new IpeaGeo.Modelagem.frmAnaliseFatorial();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void métodosDeApoioÀDecisãoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.decisaoMulticriterios.FormDecisaoMulticriterios frm = new IpeaGeo.Modelagem.decisaoMulticriterios.FormDecisaoMulticriterios();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void testesNãoParamétricosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.FormNonParametric frm = new IpeaGeo.Modelagem.FormNonParametric();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void clustersHierárquicosnãoespaciaisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.Clusters_hierarquicos.FormClustersHierarquicosNaoEspaciais frm = new IpeaGeo.Modelagem.Clusters_hierarquicos.FormClustersHierarquicosNaoEspaciais();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void MDIParent1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                System.GC.Collect();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
+
+        private void integraçãoNacionalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.frmSelecaoDadosIPEA frm = new Forms.frmSelecaoDadosIPEA();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void downloadDadosIPEAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.frmSelecaoDadosIPEA frm = new Forms.frmSelecaoDadosIPEA();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void tutorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //acessa o form AvisoLink e muda propriedades dele para se adequar ao aviso Tutorial
+                IpeaGeo.Forms.frmAvisoLink avisoTutorial = new Forms.frmAvisoLink();
+                avisoTutorial.Text = "Tutorial";
+                avisoTutorial.Label("O tutorial do IpeaGEO pode ser encontrado no site pelo seguinte link:");
+                avisoTutorial.Link("http://www.ipea.gov.br/ipeageo/arquivos/Tutorial_IpeaGEO_VF.pdf");
+                avisoTutorial.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void sobreToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.RegressoesEspaciais.FormSobreIpeaGEO frm = new IpeaGeo.RegressoesEspaciais.FormSobreIpeaGEO();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void licençaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //acessa o form AvisoLink e muda propriedades dele para se adequar ao aviso Tutorial
+                IpeaGeo.Forms.frmAvisoLink avisoLicenca = new Forms.frmAvisoLink();
+                avisoLicenca.Text = "Licença IpeaGEO";
+                avisoLicenca.Label("A licença do IpeaGEO pode ser encontrada no site pelo seguinte link:");
+                avisoLicenca.Link("http://www.ipea.gov.br/ipeageo/arquivos/Licenca_IpeaGEO.pdf");
+                avisoLicenca.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void rotaÓtimaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.RotaOtima.FormRotaOtimaDijkstra frm = new Modelagem.RotaOtima.FormRotaOtimaDijkstra();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
+
+        private void modelosLinearesGeneralizadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpeaGeo.Modelagem.RegressaoGLM frm = new IpeaGeo.Modelagem.RegressaoGLM();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void AbrirTrabalhoSalvoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog trabalho_recente = new OpenFileDialog();
+            trabalho_recente.Filter = "xml Files (*.xml)|*.xml";
+            if (trabalho_recente.ShowDialog(this) == DialogResult.OK)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                salvar.LerXML(trabalho_recente.FileName);
+                Cursor.Current = Cursors.Default;
+            }
+        }
+    }
+}

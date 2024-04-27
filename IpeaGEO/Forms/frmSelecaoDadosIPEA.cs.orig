@@ -1,0 +1,1144 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+
+using System.Drawing.Drawing2D;
+
+
+using System.Windows.Forms;
+using System.IO;
+using ADOX;
+using SharpMap.Geometries;
+using SharpMap.Data;
+using SharpMap.Data.Providers;
+using System.Collections;
+using System.Xml.XPath;
+using System.Xml.Xsl;
+using System.Xml;
+using System.Drawing.Imaging;
+using ZedGraph;
+using IpeaGEO.Forms;
+using iTextSharp;
+using IpeaGEO.RegressoesEspaciais;
+using StatConnControls;
+using System.Text.RegularExpressions;
+
+
+
+
+namespace IpeaGEO.Forms
+{
+    public partial class frmSelecaoDadosIPEA : Form
+    {
+
+        private System.Data.OleDb.OleDbConnection m_cnn = new System.Data.OleDb.OleDbConnection();
+        private System.Data.OleDb.OleDbDataAdapter m_dap = new System.Data.OleDb.OleDbDataAdapter();
+        private string strExtensao = "";
+        private string strEnderecoBase = "";
+        private DataSet ds_tabelas_csv = new System.Data.DataSet();
+        
+        public frmSelecaoDadosIPEA()
+        {
+            InitializeComponent();
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #region Leitura das Tabelas em CSV
+
+        public static void TransferCSVToTable(ref DataTable dt1, string filePath)
+        {
+            string[] csvRows = System.IO.File.ReadAllLines(filePath);
+            string[] fields = null;
+            foreach (string csvRow in csvRows)
+            {
+                fields = csvRow.Split(';');
+
+                if (dt1.Columns.Count == 0)
+                {
+                    for (int i = 0; i < fields.Length; i++)
+                    {
+                        dt1.Columns.Add(fields[i]);
+                    }
+                }
+                else
+                {
+                    DataRow row = dt1.NewRow();
+                    row.ItemArray = fields;
+                    dt1.Rows.Add(row);
+                }
+            }
+
+
+        }
+
+
+
+        #endregion
+
+        private string m_txt_metadados = "";
+
+        private void LendoTXTMetaDados()
+        {
+            /*
+            DataTable dt = new System.Data.DataTable();
+
+            dt.Columns.Add("TreeNode", typeof(string));
+            dt.Columns.Add("Descricao", typeof(string));
+
+            dt.Rows.Add();
+            dt.Rows.Add();
+
+            dt.Rows[0][0] = "Mesoregião";
+            dt.Rows[0][1] = "Descrição da meso região";
+
+            dt.Rows[1][0] = "Microregião";
+            dt.Rows[1][1] = "Descrição da micro região";
+            */
+
+            // acha o endereco de onde o aplicativo esta sendo lido
+            string strEndereco1 = Application.ExecutablePath;
+
+            FileInfo fiExcel1 = new FileInfo(strEndereco1);
+             
+            ArrayList arquivos = new ArrayList();
+            arquivos.Add("\\DescricaoMetadados.txt");
+            
+            string strEndCompleto = fiExcel1.DirectoryName + (string)arquivos[0];
+
+            using (StreamReader sr = new StreamReader(strEndCompleto, Encoding.GetEncoding("ISO-8859-1")))
+            {
+                m_txt_metadados = sr.ReadToEnd();
+                //richTextBox1.Text = m_txt_metadados;
+            }
+        }
+
+        private void frmDados_Load(object sender, EventArgs e)
+        {
+            LendoTXTMetaDados();
+
+            tabControl1.TabPages.Remove(this.tabPage2);
+
+            this.txtPesquisar.ForeColor = Color.Silver;
+
+            //impede que os split containers mudem a razao de divisao entre eles//
+            spc_1.IsSplitterFixed = true;
+            spc_2.IsSplitterFixed = true;
+
+            try
+            {
+                clsUtilTools mUtils1 = new clsUtilTools();
+
+                //Cria um DataTable
+                DataTable dt1 = new DataTable();
+
+                // acha o endereco de onde o aplicativo esta sendo lido
+                string strEndereco1 = Application.ExecutablePath;
+
+                FileInfo fiExcel1 = new FileInfo(strEndereco1);
+
+                ArrayList arquivos = new ArrayList();
+                arquivos.Add("\\TesteMetadados.csv");
+                
+                ArrayList nomes = new ArrayList();
+                nomes.Add("Arqui1");
+                
+                string strEndCompleto = "";
+                
+                for (int i = 0; i < arquivos.Count; i++)
+                {
+                    dt1 = new System.Data.DataTable();
+
+                    strEndCompleto = fiExcel1.DirectoryName + (string)arquivos[i];
+
+                    TransferCSVToTable(ref dt1, strEndCompleto);
+
+                    dt1.TableName = (string)nomes[i];
+                    
+                    ds_tabelas_csv.Tables.Add(dt1);
+                }
+
+                #region Combobox
+
+                //--- preenchendo o combobox ---//
+
+                cmbListaTemas.ForeColor = Color.Silver;
+
+                dt1 = (DataTable)ds_tabelas_csv.Tables[0];
+                cmbListaTemas.Items.Clear();
+                cmbListaTemas.Items.Add("Pesquisar em");
+                cmbListaTemas.Items.Add(" ");
+                for (int i = 0; i < dt1.Columns.Count - 2; i++)
+                {
+                    cmbListaTemas.Items.Add((string)dt1.Columns[i].ColumnName);
+                }
+                cmbListaTemas.SelectedIndex = 0;
+
+                #endregion           
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
+
+        #region Importar
+
+        public string appPath = Path.GetDirectoryName(Application.ExecutablePath);
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            //progressBar1.Enabled = true;
+            //progressBar1.Visible = true;
+            //CalculateAll(progressBar1);
+
+            string nome_node = treeView1.SelectedNode.Name;
+
+            switch (nome_node)
+            {
+                case "microregiao":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosMicroregiao();
+                        break;
+                    }
+                case "mesoregiao":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosMesoRegiao();
+                        break;
+                    }
+                case "SP_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbirDadosSaoPaulo();
+                        break;
+                    }
+                case "SC_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosSantaCatarina();
+                        break;
+                    }
+                case "SE_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosSergipe();
+                        break;
+                    }
+                case "TO_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosTocantins();
+                        break;
+                    }
+                case "RR_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosRoraima();
+                        break;
+                    }
+                case "RO_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosRondonia();
+                        break;
+                    }
+                case "RS_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosRS();
+                        break;
+                    }
+                case "RN_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosRN();
+                        break;
+                    }
+                case "RJ_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosRJ();
+                        break;
+                    }
+                case "PI_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosPiaui();
+                        break;
+                    }
+                case "PE_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosPernambuco();
+                        break;
+                    }
+                case "PR_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosParana();
+                        break;
+                    }
+                case "PB_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosParaiba();
+                        break;
+                    }
+                case "PA_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosPara();
+                        break;
+                    }
+                case "MG_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosMG();
+                        break;
+                    }
+                case "MS_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosMS();
+                        break;
+                    }
+                case "MT_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosMT();
+                        break;
+                    }
+                case "MA_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosMA();
+                        break;
+                    }
+
+                case "GO_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosGoias();
+                        break;
+                    }
+                case "ES_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosES();
+                        break;
+                    }
+                case "DF_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosDF();
+                        break;
+                    }
+                case "CE_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosCeara();
+                        break;
+                    }
+                case "BA_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosBahia();
+                        break;
+                    }
+                case "AP_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosAmapa();
+                        break;
+                    }
+                case "AM_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosAM();
+                        break;
+                    }
+                case "AL_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosAL();
+                        break;
+                    }
+                case "AC_Mun97_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosAcre();
+                        break;
+                    }
+                case "BR_MUN1997_SE_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosSudeste();
+                        break;
+                    }
+                case "BR_MUN1997_S_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosSul();
+                        break;
+                    }
+                case "BR_MUN1997_NE_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosNordeste();
+                        break;
+                    }
+                case "BR_MUN1997_N_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosNorte();
+                        break;
+                    }
+                case "BR_MUN1997_CO_region":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosCO();
+                        break;
+                    }
+                case "municipio5564":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosM5564();
+                        break;
+                    }
+                case "municipio":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosM5507();
+                        break;
+                    }
+                case "sao_francisco":
+                    {
+                        ((MDIParent1)this.MdiParent).AbrirDadosSF();
+                        break;
+                    }
+            }
+            //progressBar1.Visible = false;
+            //progressBar1.Enabled = false;
+        }
+
+        #endregion
+                
+        bool txtBox = false;
+        private void txtPesquisar_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
+     {
+            txtPesquisar.ForeColor = Color.Black;
+
+            if (txtBox == false)
+            {
+                txtPesquisar.Text = "";
+                txtBox = true;
+            }
+            else
+            {
+
+            }
+        }
+
+        private void btnClose_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        //--muda o cursor quando este estiver em cima do tree view--//
+        private void treeView1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            Cursor = Cursors.Default;            
+        }
+
+        private bool m_cmbtemas_iniciado = false;
+
+        private void cmbListaTemas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!m_cmbtemas_iniciado)
+                {
+                    cmbListaTemas.ForeColor = Color.Black;
+                    cmbListaTemas.Items.RemoveAt(0);
+                    m_cmbtemas_iniciado = true;
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
+
+        private void btnPesquisa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                int n_tabs = tabControl1.TabCount;
+                    
+                if (n_tabs < 2)
+                    
+                tabControl1.TabPages.Add(tabPage2);                    
+                
+                tabControl1.SelectedIndex = 1;
+
+                treeView1.CollapseAll();
+
+                DataTable dt1 = (DataTable)ds_tabelas_csv.Tables[0];
+                string pesquisa = (txtPesquisar.Text).ToLower();
+                string tentativa = "";
+
+                ArrayList dim1 = new ArrayList();
+                ArrayList dim2 = new ArrayList();
+                ArrayList st_encontrado = new ArrayList();
+
+                for (int i = 0; i < dt1.Columns.Count - 2; i++)
+                {
+                    for (int j = 0; j < ds_tabelas_csv.Tables[i + 1].Rows.Count; j++)
+                    {
+                        tentativa = ((string)ds_tabelas_csv.Tables[i + 1].Rows[j][1]);
+                        if (EncontrarString(pesquisa, tentativa.ToLower()))
+                        {
+                            dim1.Add(i);
+                            dim2.Add(j);
+                            st_encontrado.Add(tentativa);
+                        }
+                    }
+                }
+<<<<<<< HEAD
+                string input;
+                int index;
+                int dados;
+                output3="";
+                output3 = txtPesquisar.Text;
+                //CapitalizeVowels(input);
+                Fonetizar(output3);
+                Fonetizar(m_txt_metadados);
+                index = output2.IndexOf(output3);
+                dados = output2.CompareTo(output3);
+=======
+
+                //Classes.clsAlgoritmoFonetico s1 = new Classes.clsAlgoritmoFonetico();
+                //txtPesquisar.Text.CompareTo(m_txt_metadados);
+                
+                string input;
+                input = "";
+                input = txtPesquisar.Text;
+                
+                
+                FerramentaPesquisa(input);
+                SomenteLetras(output1);
+                FonetizarParticula(output2);
+                RemoveAcentos(output2);
+                TrataConsoanteMuda(output3, consoante, complemento);            
+                SubstituiTerminacao(output3);
+                Fonetizar(output3);
+                
+                
+                
+                
+
+>>>>>>> 38b3da32e73741b0aa07d03e448ab21d0e389cc5
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
+
+        private bool EncontrarString(string pesquisa, string tentativa)
+        {
+            double valor_corte = 1000;
+            if (DistStrings(pesquisa, tentativa) < valor_corte)
+                return true;
+
+            return false;
+        }
+
+        private double DistStrings(string pesquisa, string tentativa)
+        {
+            double res = Double.PositiveInfinity;
+
+            double indice = tentativa.IndexOf(pesquisa);
+
+            if (indice >= 0) res = 0;
+
+            return res;
+        }
+
+        // --- tecla enter ligada ao botao pesquisar --- 
+        //private void frmDados_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        //{
+        //    {
+        //        if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+        //        {
+        //            btnPesquisa_Click(sender, e);
+        //        }
+        //    }
+        //}
+
+        protected void treeView1_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
+        {
+            // --- mostra janela de qual node foi escolhido --- //
+            MessageBox.Show(e.Node.Text);
+        }
+
+        #region Metadados RichTextBox
+
+        // Metodo para poder selecionar o no com o botao direito mouse!
+        private void treeView1_AfterSelect_1(object sender, System.Windows.Forms.TreeViewEventArgs e)
+        {
+            string nome_node = treeView1.SelectedNode.Name;
+
+            /*
+            DataTable dt1 = (DataTable)ds_tabelas_csv.Tables[0];
+
+            for (int i = 0; i < dt1.Rows.Count; i++)
+            {
+                DataRow row = dt1.Rows[i];
+
+                if (nome_node == row[0].ToString())
+                {
+                    richTextBox1.Clear();
+                    string texto = row[1].ToString();
+                    richTextBox1.AppendText(texto);
+                }
+            }
+            */
+
+            int pos = m_txt_metadados.IndexOf("//" + nome_node + "//");
+            if (pos >= 0)
+            {
+                string aux1 = m_txt_metadados.Substring(pos);
+                int pos1 = aux1.IndexOf("{");
+                int pos2 = aux1.IndexOf("}");
+
+                string desc = aux1.Substring(pos1 + 3, pos2 - pos1 - 3);
+
+                richTextBox1.Text = desc;
+            }
+            else
+            {
+                richTextBox1.Text = "";
+            }
+        }      
+
+        #endregion 
+
+        private void txtPesquisar_TextChanged(object sender, EventArgs e)
+        {
+            txtPesquisar.ForeColor = Color.Black;
+        }
+
+        private void txtPesquisar_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                if (txtPesquisar.TextLength >= 0)
+                {
+                    btnPesquisa.PerformClick();
+                }
+            }
+        }
+        //private void CalculateAll(System.Windows.Forms.ProgressBar progressbar)
+        //{
+            
+        //    progressBar1.Maximum = 1000000;
+        //    progressBar1.Step = 1;
+        //    for (int i = 0; i < 1000000; i++)
+        //    {
+        //        double pow = Math.Pow(i, i);
+        //        progressBar1.PerformStep();
+        //    }
+        //}
+<<<<<<< HEAD
+        string output = string.Empty;
+=======
+        #region algoritmo de pesquisa
+        
+        #endregion
+>>>>>>> 38b3da32e73741b0aa07d03e448ab21d0e389cc5
+        string output1 = string.Empty;
+        string output2 = string.Empty;
+        string output3 = string.Empty;
+        char consoante;
+        char complemento;
+<<<<<<< HEAD
+
+        #region Algoritmo de Pesquisa Fonética
+        public string CapitalizeVowels(string input)
+        {
+            
+            if (string.IsNullOrEmpty(input)) //since a string is a class object, it could be null
+                return string.Empty;
+            else
+            {                
+=======
+        public string FerramentaPesquisa(string input)
+        {
+            if (string.IsNullOrEmpty(input)) //since a string is a class object, it could be null
+            {
+                return string.Empty;
+            }
+            else
+            {
+>>>>>>> 38b3da32e73741b0aa07d03e448ab21d0e389cc5
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if (input[i] == 'a' || input[i] == 'e' ||
+                        input[i] == 'i' || input[i] == 'o' ||
+                        input[i] == 'u')
+<<<<<<< HEAD
+                        output += input[i].ToString().ToUpper(); //Vowel
+                    else
+                        output += input[i].ToString().ToLower(); //Not vowel
+                }
+                
+                return output;
+                            
+            }
+            
+        }
+        
+        public string Fonetizar(string input, bool consulta = false)
+            {
+                input = RemoveAcentos(input.ToUpperInvariant());
+
+                if (input.Equals("H"))
+                {
+                    input = "AGA";
+                }
+
+                input = SomenteLetras(input);
+
+                if (string.IsNullOrEmpty(input))
+                {
+                    return string.Empty;
+                }
+
+                input = FonetizarParticula(input);
+                input = SubstituiTerminacao(input);
+                input = TrataConsoanteMuda(input, consoante, complemento);
+                
+                //Eliminar palavras especiais
+                input = input.Replace(" LTDA ", " ");
+
+                //Eliminar preposições
+                var preposicoes = new[] { " DE ", " DA ", " DO ", " AS ", " OS ", " AO ", " NA ", " NO ", " DOS ", " DAS ", " AOS ", " NAS ", " NOS ", " COM " };
+                input = preposicoes.Aggregate(input, (current, preposicao) => current.Replace(preposicao, " "));
+
+                //Converte algarismos romanos para números
+                var algRomanos = new[] { " V ", " I ", " IX ", " VI ", " IV ", " II ", " VII ", " III ", " X ", " VIII " };
+                var numeros = new[] { " 5 ", " 1 ", " 9 ", " 6 ", " 4 ", " 2 ", " 7 ", " 3 ", " 10 ", " 8 " };
+                for (int i = 0; i < algRomanos.Length; i++)
+                {
+                    input = input.Replace(algRomanos[i], numeros[i]);
+                }
+
+                //Converte numeros para literais
+                var algarismosExtenso = new[] { "ZERO", "UM", "DOIS", "TRES", "QUATRO", "CINCO", "SEIS", "SETE", "OITO", "NOVE" };
+                for (int i = 0; i < 10; i++)
+                {
+                    input = input.Replace(i.ToString(), algarismosExtenso[i]);
+                }
+
+                //Elimina preposições e artigos
+                var letras = new[] { " A ", " B ", " C ", " D ", " E ", " F ", " G ", " H ", " I ", " J ", " K ", " L ", " M ", " N ", " O ", " P ", " Q ", " R ", " S ", " T ", " U ", " V ", " X ", " Z ", " W ", " Y " };
+                input = letras.Aggregate(input, (current, letra) => current.Replace(letra, " "));
+
+                input = input.Trim();
+                var particulas = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var output = new string[particulas.Length];
+                for (var i = 0; i < particulas.Length; i++)
+                {
+                    output[i] = FonetizarParticula(particulas[i]);
+                }
+                string output1 = string.Join(" ", output).Trim();
+
+                if (consulta)
+                {
+                    output1 = "%" + string.Join("%%", output) + "%";
+                }
+                //return output1;
+                if (input.Length < 200)
+                {
+                    output3 = input;
+                }
+                else
+                {
+                    input = output2;
+                }
+                return output3;
+                
+            }
+        
+        public string SomenteLetras(string output1)
+            {
+                const string letras = "ABCDEFGHIJKLMNOPQRSTUVXZWY ";
+                //var output2 = string.Empty;
+                var letraAnt = output1[0];
+                foreach (var letraT in output1)
+                {
+                    foreach (var letraC in letras.Where(letraC => letraC == letraT).TakeWhile(letraC => letraAnt != ' ' || letraT != ' '))
+                    {
+                        output2 += letraC;
+                        letraAnt = letraT;
+                        break;
+                    }
+                }
+
+                return output2.ToUpperInvariant();
+            }
+        
+        public string FonetizarParticula(string input)
+            {
+                string aux2;
+                int j;
+                const string letras = "ABPCKQDTEIYFVWGJLMNOURSZX9";
+                const string codFonetico = "123444568880AABCDEEGAIJJL9";
+
+                input = input.ToUpperInvariant();
+                string output3 = input[0].ToString();
+
+                //Elimina os caracteres repetidos
+                for (int i = 1; i < input.Length; i++)
+                {
+                    if (input[i - 1] != input[i])
+                    {
+                        output3 += input[i];
+                    }
+                }
+
+                //Iguala os fonemas parecidos
+                if (output3[0].Equals('W'))
+                {
+                    if (output3[1].Equals('I'))
+                    {
+                        output3 = output3.Remove(0, 1).Insert(0, "U");
+                    }
+                    else if ("A,E,O,U".Contains(output3[1]))
+                    {
+                        output3 = output3.Remove(0, 1).Insert(0, "V");
+                    }
+                }
+                output3 = SubstituiTerminacao(output3);
+
+                var caracteres = new[]
+                                          {
+                                              "TSCH", "SCH", "TSH", "TCH", "SH", "CH", "LH", "NH", "PH", "GN", "MN", "SCE", "SCI", "SCY"
+                                              , "CS", "KS", "PS", "TS", "TZ", "XS", "CE", "CI", "CY", "GE", "GI", "GY", "GD", "CK", "PC"
+                                              , "QU", "SC", "SK", "XC", "SQ", "CT", "GT", "PT"
+                                          };
+                var caracteresSub = new[]
+                                             {
+                                                 "XXXX", "XXX", "XXX", "XXX", "XX", "XX", "LI", "NN", "FF", "NN", "NN", "SSI", "SSI",
+                                                 "SSI", "SS", "SS", "SS", "SS", "SS", "SS", "SE", "SI", "SI", "JE", "JI", "JI", "DD",
+                                                 "QQ", "QQ", "QQ", "SQ", "SQ", "SQ", "99", "TT", "TT", "TT"
+                                             };
+                for (int i = 0; i < caracteres.Length; i++)
+                {
+                    output3 = output3.Replace(caracteres[i], caracteresSub[i]);
+                }
+
+                //Trata consoantes mudas
+                output3 = TrataConsoanteMuda(output3, 'B', 'I');
+                output3 = TrataConsoanteMuda(output3, 'D', 'I');
+                output3 = TrataConsoanteMuda(output3, 'P', 'I');
+
+                //Trata as letras
+                //Retira letras iguais
+                if (output3[0].Equals('H'))
+                {
+                    aux2 = Convert.ToString(output3[1]);
+                    j = 2;
+                }
+                else
+                {
+                    aux2 = Convert.ToString(output3[0]);
+                    j = 1;
+                }
+
+                while (j < output3.Length)
+                {
+                    if (output3[j] != output3[j - 1] && output3[j] != 'H')
+                    {
+                        aux2 += output3[j];
+                    }
+                    j++;
+                }
+
+                output3 = aux2;
+
+                //Transforma letras em códigos fonéticos
+                return output3;//.Select(chr => letras.IndexOf(chr)).Aggregate(string.Empty, (current, n) => current + codFonetico[n]);
+            }
+
+        public string TrataConsoanteMuda(string input, char consoante, char complemento)
+            {
+                var i = input.IndexOf(consoante);
+                while (i > -1)
+                {
+                    if (i>=input.Length-1 || !"AEIOU".Contains(input[i + 1]))
+                    {
+                        input = input.Insert(i + 1, Convert.ToString(complemento));
+                        i++;
+                    }
+                    i = input.IndexOf(consoante, ++i);
+                }
+                return input;
+            }
+
+        public string SubstituiTerminacao(string input)
+            {
+                input = RemoveAcentos(input);
+
+                var terminacao = new[] { "N", "B", "D", "T", "W", "AM", "OM", "OIM", "UIM", "CAO", "AO", "OEM", "ONS", "EIA", "X", "US", "TH" };
+                var terminacaoSub = new[] { "M", "", "", "", "", "N", "N", "N", "N", "SSN", "N", "N", "N", "IA", "IS", "OS", "TI" };
+                var tamanhoMinStr = new[] { 2, 3, 3, 3, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 3 };
+                int tamanho = 0;    
+                do
+                {                
+                    for (int i = 0; i < terminacao.Length; i++)
+                    {
+                        if (input.EndsWith(terminacao[i]) && input.Length >= tamanhoMinStr[i])
+                        {
+                            var startIndex = input.Length - terminacao[i].Length;
+                            input = input.Remove(startIndex, terminacao[i].Length)
+                                .Insert(startIndex, terminacaoSub[i]);
+                        }
+                        else if (input.Length < tamanhoMinStr[i])
+                        {             
+                            tamanho = tamanhoMinStr[i];           
+                            break;
+                        }
+                    }
+                } while (input.EndsWith("N") && input.Length >= tamanho);
+                return input;
+            }
+
+        public string RemoveAcentos(string output3)
+            {
+                const string comAcento = "áÁàÀâÂãÃéÉèÈêÊíÍìÌîÎóÓòÒôÔõÕúÚùÙûÛüÜçÇñÑ";
+                const string semAcento = "AAAAAAAAEEEEEEIIIIIIOOOOOOOOUUUUUUUUCCNN";
+
+                for (var i = 0; i < comAcento.Length; i++)
+                {
+                    output3 = output3.Replace(comAcento[i], semAcento[i]);
+                }
+                return output3;
+            }
+
+        #endregion 
+=======
+                        output1 += input[i].ToString().ToUpper(); //Vowel
+                    else
+                        output1 += input[i].ToString().ToUpper(); //Not vowel
+                }
+
+                return output1;
+            }
+        }
+        public string SomenteLetras(string output1)
+        {
+            const string letras = "ABCDEFGHIJKLMNOPQRSTUVXZWY ";
+            var output2 = string.Empty;
+            var letraAnt = output1[0];
+            foreach (var letraT in output1)
+            {
+                foreach (var letraC in letras.Where(letraC => letraC == letraT).TakeWhile(letraC => letraAnt != ' ' || letraT != ' '))
+                {
+                    output2 += letraC;
+                    letraAnt = letraT;
+                    break;
+                }
+            }
+
+            return output2.ToUpperInvariant();
+        }
+        public static string RemoveAcentos(string output2)
+        {
+            const string comAcento = "áÁàÀâÂãÃéÉèÈêÊíÍìÌîÎóÓòÒôÔõÕúÚùÙûÛüÜçÇñÑ";
+            const string semAcento = "AAAAAAAAEEEEEEIIIIIIOOOOOOOOUUUUUUUUCCNN";
+
+            for (var i = 0; i < comAcento.Length; i++)
+            {
+                output2 = output2.Replace(comAcento[i], semAcento[i]);
+            }
+            return output2;
+        }
+        public string FonetizarParticula(string output2)
+        {
+            string aux2;
+            int j;
+            const string letras = "ABPCKQDTEIYFVWGJLMNOURSZX9";
+            const string codFonetico = "123444568880AABCDEEGAIJJL9";
+
+            output2 = output2.ToUpperInvariant();
+            string output3 = output2[0].ToString();
+
+            //Elimina os caracteres repetidos
+            for (int i = 1; i < output2.Length; i++)
+            {
+                if (output2[i - 1] != output2[i])
+                {
+                    output3 += output2[i];
+                }
+            }
+
+            //Iguala os fonemas parecidos
+            if (output3[0].Equals('W'))
+            {
+                if (output3[1].Equals('I'))
+                {
+                    output3 = output3.Remove(0, 1).Insert(0, "U");
+                }
+                else if ("A,E,O,U".Contains(output3[1]))
+                {
+                    output3 = output3.Remove(0, 1).Insert(0, "V");
+                }
+            }
+            output3 = SubstituiTerminacao(output3);
+
+            var caracteres = new[]
+                                  {
+                                      "TSCH", "SCH", "TSH", "TCH", "SH", "CH", "LH", "NH", "PH", "GN", "MN", "SCE", "SCI", "SCY"
+                                      , "CS", "KS", "PS", "TS", "TZ", "XS", "CE", "CI", "CY", "GE", "GI", "GY", "GD", "CK", "PC"
+                                      , "QU", "SC", "SK", "XC", "SQ", "CT", "GT", "PT"
+                                  };
+            var caracteresSub = new[]
+                                     {
+                                         "XXXX", "XXX", "XXX", "XXX", "XX", "XX", "LI", "NN", "FF", "NN", "NN", "SSI", "SSI",
+                                         "SSI", "SS", "SS", "SS", "SS", "SS", "SS", "SE", "SI", "SI", "JE", "JI", "JI", "DD",
+                                         "QQ", "QQ", "QQ", "SQ", "SQ", "SQ", "99", "TT", "TT", "TT"
+                                     };
+            for (int i = 0; i < caracteres.Length; i++)
+            {
+                output3 = output3.Replace(caracteres[i], caracteresSub[i]);
+            }
+
+            //Trata consoantes mudas
+            output3 = TrataConsoanteMuda(output3, 'B', 'I');
+            output3 = TrataConsoanteMuda(output3, 'D', 'I');
+            output3 = TrataConsoanteMuda(output3, 'P', 'I');
+
+            //Trata as letras
+            //Retira letras iguais
+            if (output3[0].Equals('H'))
+            {
+                aux2 = Convert.ToString(output3[1]);
+                j = 2;
+            }
+            else
+            {
+                aux2 = Convert.ToString(output3[0]);
+                j = 1;
+            }
+
+            while (j < output3.Length)
+            {
+                if (output3[j] != output3[j - 1] && output3[j] != 'H')
+                {
+                    aux2 += output3[j];
+                }
+                j++;
+            }
+
+            output3 = aux2;
+
+            //Transforma letras em códigos fonéticos
+            return output3.Select(chr => letras.IndexOf(chr)).Aggregate(string.Empty, (current, n) => current + codFonetico[n]);
+        }
+        public string TrataConsoanteMuda(string output3, char consoante, char complemento)
+        {
+            var i = output3.IndexOf(consoante);
+            while (i > -1)
+            {
+                if (i >= output3.Length - 1 || !"AEIOU".Contains(output3[i + 1]))
+                {
+                    output3 = output3.Insert(i + 1, Convert.ToString(complemento));
+                    i++;
+                }
+                i = output3.IndexOf(consoante, ++i);
+            }
+            return output3;
+        }
+        public string SubstituiTerminacao(string output3)
+        {
+            output3 = RemoveAcentos(output3);
+
+            var terminacao = new[] { "N", "B", "D", "T", "W", "AM", "OM", "OIM", "UIM", "CAO", "AO", "OEM", "ONS", "EIA", "X", "US", "TH" };
+            var terminacaoSub = new[] { "M", "", "", "", "", "N", "N", "N", "N", "SSN", "N", "N", "N", "IA", "IS", "OS", "TI" };
+            var tamanhoMinStr = new[] { 2, 3, 3, 3, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 3 };
+            int tamanho = 0;
+            do
+            {
+                for (int i = 0; i < terminacao.Length; i++)
+                {
+                    if (output3.EndsWith(terminacao[i]) && output3.Length >= tamanhoMinStr[i])
+                    {
+                        var startIndex = output3.Length - terminacao[i].Length;
+                        output3 = output3.Remove(startIndex, terminacao[i].Length)
+                            .Insert(startIndex, terminacaoSub[i]);
+                    }
+                    else if (output3.Length < tamanhoMinStr[i])
+                    {
+                        tamanho = tamanhoMinStr[i];
+                        break;
+                    }
+                }
+            } while (output3.EndsWith("N") && output3.Length >= tamanho);
+            return output3;
+        }
+        public string Fonetizar(string output3, bool consulta = false)
+        {
+            output3 = RemoveAcentos(output3.ToUpperInvariant());
+
+            if (output3.Equals("H"))
+            {
+                output3 = "AGA";
+            }
+
+            output3 = SomenteLetras(output3);
+
+            if (string.IsNullOrEmpty(output3))
+            {
+                return string.Empty;
+            }
+
+            //Eliminar palavras especiais
+            output3 = output3.Replace(" LTDA ", " ");
+
+            //Eliminar preposições
+            var preposicoes = new[] { " DE ", " DA ", " DO ", " AS ", " OS ", " AO ", " NA ", " NO ", " DOS ", " DAS ", " AOS ", " NAS ", " NOS ", " COM " };
+            output3 = preposicoes.Aggregate(output3, (current, preposicao) => current.Replace(preposicao, " "));
+
+            //Converte algarismos romanos para números
+            var algRomanos = new[] { " V ", " I ", " IX ", " VI ", " IV ", " II ", " VII ", " III ", " X ", " VIII " };
+            var numeros = new[] { " 5 ", " 1 ", " 9 ", " 6 ", " 4 ", " 2 ", " 7 ", " 3 ", " 10 ", " 8 " };
+            for (int i = 0; i < algRomanos.Length; i++)
+            {
+                output3 = output3.Replace(algRomanos[i], numeros[i]);
+            }
+
+            //Converte numeros para literais
+            var algarismosExtenso = new[] { "ZERO", "UM", "DOIS", "TRES", "QUATRO", "CINCO", "SEIS", "SETE", "OITO", "NOVE" };
+            for (int i = 0; i < 10; i++)
+            {
+                output3 = output3.Replace(i.ToString(), algarismosExtenso[i]);
+            }
+
+            //Elimina preposições e artigos
+            var letras = new[] { " A ", " B ", " C ", " D ", " E ", " F ", " G ", " H ", " I ", " J ", " K ", " L ", " M ", " N ", " O ", " P ", " Q ", " R ", " S ", " T ", " U ", " V ", " X ", " Z ", " W ", " Y " };
+            output3 = letras.Aggregate(output3, (current, letra) => current.Replace(letra, " "));
+
+            output3 = output3.Trim();
+            var particulas = output3.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var fonetizados = new string[particulas.Length];
+            for (var i = 0; i < particulas.Length; i++)
+            {
+                fonetizados[i] = FonetizarParticula(particulas[i]);
+            }
+            string fonetizado = string.Join(" ", fonetizados).Trim();
+
+            if (consulta)
+            {
+                fonetizado = "%" + string.Join("%%", fonetizados) + "%";
+            }
+            return fonetizado;
+        }
+
+>>>>>>> 38b3da32e73741b0aa07d03e448ab21d0e389cc5
+    }
+ }
+
+        
+    
+
+
+
+
+      
+    
+
+
+
+    
+
+
+
+
+
+
+

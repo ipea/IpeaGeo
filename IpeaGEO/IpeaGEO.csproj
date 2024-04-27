@@ -1,0 +1,1499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B3ADF465-A816-4A40-875B-930CE9B88BDA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IpeaGeo</RootNamespace>
+    <AssemblyName>IpeaGEO</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>Icone_IpeaGEO2p0.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>F85B48A6ACBF60380649DE2B721C54026B42479B</ManifestCertificateThumbprint>
+    <ManifestKeyFile>IpeaGEO_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Documents and Settings\e1199571326\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsUrl>F:\Instalação IpeaGEO\dotNetFx35setup.exe</BootstrapperComponentsUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Combinatorial, Version=1.0.5319.33295, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>lib\Combinatorial.exe</HintPath>
+    </Reference>
+    <Reference Include="GeoAPI, Version=1.1.0.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SAS, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>lib\Interop.SAS.dll</HintPath>
+    </Reference>
+    <Reference Include="IpeaMatrix">
+      <HintPath>lib\IpeaMatrix.dll</HintPath>
+    </Reference>
+    <Reference Include="IpeaSparse">
+      <HintPath>lib\IpeaSparse.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>lib\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite, Version=1.7.1.33580, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="SharpMap, Version=0.9.5091.29472, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\SharpMap.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpMap.UI, Version=0.9.5091.29473, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\SharpMap.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Troschuetz.Random, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Troschuetz.Random.dll</HintPath>
+    </Reference>
+    <Reference Include="XPTabControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=26a9ab604e053c35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\XPTabControl.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph, Version=5.1.5.34045, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLogic\BLIndicesSegregacaoSpacial.cs" />
+    <Compile Include="Classes\ArquivosAlternativos\clsFileMatrix.cs" />
+    <Compile Include="Classes\clsArmazenamentoDados.cs" />
+    <Compile Include="Classes\clsAreaPerimetroCentroide.cs" />
+    <Compile Include="Classes\clsBetacf.cs" />
+    <Compile Include="Classes\clsBetai.cs" />
+    <Compile Include="Classes\clsClusterizacaoEspacialHierarquica.cs" />
+    <Compile Include="Classes\clsErfcc.cs" />
+    <Compile Include="Classes\clsFuncoesEspeciais.cs" />
+    <Compile Include="Classes\clsGammln.cs" />
+    <Compile Include="Classes\clsIndicesDeSegregacao.cs" />
+    <Compile Include="Classes\clsIndicesGlobaisDeDependenciaEspacial.cs" />
+    <Compile Include="Classes\clsIndicesLocaisDeDependenciaEspacial.cs" />
+    <Compile Include="Classes\clsIntegral.cs" />
+    <Compile Include="Classes\clsIpeaShape.cs" />
+    <Compile Include="Classes\clsJacobi.cs" />
+    <Compile Include="Classes\clsManipulaItensNoLayer.cs" />
+    <Compile Include="Classes\clsMapa.cs" />
+    <Compile Include="Classes\clsMatrizArquivo.cs" />
+    <Compile Include="Classes\clsMatrizEsparsa.cs" />
+    <Compile Include="Classes\clsPearsn.cs" />
+    <Compile Include="Classes\clsReport.cs" />
+    <Compile Include="Classes\clsReportPDF.cs" />
+    <Compile Include="Classes\clsSpatialCluster.cs" />
+    <Compile Include="Classes\clsStat.cs" />
+    <Compile Include="Classes\clsStatisticScan.cs" />
+    <Compile Include="Classes\clsThemeAuxiliaryPropertiesLayers.cs" />
+    <Compile Include="Classes\clsUtilArquivos.cs" />
+    <Compile Include="Classes\clsUtilTools.cs" />
+    <Compile Include="Classes\DataGridViewNumericUpDownColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\DataGridViewTrackBarColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Delegates.cs" />
+    <Compile Include="Classes\ExportData.cs" />
+    <Compile Include="Classes\HtmlToPdfBuilder.2.0.cs" />
+    <Compile Include="Classes\TriangulosFromPoligonos.cs" />
+    <Compile Include="estatistica.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAvisoLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAvisoLink.Designer.cs">
+      <DependentUpon>frmAvisoLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCluster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCluster.Designer.cs">
+      <DependentUpon>frmCluster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmConecao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmConecao.Designer.cs">
+      <DependentUpon>frmConecao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDados.designer.cs">
+      <DependentUpon>frmDados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDependenciaGlobal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDependenciaGlobal.Designer.cs">
+      <DependentUpon>frmDependenciaGlobal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDependenciaLocal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDependenciaLocal.Designer.cs">
+      <DependentUpon>frmDependenciaLocal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmIndicadoresSegregacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmIndicadoresSegregacao.Designer.cs">
+      <DependentUpon>frmIndicadoresSegregacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMapa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMapa.Designer.cs">
+      <DependentUpon>frmMapa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMapaTematico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMapaTematico.designer.cs">
+      <DependentUpon>frmMapaTematico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMultiMapas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMultiMapas.Designer.cs">
+      <DependentUpon>frmMultiMapas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPropriedadesPoligonosNoLayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPropriedadesPoligonosNoLayer.Designer.cs">
+      <DependentUpon>frmPropriedadesPoligonosNoLayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRelatorio.Designer.cs">
+      <DependentUpon>frmRelatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmScan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmScan.Designer.cs">
+      <DependentUpon>frmScan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSelecaoDadosIPEA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelecaoDadosIPEA.designer.cs">
+      <DependentUpon>frmSelecaoDadosIPEA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSpatialGMM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSpatialGMM.Designer.cs">
+      <DependentUpon>frmSpatialGMM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSpatialRegression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSpatialRegression.Designer.cs">
+      <DependentUpon>frmSpatialRegression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralException.cs" />
+    <Compile Include="GIS\Map.cs" />
+    <Compile Include="IPEAGEOMDIParent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IPEAGEOMDIParent.Designer.cs">
+      <DependentUpon>IPEAGEOMDIParent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\AnaliseFatorial\frmAnaliseFatorial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\AnaliseFatorial\frmAnaliseFatorial.designer.cs">
+      <DependentUpon>frmAnaliseFatorial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\BlogicAnaliseFatorial.cs" />
+    <Compile Include="Modelagem\BLogicBaseModelagem.cs" />
+    <Compile Include="Modelagem\BLogicCalculoTaxas.cs" />
+    <Compile Include="Modelagem\BLogicComponentesPrincipais.cs" />
+    <Compile Include="Modelagem\BLogicDecisaoMulticriterios.cs" />
+    <Compile Include="Modelagem\BLogicDistribuicoesContinuas.cs" />
+    <Compile Include="Modelagem\BLogicDistribuicoesDiscretas.cs" />
+    <Compile Include="Modelagem\BLogicGeracaoDummies.cs" />
+    <Compile Include="Modelagem\BLogicKMeans.cs" />
+    <Compile Include="Modelagem\BLogicNonParametricTests.cs" />
+    <Compile Include="Modelagem\BLogicPropensityScoreMatching.cs" />
+    <Compile Include="Modelagem\BLogicRegressaoDadosBinarios.cs" />
+    <Compile Include="Modelagem\BLogicRegressaoGLM.cs" />
+    <Compile Include="Modelagem\BLogicRegressaoLinear.cs" />
+    <Compile Include="Modelagem\BLogicRegressaoLinearDadosPainel.cs" />
+    <Compile Include="Modelagem\BLogicRegressaoLinearDadosPainelEspacial.cs" />
+    <Compile Include="Modelagem\AnaliseFatorial\CalculoTaxas\FormCalculoTaxas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\AnaliseFatorial\CalculoTaxas\FormCalculoTaxas.Designer.cs">
+      <DependentUpon>FormCalculoTaxas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\Clusters_hierarquicos\FormClustersHierarquicosNaoEspaciais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\Clusters_hierarquicos\FormClustersHierarquicosNaoEspaciais.Designer.cs">
+      <DependentUpon>FormClustersHierarquicosNaoEspaciais.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\ComponentesPrincipais\FormComponentesPrincipais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\ComponentesPrincipais\FormComponentesPrincipais.designer.cs">
+      <DependentUpon>FormComponentesPrincipais.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\DadosPainelEspacial\FormRegressaoDadosPainelEspacial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\DadosPainelEspacial\FormRegressaoDadosPainelEspacial.designer.cs">
+      <DependentUpon>FormRegressaoDadosPainelEspacial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\DadosPainel\FormDadosPainelNaoEspacial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\DadosPainel\FormDadosPainelNaoEspacial.Designer.cs">
+      <DependentUpon>FormDadosPainelNaoEspacial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\DecisaoMulticriterios\decisaoMulticriterios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\DecisaoMulticriterios\decisaoMulticriterios.Designer.cs">
+      <DependentUpon>decisaoMulticriterios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\FormAberturaTabelaDados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\FormAberturaTabelaDados.Designer.cs">
+      <DependentUpon>FormAberturaTabelaDados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\FormBaseModelagem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\FormBaseModelagem.Designer.cs">
+      <DependentUpon>FormBaseModelagem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\DistribuicoesParametricas\FormDistribuicoesParametrics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\DistribuicoesParametricas\FormDistribuicoesParametrics.Designer.cs">
+      <DependentUpon>FormDistribuicoesParametrics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\DistribuicoesDiscretas\FormDistribuicoesDiscretas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\DistribuicoesDiscretas\FormDistribuicoesDiscretas.designer.cs">
+      <DependentUpon>FormDistribuicoesDiscretas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\FormQuickHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\FormQuickHelp.Designer.cs">
+      <DependentUpon>FormQuickHelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\FormStatisticalAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\GeracaoDummies\FormGeracaoDummies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\GeracaoDummies\FormGeracaoDummies.designer.cs">
+      <DependentUpon>FormGeracaoDummies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\Graficos\Graficos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\Graficos\Graficos.designer.cs">
+      <DependentUpon>Graficos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\K_means\K_means.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\K_means\K_means.Designer.cs">
+      <DependentUpon>K_means.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\ModelosLinearesGeneralizados\RegressaoGLM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\ModelosLinearesGeneralizados\RegressaoGLM.Designer.cs">
+      <DependentUpon>RegressaoGLM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\PropensityScore\FormPropensityScore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\PropensityScore\FormPropensityScore.Designer.cs">
+      <DependentUpon>FormPropensityScore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\RegressaoDadosBinarios\FormRegressaoDadosBinarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\RegressaoDadosBinarios\FormRegressaoDadosBinarios.Designer.cs">
+      <DependentUpon>FormRegressaoDadosBinarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\RegressaoLinear\FormLinearRegression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\RegressaoLinear\FormLinearRegression.Designer.cs">
+      <DependentUpon>FormLinearRegression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\RotaOtima\clsDistanciaMinima.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modelagem\RotaOtima\FormRotaOtimaDijkstra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\RotaOtima\FormRotaOtimaDijkstra.designer.cs">
+      <DependentUpon>FormRotaOtimaDijkstra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\TestesNaoparametricos\FormNaoParametrico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modelagem\TestesNaoparametricos\FormNaoParametrico.designer.cs">
+      <DependentUpon>FormNaoParametrico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelagem\UserControls\UserControlPropensityScoreMatching.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modelagem\UserControls\UserControlPropensityScoreMatching.designer.cs">
+      <DependentUpon>UserControlPropensityScoreMatching.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\mTheme.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\IPEADataSelection.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAvisoLink.resx">
+      <DependentUpon>frmAvisoLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCluster.resx">
+      <DependentUpon>frmCluster.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmConecao.resx">
+      <DependentUpon>frmConecao.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDados.resx">
+      <DependentUpon>frmDados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDependenciaGlobal.resx">
+      <DependentUpon>frmDependenciaGlobal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDependenciaLocal.resx">
+      <DependentUpon>frmDependenciaLocal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmIndicadoresSegregacao.resx">
+      <DependentUpon>frmIndicadoresSegregacao.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMapa.resx">
+      <DependentUpon>frmMapa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMapaTematico.resx">
+      <DependentUpon>frmMapaTematico.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMultiMapas.resx">
+      <DependentUpon>frmMultiMapas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPropriedadesPoligonosNoLayer.resx">
+      <DependentUpon>frmPropriedadesPoligonosNoLayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRelatorio.resx">
+      <DependentUpon>frmRelatorio.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmScan.resx">
+      <DependentUpon>frmScan.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelecaoDadosIPEA.resx">
+      <DependentUpon>frmSelecaoDadosIPEA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSpatialGMM.resx">
+      <DependentUpon>frmSpatialGMM.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSpatialRegression.resx">
+      <DependentUpon>frmSpatialRegression.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IPEAGEOMDIParent.resx">
+      <DependentUpon>IPEAGEOMDIParent.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\AnaliseFatorial\frmAnaliseFatorial.resx">
+      <DependentUpon>frmAnaliseFatorial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\AnaliseFatorial\CalculoTaxas\FormCalculoTaxas.resx">
+      <DependentUpon>FormCalculoTaxas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\Clusters_hierarquicos\FormClustersHierarquicosNaoEspaciais.resx">
+      <DependentUpon>FormClustersHierarquicosNaoEspaciais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\ComponentesPrincipais\FormComponentesPrincipais.resx">
+      <DependentUpon>FormComponentesPrincipais.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\DadosPainelEspacial\FormRegressaoDadosPainelEspacial.resx">
+      <DependentUpon>FormRegressaoDadosPainelEspacial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\DadosPainel\FormDadosPainelNaoEspacial.resx">
+      <DependentUpon>FormDadosPainelNaoEspacial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\DecisaoMulticriterios\decisaoMulticriterios.resx">
+      <DependentUpon>decisaoMulticriterios.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\FormAberturaTabelaDados.resx">
+      <DependentUpon>FormAberturaTabelaDados.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\FormBaseModelagem.resx">
+      <DependentUpon>FormBaseModelagem.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\DistribuicoesParametricas\FormDistribuicoesParametrics.resx">
+      <DependentUpon>FormDistribuicoesParametrics.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\DistribuicoesDiscretas\FormDistribuicoesDiscretas.resx">
+      <DependentUpon>FormDistribuicoesDiscretas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\FormQuickHelp.resx">
+      <DependentUpon>FormQuickHelp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\GeracaoDummies\FormGeracaoDummies.resx">
+      <DependentUpon>FormGeracaoDummies.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\Graficos\Graficos.resx">
+      <DependentUpon>Graficos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\K_means\K_means.resx">
+      <DependentUpon>K_means.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\ModelosLinearesGeneralizados\RegressaoGLM.resx">
+      <DependentUpon>RegressaoGLM.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\PropensityScore\FormPropensityScore.resx">
+      <DependentUpon>FormPropensityScore.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\RegressaoDadosBinarios\FormRegressaoDadosBinarios.resx">
+      <DependentUpon>FormRegressaoDadosBinarios.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\RegressaoLinear\FormLinearRegression.resx">
+      <DependentUpon>FormLinearRegression.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\RotaOtima\FormRotaOtimaDijkstra.resx">
+      <DependentUpon>FormRotaOtimaDijkstra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\TestesNaoparametricos\FormNaoParametrico.resx">
+      <DependentUpon>FormNaoParametrico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modelagem\UserControls\UserControlPropensityScoreMatching.resx">
+      <DependentUpon>UserControlPropensityScoreMatching.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormAnalisesBasicas.resx">
+      <DependentUpon>FormAnalisesBasicas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormAreasMinimasComparaveis.resx">
+      <DependentUpon>FormAreasMinimasComparaveis.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormCalculadora.resx">
+      <DependentUpon>FormCalculadora.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormConcatenacaoTabelaToShape.resx">
+      <DependentUpon>FormConcatenacaoTabelaToShape.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormCorrelacoes.resx">
+      <DependentUpon>FormCorrelacoes.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormEstatisticasDescritivas.resx">
+      <DependentUpon>FormEstatisticasDescritivas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormImputacaoValoresMissingPainelEspacial.resx">
+      <DependentUpon>FormImputacaoValoresMissingPainelEspacial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormIndicadoresDependenciaEspacial.resx">
+      <DependentUpon>FormIndicadoresDependenciaEspacial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormMatrizVizinhancaComDistancias.resx">
+      <DependentUpon>FormMatrizVizinhancaComDistancias.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormRegressaoGMMConley.resx">
+      <DependentUpon>FormRegressaoGMMConley.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormSalvamentoMatrizEsparsa.resx">
+      <DependentUpon>FormSalvamentoMatrizEsparsa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormSobreIpeaGEO.resx">
+      <DependentUpon>FormSobreIpeaGEO.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormTabelaFrequencias.resx">
+      <DependentUpon>FormTabelaFrequencias.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormTabelasCruzadas.resx">
+      <DependentUpon>FormTabelasCruzadas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\FormTamanhoFonte.resx">
+      <DependentUpon>FormTamanhoFonte.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\UserControls\UserControlDataGrid.resx">
+      <DependentUpon>UserControlDataGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\UserControls\UserControlRegressaoInstrumentos.resx">
+      <DependentUpon>UserControlRegressaoInstrumentos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\UserControls\UserControlRichTextOutput.resx">
+      <DependentUpon>UserControlRichTextOutput.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\UserControls\UserControlSelecaoDoisBlocosVariaveis.resx">
+      <DependentUpon>UserControlSelecaoDoisBlocosVariaveis.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegressoesEspaciais\UserControls\UserControlSelecaoVariaveis.resx">
+      <DependentUpon>UserControlSelecaoVariaveis.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="bases\DeparaAMCs\Depara_mun00_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun01_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun02_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun03_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun04_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun05_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun06_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun07_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun08_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun09_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun70_to_amc70.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun80_to_amc70.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun91_to_amc70.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun91_to_amc91.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun93_to_amc70.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun93_to_amc91.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun97_to_amc70.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun97_to_amc91.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun97_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun98_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\Depara_mun99_to_amc97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN00.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN01.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN02.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN03.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN04.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN05.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN06.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN07.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN08.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN09.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN10.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN70.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN80.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN91.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN93.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN98.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC70_MUN99.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN00.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN01.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN02.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN03.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN04.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN05.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN06.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN07.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN08.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN09.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN10.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN91.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN93.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN98.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC91_MUN99.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN00.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN01.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN02.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN03.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN04.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN05.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN06.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN07.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN08.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN09.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN10.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN97.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN98.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bases\DeparaAMCs\TABELA_AMC97_MUN99.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GPL IPEAGEO.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GPL IPEAGEO.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="IpeaGEO_TemporaryKey.pfx" />
+    <None Include="LGPL IPEAGEO.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LGPL.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Licenca Apache xpTabControlCS.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Licenca_IpeaGEO.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\BLAreasMinimasComparaveis.cs" />
+    <Compile Include="RegressoesEspaciais\BLConcatenacaoArquivos.cs" />
+    <Compile Include="RegressoesEspaciais\BLDependenciaGlobal.cs" />
+    <Compile Include="RegressoesEspaciais\BLEstatisticasDescritivas.cs" />
+    <Compile Include="RegressoesEspaciais\BLExecutarCalculadora.cs" />
+    <Compile Include="RegressoesEspaciais\BLExportacaoAberturaExcel.cs" />
+    <Compile Include="RegressoesEspaciais\BLIndicadoresDependenciaEspacial.cs" />
+    <Compile Include="RegressoesEspaciais\BLMatrizDistanciasParametricas.cs" />
+    <Compile Include="RegressoesEspaciais\BLModelosCrossSectionSpaciais.cs" />
+    <Compile Include="RegressoesEspaciais\BLModelosCrossSectionSpaciaisLineares.cs" />
+    <Compile Include="RegressoesEspaciais\BLModelosCrossSectionSpaciaisNaoLineares.cs" />
+    <Compile Include="RegressoesEspaciais\BLModelosPainelEspacial.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsAreaPerimetroCentroide.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsArrayVariaveisNumMissing.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsAutoValorNonSymmetric.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsDBaseConstants.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsDBaseField.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsDBaseHeader.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsDBaseReader.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsDBaseSchema.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsEstatisticasDescriptivas.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsFuncoesEspeciais.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsIpeaPoligono.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsIpeaShape.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsLinearRegressionModelsMLE.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsMapa.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsModelosRegressaoEspacial.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsNumerosComplexos.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsRegressaoPainelEspacial.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsSpatialGMM.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsTabelaLogDeterminante.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsTriangulosFromPoligonos.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsUtilObjects.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsUtilOptimization.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsUtilTools.cs" />
+    <Compile Include="RegressoesEspaciais\Classes\clsVariaveisNumMissing.cs" />
+    <Compile Include="RegressoesEspaciais\FormAnalisesBasicas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormAnalisesBasicas.Designer.cs">
+      <DependentUpon>FormAnalisesBasicas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormAreasMinimasComparaveis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormAreasMinimasComparaveis.Designer.cs">
+      <DependentUpon>FormAreasMinimasComparaveis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormCalculadora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormCalculadora.designer.cs">
+      <DependentUpon>FormCalculadora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormConcatenacaoTabelaToShape.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormConcatenacaoTabelaToShape.Designer.cs">
+      <DependentUpon>FormConcatenacaoTabelaToShape.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormCorrelacoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormCorrelacoes.Designer.cs">
+      <DependentUpon>FormCorrelacoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormEstatisticasDescritivas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormEstatisticasDescritivas.Designer.cs">
+      <DependentUpon>FormEstatisticasDescritivas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormImputacaoValoresMissingPainelEspacial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormImputacaoValoresMissingPainelEspacial.Designer.cs">
+      <DependentUpon>FormImputacaoValoresMissingPainelEspacial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormIndicadoresDependenciaEspacial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormIndicadoresDependenciaEspacial.Designer.cs">
+      <DependentUpon>FormIndicadoresDependenciaEspacial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormMatrizVizinhancaComDistancias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormMatrizVizinhancaComDistancias.Designer.cs">
+      <DependentUpon>FormMatrizVizinhancaComDistancias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormRegressaoGMMConley.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormRegressaoGMMConley.designer.cs">
+      <DependentUpon>FormRegressaoGMMConley.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormSalvamentoMatrizEsparsa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormSalvamentoMatrizEsparsa.Designer.cs">
+      <DependentUpon>FormSalvamentoMatrizEsparsa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormSobreIpeaGEO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormSobreIpeaGEO.Designer.cs">
+      <DependentUpon>FormSobreIpeaGEO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormTabelaFrequencias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormTabelaFrequencias.Designer.cs">
+      <DependentUpon>FormTabelaFrequencias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormTabelasCruzadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormTabelasCruzadas.Designer.cs">
+      <DependentUpon>FormTabelasCruzadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormTamanhoFonte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\FormTamanhoFonte.Designer.cs">
+      <DependentUpon>FormTamanhoFonte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\NumRecipesEdition3\clsLinbcg.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\NumRecipesEdition3\clsNRsparseLinbcg.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\NumRecipesEdition3\clsSparse.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\NumRecipesEdition3\clsTridag.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\TimDavis\clsDulmageMendelsohnResults.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\TimDavis\clsFuncoesMatrizEsparsa.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\TimDavis\clsLogDetMatrizEsparsa.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\TimDavis\clsMatrizEsparsa.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\TimDavis\clsSparseNumericFactorization.cs" />
+    <Compile Include="RegressoesEspaciais\MatrizesEsparsas\TimDavis\clsSparseSymbolicFactorization.cs" />
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlDataGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlDataGrid.Designer.cs">
+      <DependentUpon>UserControlDataGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlRegressaoInstrumentos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlRegressaoInstrumentos.designer.cs">
+      <DependentUpon>UserControlRegressaoInstrumentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlRichTextOutput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlRichTextOutput.Designer.cs">
+      <DependentUpon>UserControlRichTextOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlSelecaoDoisBlocosVariaveis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlSelecaoDoisBlocosVariaveis.designer.cs">
+      <DependentUpon>UserControlSelecaoDoisBlocosVariaveis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlSelecaoVariaveis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegressoesEspaciais\UserControls\UserControlSelecaoVariaveis.Designer.cs">
+      <DependentUpon>UserControlSelecaoVariaveis.cs</DependentUpon>
+    </Compile>
+    <None Include="Tutorial_IpeaGEO_VF.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DescricaoMetaDados.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icone_IpeaGEO2p0.ico" />
+    <Content Include="images\Icones_PNG\Abrir_dados_em_Excel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Add dados - IPEA.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Add dados - painel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Add dados.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\cross.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\database 1.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\database 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\database 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\DefaultSymbol.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Desinstalar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\disk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\edit legenda.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\exportar dados.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\georeferenciamento.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\help.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Icone_IpeaGEO2p0.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\imagesCAWM32WX.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\info.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Ipea geo_principal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Layers-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Mapa.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Mapa_incone.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Move mapa.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\paint mult.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\paint.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\preview.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Refresh.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\retira selecao.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\seleciona indiv..png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\seleciona poligono.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\sigma sem numero.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\Sigma.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\System-Map-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\unselect_poligono.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\zoom mais.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\zoom menos.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\zoom para selecao.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Icones_PNG\zoom to extents.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ipea_GEO.ico" />
+    <Content Include="Leia-me.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="licenca_ipeageo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\escala1.png" />
+    <None Include="Resources\escala.png" />
+    <None Include="Resources\escala_ipeageo.png" />
+    <None Include="Resources\compass-160863_640.png" />
+    <None Include="Resources\rosa_dos_ventos.bmp" />
+    <None Include="Resources\alarm.png" />
+    <None Include="Resources\Sigma.png" />
+    <None Include="Resources\paint mult.png" />
+    <None Include="Resources\georeferenciamento.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\seleciona indiv..png" />
+    <None Include="Resources\retira seleçÕ.png" />
+    <None Include="Resources\zoom to extents.png" />
+    <None Include="Resources\zoom para seleção.png" />
+    <None Include="Resources\zoom menos.png" />
+    <None Include="Resources\zoom mais.png" />
+    <None Include="Resources\Move mapa.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\exportar dados.png" />
+    <None Include="Resources\Add dados.png" />
+    <None Include="Resources\paint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ADOX">
+      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="de\Troschuetz.Random.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="de\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="es\Troschuetz.Random.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="es\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="fr\Troschuetz.Random.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="fr\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="hu\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="it\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="ja\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="ru\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="sk\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="sv\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="tr\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="zh-cn\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+    <PublishFile Include="zh-tw\ZedGraph.resources">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Satellite</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Calculation\" />
+    <Folder Include="malhas\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
