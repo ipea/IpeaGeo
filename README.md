@@ -1,20 +1,15 @@
 # IpeaGEO
 <img align="right" src="https://github.com/ipeadata-lab/IpeaGeo/blob/main/IpeaGEO/images/Icones_PNG/Ipea%20geo_principal.png?raw=true" alt="logo" width="150"> 
 
+**IpeaGEO** é um software gratuito para análises de estatística e econometria espacial. O software foi desenvolvido pelo Ipea no idos de 2014 e 2015, e seu desenvolvimento foi descontinuado. O objetivo deste repositório é preservar uma versão pública e aberta do código fonte. Veja tutoriais e versão arquivo executável no portal do projeto: https://www.ipea.gov.br/ipeageo/malhas.html.
 
-**IpeaGEO** é um software gratuito para análises de estatística e econometria espacial. O software foi desenvolvido pelo Ipea no idos de 2014 e 2015, e seu desenvolvimento foi descontinuado. O objetivo deste repositório é preservar uma versão pública e aberta do código fonte.
+**Alternativas ao IpeaGEO:**
+- Dados espaciais do Brasil: pacote de R [**geobr**](https://ipeagit.github.io/geobr/), para download de dados espaciais oficiais do Brasil.
+- Estatística e econometria espaciail
+    - Python: [PySAL: Python Spatial Analysis Library](https://pysal.org/pysal/)
+    - R: [spdep](https://r-spatial.github.io/spdep/) e [spatialreg](https://r-spatial.github.io/spatialreg/)
 
-**Dados espaciais do Brasil:** caso você esteja procurando o pacote computacional para download de dados espaciais oficiais do Brasil, veja a página do [**geobr**](https://ipeagit.github.io/geobr/).
-
-**Alternativas ao IpeaGEO**
-
-- Python
-  - [PySAL: Python Spatial Analysis Library](https://pysal.org/pysal/)
-- R
-  - [spdep](https://r-spatial.github.io/spdep/)
-  - [spatialreg](https://r-spatial.github.io/spatialreg/)
-
-## Introdução:
+## Descrição:
 O [IpeaGEO](https://www.ipea.gov.br/ipeageo/) é um software gratuito projetado para análise estatística e georreferenciamento. Desenvolvido pela Assessoria de Métodos Quantitativos (ASMEQ) da Diretoria de Estudos Regionais, Urbanos e Ambientais (DIRUR) do Instituto de Pesquisa Econômica Aplicada (Ipea), esta ferramenta simplifica e amplia a aplicação de técnicas econométricas espaciais. É ideal para estudantes, educadores, acadêmicos e empresas envolvidas em estatísticas, econometria e georreferenciamento.
 
 ## Versão:
