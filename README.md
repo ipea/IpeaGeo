@@ -57,6 +57,8 @@ O IpeaGEO é distribuído sob a Licença Pública Geral GNU versão 3, conforme 
 - SharpMap
 - ITextSharp
 - Combinatorial
+- 
+<img align="right" src="https://github.com/ipeadata-lab/IpeaGeo/blob/main/IpeaGEO/images/Icones_PNG/logo_ipea_GEO_v_2_0.png?raw=true" alt="logo" width="180"> 
 
 ## Líderes Técnicos:
 - Alexandre Xavier Ywata de Carvalho, Ph.D.
@@ -97,3 +99,4 @@ Todos os direitos reservados.
 Consulte os arquivos LICENSE.pdf e Tutorial.pdf no site do IpeaGEO para informações detalhadas sobre licenciamento e orientações para os usuários.
 
 Obrigado por escolher o IpeaGEO para suas necessidades de análise espacial!
+
