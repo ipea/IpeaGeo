@@ -1,4 +1,6 @@
 # IpeaGEO
+<img align="right" src="https://github.com/ipeadata-lab/IpeaGeo/blob/main/IpeaGEO/images/Icones_PNG/Ipea%20geo_principal.png?raw=true" alt="logo" width="150"> 
+
 
 **IpeaGEO** é um software gratuito para análises de estatística e econometria espacial. O software foi desenvolvido pelo Ipea no idos de 2014 e 2015, e seu desenvolvimento foi descontinuado. O objetivo deste repositório é preservar uma versão pública e aberta do código fonte.
 
