@@ -145,7 +145,6 @@ namespace IpeaGeo.Modelagem
         {
             try
             {
-
                 if (checkBox1.Checked)
                 {
                     MessageBox.Show("Tabela de dados Atualizada", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -162,7 +161,6 @@ namespace IpeaGeo.Modelagem
                     lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
 
                     Cursor = Cursors.Default;
-
                 }
 
                 else
