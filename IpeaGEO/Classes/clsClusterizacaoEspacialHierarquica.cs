@@ -5,7 +5,7 @@ using IpeaGeo.RegressoesEspaciais;
 
 namespace IpeaGeo
 {
-    #region Tipos de mÈtodos e dist‚ncias
+    #region Tipos de m√©todos e dist√¢ncias
 
     public enum MetodoClusterizacao : int
     {
@@ -72,7 +72,7 @@ namespace IpeaGeo
             this.m_funcao_distancia = new FuncaoDistancia(this.DistanciaContinuaPoligonos);
         }
 
-        #region Vari·veis internas
+        #region Vari√°veis internas
 
         private int m_tamanho_maximo_used_cluster = 100;
 
@@ -113,6 +113,7 @@ namespace IpeaGeo
         }
 
         private double m_corte_variavel_binaria = 0.0;
+	    
         /// <summary>
         /// Gets or sets the cut value for binary variables. If y > cut_value, or 
         /// y less than equal to cut_value. The default is 0.0.
@@ -423,12 +424,12 @@ namespace IpeaGeo
 
         #endregion 
 
-        #region CritÈrios de seleÁ„o do n˙mero de clusters
+        #region Crit√©rios de sele√ß√£o do n√∫mero de clusters
 
         private void GeraCCC(ref double ccc, ref double expected_r2, int q, double r2)
         {
-            int p = this.nvars;
-            int pstar = (int)Math.Min(q, p+1);
+                int p = this.nvars;
+                int pstar = (int)Math.Min(q, p+1);
 	        double c = 0.0;
 	        double upstar = 0.5;
 	        double vstar = 0.0;
@@ -606,7 +607,7 @@ namespace IpeaGeo
 
             for (int j = 0; j < this.nobs; j++)
             {
-                //-------------------- medidas para vari·veis contÌnuas -------------------------------------------//
+                //-------------------- medidas para vari√°veis cont√≠nuas -------------------------------------------//
 
                 aux_dados = clt.DiffArrayDouble(clt.SubRowArrayDouble(this.dados, j), media_dados_cluster);
 
@@ -621,9 +622,7 @@ namespace IpeaGeo
                 this.m_total_cov_corrected_L2 +=
                     (clt.MatrizMult(clt.MatrizMult(aux_dados, this.m_matriz_inv_covariancia), clt.MatrizTransp(aux_dados)))[0, 0];
 
-                //--------------------- medidas para vari·veis bin·rias -------------------------------------------//
-
-
+                //--------------------- medidas para vari√°veis bin√°rias -------------------------------------------//
             }
         }
 
@@ -653,7 +652,7 @@ namespace IpeaGeo
 
             for (int i = 0; i < this.m_lista_clusters_atuais.GetLength(0); i++)
             {
-                //------------------- separando as observaÁıes dentro de cada cluster ------------------------//
+                //------------------- separando as observa√ß√µes dentro de cada cluster ------------------------//
 
                 n_dados_cluster = 0;
                 for (int k = 0; k < this.nobs; k++)
@@ -682,7 +681,7 @@ namespace IpeaGeo
 
                 for (int j = 0; j < n_dados_cluster; j++)
                 {
-                    //-------------------- medidas para vari·veis contÌnuas -------------------------------------------//
+                    //-------------------- medidas para vari√°veis cont√≠nuas -------------------------------------------//
 
                     aux_dados = clt.DiffArrayDouble(clt.SubRowArrayDouble(dados_cluster, j), media_dados_cluster);
 
@@ -697,9 +696,7 @@ namespace IpeaGeo
                     this.m_intracluster_cov_corrected_L2[posicao_indice] += 
                         (clt.MatrizMult(clt.MatrizMult(aux_dados, this.m_matriz_inv_covariancia), clt.MatrizTransp(aux_dados)))[0,0];
 
-                    //--------------------- medidas para vari·veis bin·rias -------------------------------------------//
-
-
+                    //--------------------- medidas para vari√°veis bin√°rias -------------------------------------------//
                 }
             }
 
@@ -726,7 +723,7 @@ namespace IpeaGeo
 
         #region Clustering algorithms
 
-        #region Preenche a matriz com todas as dist‚ncias
+        #region Preenche a matriz com todas as dist√¢ncias
 
         private MatrizArquivo m_distancias;
         private double m_maxima_distancia_matriz_inicial = -10.0;
@@ -742,7 +739,7 @@ namespace IpeaGeo
 
             if (this.m_tipo_dados_clusterizacao != TipoDadosClusterizacao.Mistos)
             {
-                #region Dados contÌnuos, bin·rios ou categÛricos
+                #region Dados cont√≠nuos, bin√°rios ou categ√≥ricos
                 for (int i = 0; i < this.nobs; i++)
                 {
                     prBar.Value = i;
@@ -828,7 +825,7 @@ namespace IpeaGeo
 
             if (this.m_tipo_dados_clusterizacao != TipoDadosClusterizacao.Mistos)
             {
-                #region Dados contÌnuos, bin·rios ou categÛricos
+                #region Dados cont√≠nuos, bin√°rios ou categ√≥ricos
                 for (int i = 0; i < this.nobs; i++)
                 {
                     prBar.Value = i;
@@ -905,7 +902,7 @@ namespace IpeaGeo
 
         #endregion
 
-        #region FunÁıes auxiliares
+        #region Fun√ß√µes auxiliares
 
         private void CalculaLimiteMaximoTamanhoClusters()
         {
@@ -931,9 +928,9 @@ namespace IpeaGeo
 
         public double[,] RetornaDadosComClusters(int numero_clusters)
         {
-            if (this.m_cluster_tree == null) throw new Exception("¡rvore de clusters n„o construÌda");
+            if (this.m_cluster_tree == null) throw new Exception("√Årvore de clusters n√£o constru√≠da");
             if (numero_clusters > this.m_num_max_clusters_arvore || numero_clusters < this.m_num_min_clusters_arvore)
-                throw new Exception("N˙mero de clusters inv·lido para a ·rvore de clusters construÌda");
+                throw new Exception("N√∫mero de clusters inv√°lido para a √°rvore de clusters constru√≠da");
 
             int coluna = this.m_num_max_clusters_arvore - numero_clusters;
 
@@ -953,7 +950,7 @@ namespace IpeaGeo
         {
             clsUtilTools utl = new clsUtilTools();
 
-            #region Cheque sobre os dados da clusterizaÁ„o
+            #region Cheque sobre os dados da clusteriza√ß√£o
             if (this.dados == null || this.dados.GetLength(0) == 0 || this.dados.GetLength(1) == 0)
             {
                 if (this.m_tipo_dados_clusterizacao == TipoDadosClusterizacao.Binarios) this.dados = utl.ArrayDoubleClone(this.dados_binarios);
@@ -976,22 +973,22 @@ namespace IpeaGeo
             }
             #endregion
 
-            if (this.dados == null) throw new Exception("Matriz de dados n„o definida para clusterizaÁ„o espacial");
-            if (this.m_estrutura_shape == null) throw new Exception("Estrutura do shape n„o definida para clusterizaÁ„o espacial");
+            if (this.dados == null) throw new Exception("Matriz de dados n√£o definida para clusteriza√ß√£o espacial");
+            if (this.m_estrutura_shape == null) throw new Exception("Estrutura do shape n√£o definida para clusteriza√ß√£o espacial");
 
             this.nobs = this.dados.GetLength(0);
             this.nvars = this.dados.GetLength(1);
 
             this.CalculaLimiteMaximoTamanhoClusters();
 
-            //------------ preenche a matriz com todas as dist‚ncias entre observaÁıes ------------------------------------------//
+            //------------ preenche a matriz com todas as dist√¢ncias entre observa√ß√µes ------------------------------------------//
 
-            lblEvolucao.Text = "GeraÁ„o da matriz de dist‚ncias entre observaÁıes iniciais";
+            lblEvolucao.Text = "Gera√ß√£o da matriz de dist√¢ncias entre observa√ß√µes iniciais";
             lblEvolucao.Refresh();
 
             this.PreencheTodasDistanciasContinuas(ref prBar);
 
-            lblEvolucao.Text = "EvoluÁ„o da formaÁ„o da ·rvore de clusters";
+            lblEvolucao.Text = "Evolu√ß√£o da forma√ß√£o da √°rvore de clusters";
             lblEvolucao.Refresh();
 
             int min_nclus_tree = this.m_num_min_clusters_arvore;
@@ -1083,7 +1080,7 @@ namespace IpeaGeo
                 prBar.Increment(1);
                 Application.DoEvents();
 
-                //----------------------------------------- Checando se ainda h· clusters vizinhos --------------------------------------//
+                //----------------------------------------- Checando se ainda h√° clusters vizinhos --------------------------------------//
 
                 tem_vizinhos = false;
                 for (int i = 0; i < this.m_lista_clusters_atuais.GetLength(0); i++)
@@ -1170,7 +1167,7 @@ namespace IpeaGeo
                     }
                 }
 
-                //------------------ junta clusters com menor dist‚ncia -------------------//
+                //------------------ junta clusters com menor dist√¢ncia -------------------//
 
                 nclus--;
                 for (int i = 0; i < this.nobs; i++)
@@ -1189,7 +1186,7 @@ namespace IpeaGeo
                 }
                 this.m_lista_clusters_atuais = aux_lista;
 
-                //----------------------- redefiniÁ„o de vizinhanÁas dos clusters ---------------------------//
+                //----------------------- redefini√ß√£o de vizinhan√ßas dos clusters ---------------------------//
 
                 temp_shape[k1].AddListaVizinhos(temp_shape[k2].ListaIndicesVizinhos);
 
@@ -1202,7 +1199,7 @@ namespace IpeaGeo
                     }
                 }
 
-                //------------------------- redefiniÁ„o lista de polÌgonos no cluster -------------------------//
+                //------------------------- redefini√ß√£o lista de pol√≠gonos no cluster -------------------------//
 
                 nNk = temp_shape[k1].IndicesPoligonosNoCluster.GetLength(0);
                 nNl = temp_shape[k2].IndicesPoligonosNoCluster.GetLength(0);
@@ -1215,7 +1212,7 @@ namespace IpeaGeo
                 temp_shape[k1].AddIndicesPoligonosNoCluster(temp_shape[k2].IndicesPoligonosNoCluster);
                 temp_shape[k2].ClearIndicesPoligonosNoCluster();
 
-                //------------------- tira da lista de vizinhos caso o cluster j· tenha excedido o tamanho m·ximo --------------//
+                //------------------- tira da lista de vizinhos caso o cluster j√° tenha excedido o tamanho m√°ximo --------------//
                 /*
                 if (nclus >= 2*(int)Math.Ceiling((double)this.dados.GetLength(0) / (double)this.m_tamanho_maximo_used_cluster))
                 {
@@ -1237,7 +1234,7 @@ namespace IpeaGeo
                     }
                 }
                 */
-                //----------------------------- redefine as dist‚ncias entre clusters ------------------------------------------//
+                //----------------------------- redefine as dist√¢ncias entre clusters ------------------------------------------//
 
                 for (int j = 0; j < this.m_lista_clusters_atuais.GetLength(0); j++)
                 {
@@ -1271,7 +1268,7 @@ namespace IpeaGeo
                     }
                 }
 
-                //------------------------ vari·veis para geraÁ„o dos critÈrios de seleÁ„o do n˙mero de clusters ---------------//
+                //------------------------ vari√°veis para gera√ß√£o dos crit√©rios de sele√ß√£o do n√∫mero de clusters ---------------//
 
                 this.m_Bkl_to_nclus_criterion = -(this.m_W_to_nclus_criterion[k1] + this.m_W_to_nclus_criterion[k2]);
                 this.m_Pg_to_nclus_criterion -= (this.m_W_to_nclus_criterion[k1] + this.m_W_to_nclus_criterion[k2]);
@@ -1279,7 +1276,7 @@ namespace IpeaGeo
                 this.m_Pg_to_nclus_criterion += this.m_W_to_nclus_criterion[k1];
                 this.m_Bkl_to_nclus_criterion += this.m_W_to_nclus_criterion[k1];
 
-                //------------------------ alimenta a ·rvore de clusters e os critÈrios de seleÁ„o do n˙mero de clustes --------------------------------------//
+                //------------------------ alimenta a √°rvore de clusters e os crit√©rios de sele√ß√£o do n√∫mero de clustes --------------------------------------//
 
                 aux_indices = new double[this.m_indice_clusters_atuais.GetLength(0), 1];
                 for (int i = 0; i < this.m_indice_clusters_atuais.GetLength(0); i++) aux_indices[i, 0] = (double)this.m_indice_clusters_atuais[i];
@@ -1344,7 +1341,7 @@ namespace IpeaGeo
         {
             clsUtilTools utl = new clsUtilTools();
 
-            #region Cheque sobre os dados da clusterizaÁ„o
+            #region Cheque sobre os dados da clusteriza√ß√£o
             if (this.dados == null || this.dados.GetLength(0) == 0 || this.dados.GetLength(1) == 0)
             {
                 if (this.m_tipo_dados_clusterizacao == TipoDadosClusterizacao.Binarios) this.dados = utl.ArrayDoubleClone(this.dados_binarios);
@@ -1367,22 +1364,22 @@ namespace IpeaGeo
             }
             #endregion
 
-            if (this.dados == null) throw new Exception("Matriz de dados n„o definida para clusterizaÁ„o espacial");
-            if (this.m_estrutura_shape == null) throw new Exception("Estrutura do shape n„o definida para clusterizaÁ„o espacial");
+            if (this.dados == null) throw new Exception("Matriz de dados n√£o definida para clusteriza√ß√£o espacial");
+            if (this.m_estrutura_shape == null) throw new Exception("Estrutura do shape n√£o definida para clusteriza√ß√£o espacial");
 
             this.nobs = this.dados.GetLength(0);
             this.nvars = this.dados.GetLength(1);
 
             this.CalculaLimiteMaximoTamanhoClusters();
 
-            //------------ preenche a matriz com todas as dist‚ncias entre observaÁıes ------------------------------------------//
+            //------------ preenche a matriz com todas as dist√¢ncias entre observa√ß√µes ------------------------------------------//
 
-            lblEvolucao.Text = "GeraÁ„o da matriz de dist‚ncias entre observaÁıes iniciais";
+            lblEvolucao.Text = "Gera√ß√£o da matriz de dist√¢ncias entre observa√ß√µes iniciais";
             //lblEvolucao.Refresh();
 
             this.PreencheTodasDistanciasContinuas(ref prBar);
 
-            lblEvolucao.Text = "EvoluÁ„o da formaÁ„o da ·rvore de clusters";
+            lblEvolucao.Text = "Evolu√ß√£o da forma√ß√£o da √°rvore de clusters";
             //lblEvolucao.Refresh();
 
             int min_nclus_tree = this.m_num_min_clusters_arvore;
@@ -1474,7 +1471,7 @@ namespace IpeaGeo
                 prBar.Increment(1);
                 Application.DoEvents();
 
-                //----------------------------------------- Checando se ainda h· clusters vizinhos --------------------------------------//
+                //----------------------------------------- Checando se ainda h√° clusters vizinhos --------------------------------------//
 
                 tem_vizinhos = false;
                 for (int i = 0; i < this.m_lista_clusters_atuais.GetLength(0); i++)
@@ -1562,7 +1559,7 @@ namespace IpeaGeo
                     }
                 }
 
-                //------------------ junta clusters com menor dist‚ncia -------------------//
+                //------------------ junta clusters com menor dist√¢ncia -------------------//
 
                 nclus--;
                 for (int i = 0; i < this.nobs; i++)
@@ -1581,7 +1578,7 @@ namespace IpeaGeo
                 }
                 this.m_lista_clusters_atuais = aux_lista;
 
-                //----------------------- redefiniÁ„o de vizinhanÁas dos clusters ---------------------------//
+                //----------------------- redefini√ß√£o de vizinhan√ßas dos clusters ---------------------------//
 
                 temp_shape[k1].AddListaVizinhos(temp_shape[k2].ListaIndicesVizinhos);
 
@@ -1594,7 +1591,7 @@ namespace IpeaGeo
                     }
                 }
 
-                //------------------------- redefiniÁ„o lista de polÌgonos no cluster -------------------------//
+                //------------------------- redefini√ß√£o lista de pol√≠gonos no cluster -------------------------//
 
                 nNk = temp_shape[k1].IndicesPoligonosNoCluster.GetLength(0);
                 nNl = temp_shape[k2].IndicesPoligonosNoCluster.GetLength(0);
@@ -1607,7 +1604,7 @@ namespace IpeaGeo
                 temp_shape[k1].AddIndicesPoligonosNoCluster(temp_shape[k2].IndicesPoligonosNoCluster);
                 temp_shape[k2].ClearIndicesPoligonosNoCluster();
 
-                //------------------- tira da lista de vizinhos caso o cluster j· tenha excedido o tamanho m·ximo --------------//
+                //------------------- tira da lista de vizinhos caso o cluster j√° tenha excedido o tamanho m√°ximo --------------//
                 /*
                 if (nclus >= 2*(int)Math.Ceiling((double)this.dados.GetLength(0) / (double)this.m_tamanho_maximo_used_cluster))
                 {
@@ -1629,7 +1626,7 @@ namespace IpeaGeo
                     }
                 }
                 */
-                //----------------------------- redefine as dist‚ncias entre clusters ------------------------------------------//
+                //----------------------------- redefine as dist√¢ncias entre clusters ------------------------------------------//
 
                 for (int j = 0; j < this.m_lista_clusters_atuais.GetLength(0); j++)
                 {
@@ -1663,7 +1660,7 @@ namespace IpeaGeo
                     }
                 }
 
-                //------------------------ vari·veis para geraÁ„o dos critÈrios de seleÁ„o do n˙mero de clusters ---------------//
+                //------------------------ vari√°veis para gera√ß√£o dos crit√©rios de sele√ß√£o do n√∫mero de clusters ---------------//
 
                 this.m_Bkl_to_nclus_criterion = - (this.m_W_to_nclus_criterion[k1] + this.m_W_to_nclus_criterion[k2]);
                 this.m_Pg_to_nclus_criterion -= (this.m_W_to_nclus_criterion[k1] + this.m_W_to_nclus_criterion[k2]);
@@ -1671,7 +1668,7 @@ namespace IpeaGeo
                 this.m_Pg_to_nclus_criterion += this.m_W_to_nclus_criterion[k1];
                 this.m_Bkl_to_nclus_criterion += this.m_W_to_nclus_criterion[k1];
     
-                //------------------------ alimenta a ·rvore de clusters e os critÈrios de seleÁ„o do n˙mero de clustes --------------------------------------//
+                //------------------------ alimenta a √°rvore de clusters e os crit√©rios de sele√ß√£o do n√∫mero de clustes --------------------------------------//
 
                 aux_indices = new double[this.m_indice_clusters_atuais.GetLength(0), 1];
                 for (int i = 0; i < this.m_indice_clusters_atuais.GetLength(0); i++) aux_indices[i, 0] = (double)this.m_indice_clusters_atuais[i];
@@ -1735,7 +1732,7 @@ namespace IpeaGeo
 
         #endregion 
 
-        #region Sequencia estatÌsticas dos clusters da ·rvore
+        #region Sequencia estat√≠sticas dos clusters da √°rvore
 
         public double[,] GeraSequenciaEstatisticas(double[,] variaveis_to_medias)
         {
@@ -1865,9 +1862,9 @@ namespace IpeaGeo
 
         public double[,] GerarEstatisticasClusters(double[,] variaveis_to_medias, int numero_clusters)
         {
-            if (this.m_cluster_tree == null) throw new Exception("¡rvore de clusters n„o construÌda");
+            if (this.m_cluster_tree == null) throw new Exception("√Årvore de clusters n√£o constru√≠da");
             if (numero_clusters > this.m_num_max_clusters_arvore || numero_clusters < this.m_num_min_clusters_arvore)
-                throw new Exception("N˙mero de clusters inv·lido para a ·rvore de clusters construÌda");
+                throw new Exception("N√∫mero de clusters inv√°lido para a √°rvore de clusters constru√≠da");
 
             int coluna = this.m_num_max_clusters_arvore - numero_clusters;
 
@@ -1910,7 +1907,7 @@ namespace IpeaGeo
 
         #endregion 
 
-        #region Dist‚ncias contÌnuas entre polÌgonos
+        #region Dist√¢ncias cont√≠nuas entre pol√≠gonos
 
         private double[] m_variancias_variaveis = new double[0];
         private void ConstroiVarianciasVariaveis()
@@ -2021,18 +2018,18 @@ namespace IpeaGeo
 
         #endregion
 
-        #region Dist‚ncias ordinais entre polÌgonos
+        #region Dist√¢ncias ordinais entre pol√≠gonos
 
         private double[] m_variancia_dados_ordinais = new double[0];
         private double[] m_scaleL1norm_dados_ordinais = new double[0];
 
         /// <summary>
-        /// FunÁ„o para gerar a dist‚ncia entre vetores com vari·veis ordinais. Assume-se que os valores 
-        /// dos elementos do vetor assumem valores de 1 a K, onde K È o n˙mero m·ximo de categorias ordinais. 
+        /// Fun√ß√£o para gerar a dist√¢ncia entre vetores com vari√°veis ordinais. Assume-se que os valores 
+        /// dos elementos do vetor assumem valores de 1 a K, onde K √© o n√∫mero m√°ximo de categorias ordinais. 
         /// </summary>
-        /// <param name="v1">Primeiro vetor de vari·veis ordinais.</param>
-        /// <param name="v2">Segundo vetor de vari·veis ordinais.</param>
-        /// <returns>Retorna um escalar, com a dist‚ncia entre os vetores.</returns>
+        /// <param name="v1">Primeiro vetor de vari√°veis ordinais.</param>
+        /// <param name="v2">Segundo vetor de vari√°veis ordinais.</param>
+        /// <returns>Retorna um escalar, com a dist√¢ncia entre os vetores.</returns>
         private double DistanciaOrdinalPoligonos(double[,] v1, double[,] v2)
         {
             double distancia = 0.0;
@@ -2115,7 +2112,7 @@ namespace IpeaGeo
 
         #endregion
 
-        #region Dist‚ncia mista entre polÌgonos
+        #region Dist√¢ncia mista entre pol√≠gonos
 
         private double DistanciaMistaPoligonos(double[,] vcont1, double[,] vcont2,
                                                 double[,] vbin1, double[,] vbin2,
@@ -2141,7 +2138,7 @@ namespace IpeaGeo
 
         #endregion
 
-        #region Dist‚ncias categÛricas entre polÌgonos
+        #region Dist√¢ncias categ√≥ricas entre pol√≠gonos
 
         private double DistanciaCategoricaPoligonos(double[,] v1, double[,] v2)
         {
@@ -2168,7 +2165,7 @@ namespace IpeaGeo
 
         #endregion
         
-        #region Dist‚ncias bin·rias entre polÌgonos
+        #region Dist√¢ncias bin√°rias entre pol√≠gonos
 
         private double DistanciaBinariaPoligonos(double[,] v1, double[,] v2)
         {
@@ -2280,7 +2277,7 @@ namespace IpeaGeo
 
         #endregion 
 
-        #region MÈtodos de clusterizaÁ„o
+        #region M√©todos de clusteriza√ß√£o
 
         private double soma_Pg = 0.0;
        
@@ -2435,9 +2432,9 @@ namespace IpeaGeo
                     return 0.0;
             }
         }
-        
-
+      
         #region Algoritmo antigo
+		
         /*
         public int NQContinuousHierarchicalClustering(ref double[,] cluster_database,
             ref double[,] cluster_statistics,
@@ -2510,7 +2507,7 @@ namespace IpeaGeo
                     }
                 }
                 
-                //------------------ junta clusters com menor dist‚ncia -------------------//
+                //------------------ junta clusters com menor dist√¢ncia -------------------//
 
                 nclus--;
                 for (int i = 0; i < this.nobs; i++)
@@ -2529,7 +2526,7 @@ namespace IpeaGeo
                 }
                 this.m_lista_clusters_atuais = aux_lista;
 
-                //----------------------- redefiniÁ„o de vizinhanÁas dos clusters ---------------------------//
+                //----------------------- redefini√ß√£o de vizinhan√ßas dos clusters ---------------------------//
 
                 temp_shape[k1].AddListaVizinhos(temp_shape[k2].ListaIndicesVizinhos);
 
@@ -2600,12 +2597,13 @@ namespace IpeaGeo
 
             return 1;
         }
-         */
+        */
+		
         #endregion
 
         #endregion 
 
-        #region MÈtodos de dissimilaridade
+        #region M√©todos de dissimilaridade
 
         private double m_peso_dissimilaridade_cluster_size = 1.0;
 
