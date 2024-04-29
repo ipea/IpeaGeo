@@ -87,8 +87,6 @@ namespace IpeaGeo.BLogic
 
             return v;
         }
-
-
         
         public double GeraIndiceSegregacaoMultiGroup(TipoIndiceSegregacaoMultiGroup tipo_indice, string variavel_xi, string variavel_yi)
         {
@@ -116,14 +114,11 @@ namespace IpeaGeo.BLogic
                 case TipoIndiceSegregacaoMultiGroup.SquaredcoefficientOfVariation:
                     valor_indice = clindices.Squared_Coefficient_of_Variation(m_shape, this.m_dt, m_lista_vars_xi, this.m_var_ti);
                     break;
-                
-
+              
                 default:
                     valor_indice = clindices.Spatial_Proximity_Index(m_shape, this.m_dt, variavel_xi, variavel_yi);
                     break;
             }
-
-
 
             return valor_indice;
         }
@@ -135,7 +130,7 @@ namespace IpeaGeo.BLogic
             {
                 fatorial = fatorial * i;
             }
-            return (fatorial);
+            return fatorial;
         }
 
         //Gera o numero de combinacoes N, P a P.
@@ -149,8 +144,6 @@ namespace IpeaGeo.BLogic
 
             return (combinacoes);
         }
-
-
 
         public double[,] GeraIndiceSegregacaoTwoGroup(TipoIndiceSegregacaoTwoGroup tipo_indice)
         {
@@ -184,8 +177,6 @@ namespace IpeaGeo.BLogic
 
             return v;
         }
-
-
        
         public double GeraIndiceSegregacaoTwoGroup(TipoIndiceSegregacaoTwoGroup tipo_indice, string variavel_xi, string variavel_yi)
         {
@@ -226,12 +217,8 @@ namespace IpeaGeo.BLogic
                     break;
             }
 
-
-
             return valor_indice;
         }
-
-
 
         public double[,] GeraIndiceSegregacaoOneGroup(TipoIndiceSegregacaoOneGroup tipo_indice)
         {
@@ -290,8 +277,6 @@ namespace IpeaGeo.BLogic
                     valor_indice = clindices.Indice_de_Gini(this.m_dt, this.m_var_ti, variavel_xi);
                     break;
             }
-
-
 
             return valor_indice;
         }
