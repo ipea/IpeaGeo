@@ -6,10 +6,8 @@ using IpeaGeo.RegressoesEspaciais;
 
 namespace IpeaGeo
 {
-
     public partial class frmDependenciaGlobal : Form
     {
-
         public frmDependenciaGlobal()
         {
             InitializeComponent();
@@ -30,6 +28,7 @@ namespace IpeaGeo
                 shapeAlex = value;
             }
         }
+        
         private string[] strVariaveisQualitativas;
         public string[] VariaveisQualitativas
         {
@@ -42,6 +41,7 @@ namespace IpeaGeo
                 strVariaveisQualitativas = value;
             }
         }
+        
         private string[] strVariaveisQuantitativas;
         public string[] VariaveisQuantitativas
         {
@@ -93,6 +93,7 @@ namespace IpeaGeo
                 classePoligonos = value;
             }
         }
+        
         private string strIDmapa;
         public string IdentificadorMapa
         {
@@ -131,6 +132,7 @@ namespace IpeaGeo
                 strID = value;
             }
         }
+        
         private DataTable dTable;
         public DataTable DataTableDados
         {
@@ -169,6 +171,7 @@ namespace IpeaGeo
                 dblIMORAN = value;
             }
         }
+        
         private double[] dblpIMORAN;
         public double[] pValorIndiceMoran
         {
@@ -194,6 +197,7 @@ namespace IpeaGeo
                 dblIMORANSIMPLES = value;
             }
         }
+        
         private double[] dblpIMORANSIMPLES;
         public double[] pValorIndiceMoranSimples
         {
@@ -310,6 +314,7 @@ namespace IpeaGeo
                 dblpRogersonI = value;
             }
         }
+        
         private string strPOPULACAO;
         public string VariavelPopulacao
         {
@@ -322,6 +327,7 @@ namespace IpeaGeo
                 strPOPULACAO = value;
             }
         }
+        
         private string strTipoPeso;
         public string TipoDoPeso
         {
@@ -334,6 +340,7 @@ namespace IpeaGeo
                 strTipoPeso = value;
             }
         }
+        
         private int intNumeroSim;
         public int NumeroDeSimulacoes
         {
@@ -451,7 +458,6 @@ namespace IpeaGeo
         private double[] dblVarGetis;
         private double[] dblPAnaliticoGetis;
 
-
         private double[] dblTango;
         private double[] dblPvalorTango;
         private object[] dblEspTango;
@@ -527,7 +533,6 @@ namespace IpeaGeo
                 }
                 else
                 {
-
                     for (int i = 0; i < checkedListBox1.Items.Count; i++) if (checkedListBox1.GetItemChecked(i) == true) cSelected1++;
                     string[] strSelecionadasQuanti = new string[cSelected1];
                     cSelected1 = 0;
@@ -544,13 +549,11 @@ namespace IpeaGeo
 
                 #endregion
 
-                // Alteração Gabriela 07 de outubro de 2011
-                dblMoran = null; // Zerando as variáveis para não permanecerem da simulação anterior e dar erro na geração de outpus (Gabriela 7 de outubro)             
+                dblMoran = null; 
                 dblGeary = null;
                 dblGetis = null;
                 dblTango = null;
                 dblRogerson = null;
-                // Fim da alteração Gabriela 07 de outubro
 
                 if (cSelected1 == 0)
                 {
@@ -682,17 +685,13 @@ namespace IpeaGeo
 
                                 p_valor_Moran_teste = bld.IndiceMoranGeralPValor(y, (int)numSimula.Value, Moran_teste, ref progressBar1);
 
-                                // inclusão1 gabriela 21 de outubro de 2011
                                 progressBar1.Value = 0;
                                 labelProgress.Text = "Teste de hipótese para dependência espacial da variável " + strVariaveisSelecionadasQuantitativas[k] + " ...";
-                                // fim inclusão1 gabriela 21 de outubro de 2011
 
                                 teste_normalidade_moran = bld.TesteMoranGlobal(y, ref progressBar1);
 
-                                // inclusão2 gabriela 19 de outubro de 2011
                                 progressBar1.Value = 0;
                                 Application.DoEvents();
-                                // fim inclusão2 gabriela 19 de outubro de 2011
 
                                 dblMoran[k] = Moran_teste;
                                 dblPvalorMoran[k] = p_valor_Moran_teste;
@@ -700,9 +699,7 @@ namespace IpeaGeo
                                 dblVarMoran[k] = teste_normalidade_moran[1];
                                 dblPAnaliticoMoran[k] = teste_normalidade_moran[3];
                             }
-
-                            //------------------ Fim do teste Alex : 4 agosto de 2011
-                            
+                         
                             output_Resultado_indicesglobais();
 
                             if (chkRogerson.Checked || chkTango.Checked)
@@ -787,22 +784,22 @@ namespace IpeaGeo
                             {
                                 y = clt.GetMatrizFromDataTable(dTable, strVariaveisSelecionadasQuantitativas[k]);
                                 Geary_teste = bld.IndiceGearyGlobal(y);
-                                // inclusão1 gabriela 18 de outubro de 2011
+                                
                                 progressBar1.Value = 0;
                                 Application.DoEvents();
                                 labelProgress.Text = "Simulações de Monte Carlo para o Índice de Geary da variável " + strVariaveisSelecionadasQuantitativas[k] + " ...";
                                 Application.DoEvents();
-                                // fim inclusão1 gabriela 18 de outubro de 2011
+                                
                                 p_valor_Geary_teste = bld.pValorIndiceDeGeary(y, (int)numSimula.Value, Geary_teste, ref progressBar1);
-                                // inclusão1 gabriela 19 de outubro de 2011
+                                
                                 progressBar1.Value = 0;
                                 labelProgress.Text = "Teste de hipótese para dependência espacial da variável " + strVariaveisSelecionadasQuantitativas[k] + " ...";
-                                // fim inclusão1 gabriela 19 de outubro de 2011
+                                
                                 teste_normalidade_geary = bld.TesteGearyGlobal(y, ref progressBar1);
-                                // inclusão2 gabriela 19 de outubro de 2011
+                                
                                 progressBar1.Value = 0;
                                 Application.DoEvents();
-                                // fim inclusão2 gabriela 19 de outubro de 2011
+                                
                                 dblGeary[k] = Geary_teste;
                                 dblPvalorGeary[k] = p_valor_Geary_teste;
                                 dblEspGeary[k] = teste_normalidade_geary[0];
@@ -864,20 +861,16 @@ namespace IpeaGeo
                                 Application.DoEvents();
                                 
                                 p_valor_Getis_teste = bld.pValorGetisOrdGi(y, (int)numSimula.Value, Getis_teste, ref progressBar1);
-
-                                // inclusão1 gabriela 19 de outubro de 2011
+                                
                                 progressBar1.Value = 0;
                                 labelProgress.Text = "Teste de hipótese para dependência espacial da variável " + strVariaveisSelecionadasQuantitativas[k] + " ...";
-                                // fim inclusão1 gabriela 19 de outubro de 2011
-                                
+                                                                
                                 dblGetis[k] = Getis_teste;
                                 dblPvalorGetis[k] = p_valor_Getis_teste;
                                 dblEspGetis[k] = teste_normalidade_getis[0];
                                 dblVarGetis[k] = teste_normalidade_getis[1];
                                 dblPAnaliticoGetis[k] = teste_normalidade_getis[3];
                             }
-
-                            //------------------ Fim do teste Gabriela : 11 de agosto de 2011                            
 
                             output_Resultado_indicesglobais();
 
@@ -912,8 +905,6 @@ namespace IpeaGeo
                             progressBar1.Value = 0;
                             Application.DoEvents();
 
-                            //=================================== Modificação Gabriela 09.11.2011
-
                             clsUtilTools clt = new clsUtilTools();
                             double[,] y = new double[0, 0];
                             double Tango_teste = 0.0;
@@ -938,10 +929,8 @@ namespace IpeaGeo
                                 labelProgress.Text = "Simulações de Monte Carlo para o Índice de Tango...";
                                 Application.DoEvents();
 
-
                                 p_valor_Tango_teste = bld.pValorTango(y, (int)numSimula.Value, Tango_teste, ref progressBar1);
 
-                                // inclusão1 gabriela 19 de outubro de 2011
                                 progressBar1.Value = 0;
                                 labelProgress.Text = "Teste de hipótese para dependência espacial da variável " + strVariaveisSelecionadasQuantitativas[k] + " ...";
 
@@ -955,12 +944,9 @@ namespace IpeaGeo
                                 }
                                 dblTango[k] = Tango_teste;
                                 dblPvalorTango[k] = p_valor_Tango_teste;
-
                             }           
 
                             output_Resultado_indicesglobais();
-
-                            //=================================== Fim Modificação Gabriela 09.11.2011
                         }
 
                         dblRogerson = new double[mDadosQuanti.GetLength(1)];
@@ -971,8 +957,6 @@ namespace IpeaGeo
                             labelProgress.Text = "Calculando Índice de Rogerson...";
                             progressBar1.Value = 0;
                             Application.DoEvents();
-
-                            //=================================== Modificação Gabriela 09.11.2011
 
                             clsUtilTools clt = new clsUtilTools();
                             double[,] y = new double[0, 0];
@@ -1001,7 +985,6 @@ namespace IpeaGeo
 
                                 p_valor_Rogerson_teste = bld.pValorRogerson(y, (int)numSimula.Value, Rogerson_teste, ref progressBar1);
 
-                                // inclusão1 gabriela 19 de outubro de 2011
                                 progressBar1.Value = 0;
                                 labelProgress.Text = "Teste de hipótese para dependência espacial da variável " + strVariaveisSelecionadasQuantitativas[k] + " ...";
                                 if (ckRogersonTangoUsaQuiQuadrado.Checked == true)
@@ -1017,8 +1000,6 @@ namespace IpeaGeo
                             }                                     
 
                             output_Resultado_indicesglobais();
-                            
-                            //=================================== Fim Modificação Gabriela 09.11.2011
                         }
 
                         if (chkRogerson.Checked || chkTango.Checked)
@@ -1173,7 +1154,6 @@ namespace IpeaGeo
                     {
                         btnOk.Enabled = false;
                     }
-
                 }
             }
             catch (Exception ex)
@@ -1196,7 +1176,6 @@ namespace IpeaGeo
                     {
                         btnOk.Enabled = false;
                     }
-
                 }
             }
             catch (Exception ex)
@@ -1250,19 +1229,17 @@ namespace IpeaGeo
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-
+        
         private void chkMoran_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             tip = new ToolTip();
-            tip.Show(@"O Índice de Moran mede a correlação espacial de uma variável y e é similar em
-vários aspectos ao índice de correlação de pearson.
-Seu valor varia de -1 a 1. Valores próximos de zero indicam a inexistência de autocorrelação espacial
-significativa entre os valores dos objetos e seus vizinhos.
-Valores positivos para o índice, indicam autocorrelação espacial positiva, ou
-seja, o valor do atributo de um objeto tende a ser semelhante aos valores dos seus
-vizinhos. Valores negativos para o índice, por sua vez, indicam autocorrelação negativa.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
-
+            tip.Show(@"O Índice de Moran mede a correlação espacial de uma variável y e é similar em" + "\n" +
+                        "vários aspectos ao índice de correlação de pearson." + "\n" +
+                        "Seu valor varia de -1 a 1. Valores próximos de zero indicam a inexistência de autocorrelação espacial" + "\n" +
+                        "significativa entre os valores dos objetos e seus vizinhos." + "\n" +
+                        "Valores positivos para o índice, indicam autocorrelação espacial positiva, ou" + "\n" +
+                        "seja, o valor do atributo de um objeto tende a ser semelhante aos valores dos seus" + "\n" +
+                        "vizinhos. Valores negativos para o índice, por sua vez, indicam autocorrelação negativa.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
         }
 
         private ToolTip tip = new ToolTip();
@@ -1270,40 +1247,40 @@ vizinhos. Valores negativos para o índice, por sua vez, indicam autocorrelaçã
         private void chkGeary_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             tip = new ToolTip();
-            tip.Show(@"O C de Geary é uma medida de autocorrelação. O valor do C de Geary varia
-entre 0 e 2. Quando o índice é igual a 1 significa ausência de autocorrelação espacial.
-Valores pequenos menores do que 1 indicam autocorrelação espacial positiva, já
-valores maiores do que 1 indicam autocorrelação negativa.
-C de Geary é inversamente proporcional ao I de Moran, mas não identicamente.
-Enquanto o I de Moran é uma medida global o C de Geary é mais sensitivo
-a medidas locais, apesar de ser formalmente considerado um índice global.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
+            tip.Show(@"O C de Geary é uma medida de autocorrelação. O valor do C de Geary varia" + "\n" +
+                        "entre 0 e 2. Quando o índice é igual a 1 significa ausência de autocorrelação espacial." + "\n" +
+                        "Valores pequenos menores do que 1 indicam autocorrelação espacial positiva, já" + "\n" +
+                        "valores maiores do que 1 indicam autocorrelação negativa." + "\n" +
+                        "C de Geary é inversamente proporcional ao I de Moran, mas não identicamente." + "\n" +
+                        "Enquanto o I de Moran é uma medida global o C de Geary é mais sensitivo" + "\n" +
+                        "a medidas locais, apesar de ser formalmente considerado um índice global.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
         }
 
         private void chkGetis_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             tip = new ToolTip();
-            tip.Show(@"O índice global Getis-Ord mostra o quão concentrado estão os dados
-para uma determinada área de estudo. A hipótese nula do índice global Getis-Ord é de que
-não há conglomerados espaciais entre os valores. Quando o valor escore z é alto e o p-valor
-pequeno, a hipótese nula não deverá ser aceita. Caso o escore z seja significativo e positivo,
-há indícios de que os valores altos estão aglomerados, já se o escore z for significativo mas negativo
-há indícios de que os valores baixos estão aglomerados.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
+            tip.Show(@"O índice global Getis-Ord mostra o quão concentrado estão os dados" + "\n" +
+                        "para uma determinada área de estudo. A hipótese nula do índice global Getis-Ord é de que" + "\n" +
+                        "não há conglomerados espaciais entre os valores. Quando o valor escore z é alto e o p-valor" + "\n" +
+                        "pequeno, a hipótese nula não deverá ser aceita. Caso o escore z seja significativo e positivo," + "\n" +
+                        "há indícios de que os valores altos estão aglomerados, já se o escore z for significativo mas negativo" + "\n" +
+                        "há indícios de que os valores baixos estão aglomerados.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
         }
 
         private void chkTango_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             tip = new ToolTip();
-            tip.Show(@"A estatística de Tango é uma média ponderada
-das covariâncias dos desvios entre frequências observadas e esperadas,
-para todos os pares de pontos.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
+            tip.Show(@"A estatística de Tango é uma média ponderada" + "\n" +
+                        "das covariâncias dos desvios entre frequências observadas e esperadas," + "\n" +
+                        "para todos os pares de pontos.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
         }
 
         private void chkRogerson_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             tip = new ToolTip();
-            tip.Show(@"A estatística R de Rogerson é um caso especial
-da estatística de Tango, onde os pesos nesta são divididos pela raiz
-quadrada do produto entre as frequências esperadas de cada par de pontos.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
+            tip.Show(@"A estatística R de Rogerson é um caso especial" + "\n" +
+                        "da estatística de Tango, onde os pesos nesta são divididos pela raiz" + "\n" +
+                        "quadrada do produto entre as frequências esperadas de cada par de pontos.", this, hlpevent.MousePos.X, hlpevent.MousePos.Y);
         }
 
         private void frmDependenciaGlobal_MouseMove(object sender, MouseEventArgs e)
@@ -1386,7 +1363,6 @@ quadrada do produto entre as frequências esperadas de cada par de pontos.", thi
                     Application.DoEvents();
                     //labelProgress.Visible = false;
                     labelProgress.Text = "Processo de estimação finalizado.";
-
                 }
 
                 if (chkGeary.Checked & (dblGeary != null))
@@ -1432,7 +1408,6 @@ quadrada do produto entre as frequências esperadas de cada par de pontos.", thi
 
                     out_text += "Variável dos dados: " + strVariaveisSelecionadasQuantitativas[i] + "\n\n";
 
-
                     out_text += "Numero de observacoes: " + dTable.Rows.Count + "\n";
                     out_text += "Índice de Getis-Ord Gi: " + clt.Double2Texto(dblGetis[i], 6) + "\n";
                     out_text += "Esperança: " + clt.Double2Texto(dblEspGetis[i], 6) + "\n";
@@ -1467,7 +1442,6 @@ quadrada do produto entre as frequências esperadas de cada par de pontos.", thi
                     out_text += "Hora: " + System.DateTime.Now.ToLongTimeString() + "\n\n";
 
                     out_text += "Variável dos dados: " + strVariaveisSelecionadasQuantitativas[i] + "\n\n";
-
 
                     out_text += "Numero de observacoes: " + dTable.Rows.Count + "\n";
                     out_text += "Índice de Tango: " + clt.Double2Texto(dblTango[i], 6) + "\n";
@@ -1513,7 +1487,6 @@ quadrada do produto entre as frequências esperadas de cada par de pontos.", thi
                     out_text += "Hora: " + System.DateTime.Now.ToLongTimeString() + "\n\n";
 
                     out_text += "Variável dos dados: " + strVariaveisSelecionadasQuantitativas[i] + "\n\n";
-
 
                     out_text += "Numero de observacoes: " + dTable.Rows.Count + "\n";
                     out_text += "Índice de Rogerson: " + clt.Double2Texto(dblRogerson[i], 6) + "\n";
