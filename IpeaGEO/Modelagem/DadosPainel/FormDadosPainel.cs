@@ -86,7 +86,6 @@ namespace IpeaGEO.Modelagem
 
         private void FormBaseModelagem_Load(object sender, EventArgs e)
         {
-
         }
 
         #region Open tabela de dados e tabela shape
@@ -379,17 +378,14 @@ namespace IpeaGEO.Modelagem
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
-
         }
 
         private void exportarMatrizDeVizinhançaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void importarMatrizDeVizinhançaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         #endregion
