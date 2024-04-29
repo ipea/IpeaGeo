@@ -7,16 +7,13 @@ namespace IpeaGeo
 	/// Summary description for Betai.
 	/// </summary>
 	[Obsolete("Use MathNet.Numerics instead.")]
-    public class Betai
+        public class Betai
 	{
 		public Betai()
 		{
-			//
-			// TODO: Add constructor logic here
-			//
 		}
 
-		//Retorna  a funÁ„o BETA incompleta Bx(a,b)/B(a,b) onde a,b >0
+		//Retorna  a fun√ß√£o BETA incompleta Bx(a,b)/B(a,b) onde a,b >0
 
 		public double betai(double a, double b, double x)
 		{
@@ -27,8 +24,8 @@ namespace IpeaGeo
 			if (x < 0.0 || x > 1.0) try{throw new Exception();}
 									catch (Exception)
 									{
-										MessageBox.Show("Valor de x menor do que 0 ou maior do que 1.Rotina betai",
-											"MÈtodo Inv·lido",MessageBoxButtons.OK, MessageBoxIcon.Error );
+										MessageBox.Show("Valor de x menor do que 0 ou maior do que 1. Rotina betai",
+											"M√©todo Inv√°lido",MessageBoxButtons.OK, MessageBoxIcon.Error );
 									}
 			if (x == 0.0 || x == 1.0) bt=0.0;
 			else
