@@ -140,7 +140,6 @@ namespace IpeaGeo.Modelagem
         {
             try
             {
-
                 if (ckbIncluirNovasVariaveisTabelaDados.Checked)
                 {
                     MessageBox.Show("Tabela de dados Atualizada", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -157,16 +156,13 @@ namespace IpeaGeo.Modelagem
                     lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
 
                     Cursor = Cursors.Default;
-
                 }
-
                 else
                 {
                     MessageBox.Show("Selecione a opção 'Mostrar novas variáveis na tabela de dados', localizada na aba Especificações", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     DialogResult = DialogResult.OK;
                 }
             }
-
             catch (Exception er)
             {
                 Cursor = Cursors.Default;
@@ -312,17 +308,16 @@ namespace IpeaGeo.Modelagem
             zedGraphControl1.GraphPane.CurveList.Clear();
             zedGraphControl1.GraphPane.GraphObjList.Clear();
 
-
             GraphPane myPane2 = zedGraphControl2.GraphPane;
             PointPairList listPP = new PointPairList();
             PointPairList retaPP = new PointPairList();
             zedGraphControl2.GraphPane.CurveList.Clear();
             zedGraphControl2.GraphPane.GraphObjList.Clear();
 
-
             if (ckbAnaliseGrafica.Checked)
             {
                 #region Histograma dos Erros
+                
                 //Calcula o número de classes segundo Regra de Sturges numclass = 1 + 3.3 log(n)
                 int numclassesSturges = new int();
                 double amplitudehist = new double();
@@ -359,17 +354,11 @@ namespace IpeaGeo.Modelagem
                     myPane.YAxis.Scale.Min = (double)clt.Min(Yhist) - (((double)clt.Max(Yhist) - (double)clt.Min(Yhist)) / (double)Yhist.GetLength(0));
                     myPane.YAxis.Scale.Max = (double)clt.Max(Yhist) + (((double)clt.Max(Yhist) - (double)clt.Min(Yhist)) / (double)Yhist.GetLength(0));
                     myPane.XAxis.Scale.Min = (double)clt.Min(Xhist) - (((double)clt.Max(Xhist) - (double)clt.Min(Xhist)) / (double)Xhist.GetLength(0));
-                    myPane.XAxis.Scale.Max = (double)clt.Max(Xhist) + (((double)clt.Max(Xhist) - (double)clt.Min(Xhist)) / (double)Xhist.GetLength(0));
-                    
-                }
-
-                
-
+                    myPane.XAxis.Scale.Max = (double)clt.Max(Xhist) + (((double)clt.Max(Xhist) - (double)clt.Min(Xhist)) / (double)Xhist.GetLength(0));                    
+                }               
                 
                 myPane.Title.Text = "Histograma dos Erros";
-                myPane.XAxis.Title.Text = "Resíduos";
-
-                
+                myPane.XAxis.Title.Text = "Resíduos";                
 
                 if (!this.tabControl1.TabPages.Contains(tabPage3))
                 {
@@ -380,62 +369,58 @@ namespace IpeaGeo.Modelagem
 
                 #region PxP Plot dos erros
 
-                    //double mediaX = (clt.Meanc(erro))[0, 0];
-                    //double varianX = clt.Varianciac(erro)[0, 0];
-                    double[,] acumuladanormal = new double[erro.GetLength(0),1];
-                    double[,] acumuladadados = new double[erro.GetLength(0),1];
-                    double[] retaponto = new double[erro.GetLength(0)];
-                    retaponto[0] = 0;
+                //double mediaX = (clt.Meanc(erro))[0, 0];
+                //double varianX = clt.Varianciac(erro)[0, 0];
+                double[,] acumuladanormal = new double[erro.GetLength(0),1];
+                double[,] acumuladadados = new double[erro.GetLength(0),1];
+                double[] retaponto = new double[erro.GetLength(0)];
+                retaponto[0] = 0;
 
+                //MathNormaldist norm = new MathNormaldist(mediaX, Math.Sqrt(varianX));
+                erro = clt.SortcDoubleArray(erro);
 
-                    //MathNormaldist norm = new MathNormaldist(mediaX, Math.Sqrt(varianX));
-                    erro = clt.SortcDoubleArray(erro);
+                BLogicNonParametricTests blnonparametric = new BLogicNonParametricTests();
+                blnonparametric.PP_plot_1Variavel(erro,out acumuladadados,out acumuladanormal);
 
-                    BLogicNonParametricTests blnonparametric = new BLogicNonParametricTests();
-                    blnonparametric.PP_plot_1Variavel(erro,out acumuladadados,out acumuladanormal);
-
-                    for (int i = 0; i < erro.GetLength(0); i++)
+                for (int i = 0; i < erro.GetLength(0); i++)
+                {
+                    //acumuladanormal[i] = norm.cdf(erro[i, 0]);
+                    //acumuladadados[i] = ((double)i / erro.GetLength(0));
+                    listPP.Add(acumuladadados[i,0], acumuladanormal[i,0]);
+                    if (i > 0)
                     {
-                        //acumuladanormal[i] = norm.cdf(erro[i, 0]);
-                        //acumuladadados[i] = ((double)i / erro.GetLength(0));
-                        listPP.Add(acumuladadados[i,0], acumuladanormal[i,0]);
-                        if (i > 0)
-                        {
-                            retaponto[i] = (retaponto[i - 1]) + (1.0 / erro.GetLength(0));                            
-                        }
+                        retaponto[i] = (retaponto[i - 1]) + (1.0 / erro.GetLength(0));                            
                     }
-                    retaPP.Add(retaponto, retaponto);
-                    LineItem myCurve2 = myPane2.AddCurve("Normal", retaPP, Color.Black, SymbolType.None);
-                    myCurve2.Line.IsVisible = true;
+                }
+                retaPP.Add(retaponto, retaponto);
+                LineItem myCurve2 = myPane2.AddCurve("Normal", retaPP, Color.Black, SymbolType.None);
+                myCurve2.Line.IsVisible = true;
 
-                    LineItem myCurve1 = myPane2.AddCurve("tituloo", listPP, Color.Blue, SymbolType.Circle);
-                    myCurve1.Symbol.Fill.Color = Color.Blue;
-                    myCurve1.Label.IsVisible = false;
-
-
-                    myPane2.YAxis.Scale.Min = 0.0;
-                    myPane2.YAxis.Scale.Max = 1.0;
-                    myPane2.XAxis.Scale.Min = 0.0;
-                    myPane2.XAxis.Scale.Max = 1.0;
-                    myPane2.XAxis.Title.Text = "F(x) Erro";
-                    myPane2.YAxis.Title.Text = "F(x) Normal";
-                    myPane2.Title.Text = "PxP Plot dos erros";
-
-                    if (!this.tabControl1.TabPages.Contains(tabPage5))
-                    {
-                        tabControl1.TabPages.Add(tabPage5);
-                    }
-
-                    zedGraphControl1.AxisChange();
-
-                    zedGraphControl1.Update();
-                    zedGraphControl1.Refresh();  
-
-            #endregion
+                LineItem myCurve1 = myPane2.AddCurve("tituloo", listPP, Color.Blue, SymbolType.Circle);
+                myCurve1.Symbol.Fill.Color = Color.Blue;
+                myCurve1.Label.IsVisible = false;
 
 
-            }
+                myPane2.YAxis.Scale.Min = 0.0;
+                myPane2.YAxis.Scale.Max = 1.0;
+                myPane2.XAxis.Scale.Min = 0.0;
+                myPane2.XAxis.Scale.Max = 1.0;
+                myPane2.XAxis.Title.Text = "F(x) Erro";
+                myPane2.YAxis.Title.Text = "F(x) Normal";
+                myPane2.Title.Text = "PxP Plot dos erros";
 
+                if (!this.tabControl1.TabPages.Contains(tabPage5))
+                {
+                    tabControl1.TabPages.Add(tabPage5);
+                }
+
+                zedGraphControl1.AxisChange();
+
+                zedGraphControl1.Update();
+                zedGraphControl1.Refresh();  
+
+                #endregion
+            }          
 
             #endregion
             
@@ -504,12 +489,10 @@ namespace IpeaGeo.Modelagem
 
         private void ckbCorrecaoWhite_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         private void userControlRichTextOutput1_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
