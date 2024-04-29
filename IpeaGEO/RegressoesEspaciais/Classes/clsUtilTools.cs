@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace IpeaGeo.RegressoesEspaciais
 {
-    #region EnumeraÁıes
+    #region Enumera√ß√µes
 
     public enum TipoEstatisticaAmostra : int
     {
@@ -28,18 +28,18 @@ namespace IpeaGeo.RegressoesEspaciais
 
     #endregion
 
-    #region FunÁıes matriciais e utilitarios
+    #region Fun√ß√µes matriciais e utilitarios
 
     class clsUtilTools
     {
-        #region Contagem de numero de observaÁoes para um vetor de intervalos
+        #region Contagem de numero de observa√ßoes para um vetor de intervalos
 
         /// <summary>
-        /// Conta o n˙mero de elementos em uma matriz, em intervalos de dados especificados em um vetor de dados. A contagem considera intervalo fechado para o m·ximo do intervalo.
+        /// Conta o n√∫mero de elementos em uma matriz, em intervalos de dados especificados em um vetor de dados. A contagem considera intervalo fechado para o m√°ximo do intervalo.
         /// </summary>
         /// <param name="dados">Matriz de dados.</param>
         /// <param name="vetor_intervalos">Vetor coluna com os valores dos intervalos.</param>
-        /// <param name="categoria_intervalo">Retorna uma matriz, de mesma dimens„o da matriz dados, contendo o ordinal do intervalo para o qual a observaÁ„o pertence.</param>
+        /// <param name="categoria_intervalo">Retorna uma matriz, de mesma dimens√£o da matriz dados, contendo o ordinal do intervalo para o qual a observa√ß√£o pertence.</param>
         public int[] ContaFrequenciaEmIntervalos(double[,] dados, double[,] vetor_intervalos, out object[,] categoria_intervalo)
         {
             int[] contagem = new int[vetor_intervalos.GetLength(0) + 1];
@@ -74,7 +74,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Conta o n˙mero de elementos em uma matriz, em intervalos de dados especificados em um vetor de dados. A contagem considera intervalo fechado para o m·ximo do intervalo.
+        /// Conta o n√∫mero de elementos em uma matriz, em intervalos de dados especificados em um vetor de dados. A contagem considera intervalo fechado para o m√°ximo do intervalo.
         /// </summary>
         /// <param name="dados">Matriz de dados.</param>
         /// <param name="vetor_intervalos">Vetor coluna com os valores dos intervalos.</param>
@@ -110,7 +110,7 @@ namespace IpeaGeo.RegressoesEspaciais
         
         #endregion
 
-        #region FunÁıes auxiliares
+        #region Fun√ß√µes auxiliares
 
         public string[] RetornaIntersecaoDuasListas(string[] v1, string[] v2)
         {
@@ -144,13 +144,13 @@ namespace IpeaGeo.RegressoesEspaciais
             }
             catch (Exception ex)
             {
-                throw new Exception("Processo de exportaÁ„o para arquivo txt falhou." + ex.InnerException.ToString());
+                throw new Exception("Processo de exporta√ß√£o para arquivo txt falhou." + ex.InnerException.ToString());
             }
         }
 
         #endregion
         
-        #region importaÁ„o de arquivos texto
+        #region importa√ß√£o de arquivos texto
 
         public void LerArquivoTextoDelimited(string arquivo, ref DataTable dt, 
             bool delimitado_pontovirgula, bool delimitado_virgula, bool delimitado_caracter, 
@@ -323,17 +323,17 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region atribuindo nome novo a uma vari·vel, para evitar duplicaÁ„o de nomes
+        #region atribuindo nome novo a uma vari√°vel, para evitar duplica√ß√£o de nomes
 
         /// <summary>
-        /// Retorno o nome da nova vari·vei para entrar na tabela, evitando duplicaÁ„o. 
-        /// Quando o nome j· existir, ser· dado um nome com o _1 no final. Quando j· houver
-        /// vari·vel com esse sufixo, ser· um incluÌdo um sufixo incrementado atÈ n„o haver mais 
-        /// a duplicaÁ„o (_1, _2, ...). 
+        /// Retorno o nome da nova vari√°vei para entrar na tabela, evitando duplica√ß√£o. 
+        /// Quando o nome j√° existir, ser√° dado um nome com o _1 no final. Quando j√° houver
+        /// vari√°vel com esse sufixo, ser√° um inclu√≠do um sufixo incrementado at√© n√£o haver mais 
+        /// a duplica√ß√£o (_1, _2, ...). 
         /// </summary>
-        /// <param name="dt">Lista de nomes inicial, para checagem da duplicaÁ„o dos nomes das colunas.</param>
-        /// <param name="nome">Nome tetantivo da vari·vel nova.</param>
-        /// <returns>Retorno no nome sem duplicaÁ„o.</returns>
+        /// <param name="dt">Lista de nomes inicial, para checagem da duplica√ß√£o dos nomes das colunas.</param>
+        /// <param name="nome">Nome tetantivo da vari√°vel nova.</param>
+        /// <returns>Retorno no nome sem duplica√ß√£o.</returns>
         public string nome_nova_coluna(ArrayList nomes_existentes, string nome)
         {
             string res = nome;
@@ -374,14 +374,14 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorno o nome da nova vari·vei para entrar na tabela, evitando duplicaÁ„o. 
-        /// Quando o nome j· existir, ser· dado um nome com o _1 no final. Quando j· houver
-        /// vari·vel com esse sufixo, ser· um incluÌdo um sufixo incrementado atÈ n„o haver mais 
-        /// a duplicaÁ„o (_1, _2, ...). 
+        /// Retorno o nome da nova vari√°vei para entrar na tabela, evitando duplica√ß√£o. 
+        /// Quando o nome j√° existir, ser√° dado um nome com o _1 no final. Quando j√° houver
+        /// vari√°vel com esse sufixo, ser√° um inclu√≠do um sufixo incrementado at√© n√£o haver mais 
+        /// a duplica√ß√£o (_1, _2, ...). 
         /// </summary>
-        /// <param name="dt">Tabela inicial, para checagem da duplicaÁ„o dos nomes das colunas.</param>
-        /// <param name="nome">Nome tetantivo da vari·vel nova.</param>
-        /// <returns>Retorno no nome sem duplicaÁ„o.</returns>
+        /// <param name="dt">Tabela inicial, para checagem da duplica√ß√£o dos nomes das colunas.</param>
+        /// <param name="nome">Nome tetantivo da vari√°vel nova.</param>
+        /// <returns>Retorno no nome sem duplica√ß√£o.</returns>
         public string nome_nova_coluna(DataTable dt, string nome)
         {
             ArrayList nomes_existentes = new ArrayList();
@@ -422,7 +422,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region dist‚ncia entre vetores linha
+        #region dist√¢ncia entre vetores linha
 
         public double distancia_entre_vetores_linha(double[,] v1, double[,] v2)
         {
@@ -438,7 +438,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region amostras sem reposiÁ„o
+        #region amostras sem reposi√ß√£o
 
         public int[] amostra_sem_reposicao(int tamanho_amostra, int tamanho_populacao)
         {
@@ -476,7 +476,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region adiÁ„o de novas vari·veis a um datatable
+        #region adi√ß√£o de novas vari√°veis a um datatable
 
         public void AdicionaColunasToDataTable(ref DataTable tabela, double[,] dados, string[] nomes_variaveis)
         {
@@ -500,9 +500,9 @@ namespace IpeaGeo.RegressoesEspaciais
 
         public void AdicionaColunasToDataTable(ref DataTable tabela, object[,] dados, string[] nomes_variaveis, Type[] tipos_variaveis)
         {
-            if (nomes_variaveis.GetLength(0) != dados.GetLength(1)) throw new Exception("N˙mero de vari·veis È diferente do n˙mero de colunas");
-            if (dados.GetLength(0) != tabela.Rows.Count) throw new Exception("N˙mero de observaÁıes na tabela È diferente do n˙mero de linhas do datatable.");
-            if (tipos_variaveis.GetLength(0) != dados.GetLength(1)) throw new Exception("N˙mero de tipos de vari·veis È diferente do n˙mero de colunas");
+            if (nomes_variaveis.GetLength(0) != dados.GetLength(1)) throw new Exception("N√∫mero de vari√°veis √© diferente do n√∫mero de colunas");
+            if (dados.GetLength(0) != tabela.Rows.Count) throw new Exception("N√∫mero de observa√ß√µes na tabela √© diferente do n√∫mero de linhas do datatable.");
+            if (tipos_variaveis.GetLength(0) != dados.GetLength(1)) throw new Exception("N√∫mero de tipos de vari√°veis √© diferente do n√∫mero de colunas");
 
             string[] novos_nomes = new string[nomes_variaveis.GetLength(0)];
             for (int k = 0; k < nomes_variaveis.GetLength(0); k++)
@@ -612,7 +612,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region funÁ„o de logaritmo
+        #region fun√ß√£o de logaritmo
 
         public double[,] LogMatriz(double[,] m)
         {
@@ -628,7 +628,7 @@ namespace IpeaGeo.RegressoesEspaciais
         #region dobra tamanho do vetor
 
         /// <summary>
-        /// FunÁ„o para dobrar o n˙mero de elementos de um vetor, mantendo os valores originais.
+        /// Fun√ß√£o para dobrar o n√∫mero de elementos de um vetor, mantendo os valores originais.
         /// </summary>
         /// <param name="a">Vetor de entrada.</param>
         /// <returns>Novo vetor, com o dobro de valores.</returns>
@@ -643,7 +643,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// FunÁ„o para dobrar o n˙mero de elementos de um vetor, mantendo os valores originais.
+        /// Fun√ß√£o para dobrar o n√∫mero de elementos de um vetor, mantendo os valores originais.
         /// </summary>
         /// <param name="a">Vetor de entrada.</param>
         /// <returns>Novo vetor, com o dobro de valores.</returns>
@@ -665,8 +665,8 @@ namespace IpeaGeo.RegressoesEspaciais
         /// Retorna elementos a partir de um vetor original.
         /// </summary>
         /// <param name="v">Vetor original.</param>
-        /// <param name="i0">Õndice do vetor, a partir do qual os elementos ser„o retornados.</param>
-        /// <returns>Vetor de saÌda.</returns>
+        /// <param name="i0">√çndice do vetor, a partir do qual os elementos ser√£o retornados.</param>
+        /// <returns>Vetor de sa√≠da.</returns>
         public int[] SubVector(int[] v, int i0)
         {
             return SubVector(v, i0, v.GetLength(0) - 1);
@@ -676,8 +676,8 @@ namespace IpeaGeo.RegressoesEspaciais
         /// Retorna elementos a partir de um vetor original.
         /// </summary>
         /// <param name="v">Vetor original.</param>
-        /// <param name="i0">Õndice do primeiro elemento a ser retornado.</param>
-        /// <param name="i1">Õndice do ˙ltimo elemento a ser retornado.</param>
+        /// <param name="i0">√çndice do primeiro elemento a ser retornado.</param>
+        /// <param name="i1">√çndice do √∫ltimo elemento a ser retornado.</param>
         /// <returns></returns>
         public int[] SubVector(int[] v, int i0, int i1)
         {
@@ -691,7 +691,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region tratamento de observaÁıes missing ou nulas nos datatable
+        #region tratamento de observa√ß√µes missing ou nulas nos datatable
 
         public void DatatableToDoubleMatrixSemMissing(DataTable dt, string[] variaveis,
             out double[,] matriz_dados, out int num_obs_total, out int num_obs_missing, out int num_obs_validas,
@@ -701,7 +701,7 @@ namespace IpeaGeo.RegressoesEspaciais
             {
                 if (!IsNumeric(dt.Columns[variaveis[i]], typeof(double)))
                 {
-                    throw new Exception("Coluna " + variaveis[i] + " n„o corresponde a uma vari·vel numÈrica.");
+                    throw new Exception("Coluna " + variaveis[i] + " n√£o corresponde a uma vari√°vel num√©rica.");
                 }
             }                     
 
@@ -755,7 +755,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region tratamento de observaÁıes missing ou nulas em um double
+        #region tratamento de observa√ß√µes missing ou nulas em um double
         public void DoubleToDoubleSemMissing(double[,] dt, out double[,] matriz_dados)
         {
 
@@ -794,14 +794,14 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region funÁıes envolvendo categorias
+        #region fun√ß√µes envolvendo categorias
 
         /// <summary>
-        /// Checa se uma determinada string est· em um vetor de strings.
+        /// Checa se uma determinada string est√° em um vetor de strings.
         /// </summary>
         /// <param name="s">String a ser procurada.</param>
         /// <param name="v">Vetor de strings.</param>
-        /// <returns>Retorna true se string s est· no vetor v, e false caso contr·rio.</returns>
+        /// <returns>Retorna true se string s est√° no vetor v, e false caso contr√°rio.</returns>
         public bool ChecaStringEmLista(string s, string[] v)
         {
             for (int i = 0; i < v.GetLength(0); i++)
@@ -813,7 +813,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
 
         /// <summary>
-        /// Retorna true se o n˙mero de categorias est· dentro do limite m·ximo, ou false caso contr·rio.
+        /// Retorna true se o n√∫mero de categorias est√° dentro do limite m√°ximo, ou false caso contr√°rio.
         /// </summary>
         public bool ChecaLimiteCategorias(int num_max_categorias, object[,] dados)
         {
@@ -850,14 +850,14 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region checa para a presenÁa de valores double inv·lidos
+        #region checa para a presen√ßa de valores double inv√°lidos
 
         /// <summary>
-        /// Identificar linhas com valores double inv·lidos.
+        /// Identificar linhas com valores double inv√°lidos.
         /// </summary>
         /// <param name="v">Matriz de double[,].</param>
-        /// <param name="indicadores_val_invalidos">Vetor int[], com 0 se a linha estiver v·lida ou 1 caso a linha de v contenha valores inv·lidos.</param>
-        /// <returns>Retorna true se matriz v contÈm valores inv·lidos.</returns>
+        /// <param name="indicadores_val_invalidos">Vetor int[], com 0 se a linha estiver v√°lida ou 1 caso a linha de v contenha valores inv√°lidos.</param>
+        /// <returns>Retorna true se matriz v cont√©m valores inv√°lidos.</returns>
         private bool IndicadoresRowsMissingDouble(double[,] v, out int[] indicadores_val_invalidos)
         {
             bool res = false;
@@ -877,12 +877,12 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Identificar linhas com valores double inv·lidos.
+        /// Identificar linhas com valores double inv√°lidos.
         /// </summary>
         /// <param name="dt">Datatable com os dados.</param>
-        /// <param name="variavel">Vari·vel no datatable a ser checada.</param>
-        /// <param name="indicadores_val_invalidos">Vetor int[], com 0 se a linha estiver v·lida ou 1 caso a linha de v contenha valores inv·lidos.</param>
-        /// <returns>Retorna true se matriz v contÈm valores inv·lidos.</returns>
+        /// <param name="variavel">Vari√°vel no datatable a ser checada.</param>
+        /// <param name="indicadores_val_invalidos">Vetor int[], com 0 se a linha estiver v√°lida ou 1 caso a linha de v contenha valores inv√°lidos.</param>
+        /// <returns>Retorna true se matriz v cont√©m valores inv√°lidos.</returns>
         public bool ChecaValoresDoubleInvalidos(DataTable dt, string variavel, out int[] indicadores_val_invalidos)
         {
             double[,] v = this.GetMatrizFromDataTable(dt, variavel);
@@ -891,14 +891,14 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region funÁıes de importaÁ„o e exportaÁaı de arquivos
+        #region fun√ß√µes de importa√ß√£o e exporta√ßa√µ de arquivos
 
         /// <summary>
-        /// Exporta uma vari·vel texto para um arquivo texto.
+        /// Exporta uma vari√°vel texto para um arquivo texto.
         /// </summary>
-        /// <param name="conteudo">Vari·vel texto a ser salva.</param>
+        /// <param name="conteudo">Vari√°vel texto a ser salva.</param>
         /// <param name="fileName">Nome do arquivo.</param>
-        /// <returns>Retorna true se a exportaÁ„o foi bem sucedida.</returns>
+        /// <returns>Retorna true se a exporta√ß√£o foi bem sucedida.</returns>
         public bool ExportarArquivoTexto(string conteudo, string fileName)
         {
             try
@@ -916,10 +916,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna uma string com as informaÁıes de um determinado arquivo.
+        /// Retorna uma string com as informa√ß√µes de um determinado arquivo.
         /// </summary>
         /// <param name="fileName">Nome do arquivo.</param>
-        /// <returns>Retorna data de criaÁ„o, data de modificaÁ„o e data de ˙ltimo acesso.</returns>
+        /// <returns>Retorna data de cria√ß√£o, data de modifica√ß√£o e data de √∫ltimo acesso.</returns>
         private string InformacoesArquivo(string fileName)
         {
             string information = fileName + " exists\r\n\r\n";
@@ -937,12 +937,12 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// LÍ um arquivo texto e adiciona as informaÁıes para uma vari·vel string.
+        /// L√™ um arquivo texto e adiciona as informa√ß√µes para uma vari√°vel string.
         /// </summary>
-        /// <param name="conteudo">Retorno o conte˙do do arquivo texto.</param>
-        /// <param name="fileInformacoes">Retorna as informaÁıes do arquivo.</param>
+        /// <param name="conteudo">Retorno o conte√∫do do arquivo texto.</param>
+        /// <param name="fileInformacoes">Retorna as informa√ß√µes do arquivo.</param>
         /// <param name="fileName">Nome do arquivo.</param>
-        /// <returns>Retorno true se importaÁ„o foi bem sucedida.</returns>
+        /// <returns>Retorno true se importa√ß√£o foi bem sucedida.</returns>
         public bool ImportarArquivoTexto(ref string conteudo, ref string fileInformacoes, string fileName)
         {
             try
@@ -1004,7 +1004,7 @@ namespace IpeaGeo.RegressoesEspaciais
         /// Deleta uma string de um vetor de strings.
         /// </summary>
         /// <param name="a">Vetor de strings.</param>
-        /// <param name="indice">Õndice do elemento a ser deletado.</param>
+        /// <param name="indice">√çndice do elemento a ser deletado.</param>
         /// <returns>Retorna um novo vetor, com um elemento a menos.</returns>
         public string[] DeleteStringFromArray(string[] a, int indice)
         {
@@ -1040,7 +1040,7 @@ namespace IpeaGeo.RegressoesEspaciais
         /// Deleta uma linha de uma matriz.
         /// </summary>
         /// <param name="a">Matriz original.</param>
-        /// <param name="col">Õndice da linha a ser excluÌda.</param>
+        /// <param name="col">√çndice da linha a ser exclu√≠da.</param>
         /// <returns>Retorna uma matriz com uma linha a menos.</returns>
         public double[,] DeleteRow(double[,] a, int row)
         {
@@ -1093,7 +1093,7 @@ namespace IpeaGeo.RegressoesEspaciais
         /// Deleta uma coluna de uma matriz.
         /// </summary>
         /// <param name="a">Matriz original.</param>
-        /// <param name="col">Õndice da coluna a ser excluÌda.</param>
+        /// <param name="col">√çndice da coluna a ser exclu√≠da.</param>
         /// <returns>Retorna uma matriz com uma coluna a menos.</returns>
         public object[,] DeleteCol(object[,] a, int col)
         {
@@ -1146,7 +1146,7 @@ namespace IpeaGeo.RegressoesEspaciais
         /// Deleta uma coluna de uma matriz.
         /// </summary>
         /// <param name="a">Matriz original.</param>
-        /// <param name="col">Õndice da coluna a ser excluÌda.</param>
+        /// <param name="col">√çndice da coluna a ser exclu√≠da.</param>
         /// <returns>Retorna uma matriz com uma coluna a menos.</returns>
         public double[,] DeleteCol(double[,] a, int col)
         {
@@ -1197,13 +1197,13 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region funÁıes estatÌsticas de matrizes
+        #region fun√ß√µes estat√≠sticas de matrizes
 
         /// <summary>
-        /// Retorna o traÁo de uma matriz.
+        /// Retorna o tra√ßo de uma matriz.
         /// </summary>
         /// <param name="a">Matriz de entrada.</param>
-        /// <returns>TraÁo da matriz.</returns>
+        /// <returns>Tra√ßo da matriz.</returns>
         public double Trace(double[,] a)
         {
             if (a.GetLength(0) != a.GetLength(1)) return double.NaN;
@@ -1218,7 +1218,7 @@ namespace IpeaGeo.RegressoesEspaciais
         /// <summary>
         /// Retorna o percentil de uma massa de dados.
         /// </summary>
-        /// <param name="dados">Matriz com as observaÁıes.</param>
+        /// <param name="dados">Matriz com as observa√ß√µes.</param>
         /// <param name="percentil">Percentil (entre 0% e 100%).</param>
         /// <returns>Percentil.</returns>
         public double Percentil(double[] dados, double percentil)
@@ -1234,7 +1234,7 @@ namespace IpeaGeo.RegressoesEspaciais
         /// <summary>
         /// Retorna o percentil de uma massa de dados.
         /// </summary>
-        /// <param name="dados">Matriz com as observaÁıes.</param>
+        /// <param name="dados">Matriz com as observa√ß√µes.</param>
         /// <param name="percentil">Percentil (entre 0% e 100%).</param>
         /// <returns>Percentil.</returns>
         public double Percentil(double[,] dados, double percentil)
@@ -1294,7 +1294,7 @@ namespace IpeaGeo.RegressoesEspaciais
         /// <summary>
         /// Retorna uma matriz identidade.
         /// </summary>
-        /// <param name="m">Dimens„o da matriz identidade.</param>
+        /// <param name="m">Dimens√£o da matriz identidade.</param>
         /// <returns>Matriz criada.</returns>
         public double[,] Identity(int m)
         {
@@ -1308,13 +1308,13 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region procura chave prim·ria nas colunas de um datatable
+        #region procura chave prim√°ria nas colunas de um datatable
 
         /// <summary>
-        /// Retorna uma combinaÁ„o (de no m·ximo quatro colunas) que forma uma chave prim·ria para as observaÁıes no datatable. 
+        /// Retorna uma combina√ß√£o (de no m√°ximo quatro colunas) que forma uma chave prim√°ria para as observa√ß√µes no datatable. 
         /// </summary>
         /// <param name="dt">Datatable de entrada.</param>
-        /// <returns>ArrayList contendo os nomes das colunas que formam a chave prim·ria.</returns>
+        /// <returns>ArrayList contendo os nomes das colunas que formam a chave prim√°ria.</returns>
         public ArrayList RetornaIndicesColunasChavesPrimarias(DataTable dt)
         {
             ArrayList res = new ArrayList();
@@ -1491,10 +1491,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// FunÁ„o para eliminar string duplicadas em uma array de strings.
+        /// Fun√ß√£o para eliminar string duplicadas em uma array de strings.
         /// </summary>
         /// <param name="vs">Array de strings como imput.</param>
-        /// <returns>Retorna array de strings sem duplicaÁ„o.</returns>
+        /// <returns>Retorna array de strings sem duplica√ß√£o.</returns>
         public string[] EliminaStringsDuplicadas(string[] vs)
         {
             ArrayList va = new ArrayList();
@@ -1513,7 +1513,7 @@ namespace IpeaGeo.RegressoesEspaciais
             return res;
         }
 
-        #region mudando o separador de decimais de valores numÈricos em um datatable
+        #region mudando o separador de decimais de valores num√©ricos em um datatable
 
         public DataTable MudaSeparadorDecimais(DataTable dt)
         {
@@ -1564,7 +1564,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region funÁıes de n˙meros para texto
+        #region fun√ß√µes de n√∫meros para texto
 
         public double DoubleFromTexto(object m_texto)
         {
@@ -1678,14 +1678,14 @@ namespace IpeaGeo.RegressoesEspaciais
             return (dados);
         }
 
-        #region geracao de um nome de coluna que ainda n„o existe no datatable ou na lista de vari·veis
+        #region geracao de um nome de coluna que ainda n√£o existe no datatable ou na lista de vari√°veis
 
         /// <summary>
-        /// Retorna um string com um nome para uma coluna, sem que haja outra coluna com o mesmo nome no datatable. O novo nome È criado adicionando-se inteiros ao final do nome sugerido, quando necess·rio.
+        /// Retorna um string com um nome para uma coluna, sem que haja outra coluna com o mesmo nome no datatable. O novo nome √© criado adicionando-se inteiros ao final do nome sugerido, quando necess√°rio.
         /// </summary>
-        /// <param name="dt">Datatable de entrada - ser„o checados os nomes de colunas nesse datatable.</param>
+        /// <param name="dt">Datatable de entrada - ser√£o checados os nomes de colunas nesse datatable.</param>
         /// <param name="nome_sugerido">Nome sugerido.</param>
-        /// <returns>Retorno o nome alterado, quando j· existir no datatable.</returns>
+        /// <returns>Retorno o nome alterado, quando j√° existir no datatable.</returns>
         public string RetornaNovoNomeSemRepeticao(string[] variaveis, string nome_sugerido)
         {
             ArrayList lista = new ArrayList();
@@ -1695,11 +1695,11 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna um string com um nome para uma coluna, sem que haja outra coluna com o mesmo nome no datatable. O novo nome È criado adicionando-se inteiros ao final do nome sugerido, quando necess·rio.
+        /// Retorna um string com um nome para uma coluna, sem que haja outra coluna com o mesmo nome no datatable. O novo nome √© criado adicionando-se inteiros ao final do nome sugerido, quando necess√°rio.
         /// </summary>
-        /// <param name="dt">Datatable de entrada - ser„o checados os nomes de colunas nesse datatable.</param>
+        /// <param name="dt">Datatable de entrada - ser√£o checados os nomes de colunas nesse datatable.</param>
         /// <param name="nome_sugerido">Nome sugerido.</param>
-        /// <returns>Retorno o nome alterado, quando j· existir no datatable.</returns>
+        /// <returns>Retorno o nome alterado, quando j√° existir no datatable.</returns>
         public string RetornaNovoNomeSemRepeticao(ArrayList lista_vars, string nome_sugerido)
         {
             if (!lista_vars.Contains(nome_sugerido)) return nome_sugerido;
@@ -1816,10 +1816,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna a lista de colunas cujos valores s„o ˙nicos e n„o missing. As colunas escolhidas podem ser numÈricas ou n„o. 
+        /// Retorna a lista de colunas cujos valores s√£o √∫nicos e n√£o missing. As colunas escolhidas podem ser num√©ricas ou n√£o. 
         /// </summary>
         /// <param name="dt">Tabela de dados.</param>
-        /// <returns>Vari·veis ˙nidas</returns>
+        /// <returns>Vari√°veis √∫nidas</returns>
         public string[] RetornaUniqueColunas(DataTable dt)
         {
             ArrayList lista = new ArrayList();
@@ -1882,10 +1882,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Lista todas as colunas numÈricas em um datatable.
+        /// Lista todas as colunas num√©ricas em um datatable.
         /// </summary>
         /// <param name="dt">Datatable de entrada.</param>
-        /// <returns>Vetor de strings com os nomes das colunas numÈricas.</returns>
+        /// <returns>Vetor de strings com os nomes das colunas num√©ricas.</returns>
         public string[] RetornaColunasNumericas(DataTable dt)
         {
             string[] m_colunas = new string[dt.Columns.Count];
@@ -1907,11 +1907,11 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Checa se um determinado Datacolumn È numÈrico.
+        /// Checa se um determinado Datacolumn √© num√©rico.
         /// </summary>
         /// <param name="dc">Datacolumn de entrada.</param>
-        /// <param name="tp">Tipo da vari·vel.</param>
-        /// <returns>Retorna true se Datacolumn corresponde a uma vari·vel numÈrica.</returns>
+        /// <param name="tp">Tipo da vari√°vel.</param>
+        /// <returns>Retorna true se Datacolumn corresponde a uma vari√°vel num√©rica.</returns>
         private bool IsNumeric(DataColumn dc, Type tp)
         {
             switch (dc.DataType.ToString())
@@ -1939,7 +1939,7 @@ namespace IpeaGeo.RegressoesEspaciais
             }
         }
         
-        /// <summary>MÈdia das colunas de uma matriz.</summary>
+        /// <summary>M√©dia das colunas de uma matriz.</summary>
         public double[] VetorMedias(double[,] a)
         {
             double[] r = new double[a.GetLength(1)];
@@ -1955,7 +1955,7 @@ namespace IpeaGeo.RegressoesEspaciais
             return r;
         }
 
-        /// <summary>MÈdia das linhas de uma matriz.</summary>
+        /// <summary>M√©dia das linhas de uma matriz.</summary>
         public double[,] Meanl(double[,] a)
         {
             double[,] r = new double[a.GetLength(0), 1];
@@ -1993,7 +1993,7 @@ namespace IpeaGeo.RegressoesEspaciais
             return a;
         }
 
-        /// <summary>MÈdia geomÈtrica das linhas de uma matriz.</summary>
+        /// <summary>M√©dia geom√©trica das linhas de uma matriz.</summary>
         public double[,] GeometricMeanl(double[,] a)
         {
             double[,] r = new double[a.GetLength(0), 1];
@@ -2184,7 +2184,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna uma matriz quadrada, com dimens„o m, com todos os elementos iguais a um.
+        /// Retorna uma matriz quadrada, com dimens√£o m, com todos os elementos iguais a um.
         /// </summary>
         public double[,] unit(int m)
         {
@@ -2343,10 +2343,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// FunÁ„o para retornar a matriz de ranks a partir de uma determinada matriz de entrada.
+        /// Fun√ß√£o para retornar a matriz de ranks a partir de uma determinada matriz de entrada.
         /// </summary>
         /// <param name="v">Matriz de doubles de entrada.</param>
-        /// <returns>Substitui cada coluna da matriz original, pelos ranks das observaÁıes naquela coluna. Os ranks v„o de 1 atÈ o n˙mero de 
+        /// <returns>Substitui cada coluna da matriz original, pelos ranks das observa√ß√µes naquela coluna. Os ranks v√£o de 1 at√© o n√∫mero de 
         /// valores distintos na coluna.</returns>
         public double[,] ArrayRanks(double[,] v)
         {
@@ -2384,7 +2384,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #region RankEmpates
 
-        /// <summary> FunÁ„o que rankei levando em consideraÁ„o os empates
+        /// <summary> Fun√ß√£o que rankei levando em considera√ß√£o os empates
         /// 
         /// </summary> 
         /// <param name="v"> Matriz de dados</param>
@@ -2435,12 +2435,12 @@ namespace IpeaGeo.RegressoesEspaciais
             return ranks;
         }
 
-        /// <summary> FunÁ„o que rankeia levando em consideraÁ„o os empates e tambÈm retorna a frequÍncia de empates:FunÁ„o especifica para o teste Kruskal Wallis
+        /// <summary> Fun√ß√£o que rankeia levando em considera√ß√£o os empates e tamb√©m retorna a frequ√™ncia de empates:Fun√ß√£o especifica para o teste Kruskal Wallis
         /// 
         /// </summary>
         /// <param name="v"> Matriz de dados</param>
         /// <param name="ranks">Matriz de dados rankeado</param>
-        /// <param name="empates">FrequÍncia de empates</param>
+        /// <param name="empates">Frequ√™ncia de empates</param>
         public void ArrayRanksEmpateC(double[,] v, out double[,] ranks, out double[,] empates)
         {
             double[,] r;
@@ -2519,7 +2519,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         public void GeraSubRows(ref double[] res, double[] dados, int first_row, int last_row)
         {
-            if (first_row < 0 || last_row > dados.GetLength(0) - 1) throw new Exception("Primeira e ˙ltima linhas n„o v·lidas em rotina de sublinhas");
+            if (first_row < 0 || last_row > dados.GetLength(0) - 1) throw new Exception("Primeira e √∫ltima linhas n√£o v√°lidas em rotina de sublinhas");
             res = new double[last_row - first_row + 1];
             for (int i = 0; i < res.GetLength(0); i++)
             {
@@ -2529,7 +2529,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         public void GeraSubRows(ref double[,] res, double[,] dados, int first_row, int last_row)
         {
-            if (first_row < 0 || last_row > dados.GetLength(0)-1) throw new Exception("Primeira e ˙ltima linhas n„o v·lidas em rotina de sublinhas");
+            if (first_row < 0 || last_row > dados.GetLength(0)-1) throw new Exception("Primeira e √∫ltima linhas n√£o v√°lidas em rotina de sublinhas");
             res = new double[last_row - first_row + 1, dados.GetLength(1)];
             for (int i = 0; i < res.GetLength(0); i++)
             {
@@ -2539,10 +2539,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna os desvios padrıes amostrais das observaÁıes em cada coluna de uma matriz de dados.
+        /// Retorna os desvios padr√µes amostrais das observa√ß√µes em cada coluna de uma matriz de dados.
         /// </summary>
         /// <param name="dados">Matriz de dados.</param>
-        /// <returns>Vetor linha com os desvios padrıes amostrais.</returns>
+        /// <returns>Vetor linha com os desvios padr√µes amostrais.</returns>
         public double[,] Despadca(double[,] dados)
         {
             double[,] a = this.Varianciaca(dados);
@@ -2554,10 +2554,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna os desvios padrıes populacionais das observaÁıes em cada coluna de uma matriz de dados.
+        /// Retorna os desvios padr√µes populacionais das observa√ß√µes em cada coluna de uma matriz de dados.
         /// </summary>
         /// <param name="dados">Matriz de dados.</param>
-        /// <returns>Vetor linha com os desvios padrıes.</returns>
+        /// <returns>Vetor linha com os desvios padr√µes.</returns>
         public double[,] Despadc(double[,] dados)
         {
             double[,] a = this.Varianciac(dados);
@@ -2569,10 +2569,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna as vari‚ncias amostrais das observaÁıes em cada coluna de uma matriz de dados.
+        /// Retorna as vari√¢ncias amostrais das observa√ß√µes em cada coluna de uma matriz de dados.
         /// </summary>
         /// <param name="dados">Matriz de dados.</param>
-        /// <returns>Vetor linha com as vari‚ncias amostrais.</returns>
+        /// <returns>Vetor linha com as vari√¢ncias amostrais.</returns>
         public double[,] Varianciaca(double[,] dados)
         {
             double[,] media = this.Meanc(dados);
@@ -2603,10 +2603,10 @@ namespace IpeaGeo.RegressoesEspaciais
 
        
         /// <summary>
-        /// Retorna as vari‚ncias populacionais das observaÁıes em cada coluna de uma matriz de dados.
+        /// Retorna as vari√¢ncias populacionais das observa√ß√µes em cada coluna de uma matriz de dados.
         /// </summary>
         /// <param name="dados">Matriz de dados.</param>
-        /// <returns>Vetor linha com as vari‚ncias.</returns>
+        /// <returns>Vetor linha com as vari√¢ncias.</returns>
         public double[,] Varianciac(double[,] dados)
         {
             double[,] media = this.Meanc(dados);
@@ -2633,7 +2633,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna as vari‚ncias amostrais das observaÁıes em cada coluna de uma matriz de dados.
+        /// Retorna as vari√¢ncias amostrais das observa√ß√µes em cada coluna de uma matriz de dados.
         /// </summary>
         /// <param name="dados"></param>
         /// <returns></returns>
@@ -2650,10 +2650,10 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Retorna as vari‚ncias amostrais das observaÁıes em cada coluna de uma matriz de dados.
+        /// Retorna as vari√¢ncias amostrais das observa√ß√µes em cada coluna de uma matriz de dados.
         /// </summary>
-        /// <param name="dados">Dados com vari·veis organizadas em colunas.</param>
-        /// <returns>Vetor linha com a vari‚ncia amostral de cada coluna.</returns>
+        /// <param name="dados">Dados com vari√°veis organizadas em colunas.</param>
+        /// <returns>Vetor linha com a vari√¢ncia amostral de cada coluna.</returns>
         public double[,] VarianciasColumnMatrix(double[,] dados)
         {
             if (dados.GetLength(0) <= 1) return new double[1, dados.GetLength(1)];
@@ -2676,7 +2676,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         public string[] RemoveElementoArrayString(string[] v, int elemento)
         {
-            if (elemento < 0 || elemento > v.GetLength(0) - 1) throw new Exception("Dimens„o fora do vetor de strings");
+            if (elemento < 0 || elemento > v.GetLength(0) - 1) throw new Exception("Dimens√£o fora do vetor de strings");
 
             string[] novo = new string[v.GetLength(0) - 1];
 
@@ -2755,7 +2755,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         //    for (int i = 0; i < indice.GetLength(0); i++)
         //    {
-        //        if (indice[i] < 0 || indice[i] > a.GetLength(1) - 1) throw new Exception("Õndice da subcoluna inv·lido");
+        //        if (indice[i] < 0 || indice[i] > a.GetLength(1) - 1) throw new Exception("√çndice da subcoluna inv√°lido");
         //    }
 
         //    double[,] r = new double[a.GetLength(0), indice.GetLength(0)];
@@ -2785,7 +2785,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
             for (int i = 0; i < indice.GetLength(0); i++)
             {
-                if (indice[i] < 0 || indice[i] > a.GetLength(1) - 1) throw new Exception("Õndice da subcoluna inv·lido");
+                if (indice[i] < 0 || indice[i] > a.GetLength(1) - 1) throw new Exception("√çndice da subcoluna inv√°lido");
             }
 
             object[,] r = new object[a.GetLength(0), indice.GetLength(0)];
@@ -2803,7 +2803,7 @@ namespace IpeaGeo.RegressoesEspaciais
         {
             if (a.GetLength(0) == 0 || a.GetLength(1) == 0) return new object[0, 0];
 
-            if (indice < 0 || indice > a.GetLength(1) - 1) throw new Exception("Õndice da subcoluna inv·lido");
+            if (indice < 0 || indice > a.GetLength(1) - 1) throw new Exception("√çndice da subcoluna inv√°lido");
 
             object[,] r = new object[a.GetLength(0), 1];
             for (int i = 0; i < r.GetLength(0); i++)
@@ -2819,7 +2819,7 @@ namespace IpeaGeo.RegressoesEspaciais
         {
             if (a.GetLength(0) == 0 || a.GetLength(1) == 0) return new object[0, 0];
 
-            if (indice < 0 || indice > a.GetLength(1) - 1) throw new Exception("Õndice da subcoluna inv·lido");
+            if (indice < 0 || indice > a.GetLength(1) - 1) throw new Exception("√çndice da subcoluna inv√°lido");
 
             object[,] r = new object[a.GetLength(0), 1];
             for (int i = 0; i < r.GetLength(0); i++)
@@ -2835,7 +2835,7 @@ namespace IpeaGeo.RegressoesEspaciais
         {
             if (a.GetLength(0) == 0 || a.GetLength(1) == 0) return new double[0, 0];
 
-            if (indice < 0 || indice > a.GetLength(1) - 1) throw new Exception("Õndice da subcoluna inv·lido");
+            if (indice < 0 || indice > a.GetLength(1) - 1) throw new Exception("√çndice da subcoluna inv√°lido");
 
             double[,] r = new double[a.GetLength(0), 1];
             for (int i = 0; i < r.GetLength(0); i++)
@@ -2851,7 +2851,7 @@ namespace IpeaGeo.RegressoesEspaciais
         {
             if (a.GetLength(0) == 0 || a.GetLength(1) == 0) return new double[0, 0];
 
-            if (indice < 0 || indice > a.GetLength(0) - 1) throw new Exception("Õndice da sublinha inv·lido");
+            if (indice < 0 || indice > a.GetLength(0) - 1) throw new Exception("√çndice da sublinha inv√°lido");
 
             double[,] r = new double[1, a.GetLength(1)];
             for (int i = 0; i < r.GetLength(1); i++)
@@ -2861,12 +2861,12 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// DiferenÁa entre duas matrizes.
+        /// Diferen√ßa entre duas matrizes.
         /// </summary>
         public double[,] DiffArrayDouble(double[,] a, double[,] b)
         {
             if (a.GetLength(0) != b.GetLength(0) || b.GetLength(1) != a.GetLength(1))
-                throw new Exception("Matrizes devem possuir mesma dimens„o em rotina de diferenÁa de matrizes");
+                throw new Exception("Matrizes devem possuir mesma dimens√£o em rotina de diferen√ßa de matrizes");
 
             double[,] r = new double[a.GetLength(0), a.GetLength(1)];
 
@@ -2949,7 +2949,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         public double[,] MatrizSubtracao(double[,] a, double[,] b)
         {
-            if (a.GetLength(0) != b.GetLength(0) || a.GetLength(1) != b.GetLength(1)) throw new Exception("Dimensıes das matrizes n„o est„o adequadas para soma das matrizes");
+            if (a.GetLength(0) != b.GetLength(0) || a.GetLength(1) != b.GetLength(1)) throw new Exception("Dimens√µes das matrizes n√£o est√£o adequadas para soma das matrizes");
             double[,] r = new double[a.GetLength(0), b.GetLength(1)];
 
             for (int i = 0; i < r.GetLength(0); i++)
@@ -2965,7 +2965,7 @@ namespace IpeaGeo.RegressoesEspaciais
         
         public double[,] MatrizSoma(double[,] a, double[,] b)
         {
-            if (a.GetLength(0) != b.GetLength(0) || a.GetLength(1) != b.GetLength(1)) throw new Exception("Dimensıes das matrizes n„o est„o adequadas para soma das matrizes");
+            if (a.GetLength(0) != b.GetLength(0) || a.GetLength(1) != b.GetLength(1)) throw new Exception("Dimens√µes das matrizes n√£o est√£o adequadas para soma das matrizes");
             double[,] r = new double[a.GetLength(0), b.GetLength(1)];
 
             for (int i = 0; i < r.GetLength(0); i++)
@@ -3037,7 +3037,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         public double[,] MatrizMult(double[,] a, double[,] b)
         {
-            if (a.GetLength(1) != b.GetLength(0)) throw new Exception("Dimensıes das matrizes n„o est„o adequadas para multiplicaÁ„o");
+            if (a.GetLength(1) != b.GetLength(0)) throw new Exception("Dimens√µes das matrizes n√£o est√£o adequadas para multiplica√ß√£o");
             double[,] r = new double[a.GetLength(0), b.GetLength(1)];
 
             for (int i = 0; i < r.GetLength(0); i++)
@@ -3121,7 +3121,7 @@ namespace IpeaGeo.RegressoesEspaciais
             return Math.Sqrt(f);
         }
 
-        /// <summary>MÌnimos das colunas de uma matriz.</summary>
+        /// <summary>M√≠nimos das colunas de uma matriz.</summary>
         public double[,] Minc(double[,] a)
         {
             double[,] r = new double[1, a.GetLength(1)];
@@ -3136,7 +3136,7 @@ namespace IpeaGeo.RegressoesEspaciais
             return r;
         }
 
-        /// <summary>M·ximos das colunas de uma matriz.</summary>
+        /// <summary>M√°ximos das colunas de uma matriz.</summary>
         public double[,] Maxc(double[,] a)
         {
             double[,] r = new double[1, a.GetLength(1)];
@@ -3267,7 +3267,7 @@ namespace IpeaGeo.RegressoesEspaciais
             return double.NaN;
         }
 
-        /// <summary>MÈdia das colunas de uma matriz.</summary>
+        /// <summary>M√©dia das colunas de uma matriz.</summary>
         public double[,] Meanc(double[,] a)
         {
             double[,] r = new double[1, a.GetLength(1)];
@@ -3307,7 +3307,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// C·lculo da matriz de vari‚ncias e covari‚ncias.
+        /// C√°lculo da matriz de vari√¢ncias e covari√¢ncias.
         /// </summary>
         /// <param name="matriz_De_Entrada">Matriz de dados.</param>
         /// <returns></returns>
@@ -3365,7 +3365,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }      
 
         /// <summary>
-        /// ConcatenaÁ„o de vetores.
+        /// Concatena√ß√£o de vetores.
         /// </summary>
         public double[] ConcateArraysDouble(double[] a, double[] b)
         {
@@ -3394,14 +3394,14 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// ConcatenaÁ„o vertical de matrizes.
+        /// Concatena√ß√£o vertical de matrizes.
         /// </summary>
         public object[,] Concatev(object[,] a, object[,] b)
         {
             if (b.GetLength(0) == 0 && b.GetLength(1) == 0) return this.ArrayDoubleClone(a);
             if (a.GetLength(0) == 0 && a.GetLength(1) == 0) return this.ArrayDoubleClone(b);
 
-            if (a.GetLength(1) != b.GetLength(1)) throw new Exception("Matrizes devem possuir o mesmo n˙mero de colunas em concatenaÁ„o vertical");
+            if (a.GetLength(1) != b.GetLength(1)) throw new Exception("Matrizes devem possuir o mesmo n√∫mero de colunas em concatena√ß√£o vertical");
 
             object[,] res = new object[a.GetLength(0) + b.GetLength(0), a.GetLength(1)];
             for (int i = 0; i < a.GetLength(1); i++)
@@ -3417,14 +3417,14 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// ConcatenaÁ„o vertical de matrizes.
+        /// Concatena√ß√£o vertical de matrizes.
         /// </summary>
         public double[,] Concatev(double[,] a, double[,] b)
         {
             if (b.GetLength(0) == 0 && b.GetLength(1) == 0) return this.ArrayDoubleClone(a);
             if (a.GetLength(0) == 0 && a.GetLength(1) == 0) return this.ArrayDoubleClone(b);
 
-            if (a.GetLength(1) != b.GetLength(1)) throw new Exception("Matrizes devem possuir o mesmo n˙mero de colunas em concatenaÁ„o vertical");
+            if (a.GetLength(1) != b.GetLength(1)) throw new Exception("Matrizes devem possuir o mesmo n√∫mero de colunas em concatena√ß√£o vertical");
 
             double[,] res = new double[a.GetLength(0) + b.GetLength(0), a.GetLength(1)];
             for (int i = 0; i < a.GetLength(1); i++)
@@ -3440,14 +3440,14 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// ConcatenaÁ„o horizontal de matrizes.
+        /// Concatena√ß√£o horizontal de matrizes.
         /// </summary>
         public object[,] Concateh(object[,] a, double[,] b)
         {
             if (b.GetLength(0) == 0 && b.GetLength(1) == 0) return this.ArrayObjectClone(a);
             if (a.GetLength(0) == 0 && a.GetLength(1) == 0) return this.ArrayObjectClone(b);
 
-            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n˙mero de linhas em concatenaÁ„o horizontal");
+            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n√∫mero de linhas em concatena√ß√£o horizontal");
 
             object[,] res = new object[a.GetLength(0), a.GetLength(1) + b.GetLength(1)];
             for (int i = 0; i < a.GetLength(0); i++)
@@ -3463,14 +3463,14 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// ConcatenaÁ„o horizontal de matrizes.
+        /// Concatena√ß√£o horizontal de matrizes.
         /// </summary>
         public object[,] Concateh(double[,] a, object[,] b)
         {
             if (b.GetLength(0) == 0 && b.GetLength(1) == 0) return this.ArrayObjectClone(a);
             if (a.GetLength(0) == 0 && a.GetLength(1) == 0) return this.ArrayObjectClone(b);
 
-            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n˙mero de linhas em concatenaÁ„o horizontal");
+            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n√∫mero de linhas em concatena√ß√£o horizontal");
 
             object[,] res = new object[a.GetLength(0), a.GetLength(1) + b.GetLength(1)];
             for (int i = 0; i < a.GetLength(0); i++)
@@ -3486,14 +3486,14 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// ConcatenaÁ„o horizontal de matrizes.
+        /// Concatena√ß√£o horizontal de matrizes.
         /// </summary>
         public object[,] Concateh(object[,] a, object[,] b)
         {
             if (b.GetLength(0) == 0 && b.GetLength(1) == 0) return this.ArrayObjectClone(a);
             if (a.GetLength(0) == 0 && a.GetLength(1) == 0) return this.ArrayObjectClone(b);
 
-            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n˙mero de linhas em concatenaÁ„o horizontal");
+            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n√∫mero de linhas em concatena√ß√£o horizontal");
 
             object[,] res = new object[a.GetLength(0), a.GetLength(1) + b.GetLength(1)];
             for (int i = 0; i < a.GetLength(0); i++)
@@ -3520,14 +3520,14 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// ConcatenaÁ„o horizontal de matrizes.
+        /// Concatena√ß√£o horizontal de matrizes.
         /// </summary>
         public double[,] Concateh(double[,] a, double[,] b)
         {
             if (b.GetLength(0) == 0 && b.GetLength(1) == 0) return this.ArrayDoubleClone(a);
             if (a.GetLength(0) == 0 && a.GetLength(1) == 0) return this.ArrayDoubleClone(b);
 
-            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n˙mero de linhas em concatenaÁ„o horizontal");
+            if (a.GetLength(0) != b.GetLength(0)) throw new Exception("Matrizes devem possuir o mesmo n√∫mero de linhas em concatena√ß√£o horizontal");
 
             double[,] res = new double[a.GetLength(0), a.GetLength(1) + b.GetLength(1)];
             for (int i = 0; i < a.GetLength(0); i++)
@@ -3684,9 +3684,9 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Tabela de frequÍncia para uma vari·vel categÛrica. 
+        /// Tabela de frequ√™ncia para uma vari√°vel categ√≥rica. 
         /// </summary>
-        /// <param name="table">Matriz de saÌda: primeira coluna corresponde ‡s categorias; segunda coluna corresponde ‡ contagem de cada categoria.</param>
+        /// <param name="table">Matriz de sa√≠da: primeira coluna corresponde √†s categorias; segunda coluna corresponde √† contagem de cada categoria.</param>
         /// <param name="cats">Vetor coluna com as categorias.</param>
         public void FrequencyTable(ref object[,] table, object[,] cats)
         {
@@ -3739,9 +3739,9 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Tabela de frequÍncia para uma vari·vel categÛrica. 
+        /// Tabela de frequ√™ncia para uma vari√°vel categ√≥rica. 
         /// </summary>
-        /// <param name="table">Matriz de saÌda: primeira coluna corresponde ‡s categorias; segunda coluna corresponde ‡ contagem de cada categoria.</param>
+        /// <param name="table">Matriz de sa√≠da: primeira coluna corresponde √†s categorias; segunda coluna corresponde √† contagem de cada categoria.</param>
         /// <param name="cats">Vetor coluna com as categorias.</param>
         public void FrequencyTable(ref double[,] table, double[,] cats)
         {
@@ -3789,12 +3789,12 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Gera matriz diagonal. FunÁ„o similar ‡ do matlab. Se D for uma matriz coluna, ent„o a funÁ„o retorna uma matriz diagonal, 
+        /// Gera matriz diagonal. Fun√ß√£o similar √† do matlab. Se D for uma matriz coluna, ent√£o a fun√ß√£o retorna uma matriz diagonal, 
         /// com elementos iguais ao vetor coluna D. Caso D seja uma matriz quadrada, 
-        /// ent„o a funÁ„o retorna uma matriz coluna, com os elementos da diagonal principal de D.
+        /// ent√£o a fun√ß√£o retorna uma matriz coluna, com os elementos da diagonal principal de D.
         /// </summary>
         /// <param name="D">Matriz de entrada.</param>
-        /// <returns>Retorna uma matriz coluna ou uma matriz diagonal, dependendo das dimensıes de D.</returns>
+        /// <returns>Retorna uma matriz coluna ou uma matriz diagonal, dependendo das dimens√µes de D.</returns>
         public double[,] MatrizDiagonal(double[,] D)
         {
             if (D.GetLength(1) == D.GetLength(0))
@@ -3824,7 +3824,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// Calcula os autovalores e os autovetores de uma matriz simÈtrica (retorna autovalores ordenados)
+        /// Calcula os autovalores e os autovetores de uma matriz sim√©trica (retorna autovalores ordenados)
         /// </summary>
         /// <param name="x">Matriz de entrada</param>
         /// <param name="V">Referencia para os autovetores (em colunas)</param>
@@ -3843,7 +3843,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
 
         /// <summary>
-        /// FunÁ„o para calcular a singular value decomposition de uma matriz de input. A funÁ„o calcula matrizes W, U, V, tais que
+        /// Fun√ß√£o para calcular a singular value decomposition de uma matriz de input. A fun√ß√£o calcula matrizes W, U, V, tais que
         /// a matriz de entrada A = U x diag(W) x transp(V). 
         /// </summary>
         public void SingularValueDecomposition(ref double[,] W, ref double[,] U, ref double[,] V,
@@ -3882,7 +3882,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
     internal class clsSort
     {
-        #region FunÁıes de comparaÁ„o
+        #region Fun√ß√µes de compara√ß√£o
 
         public bool LessOrEqualTo(object v1, object v2)
         {
@@ -4269,7 +4269,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
         #endregion
 
-        #region IndexizaÁ„o de ranks
+        #region Indexiza√ß√£o de ranks
 
         //private int M = 7;
         //private int NSTACK = 500;
@@ -4392,10 +4392,10 @@ namespace IpeaGeo.RegressoesEspaciais
         /// </summary>
         /// 
 
-        //TODO: corrigi essa funÁ„o (Caue)
+        //TODO: corrigi essa fun√ß√£o (Caue)
         public void gaussj(ref double[,] a, ref double[,] b)
         {
-            // Cria vari·veis e matriz do tamanho da tabela usada pelo usu·rio
+            // Cria vari√°veis e matriz do tamanho da tabela usada pelo usu√°rio
             double temp = 0.0;
             int i, icol = 0, irow = 0, j, k, l, ll, n = a.GetLength(0), m = b.GetLength(1);
             double big, dum, pivinv;
@@ -4452,7 +4452,7 @@ namespace IpeaGeo.RegressoesEspaciais
                 
                 if(a[icol,icol] == 0 && IpeaMatrix.Mfunc.Det(matriz_a) == 0)
                 {
-                   throw new Exception("Matriz singular na rotina de invers„o."); 
+                   throw new Exception("Matriz singular na rotina de invers√£o."); 
                 }
                 
                 // A inversa da matriz diagonal e 1/elementos da diagonal
@@ -4498,7 +4498,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
     #endregion 
     
-    #region Classe para encontrar auto-valores e auto-vetores de matrizes simÈtricas
+    #region Classe para encontrar auto-valores e auto-vetores de matrizes sim√©tricas
 
     public class Jacobi
     {
@@ -4622,7 +4622,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
     #endregion 
 
-    #region Classe para encontrar a decomposiÁ„o de Cholesky
+    #region Classe para encontrar a decomposi√ß√£o de Cholesky
 
     public class Cholesky
     {
@@ -4630,7 +4630,7 @@ namespace IpeaGeo.RegressoesEspaciais
         private double[,] el;
 
         /// <summary>
-        /// Retorna a decomposiÁ„o de Cholesky L da matriz de entrada A, onde A = LxLT. 
+        /// Retorna a decomposi√ß√£o de Cholesky L da matriz de entrada A, onde A = LxLT. 
         /// </summary>
         public double[,] CholMatrix
         {
@@ -5123,7 +5123,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
     #endregion
 
-    #region Classes para interpolaÁ„o
+    #region Classes para interpola√ß√£o
 
     #region Base_interp
 
@@ -5407,7 +5407,7 @@ namespace IpeaGeo.RegressoesEspaciais
         }
         
         /// <summary>
-        /// FunÁ„o para decomposiÁ„o LU
+        /// Fun√ß√£o para decomposi√ß√£o LU
         /// </summary>
         private void LUdcmp(ref double[,] a)
         {
@@ -5428,7 +5428,7 @@ namespace IpeaGeo.RegressoesEspaciais
                 for (j = 0; j < n; j++)
                     if ((temp = Math.Abs(lu[i, j])) > big) big = temp;
                 if (big == 0.0) 
-                    throw new Exception("Matriz singular na decomposiÁ„o LU.");
+                    throw new Exception("Matriz singular na decomposi√ß√£o LU.");
                 vv[i] = 1.0 / big;
             }
             for (k = 0; k < n; k++)
@@ -5494,7 +5494,7 @@ namespace IpeaGeo.RegressoesEspaciais
 
     #endregion
 
-    #region Classe para ExportaÁ„o para planilha Excel
+    #region Classe para Exporta√ß√£o para planilha Excel
     
     # region Summary
 
@@ -5932,3 +5932,4 @@ namespace IpeaGeo.RegressoesEspaciais
 
     #endregion
 }
+
