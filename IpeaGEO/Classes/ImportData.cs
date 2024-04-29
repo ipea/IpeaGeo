@@ -19,7 +19,5 @@ namespace IpeaGEO.Classes
         public ImportData()
         {
         }
-
-
     }
 }
