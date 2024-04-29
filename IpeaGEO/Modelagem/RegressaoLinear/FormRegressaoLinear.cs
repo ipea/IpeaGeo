@@ -45,7 +45,6 @@ namespace IpeaGEO.Modelagem
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
         }
 
         private void FormBaseModelagem_Load(object sender, EventArgs e)
@@ -62,7 +61,6 @@ namespace IpeaGEO.Modelagem
 
         private void grbImportacaoDosArquivos_Enter(object sender, EventArgs e)
         {
-
         }
 
         private void AtualizaTabelaDados()
@@ -99,7 +97,6 @@ namespace IpeaGEO.Modelagem
                 string FileName = "";
                 if (openFileDialog.ShowDialog(this) == DialogResult.OK)
                 {
-
                     FileName = openFileDialog.FileName;
                     strExtensao = Path.GetExtension(FileName).ToUpper();
                     strEnderecoBase = FileName;
