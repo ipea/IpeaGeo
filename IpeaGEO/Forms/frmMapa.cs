@@ -18,8 +18,7 @@ using SharpMap;
 namespace IpeaGeo
 {
     public partial class frmMapa : Form
-    {
-        
+    {      
         clsClusterizacaoEspacialHierarquica clsAlexCluster = new clsClusterizacaoEspacialHierarquica();
         
         public frmMapa()
@@ -34,7 +33,7 @@ namespace IpeaGeo
         #region Métodos para a escolha do número de conglomerados 
 
         private double[] dblPseudoT, dblPseudoF, dblRSquare, dblRSquarePartial,
-            dblRSquareExpected, dblCCC;
+                dblRSquareExpected, dblCCC;
         
         #endregion
 
@@ -2585,7 +2584,7 @@ namespace IpeaGeo
                 frm.PastaPublic = appPath;
                 frm.Shape.ConvertFromIpeaGEOShape(this.shapeAlex);
 
-#warning Reimplementar usando o arquivo XML.
+                #warning Reimplementar usando o arquivo XML.
                 #region Reimplementar usando XML.
                 string[] labels = { "AC_Mun97_region", "AL_Mun97_region", "AP_Mun97_region",
                                       "AM_Mun97_region", "BA_Mun97_region", "CE_Mun97_region",
@@ -3773,7 +3772,7 @@ namespace IpeaGeo
 
         #endregion
 
-#warning Agrupar os métodos semelhantes
+        #warning Agrupar os métodos semelhantes
         #region ferramentas de análise
 
         private void análiseDeComponentesPrincipaisToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5836,7 +5835,6 @@ namespace IpeaGeo
 
         #endregion
 
-
         private enum KindOfStatisticalAnalysis
         {
             SpatialPanel, NonSpatialPanel, NonParametric
@@ -6215,9 +6213,8 @@ namespace IpeaGeo
             }
             return (dist);
         }
+        
         #endregion
-
-
     }
 }
 
