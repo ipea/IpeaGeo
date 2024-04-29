@@ -5,12 +5,9 @@ using System.Windows.Forms;
 
 namespace IpeaGeo
 {
-
     public class DataGridViewTrackBarColumn : DataGridViewColumn
     {
-
         public DataGridViewTrackBarColumn() : base(new DataGridViewTrackBarCell()) { }
-
     }
 
     public class DataGridViewTrackBarCell : DataGridViewTextBoxCell
@@ -58,17 +55,14 @@ namespace IpeaGeo
             base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
             ((DataGridViewTrackBarControl)this.DataGridView.EditingControl).Value = Int32.Parse(this.Value.ToString());
         }
-
     }
 
     public class DataGridViewTrackBarControl : TrackBar, IDataGridViewEditingControl
     {
-
         private DataGridView _dataGridView;
         private int _rowIndex;
         private bool _valueChanged = false;
-        
-
+     
         #region IDataGridViewEditingControl Members
 
         public void ApplyCellStyleToEditingControl(DataGridViewCellStyle dataGridViewCellStyle)
@@ -380,5 +374,4 @@ namespace IpeaGeo
     //        base.OnValueChanged(eventargs);
     //    }
     //}
-
 }
