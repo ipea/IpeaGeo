@@ -504,7 +504,6 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numClasses)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
