@@ -49,7 +49,6 @@ namespace IpeaGeo.Modelagem.Graficos
             string[] variaveis_numericas = clt.RetornaColunasNumericas(m_dt_tabela_dados);
             string[] todasvariaveis = clt.RetornaTodasColunas(m_dt_tabela_dados);                      
         }
-
         
         private void btnAbrirTabelaDados_Click(object sender, EventArgs e)
         {
@@ -64,11 +63,9 @@ namespace IpeaGeo.Modelagem.Graficos
         }
 
         private void EstimaModelo()
-        {
-            
+        {          
             tabControl1.TabPages.Remove(tabPage3);
             GraphPane myPane = zedGraphControl1.GraphPane;
-
 
             if (LstX.SelectedIndex < 0 || (LstY.Enabled && LstY.SelectedIndex <0))
             {
@@ -83,14 +80,12 @@ namespace IpeaGeo.Modelagem.Graficos
                 tabControl1.TabPages.Add(tabPage3);
             }
 
-
             #region Títulos
 
             if (txtTituloGrafico.Text == "(Insira o título do gráfico)")
             {
                 if (LstY.Enabled)
                 {
-
                     myPane.Title.Text = Convert.ToString(LstX.SelectedItem) + " x " + Convert.ToString(LstY.SelectedItem);
                 }
                 else
@@ -104,8 +99,7 @@ namespace IpeaGeo.Modelagem.Graficos
             }
 
             if (txtEixoX.Text == "(Insira o nome do eixo X)")
-            {
-                
+            {               
                 myPane.XAxis.Title.Text = Convert.ToString(LstX.SelectedItem); ;
             }
             else
@@ -114,8 +108,7 @@ namespace IpeaGeo.Modelagem.Graficos
             }
 
             if (txtEixoY.Text == "(Insira o nome do eixo Y)")
-            {
-                
+            {                
                 myPane.YAxis.Title.Text = Convert.ToString(LstY.SelectedItem); ;
             }
             else
@@ -130,37 +123,36 @@ namespace IpeaGeo.Modelagem.Graficos
             //if (RBcategorica.Checked)
             //{
 
+            object[,] varescolhidaX = clt.GetObjMatrizFromDataTable(m_dt_tabela_dados, Convert.ToString(LstX.SelectedItem));
+            object[,] freq_out = new object[0, 0];
+        
+            clt.FrequencyTable(ref freq_out, varescolhidaX);
 
-                object[,] varescolhidaX = clt.GetObjMatrizFromDataTable(m_dt_tabela_dados, Convert.ToString(LstX.SelectedItem));
-                object[,] freq_out = new object[0, 0];
-            
-                clt.FrequencyTable(ref freq_out, varescolhidaX);
+            string[] X = new string[freq_out.GetLength(0)];
+            double[] Y = new double[freq_out.GetLength(0)];
+            //double[] Xhist = new double[freq_out.GetLength(0)];
 
-                string[] X = new string[freq_out.GetLength(0)];
-                double[] Y = new double[freq_out.GetLength(0)];
-                //double[] Xhist = new double[freq_out.GetLength(0)];
+            for (int i = 0; i < freq_out.GetLength(0); i++)
+            {
+                X[i] = Convert.ToString(freq_out[i, 0]);
+                Y[i] = Convert.ToDouble(freq_out[i, 1]);
+                //                    Xhist[i] = Convert.ToDouble(freq_out[i, 0]);
+            }
 
-                for (int i = 0; i < freq_out.GetLength(0); i++)
-                {
-                    X[i] = Convert.ToString(freq_out[i, 0]);
-                    Y[i] = Convert.ToDouble(freq_out[i, 1]);
-//                    Xhist[i] = Convert.ToDouble(freq_out[i, 0]);
-                }
+            #region Vetor de cores principais
+            Color[] cores = new Color[10];
+            cores[0] = Color.Red;
+            cores[1] = Color.Gold;
+            cores[2] = Color.RoyalBlue;
+            cores[3] = Color.Olive;
+            cores[4] = Color.Gray;
+            cores[5] = Color.Orange;
+            cores[6] = Color.LightSteelBlue;
+            cores[7] = Color.Wheat;
+            cores[8] = Color.Violet;
+            cores[9] = Color.Black;
 
-                #region Vetor de cores principais
-                Color[] cores = new Color[10];
-                cores[0] = Color.Red;
-                cores[1] = Color.Gold;
-                cores[2] = Color.RoyalBlue;
-                cores[3] = Color.Olive;
-                cores[4] = Color.Gray;
-                cores[5] = Color.Orange;
-                cores[6] = Color.LightSteelBlue;
-                cores[7] = Color.Wheat;
-                cores[8] = Color.Violet;
-                cores[9] = Color.Black;
-
-                #endregion
+            #endregion
 
             //}
 
@@ -169,8 +161,7 @@ namespace IpeaGeo.Modelagem.Graficos
             #region Gráfico de barras
 
             if (RBBarras.Checked)
-            {
-              
+            {             
                 BarItem myBar = myPane.AddBar("Curve 1", null, Y, Color.Red);
                 myBar.Bar.Fill = new Fill(Color.Red, Color.White, Color.Red);
 
@@ -184,25 +175,21 @@ namespace IpeaGeo.Modelagem.Graficos
 
                 myPane.XAxis.IsVisible = true;
                 myPane.YAxis.IsVisible = true;
-
-
+                
                 // Fill the Axis and Pane backgrounds
             }
 
-                #endregion
+            #endregion
 
             #region Gráfico de Pizza;
+            
             if (RBPizza.Checked)
-            {
-                
+            {                
                 for (int i = 0; i < X.GetLength(0); i++)
                 {
                     PieItem pieSlice = myPane.AddPieSlice(Y[i], cores[i], 0F, X[i]);
-                    //pieSlice.Border.Color = Color.White;
-                    
-                }
-                                
-                
+                    //pieSlice.Border.Color = Color.White;                    
+                }                               
 
                 // optional depending on whether you want labels within the graph legend
                 myPane.Legend.IsVisible = true;
@@ -213,12 +200,10 @@ namespace IpeaGeo.Modelagem.Graficos
 
             #endregion
 
-
             #region Gráfico de linha e dispersão
 
             if (RBLinhas.Checked || RBDispers.Checked || RBNormplotpp.Checked || RBHistograma.Checked || RBNormplotqq.Checked)
             {
-
                 string[] nomesvar = new string[2];
                 nomesvar[0] = Convert.ToString(LstX.SelectedItem);
                 nomesvar[1] = Convert.ToString(LstY.SelectedItem);
@@ -266,11 +251,11 @@ namespace IpeaGeo.Modelagem.Graficos
                     myPane.YAxis.Scale.Min = (double)clt.Minc(pontoscurva)[0, 1] - (((double)clt.Maxc(pontoscurva)[0,1] - (double)clt.Minc(pontoscurva)[0,1]) / (double)pontoscurva.GetLength(0));
                     myPane.YAxis.Scale.Max = (double)clt.Maxc(pontoscurva)[0, 1] + (((double)clt.Maxc(pontoscurva)[0, 1] - (double)clt.Minc(pontoscurva)[0, 1]) / (double)pontoscurva.GetLength(0));
                     myPane.XAxis.Scale.Min = (double)clt.Minc(pontoscurva)[0, 0] - (((double)clt.Maxc(pontoscurva)[0, 0] - (double)clt.Minc(pontoscurva)[0, 0]) / (double)pontoscurva.GetLength(0));
-                    myPane.XAxis.Scale.Max = (double)clt.Maxc(pontoscurva)[0, 0] + (((double)clt.Maxc(pontoscurva)[0, 0] - (double)clt.Minc(pontoscurva)[0, 0]) / (double)pontoscurva.GetLength(0));
- 
+                    myPane.XAxis.Scale.Max = (double)clt.Maxc(pontoscurva)[0, 0] + (((double)clt.Maxc(pontoscurva)[0, 0] - (double)clt.Minc(pontoscurva)[0, 0]) / (double)pontoscurva.GetLength(0)); 
                 }
 
                 #region PPplot
+                
                 if (RBNormplotpp.Checked)
                 {
                     double[,] variavelpp = clt.GetMatrizFromDataTable(m_dt_tabela_dados, Convert.ToString(LstX.SelectedItem));
@@ -295,7 +280,6 @@ namespace IpeaGeo.Modelagem.Graficos
                         qqdadosv[i, 0] = ((double)i / (double)n);
                         qqnormalv[i,0] = norm.CumulativeDistribution(sdados[i,0]);
                     }
-
 
                     for (int i = 0; i < qqdadosv.GetLength(0); i++)
                     {
@@ -327,6 +311,7 @@ namespace IpeaGeo.Modelagem.Graficos
                 #endregion
 
                 #region QQplt
+                
                 if (RBNormplotqq.Checked)
                 {
                     double[,] variavelpp = clt.GetMatrizFromDataTable(m_dt_tabela_dados, Convert.ToString(LstX.SelectedItem));
@@ -375,12 +360,12 @@ namespace IpeaGeo.Modelagem.Graficos
                     myPane.YAxis.Scale.Max = (double)clt.Max(qqnormalv) + (((double)clt.Max(qqnormalv) - (double)clt.Min(qqnormalv)) / (double)qqnormalv.GetLength(0));
                     myPane.XAxis.Scale.Min = (double)clt.Min(qqdadosv) - (((double)clt.Max(qqdadosv) - (double)clt.Min(qqdadosv)) / (double)qqdadosv.GetLength(0));
                     myPane.XAxis.Scale.Max = (double)clt.Max(qqdadosv) + (((double)clt.Max(qqdadosv) - (double)clt.Min(qqdadosv)) / (double)qqdadosv.GetLength(0));
-
                 }
 
                 #endregion
                 
                 #region Histograma
+                
                 if (RBHistograma.Checked)
                 {
                     double[,] variavelpp = clt.GetMatrizFromDataTable(m_dt_tabela_dados, Convert.ToString(LstX.SelectedItem));                    
@@ -405,15 +390,14 @@ namespace IpeaGeo.Modelagem.Graficos
                         else
                         {
                             if(rbNotimoclasses.Checked)
-                                {
-                                    
-                                    numclassesSturges = (int)(1.0 + 3.3 * Math.Log(variavelpp.GetLength(0)));
-                                }
-                                else
-                                {
-                                   MessageBox.Show("Selecione uma opção para o Histograma.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);                              
-
-                                }
+                            {
+                                
+                                numclassesSturges = (int)(1.0 + 3.3 * Math.Log(variavelpp.GetLength(0)));
+                            }
+                            else
+                            {
+                               MessageBox.Show("Selecione uma opção para o Histograma.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);                              
+                            }
                         }
                     }
 
@@ -425,15 +409,15 @@ namespace IpeaGeo.Modelagem.Graficos
                     double incrementohist = (double)(amplitudehist / (double)numclassesSturges);
                     double[] Yhist = new double[numclassesSturges];
                     double[] Xhist = new double[numclassesSturges + 1];
+                    
                     for (int i = 0; i < Xhist.GetLength(0); i++)
                     { 
-                    Xhist[i] = ((clt.Minc(variavelpp)[0, 0]) + (incrementohist * ((double)i)));               
+                        Xhist[i] = ((clt.Minc(variavelpp)[0, 0]) + (incrementohist * ((double)i)));               
                     }
 
                     double temp = new double();
                     for (int i = 0; i < variavelpp.GetLength(0); i++)
                     {
-
                         for (int j = 0; j < numclassesSturges; j++)
                         {
                             temp = ((clt.Minc(variavelpp)[0, 0]) + (incrementohist * (((double)j)+1.0)));
@@ -451,12 +435,9 @@ namespace IpeaGeo.Modelagem.Graficos
                     {
                         for (int i = 0; i < numclassesSturges; i++)
                         {
-                            Yhist[i] = Yhist[i] / n;
-                        
-                        }
-                    
-                    }
-                    
+                            Yhist[i] = Yhist[i] / n;                       
+                        }                    
+                    }                    
 
                     for (int i = 0; i < Xhist.GetLength(0) - 1; i++)
                     {
@@ -469,7 +450,6 @@ namespace IpeaGeo.Modelagem.Graficos
                         myPane.XAxis.Scale.Min = (double)clt.Min(Xhist) - (((double)clt.Max(Xhist) - (double)clt.Min(Xhist)) / (double)Xhist.GetLength(0));
                         myPane.XAxis.Scale.Max = (double)clt.Max(Xhist) + (((double)clt.Max(Xhist) - (double)clt.Min(Xhist)) / (double)Xhist.GetLength(0));
                     }
-
                 }
 
                 #endregion
@@ -483,8 +463,8 @@ namespace IpeaGeo.Modelagem.Graficos
                 {
                     myCurve1.Line.IsVisible = false;                    
                 }
-
             }
+            
             #endregion
 
             //myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 166), 90F);
@@ -496,8 +476,7 @@ namespace IpeaGeo.Modelagem.Graficos
             zedGraphControl1.Update();
             zedGraphControl1.Refresh();           
 
-            tabControl1.SelectedTab = tabPage3;
-        
+            tabControl1.SelectedTab = tabPage3;        
         }              
         
         private void FormComponentesPrincipais_Load(object sender, EventArgs e)
@@ -532,7 +511,6 @@ namespace IpeaGeo.Modelagem.Graficos
                 txtTituloGrafico.Text = "(Insira o título do gráfico)";
                 txtEixoX.Text = "(Insira o nome do eixo X)";
                 txtEixoY.Text = "(Insira o nome do eixo Y)";
-
             }
 
             if (tabControl1.TabPages.Contains(tabPage2))
@@ -654,11 +632,8 @@ namespace IpeaGeo.Modelagem.Graficos
                 rbNumClasses.Checked = false;
                 rbAmplitudeManual.Checked = false;
                 rbNotimoclasses.Checked = false;
-                cbFrequencia.Enabled = false;
-                
-
+                cbFrequencia.Enabled = false;              
             }
-
         }
 
         private void RBNormplotqq_CheckedChanged(object sender, EventArgs e)
@@ -686,8 +661,7 @@ namespace IpeaGeo.Modelagem.Graficos
         }
 
         private void txtTituloGrafico_TextChanged(object sender, EventArgs e)
-        {
-            
+        {           
         }
 
         private void rdbAmplitudeManual_CheckedChanged(object sender, EventArgs e)
@@ -722,9 +696,11 @@ namespace IpeaGeo.Modelagem.Graficos
                 numericUpDownAmplitudeManual.Value = 0;
             }
         }
+        
         int a = 0;
         int b = 0;
         int c = 0;
+        
         private void txtTituloGrafico_Click(object sender, EventArgs e)
         {
             if (a == 0)
@@ -765,13 +741,13 @@ namespace IpeaGeo.Modelagem.Graficos
                     txtTituloGrafico.Text = txtTituloGrafico.Text.Remove(0, 1);
                 }
             }
+            
             if (txtTituloGrafico.Text == "")
             {
                 txtTituloGrafico.ForeColor = Color.Silver;
                 txtTituloGrafico.Text = "(Insira o título do gráfico)";
                 a = 0;
-            }
-            
+            }            
         }
 
         private void txtEixoX_Leave(object sender, EventArgs e)
