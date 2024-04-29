@@ -143,6 +143,7 @@ namespace IpeaMatrix
             }
             return r;
         }
+        
         /// <summary>
         /// Remove-se determinada coluna da matriz.
         /// </summary>
@@ -163,8 +164,7 @@ namespace IpeaMatrix
             }
             return r;
         }
-        
-        
+              
         /// <summary>
         /// Remove-se determinada linha e coluna da matriz.
         /// </summary>
