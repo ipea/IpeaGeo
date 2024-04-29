@@ -12,7 +12,6 @@ namespace IpeaGeo
 {
     public partial class frmSpatialRegression : Form
     {
-
         #region Métodos Get Set
 
         private clsIpeaShape shapeAlex;
@@ -27,6 +26,7 @@ namespace IpeaGeo
                 shapeAlex = value;
             }
         }
+        
         private string[] strVariaveis;
         public string[] Variaveis
         {
@@ -36,37 +36,37 @@ namespace IpeaGeo
                 strVariaveis = value;
             }
         }
+        
         private string[] strVariaveisSelecionadas;
         public string[] VariaveisSelecionadas
-        {
-            
+        {            
             set
             {
                 strVariaveisSelecionadas = value;
             }
         }
+        
         private string[] strVariaveisSelecionadasInstrumentos;
         public string[] VariaveisSelecionadasInstrumentos
-        {
-            
+        {            
             set
             {
                 strVariaveisSelecionadasInstrumentos = value;
             }
         }
+        
         private int[] classePoligonos;
         public int[] vetorPoligonos
-        {
-            
+        {            
             set
             {
                 classePoligonos = value;
             }
         }
+        
         private string strIDmapa;
         public string IdentificadorMapa
-        {
-            
+        {      
             set
             {
                 strIDmapa = value;
@@ -75,8 +75,7 @@ namespace IpeaGeo
      
         private bool blRelatorio;
         public bool GeraRelatorio
-        {
-           
+        {          
             set
             {
                 blRelatorio = value;
@@ -85,17 +84,16 @@ namespace IpeaGeo
 
         private string strID;
         public string IdentificadorDados
-        {
-            
+        {            
             set
             {
                 strID = value;
             }
         }
+        
         private DataTable dTable;
         public DataTable DataTableDados
         {
-
             set
             {
                 dTable = value;
@@ -104,17 +102,16 @@ namespace IpeaGeo
 
         private string strEnderecoMapa;
         public string EnderecoMapa
-        {
-           
+        {           
             set
             {
                 strEnderecoMapa = value;
             }
         }
+        
         private string strDistancia;
         public string Distancia
-        {
-           
+        {           
             set
             {
                 strDistancia = value;
@@ -123,13 +120,13 @@ namespace IpeaGeo
 
         private string strMetodo;
         public string Metodo
-        {
-            
+        {            
             set
             {
                 strMetodo = value;
             }
         }
+        
         private Brush[] classeCor;
         public Brush[] CoresParaMapa
         {
@@ -142,6 +139,7 @@ namespace IpeaGeo
                 classeCor = value;
             }
         }
+        
         private int[] iVetor;
         public int[] Residuos_Mapa
         {
@@ -218,6 +216,7 @@ namespace IpeaGeo
                 dTable = value; 
             }
         }
+        
         private string[] Nomes_Var;
         public string[] sBetas
         {
@@ -230,6 +229,7 @@ namespace IpeaGeo
                 Nomes_Var = value;
             }
         }
+        
         private double[] Valores_betas;
         public double[] dBetas
         {
@@ -242,6 +242,7 @@ namespace IpeaGeo
                 Valores_betas = value;
             }
         }
+        
         private double[] t_betas;
         public double[] t
         {
@@ -293,6 +294,7 @@ namespace IpeaGeo
                 prov_aic = value;
             }
         }
+        
         private double prov_bic;
         public double bic
         {
@@ -305,6 +307,7 @@ namespace IpeaGeo
                 prov_bic = value;
             }
         }
+        
         private double prov_loglik;
         public double loglikeli
         {
@@ -317,6 +320,7 @@ namespace IpeaGeo
                 prov_loglik = value;
             }
         }
+        
         private double prov_sigma2;
         public double sigma_2
         {
@@ -433,11 +437,10 @@ namespace IpeaGeo
             }
         }
 
-
         private Brush[,] coresVetor = new Brush[110, 2];
         private Color[,] coresVetor2 = new Color[110, 2];
+        
         #endregion 
-
 
         public frmSpatialRegression()
         {
@@ -448,7 +451,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 //Popula listbox
 
                 ckbX.Items.AddRange(strVariaveis);
@@ -479,9 +481,6 @@ namespace IpeaGeo
                 comboBox2.SelectedIndex = 0;
                 comboBox3.SelectedIndex = 0;
                 cmbVizinhanca.SelectedIndex = 0;
-
-
-
 
                 //Cores
                 Color[] vetorCores = new Color[11];
@@ -530,16 +529,14 @@ namespace IpeaGeo
                             coresVetor2[contador, 1] = vetorCores[j];
 
                             contador++;
-
                         }
                     }
                 }
 
-                //dai vc seta a fonte pro combobox
+                // seta a fonte pro combobox
                 this.cmbCores.DataSource = colorList;
                 this.cmbCores.DisplayMember = "Nome";
                 this.cmbCores.ValueMember = "Nome";
-
             }
             catch (Exception ex)
             {
@@ -556,7 +553,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 /*
                 //Testando exibição de dataset
                 DataSet teste = new DataSet();
@@ -581,8 +577,7 @@ namespace IpeaGeo
                 teste.Tables.Add(dados1);
                 teste.Tables.Add(dados2);
                 dataGridView1.DataSource = teste;
-              
-             
+                         
                 //Fazer o datagridview exibir a table "betas"
                 BindingSource bs = new BindingSource();
                 bs.DataSource = teste;
@@ -593,7 +588,6 @@ namespace IpeaGeo
 
                 int u = 0;
                 */
-
 
                 this.Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
@@ -617,8 +611,6 @@ namespace IpeaGeo
 
                     cps.DefinicaoVizinhos(ref shapeAlex, tipo_vizinhanca, ref progressBar1);
                 }
-
-
 
                 groupBox4.Enabled = true;
                 comboBox3.Enabled = true;
@@ -652,13 +644,10 @@ namespace IpeaGeo
 
                 //Definindo o cutoff
 
-
                 clsMapa cmm = new clsMapa();
 
                 //valor_escala_x = (cmm.Sharp_Mapa.Envelope.Right) - (cmm.Sharp_Mapa.Envelope.Left);
                 //valor_escala_y = (cmm.Sharp_Mapa.Envelope.Top) - (cmm.Sharp_Mapa.Envelope.Bottom);
-
-
 
                 if (nudCutoffLatitude.Value != 0)
                 {
@@ -690,12 +679,12 @@ namespace IpeaGeo
                         coord_X[i, 0] = Convert.ToDouble(dTable.Rows[i][comboBox5.SelectedIndex]);
                     }
 
-
                     for (int i = 0; i < dTable.Rows.Count; i++)
                     {
                         coord_Y[i, 0] = Convert.ToDouble(dTable.Rows[i][comboBox4.SelectedIndex]);
                     }
                 }
+                
                 //Variáveis Selecionadas Regressão
                 strVariaveisSelecionadas = new string[ckbX.CheckedItems.Count];
 
@@ -719,7 +708,6 @@ namespace IpeaGeo
                 {
                     DataRow dr = dTable.Rows[i];
                     Type tp = dr[comboBoxDependente.SelectedIndex].GetType();
-
 
                     if (tp == typeof(System.DBNull))
                     {
@@ -760,7 +748,6 @@ namespace IpeaGeo
                             posicaoz = j;
                         }
                     }
-
                 }
 
                 clsUtilTools clsUtil = new clsUtilTools();
@@ -801,7 +788,6 @@ namespace IpeaGeo
                 }
 
                 //Generalized method of moments
-
                 if (comboBox2.SelectedItem.ToString() == "GMM")
                 {
                     metreg = "GMM";
@@ -833,14 +819,11 @@ namespace IpeaGeo
                 double rho_t = 0;
                 double[,] res_pond = new double[0, 0];
                 
-              //Gerando vetor de residuos, caso o modelo não seja SAR ou SEM
+                //Gerando vetor de residuos, caso o modelo não seja SAR ou SEM
                 clsUtilTools clsut = new clsUtilTools();
                 double[,] predito = clsut.MatrizMult(matriz_x, vetor_betas);
                 vetor_residuos = clsut.MatrizSubtracao(matriz_y, predito);
                 
-
-
-
                 if (comboBox2.SelectedItem.ToString() == "SAR")
                 {
                     label2.Text = "Modelo SAR";
@@ -868,7 +851,6 @@ namespace IpeaGeo
                     //rho_std = clsMLE.RhoStdError;
                     //rho_t = clsMLE.RhoTStat;
                     //sigma2 = clsMLE.Sigma2Hat;
-
 
                     label2.Text = "";
                     Application.DoEvents();
@@ -922,10 +904,6 @@ namespace IpeaGeo
 
                 todas_var = clsUtil.Concatev(var_x, var_z);
 
-
-
-
-
                 //Gerando o datatable com betas
 
                 betas.Columns.Add("Variaveis", Type.GetType("System.String"));
@@ -960,7 +938,6 @@ namespace IpeaGeo
                     novaLinha[6] = lim_sup_betas[i, 0];
 
                     betas.Rows.Add(novaLinha);
-
                 }
 
                 //Inserindo a linha final, com rho
@@ -974,13 +951,11 @@ namespace IpeaGeo
                 linha_rho[6] = lim_sup_rho;
                 betas.Rows.Add(linha_rho);
 
-
                 dataGridView1.DataSource = betas;
                 dataGridView1.Refresh();
                 Application.DoEvents();
 
                 //Gerar outro datatable, agora com os outros resultados
-
 
                 outras.Columns.Add("AIC", Type.GetType("System.Double"));
                 outras.Columns.Add("BIC", Type.GetType("System.Double"));
@@ -1080,9 +1055,8 @@ namespace IpeaGeo
                     out_res.Rows.Add(drr);
                 }
 
-
-                ////Adicionando para as variaveis publicas, a usar no relatorio//////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //Adicionando para as variaveis publicas, a usar no relatorio
+                
                 Nomes_Var = new string[todas_var.Length];
                 t_betas = new double[vetor_t.Length];
                 p_betas = new double[p_valores.Length];
@@ -1110,9 +1084,6 @@ namespace IpeaGeo
                 prov_rho_p = rho_pvalue;
                 var_para_mapa = comboBox3.SelectedItem.ToString();
                 isso_eh_regressao = true;
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
                 //Inserindo a linha final, com rho
                 drr = out_res.NewRow();
@@ -1142,8 +1113,6 @@ namespace IpeaGeo
                 this.dataGridView2.DataSource = out_res;
 
                 #endregion
-
-
                 
                 //Gerar datatable com o vetor de residuos
 
@@ -1159,11 +1128,6 @@ namespace IpeaGeo
                 }
                 dataGridView1.DataSource = residuos;
 
-
-
-
-
-
                 //Grafico
                 GraphPane myPane = zedGraphControl1.GraphPane;
 
@@ -1171,7 +1135,6 @@ namespace IpeaGeo
                 myPane.Title.Text = "Resíduos versus Resíduos Ponderados Geograficamente";
                 myPane.XAxis.Title.Text = "Resíduos";
                 myPane.YAxis.Title.Text = "Resíduos Ponderados Geograficamente";
-
 
                 // Populate a PointPairList with a log-based function and some random variability
                 PointPairList list = new PointPairList();
@@ -1184,10 +1147,13 @@ namespace IpeaGeo
 
                 // Add the curve
                 LineItem myCurve = myPane.AddCurve("Observação", list, Color.Black, SymbolType.Diamond);
+                
                 // Don't display the line (This makes a scatter plot)
                 myCurve.Line.IsVisible = false;
+                
                 // Hide the symbol outline
                 myCurve.Symbol.Border.IsVisible = false;
+                
                 // Fill the symbol interior with color
                 myCurve.Symbol.Fill = new Fill(Color.Firebrick);
 
@@ -1197,11 +1163,8 @@ namespace IpeaGeo
 
                 zedGraphControl1.AxisChange();
 
-
-
                 this.Cursor = Cursors.Default;
                 Application.DoEvents();
-
             }
             catch (Exception ex)
             {
@@ -1214,7 +1177,6 @@ namespace IpeaGeo
             try
             {
                 this.EstimaRegressao();                             
-
             }
             catch (Exception er)
             {
@@ -1240,8 +1202,8 @@ namespace IpeaGeo
             {
                 get { return ColorName; }
             }
-
         }
+        
         private void comboBoxDependente_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1281,7 +1243,6 @@ namespace IpeaGeo
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         
         private void tabPage3_Click(object sender, EventArgs e)
         {            
@@ -1305,7 +1266,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 isso_eh_regressao = true;
 
                 //É preciso adicionar as colunas de resiudos à tabela dtable
@@ -1315,13 +1275,9 @@ namespace IpeaGeo
 
                 for (int i = 0; i < numero; i++)
                 {
-
                     dTable.Rows[i]["Resíduos"] = residuos.Rows[i]["Resíduos"];
                     dTable.Rows[i]["Resíduos defasados"] = residuos.Rows[i]["Resíduos defasados"];
-
                 }
-
-
 
                 //Criando o vetor tematico
                 clsMapa cmapa = new clsMapa();
@@ -1338,22 +1294,26 @@ namespace IpeaGeo
                     Metodo_mapa = "Jenks";
                     iVetor = cmapa.criaJenks(dTable, var_sel, strIDmapa, strID, numclasses, ref limites);
                 }
+                
                 if (comboBox1.SelectedItem.ToString() == "Geométrica")
                 {
                     Metodo_mapa = "Geométrico";
                     iVetor = cmapa.criaGeometric(dTable, var_sel, strIDmapa, strID, numclasses, ref limites);
                 }
+                
                 if (comboBox1.SelectedItem.ToString() == "Desvio Padrão")
                 {
                     Metodo_mapa = "Desvio Padrão";
                     int numero_class = 0;
                     iVetor = cmapa.criaDesvios(dTable, var_sel, strIDmapa, strID, numclasses, ref limites, ref numero_class);
                 }
+                
                 if (comboBox1.SelectedItem.ToString() == "Equal")
                 {
                     Metodo_mapa = "Equal";
                     iVetor = cmapa.criaEqual(dTable, var_sel, strIDmapa, strID, numclasses, ref limites);
                 }
+                
                 if (comboBox1.SelectedItem.ToString() == "Quantil")
                 {
                     Metodo_mapa = "Quantil";
@@ -1361,10 +1321,7 @@ namespace IpeaGeo
                 }
 
                 //Cores para o mapa
-
-
                 #region Cores
-
 
                 //Cores
                 Brush[] cores = new Brush[numclasses];
@@ -1384,7 +1341,6 @@ namespace IpeaGeo
                     Color[] colors = new Color[2];
                     colors[0] = coresVetor2[iTem, 0];
                     colors[1] = coresVetor2[iTem, 1];
-
 
                     //Valores RGB
                     double R0 = Convert.ToDouble(colors[0].R);
@@ -1428,9 +1384,11 @@ namespace IpeaGeo
                     }
                     //Cria o objeto cor
                     Color mCor0 = new Color();
+                    
                     //Set the color
                     mCor0 = Color.FromArgb(colors[0].ToArgb());
                     strCoresRGB[0] = System.Drawing.ColorTranslator.ToHtml(mCor0);
+                    
                     //Cria o objeto cor
                     Color mCor1 = new Color();
                     mCor1 = Color.FromArgb(colors[1].ToArgb());
@@ -1439,6 +1397,7 @@ namespace IpeaGeo
                 else
                 {
                     Random rnd = new Random();
+                    
                     //Gerando vetor de cores aleatórias
                     for (int l = 0; l < cores.Length; l++)
                     {
@@ -1458,24 +1417,17 @@ namespace IpeaGeo
                     {
                         strCoresRGB[k] = System.Drawing.ColorTranslator.ToHtml((Color)coresRGB[k]);
                     }
-
-
                 }
                 RGB = strCoresRGB;
+                
                 #endregion
 
-
-
-
                 this.DialogResult = DialogResult.OK;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-
         }
 
         private void cmbCores_DrawItem_1(object sender, DrawItemEventArgs e)
@@ -1497,19 +1449,6 @@ namespace IpeaGeo
             {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        
-
-     
-
-     
-    
-
-
-
-      
-
-      
+        }      
     }
 }
