@@ -26,6 +26,7 @@ namespace IpeaGeo
         {
             get { return deuerro_; }
         }
+        
         private bool deuerro2_ = false;
         public bool DeuErro2
         {
@@ -42,7 +43,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 //Cria as colunas do DataGridView
                 DataGridViewTextBoxColumn txtbox = new DataGridViewTextBoxColumn();
                 txtbox = new DataGridViewTextBoxColumn();
@@ -96,7 +96,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 Cursor.Current = Cursors.WaitCursor;
                 dataGridView1.AllowUserToAddRows = false;
                 tabControl1.TabPages.RemoveAt(1);
@@ -130,18 +129,19 @@ namespace IpeaGeo
 
                     //Coloca na combobox
                     for (int i = 0; i < strVariaveisMapa.Length; i++) cmbIDmapa.Items.Add(strVariaveisMapa[i]);
-
-
                 }
                 else if (ExtensaoDoArquivo == ".SAS7BDAT")
                 {
                     txtEndereco.Text = EnderecoBase;
                     label2.Text = "";
                     cmbTabela.Enabled = false;
+                    
                     //Endereço da pasta com o arquivo
                     string strPath = Path.GetDirectoryName(EnderecoBase);
+                    
                     //Nome do arquivo
                     string strAqruivo = Path.GetFileNameWithoutExtension(EnderecoBase);
+                    
                     //String de conexão
                     string m_cnnstring = "Provider=sas.LocalProvider; Data Source=" + strPath;
                     m_cnn = new System.Data.OleDb.OleDbConnection(m_cnnstring);
@@ -150,6 +150,7 @@ namespace IpeaGeo
                     sasCommand.CommandType = CommandType.TableDirect;
                     sasCommand.CommandText = strAqruivo;
                     m_dap = new System.Data.OleDb.OleDbDataAdapter(sasCommand);
+                    
                     //Guarda no DataSet
                     m_dap.Fill(dsDados, "Table1");
                     m_cnn.Close();
@@ -213,6 +214,7 @@ namespace IpeaGeo
 
                     cmbIDdados.Enabled = true;
                     cmbIDmapa.Enabled = true;
+                    
                     //Popula o DataGridView
                     PopulaDataGridView(ref dataGridView1, cmbIDdados.Items.Count);
                 }
@@ -220,6 +222,7 @@ namespace IpeaGeo
                 {
                     label2.Text = "Planilha";
                     txtEndereco.Text = EnderecoBase;
+                    
                     //Inicia conexão com o MDB
                     string m_cnnstring = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + EnderecoBase + ";Extended Properties=Excel 8.0;";
                     m_cnn = new System.Data.OleDb.OleDbConnection(m_cnnstring);
@@ -331,6 +334,7 @@ namespace IpeaGeo
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        
         private bool agrega(DataGridView grid)
         {
             for (int i = 0; i < cmbIDdados.Items.Count; i++)
@@ -340,6 +344,7 @@ namespace IpeaGeo
 
             return (true);
         }
+        
         private void btnConecta_Click_1(object sender, EventArgs e)
         {
             try
@@ -487,7 +492,6 @@ namespace IpeaGeo
 
                     //Limpa o DataSet
                     dsDados.Tables.Clear();
-
 
                     //Criar o datatable das agregacoes
                     DataTable dt = dTable.Copy();
