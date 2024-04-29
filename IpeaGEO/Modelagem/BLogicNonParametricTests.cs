@@ -8,8 +8,6 @@ namespace IpeaGeo.Modelagem
 {
     #region enumerações
 
-
-
     public enum TipoDistribuicao : int
     {
         Normal = 1,
@@ -19,7 +17,6 @@ namespace IpeaGeo.Modelagem
         Beta = 5,
         Poisson = 6
     };
-
 
     public enum TipoTeste : int
     {
@@ -33,9 +30,7 @@ namespace IpeaGeo.Modelagem
     {
         #region variaveis internas
 
-
         #endregion
-
 
         public BLogicNonParametricTests()
         {
@@ -113,11 +108,9 @@ namespace IpeaGeo.Modelagem
 
         #region Teste Kolmogorv Smirnov
 
-
         public void KS_Test(DataTable dt_dados, string[] variaveis, out double[] test_stat, out double[] p_valor)
         {
             clsUtilTools clt = new clsUtilTools();
-
 
             double[,] dados = new double[0, 0];
             int num_obs_total;
@@ -130,8 +123,6 @@ namespace IpeaGeo.Modelagem
 
             this.KS_Test(dados, out test_stat, out p_valor);
         }
-
-
 
         /// <summary>
         /// Função para o teste KS bi-cauldal para várias variáveis (colunas de uma matriz). 
@@ -156,9 +147,6 @@ namespace IpeaGeo.Modelagem
                 p_valor[j] = temp_pvalor;
             }
         }
-
-
-     
        
         public void KS_Test2(double[,] dados, double[,] dados1, out double[,] test_stat2, out double[,] p_valor2, out double[,] parametro1, out double[,] parametro2)
         {
@@ -176,7 +164,7 @@ namespace IpeaGeo.Modelagem
             parametro2 = new double[tabclasse.GetLength(0), (ncols)];
             double[,] cdf = this.cdf_distribuicao(dados);
 
-            //PEGAR NÍVEIS DA VARIAVEL CATEGORICA
+            // NÍVEIS DA VARIAVEL CATEGORICA
 
             for (int j = 0; j < ncols; j++)
             {
@@ -209,21 +197,14 @@ namespace IpeaGeo.Modelagem
                     {
                         parametro1[h, j] = clt.Mean(clt.SubColumnArrayDouble(dados_sep, 0));
                         parametro2[h, j] = (clt.Despadc(clt.SubColumnArrayDouble(dados_sep, 0))[0, 0]) * Math.Sqrt((dados_sep.GetLength(0)) / (dados_sep.GetLength(0) - 1.0));
-                    }
-
-                   
+                    }                   
 
                     KS_Test_1Variavel(dados_sep, out temp_tstat, out temp_pvalor);
                     test_stat2[h, (j + 1)] = temp_tstat;
                     p_valor2[h, (j + 1)] = temp_pvalor;
-
                 }
-
             }
-
         }
-
-
 
         /// <summary>
         /// Função para o teste KS bi-caudal de uma variável apenas (matriz coluna). 
@@ -269,7 +250,6 @@ namespace IpeaGeo.Modelagem
 
             MathKSdist_N ksd = new MathKSdist_N();
             ksd.ks(test_stat, n, out p_valor);
-
         }
 
         #endregion
@@ -439,7 +419,6 @@ namespace IpeaGeo.Modelagem
         /// <param name="tabela">Tabela de saída de frequencia</param>
         public void Teste_AjusteQQuadrado(double[,] dados, out double test_stat, out double p_valor, out double[,] tabela, out double par1, out  double par2, out double verificacao, out object[,] tabelapoisson)
         {
-
             clsUtilTools clt1 = new clsUtilTools();
             tabela = new double[10, 3];
             test_stat = 0.0;
@@ -454,21 +433,17 @@ namespace IpeaGeo.Modelagem
             double[,] emp_dist = new double[n, 1];
             double[,] freq = new double[0, 0];
 
-
-
             if (m_tipo_distribuicao == Modelagem.TipoDistribuicao.Poisson)
             {
                 ////test_stat = 0.0;
                 ////p_valor = 0.0;
                 ////m_tipo_distribuicao = TipoDistribuicao.Poisson;
 
-
                 bool adicionazero = false;
                 if (clt1.Min(dados) > 0)
                 {
                     adicionazero = true;
                 }
-
 
                 //double[,] freq = new double[0, 0];
 
@@ -502,7 +477,6 @@ namespace IpeaGeo.Modelagem
 
                 #region Tabela das probabilidades esperadas e observadas
 
-
                 double[,] freq1 = new double[0, 0];
 
                 int casela = 0;
@@ -527,8 +501,6 @@ namespace IpeaGeo.Modelagem
 
                     dfp = new double[freq1.GetLength(0), 1];
 
-
-
                     dfp[0, 0] = n * dist_prob.CumulativeDistribution((int)clt1.Min(clt1.SubColumnArrayDouble(freqajustado, 0)));
                     dfp[dfp.GetLength(0) - 1, 0] = n * (1 - dist_prob.CumulativeDistribution((int)clt1.Max(clt1.SubColumnArrayDouble(freqajustado, 0)) + 1));
                     for (int i = 1; i < dfp.GetLength(0) - 1; i++)
@@ -538,19 +510,13 @@ namespace IpeaGeo.Modelagem
 
                     }
 
-
                     for (int i = 0; i < dfp.GetLength(0); i++)
                     {
-
                         if (dfp[i, 0] <= 5)
                         {
                             casela = casela + 1;
                         }
-
                     }
-
-
-
                 }
                 else
                 {
@@ -565,8 +531,7 @@ namespace IpeaGeo.Modelagem
                             freq1[i, j] = freqajustado[i, j];
                         }
                     }
-
-
+                    
                     dfp = new double[freq1.GetLength(0), 1];
                     dfp[dfp.GetLength(0) - 1, 0] = n * (1 - dist_prob.CumulativeDistribution((int)clt1.Max(clt1.SubColumnArrayDouble(freqajustado, 0)) + 1));
 
@@ -579,15 +544,11 @@ namespace IpeaGeo.Modelagem
 
                     for (int i = 0; i < dfp.GetLength(0); i++)
                     {
-
                         if (dfp[i, 0] <= 5)
                         {
                             casela = casela + 1;
                         }
-
                     }
-
-
                 }
 
                 /// Adequa o vetor de frequencia para diminuir a quantidade de caselas com valores esperados menores que 5
@@ -597,6 +558,7 @@ namespace IpeaGeo.Modelagem
                 object[,] freq3 = new object[freq1.GetLength(0) - tam, 3];
                 int n2 = freq1.GetLength(0);
                 string[,] label = new string[n2, 1];
+                
                 for (int i = 0; i < freq1.GetLength(0); i++)
                 {
                     label[i, 0] = "" + (int)freq1[i, 0];
@@ -621,7 +583,6 @@ namespace IpeaGeo.Modelagem
                 {
                     for (int i = 0; i < freq1.GetLength(0); i++)
                     {
-
                         indice = n2 * ((i + 1) % 2) + (int)((Math.Pow(-1, (i + 1) % 2) * i + (i % 2)) * (0.5)) - 1; // gera uma sequencia n,1,n-1,2,n-3,3,n-4,4 ... por meio do 0,1,2,3,4,5,6 
 
                         if (freq2[indice, 2] < 5 & cont2 < tam)
@@ -641,11 +602,8 @@ namespace IpeaGeo.Modelagem
                             freq2[indice, 1] = -1;
                             freq2[indice, 2] = -1;
                             label[indice, 0] = "NULL";
-
                         }
-
                     }
-
                 }
 
                 freq3 = new object[freq1.GetLength(0) - cont2, 3];
@@ -654,7 +612,6 @@ namespace IpeaGeo.Modelagem
                     if (freq2[i, 2] == -1)
                     {
                         lag += 1;
-
                     }
                     else
                     {
@@ -662,19 +619,16 @@ namespace IpeaGeo.Modelagem
                         freq3[i - lag, 1] = freq2[i, 1];
                         freq3[i - lag, 2] = freq2[i, 2];
                     }
-
                 }
 
                 for (int i = 0; i < freq3.GetLength(0); i++)
                 {
                     freq3[i, 0] = "{" + freq3[i, 0] + "}";
-
                 }
+                
                 #endregion
 
                 #endregion
-
-
 
                 for (int i = 0; i < freq3.GetLength(0); i++)
                 {
@@ -685,13 +639,12 @@ namespace IpeaGeo.Modelagem
                 p_valor = qq.Density(test_stat);
 
                 tabelapoisson = clt1.ArrayObjectClone(freq3);
-
             }
+            
             #region Outras distribuições
+            
             else
             {
-
-
                 for (int i = 10; i < (tabela.GetLength(0) * 10) + 1; i += 10)
                 {
                     tabela[(i / 10) - 1, 0] = clt1.Percentil(dados, i);
@@ -701,7 +654,6 @@ namespace IpeaGeo.Modelagem
                 int contadora = 0;
                 for (int i = 0; i < sdados.GetLength(0); i++)
                 {
-
                     if (sdados[i, 0] <= tabela[lag2, 0]) contadora++;
                     else
                     {
@@ -716,10 +668,7 @@ namespace IpeaGeo.Modelagem
                         tabela[lag2, 1] = contadora;
                         break;
                     }
-
                 }
-
-
 
                 switch (m_tipo_distribuicao)
                 {
@@ -728,7 +677,6 @@ namespace IpeaGeo.Modelagem
                         Exponential exp = new Exponential(1.0 / par1);
                         for (int i = 0; i < tabela.GetLength(0); i++)
                         {
-
                             tabela[i, 2] = exp.CumulativeDistribution(tabela[i, 0]);
                         }
 
@@ -757,7 +705,6 @@ namespace IpeaGeo.Modelagem
                     //    }
                     //    break;
 
-
                     default:
                         par1 = clt1.Mean(dados);
                         par2 = (clt1.Despadc(clt1.SubColumnArrayDouble(dados, 0))[0, 0]) * Math.Sqrt((dados.GetLength(0)) / (dados.GetLength(0) - 1.0));
@@ -770,11 +717,9 @@ namespace IpeaGeo.Modelagem
                         break;
                 }
 
-
                 double contadora2 = 0.0;
                 for (int i = 0; i < tabela.GetLength(0); i++)
                 {
-
                     tabela[i, 2] = (tabela[i, 2] * n);
 
                     if (i != 0)
@@ -786,8 +731,6 @@ namespace IpeaGeo.Modelagem
                     if (tabela[i, 2] <= 5) verificacao++;
 
                     if (i == 9) tabela[i, 2] = n - contadora2;
-
-
                 }
                 double[] diferenca = new double[10];
 
@@ -801,15 +744,11 @@ namespace IpeaGeo.Modelagem
                 ChiSquared qq = new ChiSquared(tabela.GetLength(0) - 1);
 
                 p_valor = qq.Density(test_stat);
-
             }
 
-            #endregion
-
-            
+            #endregion            
         }
-
-
+        
         #endregion
 
         #region ShapiroWilk
@@ -818,10 +757,6 @@ namespace IpeaGeo.Modelagem
         {
             test_stat = 0.0;
             p_valor = 0.0;
-
-
-
-
         }
         #endregion
 
@@ -842,37 +777,26 @@ namespace IpeaGeo.Modelagem
 
             double[,] diferenca = clt.DiffArrayDouble(dados, dados1);
 
-
-
             for (int i = 0; i < diferenca.GetLength(0); i++)
             {
-
                 if (diferenca[i, 0] <= 0.0001 & diferenca[i, 0] >= -0.0001)
                 {
                     diferenca = clt.DeleteRow(diferenca, i);
-
                 }
-
             }
 
             double[,] diferenca_abs = new double[diferenca.GetLength(0), 1];
 
-
             for (int i = 0; i < diferenca.GetLength(0); i++)
             {
-
                 diferenca_abs[i, 0] = Math.Abs(diferenca[i, 0]);
-
             }
-
-
 
             double[,] sorteado = clt.ArrayRanksEmpate(diferenca_abs);
             double[,] concatenada = clt.Concateh(diferenca, sorteado);
 
             for (int i = 0; i < concatenada.GetLength(0); i++)
             {
-
                 if (concatenada[i, 0] < 0)
                 {
                     rank1 += concatenada[i, 1];
@@ -881,7 +805,6 @@ namespace IpeaGeo.Modelagem
                 {
                     rank2 += concatenada[i, 1];
                 }
-
             }
 
             estat_wil = Math.Min(rank1, rank2);
@@ -891,13 +814,9 @@ namespace IpeaGeo.Modelagem
             double[] ti = new double[cor_empates.GetLength(0)];
             for (int i = 0; i < cor_empates.GetLength(0); i++)
             {
-
                 if (cor_empates[i, 1] != 1)
                 {
-
                     ti[i] = cor_empates[i, 1];
-
-
                 }
                 else
                 {
@@ -906,49 +825,28 @@ namespace IpeaGeo.Modelagem
                 soma += ti[i];
             }
 
-
-
             for (int i = 0; i < ti.GetLength(0); i++)
             {
-
                 n1 += Math.Pow(ti[i], 3.0);
                 n2 += ti[i];
-
-
             }
-
-
-
-
 
             if (soma != 0)
             {
-
                 double n = dados.GetLength(0);
                 double estat_aprox = (estat_wil - ((n * (n + 1)) / 4)) / (Math.Sqrt(n * (n + 1) * (2 * n + 1) / 24) - ((n1 - n2) / 48));
 
-
                 pvalue_wil = 2 * nrm.CumulativeDistribution(-Math.Abs(estat_aprox));
                 ver_empates = true;
-
-
             }
-
             else
             {
                 double n = dados.GetLength(0);
                 double estat_aprox = (estat_wil - ((n * (n + 1)) / 4)) / Math.Sqrt(n * (n + 1) * (2 * n + 1) / 24);
 
-
                 pvalue_wil = 2 * nrm.CumulativeDistribution(-Math.Abs(estat_aprox));
-
             }
-
-
-
         }
-
-
 
         #endregion
 
@@ -963,10 +861,6 @@ namespace IpeaGeo.Modelagem
             double rank2 = 0.0;
             double[,] cat = new double[0, 0];
             clt.FrequencyTable(ref cat, dados1);
-
-       
-
-
 
             for (int i = 0; i < sorteado.GetLength(0); i++)
             {
@@ -997,8 +891,8 @@ namespace IpeaGeo.Modelagem
 
             posto = rank1;
             pvalue = nrm.CumulativeDistribution(-Math.Abs(estat));
-
         }
+        
         #endregion
 
         #region Kruskal-Wallis
@@ -1006,7 +900,6 @@ namespace IpeaGeo.Modelagem
         public void Kruskal_Wallis(double[,] dados, double[,] dados1, out double h, out double estat, out double pvalue, out double[,] dif)
         {
             clsUtilTools clt = new clsUtilTools();
-
 
             double[,] sorteado = new double[0, 0];
             double[,] empates = new double[0, 0];
@@ -1033,7 +926,6 @@ namespace IpeaGeo.Modelagem
                 }
             }
 
-
             double acum = 0.0;
             double acum2 = 0.0;
             double h_empate = 0.0;
@@ -1041,7 +933,6 @@ namespace IpeaGeo.Modelagem
             {
                 acum += Math.Pow(rank[k, 0], 2) / cat[k, 1];
                 acum2 += Math.Pow(rank[k, 1], 3) - rank[k, 1];
-
             }
 
             h = (12.0 / (dados.GetLength(0) * (dados.GetLength(0) + 1.0))) * acum - 3.0 * (dados.GetLength(0) + 1.0);
@@ -1051,15 +942,16 @@ namespace IpeaGeo.Modelagem
             double a = nrm.InverseCumulativeDistribution(0.05);
             dif = new double[(rank.GetLength(0) * (rank.GetLength(0) - 1)) / 2, 5];
             int lin = 0;
+            
             for (int i = 0; i < rank.GetLength(0) - 1; i++)
             {
                 for (int j = i + 1; j < rank.GetLength(0); j++)
                 {
-
                     dif[lin, 0] = (int)(i + 1);
                     dif[lin, 1] = (int)(j + 1);
                     dif[lin, 2] = Math.Abs(nrm.InverseCumulativeDistribution(0.05 / ((rank.GetLength(0) * (rank.GetLength(0) - 1)) / 2)) * Math.Sqrt(((dados1.GetLength(0) * (dados1.GetLength(0) + 1)) / 12) * (1 / cat[i, 1] + 1 / cat[j, 1])));
                     dif[lin, 3] = Math.Abs(rank[i, 0] / cat[i, 1] - rank[j, 0] / cat[j, 1]);
+                    
                     if (dif[lin, 2] < dif[lin, 3])
                     {
                         dif[lin, 4] = 1;
@@ -1070,12 +962,13 @@ namespace IpeaGeo.Modelagem
                     }
                     lin += 1;
                 }
-            }
-
+            }           
         }
+        
         #endregion
 
         #region Testes comparação de médias paramétricos
+        
         /// <summary>
         ///  Teste de comparação de médias para amostras independentes quando as variâncias são desconhecidas e desiguais.
         /// </summary>
@@ -1126,7 +1019,6 @@ namespace IpeaGeo.Modelagem
 
             MathStudenttdist T = new MathStudenttdist(v);
             pvalue = T.cdf(-Math.Abs(estat)) * 2.0;
-
         }
 
         /// <summary>
@@ -1172,8 +1064,8 @@ namespace IpeaGeo.Modelagem
             estat = (media_g1 - media_g2) / Math.Pow(a + b, 0.5);
             Normal N = new Normal(0, a + b);
             pvalue = N.CumulativeDistribution(-Math.Abs(estat)) * 2.0;
-
         }
+        
         /// <summary>
         /// Teste de comparação de médias para amostras independentes quando as variâncias são desconhecidas e iguais.
         /// </summary>
@@ -1269,7 +1161,6 @@ namespace IpeaGeo.Modelagem
             MathStudenttdist T = new MathStudenttdist(n - 1);
             pvalue = T.cdf(-Math.Abs(estat)) * 2.0;
         }
-
 
         /// <summary>
         /// Teste de comparação de médias para amostras dependentes (pareadas) com variancia conhecidas
@@ -1452,7 +1343,7 @@ namespace IpeaGeo.Modelagem
     }
 }
 
-        #endregion
+#endregion
 
 
 
