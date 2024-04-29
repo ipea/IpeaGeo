@@ -119,7 +119,6 @@ namespace IpeaGeo.Modelagem
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
         }
 
         private void FormBaseModelagem_Load(object sender, EventArgs e)
