@@ -5,23 +5,17 @@ using System.Threading;
 // Simple threading scenario:  Start a static method running
 // on a second thread.
 
-
-
 namespace IpeaGEO
 {
 	/// <summary>
 	/// Summary description for estatistica.
 	/// </summary>
-#warning Verificar a necessidade de manter esta classe.
+	#warning Verificar a necessidade de manter esta classe.
 	public class estatistica
 	{
 		public estatistica()
 		{
-			//
-			// TODO: Add constructor logic here
-			//
 		}
-
 
 		private double ave, var;
 		public double Average
@@ -39,11 +33,9 @@ namespace IpeaGEO
 			ulong total;
 			double s,ep;
 			ulong error=0;
-			
-
+	
 			for (ave=0.0,j=0;j<n;j++) 
-			{
-				
+			{			
 				if(double.IsNaN(data[j])== true)
 				{
 					error+=1;
@@ -53,9 +45,9 @@ namespace IpeaGEO
 				else 
 				{
 					ave += data[j];
-				}
-				
+				}			
 			}
+			
 			ave /= (double)n-error;
 
 			var=ep=0.0;
@@ -79,79 +71,75 @@ namespace IpeaGEO
 			var=(var-ep*ep/(double)total)/(double)(total-1);
 		} 
 
-
 		private double ave2, adev, sdev, var2 ,skew,curt,maximo,minimo,r;
 
 		public double Average2
 		{
 			get{return ave2;}
 		}
+		
 		public double AverageDeviation
 		{
 			get{return adev;}
 		}
+		
 		public double StandardDeviation
 		{
 			get{return sdev;}
-		} 
+		}
+		
 		public double Variance2
 		{
 			get{return var2;}
 		}
+		
 		public double Skewness
 		{
 			get{return skew;}
 		}
+		
 		public double Kurtosis
 		{
 			get{return curt;}
 		}
-
-		
+				
 		public void moment(double[] data, int n)
-		{
-	
+		{	
 			int j;
 			ulong error=0;
 			ulong total;
 			double ep=0.0,s,s2,p,C_4,C4,tudo;
-			
-			
-
+		
 			if (n <= 1) try{throw new Exception();}
 						catch (Exception)
 						{
 							MessageBox.Show("n deve ser ao menos 2 para o momento",
-								"Método Invalido",MessageBoxButtons.OK, MessageBoxIcon.Error );
+								"MÃ©todo Invalido",MessageBoxButtons.OK, MessageBoxIcon.Error );
 						}
 			s=0.0;
 			s2=0.0;
 			C_4=0.0;
 			C4=0.0;
+			
 			for (j=0;j<n;j++)
 			{
-
 				if(double.IsNaN(data[j])== true)
 				{
 					error+=1;
 					s+=0;
-					
 				}
 				else
 				{
-					
 					s += data[j];
 					s2+=Math.Pow(data[j],2);
-				
 				}
-					
-			}
-		
+			}		
 
 			total=(ulong)n-error;
 			tudo=(double)total;
 			ave2=s/(total);
 			adev=var2=skew=curt=0.0;
+			
 			for (j=0;j<n;j++) 
 			{
 				if(double.IsNaN(data[j])!= true)
@@ -160,7 +148,6 @@ namespace IpeaGEO
 					var2 += (p=s*s);
 					skew += (p *= s);
 					curt += (p *= s);
-					
 				}
 				else
 				{
@@ -170,9 +157,11 @@ namespace IpeaGEO
 					curt +=0.0;
 				}
 			}
+			
 			adev /= total;
 			var2=(var2-ep*ep/total)/(total-1);
 			sdev=Math.Sqrt(var2);
+			
 			if (var2 != 0.0) 
 			{
 				skew *= (total)/((total-1)*(total-2)*var2*sdev);
@@ -180,24 +169,17 @@ namespace IpeaGEO
 				C_4=(Math.Pow((tudo-1),2)/((tudo-2)*(tudo-3)));
 				curt=(C4*curt)-3*C_4;
 			} 
+			
 			else try{throw new Exception();}
 				 catch (Exception)
 				 {
 					 MessageBox.Show("Nenhuma Assimetria/Curtose quando variancia = 0 (no momento)",
-						 "Método Invalido",MessageBoxButtons.OK, MessageBoxIcon.Error );
+						 "MÃ©todo Invalido",MessageBoxButtons.OK, MessageBoxIcon.Error );
 				 }
 		}
 
-
-
-
-
-
-
 		public void Minimo_(double[] data)
 		{
-			
-
 			int error=0;
 			
 			Array.Sort(data);
@@ -212,9 +194,7 @@ namespace IpeaGEO
 				{
 					error++;
 				}
-
-			}
-		
+			}		
 		} 
 
 		public void Maximo_(double[] data)
@@ -222,8 +202,7 @@ namespace IpeaGEO
 			int error=0;
 			Array.Sort(data);
 			for(int i=data.Length-1; i>-1;i--)
-			{
-			
+			{			
 				if(double.IsNaN(data[i])== false)
 				{
 					maximo=data[i];
@@ -236,10 +215,12 @@ namespace IpeaGEO
 			}
 		
 		} 
+		
 		public double Maximo
 		{
 			get{return maximo;}
 		}
+		
 		public double Minimo
 		{
 			get{return minimo;}
@@ -248,11 +229,9 @@ namespace IpeaGEO
 		private double TINY = 1.0e-20;
 		public void pearsn(double[] x, double[] y, ulong n) 
 		{
-
 			ulong j;
 			double yt,xt,erro=0.0,total=0.0;
 			double syy=0.0,sxy=0.0,sxx=0.0,ay=0.0,ax=0.0;
-
 
 			for (j=0;j<n;j++) 
 			{
@@ -283,20 +262,14 @@ namespace IpeaGEO
 					sxy += xt*yt;
 				}
 			}
-			
-
+		
 			r=sxy/(Math.Sqrt(sxx*syy)+TINY);
-
 		}
+		
 		public double R
 		{
 			get{return r;}
-		}
-		
+		}	
 	}
-	
-
 }
-
-
 
