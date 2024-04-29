@@ -310,8 +310,6 @@ namespace IpeaGeo.Forms
 
                 layMapa.Theme = new SharpMap.Rendering.Thematics.CustomTheme(meuTema.GetStyleOriginal);
 
-                //m_mapa.ZoomToExtents();
-
                 //Refresh o mapa
                 this.m_map_image.Refresh();
 
