@@ -7,10 +7,10 @@ namespace IpeaMatrix
 {
     internal class LUDecomposition
     {
-	    private int n;
-	    private Matrix lu;
-	    private int[] indx;
-	    private double d;
+	private int n;
+	private Matrix lu;
+	private int[] indx;
+	private double d;
         private Matrix aref;
 	    
         public LUDecomposition(ref Matrix a)
@@ -20,44 +20,45 @@ namespace IpeaMatrix
             indx = new int[n];
             aref = a.Clone();
 
-	        double TINY=1.0e-40;
-	        int i,imax=0,j,k;
-	        double big,temp;
-	        double[] vv = new double[n]; 
-	        d=1.0;
-	        for (i=0;i<n;i++) {
-		        big=0.0;
-		        for (j=0;j<n;j++)
-			        if ((temp=Math.Abs(lu[i,j])) > big) big=temp;
-		        if (big == 0.0) throw new Exception("Singular matrix in LU decomposition");
-		        vv[i]=1.0/big;
-	        }
-	        for (k=0;k<n;k++) {
-		        big=0.0;
-		        for (i=k;i<n;i++) {
-			        temp=vv[i]*Math.Abs(lu[i,k]);
-			        if (temp > big) {
-				        big=temp;
-				        imax=i;
-			        }
-		        }
-		        if (k != imax) {
-			        for (j=0;j<n;j++) {
-				        temp=lu[imax,j];
-				        lu[imax,j]=lu[k,j];
-				        lu[k,j]=temp;
-			        }
-			        d = -d;
-			        vv[imax]=vv[k];
-		        }
-		        indx[k]=imax;
-		        if (lu[k,k] == 0.0) lu[k,k]=TINY;
-		        for (i=k+1;i<n;i++) {
-			        temp=lu[i,k] /= lu[k,k];
-			        for (j=k+1;j<n;j++)
-				        lu[i,j] -= temp*lu[k,j];
-		        }
-	        }
+	    double TINY=1.0e-40;
+	    int i,imax=0,j,k;
+	    double big,temp;
+	    double[] vv = new double[n]; 
+	    d=1.0;
+	    for (i=0;i<n;i++) {
+		big=0.0;
+		for (j=0;j<n;j++)
+			if ((temp=Math.Abs(lu[i,j])) > big) big=temp;
+		if (big == 0.0) throw new Exception("Singular matrix in LU decomposition");
+		vv[i]=1.0/big;
+	    }
+		
+	    for (k=0;k<n;k++) {
+		big=0.0;
+		for (i=k;i<n;i++) {
+			temp=vv[i]*Math.Abs(lu[i,k]);
+			if (temp > big) {
+				big=temp;
+				imax=i;
+			}
+		}
+		if (k != imax) {
+			for (j=0;j<n;j++) {
+				temp=lu[imax,j];
+				lu[imax,j]=lu[k,j];
+				lu[k,j]=temp;
+			}
+			d = -d;
+			vv[imax]=vv[k];
+		}
+		indx[k]=imax;
+		if (lu[k,k] == 0.0) lu[k,k]=TINY;
+		for (i=k+1;i<n;i++) {
+			temp=lu[i,k] /= lu[k,k];
+			for (j=k+1;j<n;j++)
+				lu[i,j] -= temp*lu[k,j];
+		}
+	    }
         }
 
         public void solve(ref Matrix b, ref Matrix x)
