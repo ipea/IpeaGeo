@@ -43,14 +43,11 @@ namespace IpeaGeo.Classes
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
 
-
-
             documento.Add(title);
 
             Paragraph p = new Paragraph("Relatório");
             documento.Add(p);
             documento.Add(new Paragraph("Regressão Método: " + rr.regressionMethod));
-
 
             //Adiciona a tabela com informações gerais
             Table oTable = new Table(2, 4);
@@ -94,8 +91,6 @@ namespace IpeaGeo.Classes
             aTable.BorderColorLeft = iTextSharp.text.Color.WHITE;
             aTable.BorderColorRight = iTextSharp.text.Color.WHITE;
 
-
-
             titulo = new Chunk("Beta", FontFactory.GetFont(FontFactory.COURIER, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             Cell a1 = new Cell();
             a1.Add(titulo);
@@ -117,14 +112,11 @@ namespace IpeaGeo.Classes
             a4.Add(titulo);
             aTable.AddCell(a4);
 
-
             titulo = new Chunk("Desvio Padrão", FontFactory.GetFont(FontFactory.COURIER, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             Cell a5 = new Cell();
             a5.Add(titulo);
             a5.BorderColorRight = iTextSharp.text.Color.WHITE;
             aTable.AddCell(a5);
-
-
 
             Cell celldummy = new Cell("Intercepto");
             celldummy.BorderColorLeft = iTextSharp.text.Color.WHITE;
@@ -142,7 +134,6 @@ namespace IpeaGeo.Classes
                 cellbeta.BorderColorLeft = iTextSharp.text.Color.WHITE;
                 cellbeta.HorizontalAlignment = Element.ALIGN_CENTER;
                 aTable.AddCell(cellbeta);
-
 
                 Cell cellvalor = new Cell(rr.dBetas[i + 1].ToString());
                 cellvalor.BackgroundColor = iTextSharp.text.Color.WHITE;
@@ -164,8 +155,8 @@ namespace IpeaGeo.Classes
                 celldesv.BorderColorRight = iTextSharp.text.Color.WHITE;
                 celldesv.HorizontalAlignment = Element.ALIGN_CENTER;
                 aTable.AddCell(celldesv);
-
             }
+            
             Cell cellrho = new Cell("Rho");
             cellrho.BackgroundColor = iTextSharp.text.Color.WHITE;
             cellrho.BorderColorLeft = iTextSharp.text.Color.WHITE;
@@ -193,15 +184,10 @@ namespace IpeaGeo.Classes
             cellrhodesv.HorizontalAlignment = Element.ALIGN_CENTER;
             aTable.AddCell(cellrhodesv);
 
-
-
             aTable.Cellpadding = 5;
             aTable.Cellspacing = 5;
 
-
-
             documento.Add(aTable);
-
 
             documento.Add(new Paragraph("Estatísticas"));
 
@@ -256,19 +242,17 @@ namespace IpeaGeo.Classes
             cellsigma.BorderColorRight = iTextSharp.text.Color.WHITE;
             bTable.AddCell(cellsigma);
 
-
             bTable.Cellspacing = 5;
             bTable.Cellpadding = 5;
 
             documento.Add(bTable);
 
-            //Nova pagina////////////////////////////////////////////////////////////////
+            // Nova pagina
             documento.NewPage();
 
-            //Adiciona imagem do mapa
+            // Adiciona imagem do mapa
             iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(rr.shape);
             documento.Add(gif);
-
 
             documento.Add(new Paragraph("Mapa de " + rr.mapVar + ", Metodologia: " + rr.mapMethod));
             //Adiciona a legenda do mapa
@@ -298,7 +282,6 @@ namespace IpeaGeo.Classes
             c3.Add(titulo);
             cTable.AddCell(c3);
 
-
             for (int i = 0; i < rr.mapClasses.Length; i++)
             {
                 int numero = i + 1;
@@ -308,8 +291,7 @@ namespace IpeaGeo.Classes
                 cellclasse.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellclasse);
 
-
-                //Trabalhando com cores. O string vem como #FFFFFF, preciso retirar o #, separar o resto em 3 (RGB)
+                //Trabalhando com cores
                 string totalcor = rr.mapColors[i].Substring(1); //Retirei o #
                 string R = totalcor.Substring(0, 2);
                 string G = totalcor.Substring(2, 2);
@@ -319,13 +301,10 @@ namespace IpeaGeo.Classes
                 int Gint = Convert.ToInt32(G, 16);
                 int Bint = Convert.ToInt32(B, 16);
 
-                //Pronto, agora basta jogar isso no background da proxima celula
-
                 Cell cellcor = new Cell();
                 cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                 cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellcor);
-
 
                 if (i == 0)
                 {
@@ -339,7 +318,6 @@ namespace IpeaGeo.Classes
                 {
                     if (i != rr.mapClasses.Length - 1)
                     {
-
                         Cell cellintervalo = new Cell(rr.mapClasses[i - 1].ToString() + "  a  " + rr.mapClasses[i].ToString());
                         cellintervalo.BackgroundColor = iTextSharp.text.Color.WHITE;
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -352,21 +330,17 @@ namespace IpeaGeo.Classes
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
                         cTable.AddCell(cellintervalo);
                     }
-
-
                 }
-
             }
+            
             cTable.Cellpadding = 5;
             cTable.Cellspacing = 5;
 
             documento.Add(cTable);
 
             documento.Close();
-
-
-
         }
+        
         public void RelatorioPDF_Segregacao(string enderecopdf, double[,] valores, string[] nomes_indices, string[] nomes_variaveis)
         {
             Document documento = new Document(iTextSharp.text.PageSize.A2);
@@ -380,8 +354,6 @@ namespace IpeaGeo.Classes
 
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
-
-
 
             documento.Add(title);
 
@@ -404,7 +376,6 @@ namespace IpeaGeo.Classes
                 oTable.AddCell(nomes_indices[i].ToString());
             }
 
-
             for (int i = 0; i < linhas - 1; i++)
             {
                 oTable.AddCell(nomes_variaveis[i].ToString());
@@ -416,18 +387,12 @@ namespace IpeaGeo.Classes
                 }
             }
 
-
             oTable.Cellspacing = 5;
             oTable.Cellpadding = 5;
 
             documento.Add(oTable);
 
-
-
             documento.Close();
-
-
-
         }
 
         public void RelatorioPDF_MapaTematicoMM(string enderecopdf, string strMapaImagem, string strMetodo, double[] strClasses, string[] strCores, string strVariavel)
@@ -444,8 +409,6 @@ namespace IpeaGeo.Classes
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
 
-
-
             documento.Add(title);
 
             Paragraph p = new Paragraph("Relatório");
@@ -454,13 +417,12 @@ namespace IpeaGeo.Classes
 
             documento.Add(new Paragraph("Metodologia: " + strMetodo));
 
-
             //Adiciona imagem do mapa
             iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(strMapaImagem);
             documento.Add(gif);
 
-
             documento.Add(new Paragraph("Mapa de " + strVariavel));
+
             //Adiciona a legenda do mapa
             Table cTable = new Table(3);
 
@@ -488,7 +450,6 @@ namespace IpeaGeo.Classes
             c3.Add(titulo);
             cTable.AddCell(c3);
 
-
             for (int i = 0; i < strClasses.Length; i++)
             {
                 int numero = i + 1;
@@ -498,8 +459,7 @@ namespace IpeaGeo.Classes
                 cellclasse.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellclasse);
 
-
-                //Trabalhando com cores. O string vem como #FFFFFF, preciso retirar o #, separar o resto em 3 (RGB)
+                //Trabalhando com cores. O string vem como #FFFFFF
                 string totalcor = strCores[i].Substring(1); //Retirei o #
                 string R = totalcor.Substring(0, 2);
                 string G = totalcor.Substring(2, 2);
@@ -509,13 +469,10 @@ namespace IpeaGeo.Classes
                 int Gint = Convert.ToInt32(G, 16);
                 int Bint = Convert.ToInt32(B, 16);
 
-                //Pronto, agora basta jogar isso no background da proxima celula
-
                 Cell cellcor = new Cell();
                 cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                 cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellcor);
-
 
                 if (i == 0)
                 {
@@ -529,7 +486,6 @@ namespace IpeaGeo.Classes
                 {
                     if (i != strClasses.Length - 1)
                     {
-
                         Cell cellintervalo = new Cell(strClasses[i - 1].ToString() + "  a  " + strClasses[i].ToString());
                         cellintervalo.BackgroundColor = iTextSharp.text.Color.WHITE;
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -542,23 +498,16 @@ namespace IpeaGeo.Classes
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
                         cTable.AddCell(cellintervalo);
                     }
-
-
                 }
-
             }
+            
             cTable.Cellpadding = 5;
             cTable.Cellspacing = 5;
 
             documento.Add(cTable);
 
             documento.Close();
-
-
-
-
         }
-
 
         public void RelatorioPDF_MapaTematico(string enderecopdf, string strBase, string strMapa, string strMapaImagem, int numPoligonos, string strMetodo, double[] strClasses, string[] strCores, string strVariavel)
         {
@@ -574,15 +523,11 @@ namespace IpeaGeo.Classes
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
 
-
-
             documento.Add(title);
 
             Paragraph p = new Paragraph("Relatório");
             documento.Add(p);
             documento.Add(new Paragraph("Mapa Temático"));
-
-
 
             //Adiciona a tabela com informações gerais
             Table oTable = new Table(2, 4);
@@ -618,13 +563,11 @@ namespace IpeaGeo.Classes
 
             documento.Add(new Paragraph(""));
 
-
             documento.NewPage();
 
             //Adiciona imagem do mapa
             iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(strMapaImagem);
             documento.Add(gif);
-
 
             documento.Add(new Paragraph("Mapa de " + strVariavel));
             //Adiciona a legenda do mapa
@@ -654,7 +597,6 @@ namespace IpeaGeo.Classes
             c3.Add(titulo);
             cTable.AddCell(c3);
 
-
             for (int i = 0; i < strClasses.Length; i++)
             {
                 int numero = i + 1;
@@ -664,8 +606,7 @@ namespace IpeaGeo.Classes
                 cellclasse.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellclasse);
 
-
-                //Trabalhando com cores. O string vem como #FFFFFF, preciso retirar o #, separar o resto em 3 (RGB)
+                //Trabalhando com cores. O string vem como #FFFFFF
                 string totalcor = strCores[i].Substring(1); //Retirei o #
                 string R = totalcor.Substring(0, 2);
                 string G = totalcor.Substring(2, 2);
@@ -675,13 +616,10 @@ namespace IpeaGeo.Classes
                 int Gint = Convert.ToInt32(G, 16);
                 int Bint = Convert.ToInt32(B, 16);
 
-                //Pronto, agora basta jogar isso no background da proxima celula
-
                 Cell cellcor = new Cell();
                 cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                 cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellcor);
-
 
                 if (i == 0)
                 {
@@ -695,7 +633,6 @@ namespace IpeaGeo.Classes
                 {
                     if (i != strClasses.Length - 1)
                     {
-
                         Cell cellintervalo = new Cell(strClasses[i - 1].ToString() + "  a  " + strClasses[i].ToString());
                         cellintervalo.BackgroundColor = iTextSharp.text.Color.WHITE;
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -708,20 +645,15 @@ namespace IpeaGeo.Classes
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
                         cTable.AddCell(cellintervalo);
                     }
-
-
                 }
-
             }
+            
             cTable.Cellpadding = 5;
             cTable.Cellspacing = 5;
 
             documento.Add(cTable);
 
             documento.Close();
-
-
-
         }
 
         public void RelatorioPDF_MapaTematico(string enderecopdf, string strBase, string strMapa, string strMapaImagem, int numPoligonos, string strMetodo, double[] strClasses, string[] strCores, string strVariavel, string[] legendas)
@@ -738,15 +670,11 @@ namespace IpeaGeo.Classes
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
 
-
-
             documento.Add(title);
 
             Paragraph p = new Paragraph("Relatório");
             documento.Add(p);
             documento.Add(new Paragraph("Mapa Temático"));
-
-
 
             //Adiciona a tabela com informações gerais
             Table oTable = new Table(2, 4);
@@ -782,15 +710,14 @@ namespace IpeaGeo.Classes
 
             documento.Add(new Paragraph(""));
 
-
             documento.NewPage();
 
             //Adiciona imagem do mapa
             iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(strMapaImagem);
             documento.Add(gif);
 
-
             documento.Add(new Paragraph("Mapa de " + strVariavel));
+            
             //Adiciona a legenda do mapa
             Table cTable = new Table(3);
 
@@ -818,7 +745,6 @@ namespace IpeaGeo.Classes
             c3.Add(titulo);
             cTable.AddCell(c3);
 
-
             for (int i = 0; i < strClasses.Length; i++)
             {
                 int numero = i + 1;
@@ -828,8 +754,7 @@ namespace IpeaGeo.Classes
                 cellclasse.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellclasse);
 
-
-                //Trabalhando com cores. O string vem como #FFFFFF, preciso retirar o #, separar o resto em 3 (RGB)
+                //Trabalhando com cores. O string vem como #FFFFFF
                 string totalcor = strCores[i].Substring(1); //Retirei o #
                 string R = totalcor.Substring(0, 2);
                 string G = totalcor.Substring(2, 2);
@@ -839,14 +764,11 @@ namespace IpeaGeo.Classes
                 int Gint = Convert.ToInt32(G, 16);
                 int Bint = Convert.ToInt32(B, 16);
 
-                //Pronto, agora basta jogar isso no background da proxima celula
-
                 Cell cellcor = new Cell();
                 cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                 cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellcor);
-
-
+                
                 if (i == 0)
                 {
                     Cell cellintervalo = new Cell("a partir de  " + strClasses[i].ToString());
@@ -859,7 +781,6 @@ namespace IpeaGeo.Classes
                 {
                     if (i != strClasses.Length - 1)
                     {
-
                         Cell cellintervalo = new Cell(strClasses[i - 1].ToString() + "  a  " + strClasses[i].ToString());
                         cellintervalo.BackgroundColor = iTextSharp.text.Color.WHITE;
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -872,10 +793,7 @@ namespace IpeaGeo.Classes
                         cellintervalo.HorizontalAlignment = Element.ALIGN_CENTER;
                         cTable.AddCell(cellintervalo);
                     }
-
-
                 }
-
             }
             cTable.Cellpadding = 5;
             cTable.Cellspacing = 5;
@@ -883,9 +801,6 @@ namespace IpeaGeo.Classes
             documento.Add(cTable);
 
             documento.Close();
-
-
-
         }
 
         public void RelatorioPDF_Conglomerados(string enderecopdf, string strBase, string strMapa, string strMapaImagem, string numClusters, string iMinkowsky, int numPoligonos, string strMetodo, string strDistancia, bool blEspacial, string[] strVariaveisSelecionadas, string strvizinhanca, string[] strCores, string strCCC)
@@ -896,14 +811,11 @@ namespace IpeaGeo.Classes
 
             documento.Open();
 
-
             //Adiciona o titulo do relatorio
             Chunk titulo = new Chunk("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
 
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
-
-
 
             documento.Add(title);
 
@@ -911,14 +823,11 @@ namespace IpeaGeo.Classes
             documento.Add(p);
             documento.Add(new Paragraph("Conglomerados Espaciais"));
 
-
-
             string strVariaveis = "";
             string strPesos = "";
 
             for (int i = 0; i < strVariaveisSelecionadas.Length - 1; i++) strVariaveis += strVariaveisSelecionadas[i] + ", ";
             strVariaveis += strVariaveisSelecionadas[strVariaveisSelecionadas.Length - 1];
-
 
             //Adiciona a tabela com informações gerais
             Table oTable = new Table(2, 10);
@@ -983,8 +892,6 @@ namespace IpeaGeo.Classes
             oTable.AddCell(o10);
             oTable.AddCell(blEspacial.ToString());
 
-
-
             oTable.Cellspacing = 5;
             oTable.Cellpadding = 5;
 
@@ -994,11 +901,9 @@ namespace IpeaGeo.Classes
 
             documento.NewPage();
 
-
             //Adiciona imagem do mapa
             iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(strMapaImagem);
             documento.Add(gif);
-
 
             documento.Add(new Paragraph("Metodologia:  " + strMetodo));
             //Adiciona a legenda do mapa
@@ -1022,7 +927,6 @@ namespace IpeaGeo.Classes
             c2.Add(titulo);
             cTable.AddCell(c2);
 
-
             for (int i = 0; i < strCores.Length; i++)
             {
                 int numero = i + 1;
@@ -1032,8 +936,7 @@ namespace IpeaGeo.Classes
                 cellclasse.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellclasse);
 
-
-                //Trabalhando com cores. O string vem como #FFFFFF, preciso retirar o #, separar o resto em 3 (RGB)
+                //Trabalhando com cores. O string vem como #FFFFFF
                 string totalcor = strCores[i].Substring(1); //Retirei o #
                 string R = totalcor.Substring(0, 2);
                 string G = totalcor.Substring(2, 2);
@@ -1043,14 +946,10 @@ namespace IpeaGeo.Classes
                 int Gint = Convert.ToInt32(G, 16);
                 int Bint = Convert.ToInt32(B, 16);
 
-                //Pronto, agora basta jogar isso no background da proxima celula
-
                 Cell cellcor = new Cell();
                 cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                 cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                 cTable.AddCell(cellcor);
-
-
             }
 
             cTable.Cellpadding = 5;
@@ -1058,14 +957,11 @@ namespace IpeaGeo.Classes
 
             documento.Add(cTable);
 
-
             //Adiciona imagem dos critérios de parada
             iTextSharp.text.Image gif2 = iTextSharp.text.Image.GetInstance(strCCC);
             documento.Add(gif2);
 
-
             documento.Close();
-
         }
 
         public void RelatorioPDF_DependenciaGlobal(GlobalDependence rdg)
@@ -1076,22 +972,17 @@ namespace IpeaGeo.Classes
 
             documento.Open();
 
-
             //Adiciona o titulo do relatorio
             Chunk titulo = new Chunk("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
 
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
 
-
-
             documento.Add(title);
 
             Paragraph p = new Paragraph("Relatório");
             documento.Add(p);
             documento.Add(new Paragraph("Dependência Global"));
-
-
 
             int iFor = rdg.quantitativeSelectedVariables.Length - 1;
 
@@ -1101,7 +992,6 @@ namespace IpeaGeo.Classes
                 iFor++;
                 rdg.populationVariables = "";
             }
-
 
             //Adiciona a tabela com informações gerais
             Table oTable = new Table(2);
@@ -1130,7 +1020,6 @@ namespace IpeaGeo.Classes
             oTable.AddCell(o4);
             oTable.AddCell(rdg.neighborhoodType);
 
-
             if (rdg.populationVariables != "")
             {
                 titulo = new Chunk("Variável Populacional", FontFactory.GetFont(FontFactory.DefaultEncoding, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
@@ -1148,7 +1037,6 @@ namespace IpeaGeo.Classes
 
             if (rdg.moranIndex[0] != 0)
             {
-
                 documento.Add(new Paragraph("Indice de Moran"));
                 Table moranTable = new Table(3);
 
@@ -1181,7 +1069,6 @@ namespace IpeaGeo.Classes
 
             if (rdg.simpleMoranIndex[0] != 0)
             {
-
                 documento.Add(new Paragraph("Indice de Moran Simples"));
                 Table moranTable = new Table(3);
 
@@ -1246,7 +1133,6 @@ namespace IpeaGeo.Classes
 
             if (rdg.getisIndex[0] != 0)
             {
-
                 documento.Add(new Paragraph("Indice de Getis"));
                 Table moranTable = new Table(3);
 
@@ -1348,10 +1234,7 @@ namespace IpeaGeo.Classes
             }
 
             documento.Close();
-
         }
-
-
 
         public void RelatorioPDF_DependenciaLocal(string enderecopdf, string strBase, string strMapa, int numPoligonos, string[] strMapaImagemLisa, string[] strMapaImagemGetis, string[] strMapaImagemGetis2, string[] strMapaImagemEscore, string[] strEspalha, string strTipoVizinhnaca, string strTipoCorrecao, string strConfiabilidade, string strPopulacao, string[] strVariaveisSelecionadas, string[] strCores)
         {
@@ -1361,14 +1244,11 @@ namespace IpeaGeo.Classes
 
             documento.Open();
 
-
             string strVariaveis = "";
 
             for (int i = 0; i < strVariaveisSelecionadas.Length - 1; i++) strVariaveis += strVariaveisSelecionadas[i] + ", ";
             strVariaveis += strVariaveisSelecionadas[strVariaveisSelecionadas.Length - 1];
             string[] strClasse = new string[5] { "Não significativo", "Alto-Alto", "Alto-Baixo", "Baixo-Baixo", "Baixo-Alto" };
-
-
 
             //Adiciona o titulo do relatorio
             Chunk titulo = new Chunk("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
@@ -1376,15 +1256,11 @@ namespace IpeaGeo.Classes
             Paragraph title = new Paragraph("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             title.Alignment = Element.ALIGN_CENTER;
 
-
-
             documento.Add(title);
 
             Paragraph p = new Paragraph("Relatório");
             documento.Add(p);
             documento.Add(new Paragraph("Dependência Local"));
-
-
 
             //Adiciona a tabela com informações gerais
             Table oTable = new Table(2);
@@ -1431,7 +1307,6 @@ namespace IpeaGeo.Classes
             oTable.AddCell(o7);
             oTable.AddCell(strTipoCorrecao);
 
-
             if (strPopulacao != null)
             {
                 titulo = new Chunk("População", FontFactory.GetFont(FontFactory.DefaultEncoding, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
@@ -1446,7 +1321,7 @@ namespace IpeaGeo.Classes
             documento.Add(oTable);
             documento.NewPage();
 
-            //Adicionando mapas LISA...
+            //Adicionando mapas LISA
             if (strMapaImagemLisa[0] != null)
             {
                 for (int m = 0; m < strMapaImagemLisa.Length; m++)
@@ -1476,13 +1351,12 @@ namespace IpeaGeo.Classes
                     t2.Add(titulo);
                     tabelalocal.AddCell(t2);
 
-
                     for (int i = 0; i < strCores.Length; i++)
                     {
                         tabelalocal.AddCell(strClasse[i]);
 
                         //Trabalhando com cores
-                        string totalcor = strCores[i].Substring(1); //Retirei o #
+                        string totalcor = strCores[i].Substring(1); 
                         string R = totalcor.Substring(0, 2);
                         string G = totalcor.Substring(2, 2);
                         string B = totalcor.Substring(4, 2);
@@ -1491,14 +1365,12 @@ namespace IpeaGeo.Classes
                         int Gint = Convert.ToInt32(G, 16);
                         int Bint = Convert.ToInt32(B, 16);
 
-                        //Pronto, agora basta jogar isso no background da proxima celula
-
                         Cell cellcor = new Cell();
                         cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                         cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                         tabelalocal.AddCell(cellcor);
-
                     }
+                    
                     tabelalocal.Cellspacing = 5;
                     tabelalocal.Cellpadding = 5;
                     documento.Add(tabelalocal);
@@ -1511,14 +1383,11 @@ namespace IpeaGeo.Classes
                     gif.Alignment = Element.ALIGN_CENTER;
                     documento.Add(gif);
 
-
                     documento.NewPage();
-
                 }
             }
 
-
-            //Adicionando mapas GETIS...
+            //Adicionando mapas GETIS
             if (strMapaImagemGetis[0] != null)
             {
                 for (int m = 0; m < strMapaImagemGetis.Length; m++)
@@ -1548,13 +1417,12 @@ namespace IpeaGeo.Classes
                     t2.Add(titulo);
                     tabelalocal.AddCell(t2);
 
-
                     for (int i = 0; i < strCores.Length; i++)
                     {
                         tabelalocal.AddCell(strClasse[i]);
 
                         //Trabalhando com cores
-                        string totalcor = strCores[i].Substring(1); //Retirei o #
+                        string totalcor = strCores[i].Substring(1); 
                         string R = totalcor.Substring(0, 2);
                         string G = totalcor.Substring(2, 2);
                         string B = totalcor.Substring(4, 2);
@@ -1563,26 +1431,21 @@ namespace IpeaGeo.Classes
                         int Gint = Convert.ToInt32(G, 16);
                         int Bint = Convert.ToInt32(B, 16);
 
-                        //Pronto, agora basta jogar isso no background da proxima celula
-
                         Cell cellcor = new Cell();
                         cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                         cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                         tabelalocal.AddCell(cellcor);
-
                     }
+                    
                     tabelalocal.Cellspacing = 5;
                     tabelalocal.Cellpadding = 5;
                     documento.Add(tabelalocal);
 
-
                     documento.NewPage();
-
                 }
             }
 
-
-            //Adicionando mapas GETIS2...
+            //Adicionando mapas GETIS2
             if (strMapaImagemGetis2[0] != null)
             {
                 for (int m = 0; m < strMapaImagemGetis2.Length; m++)
@@ -1612,13 +1475,12 @@ namespace IpeaGeo.Classes
                     t2.Add(titulo);
                     tabelalocal.AddCell(t2);
 
-
                     for (int i = 0; i < strCores.Length; i++)
                     {
                         tabelalocal.AddCell(strClasse[i]);
 
                         //Trabalhando com cores
-                        string totalcor = strCores[i].Substring(1); //Retirei o #
+                        string totalcor = strCores[i].Substring(1); 
                         string R = totalcor.Substring(0, 2);
                         string G = totalcor.Substring(2, 2);
                         string B = totalcor.Substring(4, 2);
@@ -1627,25 +1489,21 @@ namespace IpeaGeo.Classes
                         int Gint = Convert.ToInt32(G, 16);
                         int Bint = Convert.ToInt32(B, 16);
 
-                        //Pronto, agora basta jogar isso no background da proxima celula
-
                         Cell cellcor = new Cell();
                         cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                         cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                         tabelalocal.AddCell(cellcor);
-
                     }
+                    
                     tabelalocal.Cellspacing = 5;
                     tabelalocal.Cellpadding = 5;
                     documento.Add(tabelalocal);
 
-
                     documento.NewPage();
-
                 }
             }
 
-            //Adicionando mapas ESCORE...
+            //Adicionando mapas ESCORE
             if (strMapaImagemEscore[0] != null)
             {
                 for (int m = 0; m < strMapaImagemEscore.Length; m++)
@@ -1675,13 +1533,12 @@ namespace IpeaGeo.Classes
                     t2.Add(titulo);
                     tabelalocal.AddCell(t2);
 
-
                     for (int i = 0; i < strCores.Length; i++)
                     {
                         tabelalocal.AddCell(strClasse[i]);
 
                         //Trabalhando com cores
-                        string totalcor = strCores[i].Substring(1); //Retirei o #
+                        string totalcor = strCores[i].Substring(1); 
                         string R = totalcor.Substring(0, 2);
                         string G = totalcor.Substring(2, 2);
                         string B = totalcor.Substring(4, 2);
@@ -1690,30 +1547,22 @@ namespace IpeaGeo.Classes
                         int Gint = Convert.ToInt32(G, 16);
                         int Bint = Convert.ToInt32(B, 16);
 
-                        //Pronto, agora basta jogar isso no background da proxima celula
-
                         Cell cellcor = new Cell();
                         cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                         cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                         tabelalocal.AddCell(cellcor);
-
                     }
+                    
                     tabelalocal.Cellspacing = 5;
                     tabelalocal.Cellpadding = 5;
                     documento.Add(tabelalocal);
 
                     documento.NewPage();
-
                 }
             }
 
-
             documento.Close();
-
         }
-
-
-
 
         public void RelatorioPDF_Scan(string enderecopdf, string strBase, string strMapa, string strMapaImagem, int numPoligonos, string strMetodo, double[] strClasses, string[] strCores, string strVariavelBase, string strVariavelEvento, string strSimulacoes, string strPontosGrid, string strRaioMax, string strRarioMin, string strProp, string strHistograma)
         {
@@ -1723,8 +1572,6 @@ namespace IpeaGeo.Classes
 
             documento.Open();
 
-
-
             //Adiciona o titulo do relatorio
             Chunk titulo = new Chunk("IpeaGEO 2.1", FontFactory.GetFont(FontFactory.COURIER, 30, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
 
@@ -1733,12 +1580,9 @@ namespace IpeaGeo.Classes
 
             documento.Add(title);
 
-
             Paragraph p = new Paragraph("Relatório");
             documento.Add(p);
             documento.Add(new Paragraph("Scan"));
-
-
 
             //Adiciona a tabela com informações gerais
             Table oTable = new Table(2);
@@ -1779,23 +1623,17 @@ namespace IpeaGeo.Classes
             oTable.AddCell(o6);
             oTable.AddCell(strVariavelEvento);
 
-
-
             oTable.Cellpadding = 5;
             oTable.Cellspacing = 5;
             documento.Add(oTable);
             documento.NewPage();
 
-
             //Adicionando a imagem
-
 
             iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(strMapaImagem);
             documento.Add(gif);
 
             documento.Add(new Paragraph("Metodologia:  " + strMetodo));
-
-
 
             Table tabelacluster = new Table(3);
 
@@ -1823,13 +1661,12 @@ namespace IpeaGeo.Classes
             t3.Add(titulo);
             tabelacluster.AddCell(t3);
 
-
             for (int i = 0; i < strClasses.Length; i++)
             {
                 tabelacluster.AddCell(i.ToString());
 
                 //Trabalhando com cores
-                string totalcor = strCores[i + 1].Substring(1); //Retirei o #
+                string totalcor = strCores[i + 1].Substring(1); 
                 string R = totalcor.Substring(0, 2);
                 string G = totalcor.Substring(2, 2);
                 string B = totalcor.Substring(4, 2);
@@ -1838,22 +1675,18 @@ namespace IpeaGeo.Classes
                 int Gint = Convert.ToInt32(G, 16);
                 int Bint = Convert.ToInt32(B, 16);
 
-                //Pronto, agora basta jogar isso no background da proxima celula
-
                 Cell cellcor = new Cell();
                 cellcor.BackgroundColor = new iTextSharp.text.Color(Rint, Gint, Bint);
                 cellcor.HorizontalAlignment = Element.ALIGN_CENTER;
                 tabelacluster.AddCell(cellcor);
 
                 tabelacluster.AddCell(strClasses[i].ToString().Substring(0, 6));
-
             }
+            
             tabelacluster.Cellspacing = 5;
             tabelacluster.Cellpadding = 5;
             documento.Add(tabelacluster);
             documento.NewPage();
-
-
 
             //Adicionando o histograma
 
@@ -1862,7 +1695,7 @@ namespace IpeaGeo.Classes
             gif.Alignment = Element.ALIGN_CENTER;
             documento.Add(gif);
 
-            //Tabela montecarlo
+            //Tabela Monte Carlo
             documento.Add(new Paragraph("Monte Carlo"));
 
             Table montecarlo = new Table(2);
@@ -1873,13 +1706,11 @@ namespace IpeaGeo.Classes
             montecarlo.AddCell(tr2);
             montecarlo.AddCell(strSimulacoes);
 
-
             titulo = new Chunk("Pontos Grid", FontFactory.GetFont(FontFactory.DefaultEncoding, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             Cell tr3 = new Cell();
             tr3.Add(titulo);
             montecarlo.AddCell(tr3);
             montecarlo.AddCell(strPontosGrid);
-
 
             titulo = new Chunk("Raio Máximo", FontFactory.GetFont(FontFactory.DefaultEncoding, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             Cell tr4 = new Cell();
@@ -1887,13 +1718,11 @@ namespace IpeaGeo.Classes
             montecarlo.AddCell(tr4);
             montecarlo.AddCell(strRaioMax);
 
-
             titulo = new Chunk("Raio Mínimo", FontFactory.GetFont(FontFactory.DefaultEncoding, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             Cell tr5 = new Cell();
             tr5.Add(titulo);
             montecarlo.AddCell(tr5);
             montecarlo.AddCell(strRarioMin);
-
 
             titulo = new Chunk("Proporção Máxima", FontFactory.GetFont(FontFactory.DefaultEncoding, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK));
             Cell tr6 = new Cell();
@@ -1907,34 +1736,9 @@ namespace IpeaGeo.Classes
 
             documento.Add(new Paragraph("Obs: Utilizou-se a distribuição generalizada de valores extremos."));
 
-
             documento.NewPage();
 
-
             documento.Close();
-
         }
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
