@@ -217,8 +217,7 @@ namespace IpeaGeo.Modelagem.Clusters_hierarquicos
                     {
                         tabControl1.TabPages.Remove(tabPage0);
                     }
-                }                
-                
+                }              
             }
             catch (Exception er)
             {
