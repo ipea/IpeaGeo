@@ -15,7 +15,6 @@ namespace IpeaGeo.Forms
 {
     public partial class frmSelecaoDadosIPEA : Form 
     {
-
         private System.Data.OleDb.OleDbConnection m_cnn = new System.Data.OleDb.OleDbConnection();
         private System.Data.OleDb.OleDbDataAdapter m_dap = new System.Data.OleDb.OleDbDataAdapter();
         private string strExtensao = "";
@@ -31,7 +30,6 @@ namespace IpeaGeo.Forms
             InitializeComponent();
             resources = IpeaDataSelection.parseXmlDataConfig();
             FormaçãoTreeView();
-
         } // constructor
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -40,6 +38,7 @@ namespace IpeaGeo.Forms
         } //btnClose_Click()
 
         #region Formação TreeView
+        
         private void FormaçãoTreeView()
         {
             foreach (DataResource resource in resources)
@@ -56,6 +55,7 @@ namespace IpeaGeo.Forms
                 } //if
             } // foreach
         } // FormaçãoTreeView()
+
         #endregion 
 
         #region Metadados RichTextBox
@@ -82,9 +82,11 @@ namespace IpeaGeo.Forms
                     break;
                 } // if
         } // treeView1_AfterSelect_1()
+
         #endregion 
 
         #region Leitura das Tabelas em CSV
+        
         public static void TransferCSVToTable(ref DataTable dt1, string filePath)
         {
             string[] csvRows = System.IO.File.ReadAllLines(filePath);
@@ -103,6 +105,7 @@ namespace IpeaGeo.Forms
                 } // else
             } // foreach
         } // TransferCSVToTable()
+
         #endregion
 
         private string m_txt_metadados = "";
@@ -241,7 +244,8 @@ namespace IpeaGeo.Forms
             get { return txtPesquisar.Text; }
         }     
 
-#warning Reescrever lendo a partir do XML.
+        #warning Reescrever lendo a partir do XML.
+        
         private void btnPesquisa_Click(object sender, EventArgs e)
         {
             listView1.Clear();
@@ -271,7 +275,7 @@ namespace IpeaGeo.Forms
                     ArrayList dim2 = new ArrayList();
                     ArrayList st_encontrado = new ArrayList();
 
-#warning Avaliar se não é conveniente remover.
+                    #warning Avaliar se não é conveniente remover.
                     if (dt1 != null)
                         for (int i = 0; i < dt1.Columns.Count - 2; i++)
                             for (int j = 0; j < ds_tabelas_csv.Tables[i + 1].Rows.Count; j++)
@@ -289,13 +293,11 @@ namespace IpeaGeo.Forms
                     string input_teste = ""; ;
                     int index_teste;
 
-
                     index.Clear();
                     listView1.Clear();
 
                     foreach (DataResource elemento in resources)
                     {
-
                         if (elemento.items != null)
                         {
                             foreach (DataResourceItem item in elemento.items)
@@ -319,7 +321,6 @@ namespace IpeaGeo.Forms
                 }
                 else
                 {
-
                 }
                Cursor.Current = Cursors.Default;
             } // try
@@ -363,7 +364,8 @@ namespace IpeaGeo.Forms
                 }
             } //if
         } // listView1_ItemSelectionChanged()
-                #endregion
+        
+        #endregion
 
         private bool EncontrarString(string pesquisa, string tentativa)
         {
@@ -407,6 +409,7 @@ namespace IpeaGeo.Forms
         int length;
 
         #region Algoritmo de Pesquisa Fonética
+        
         public string CapitalizeVowels(string input)
         {
             
@@ -635,23 +638,3 @@ namespace IpeaGeo.Forms
         } // Intervalo()
     } // class
  } // namespace
-
-        
-    
-
-
-
-
-      
-    
-
-
-
-    
-
-
-
-
-
-
-
