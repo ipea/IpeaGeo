@@ -12,7 +12,6 @@ namespace IpeaGeo.Modelagem
 {
     class BLogicDecisaoMulticriterios : BLogicBaseModelagem
     {
-
         #region Alterações Pedro
 
         private string[] strVariaveisSelecionadas;
@@ -49,6 +48,7 @@ namespace IpeaGeo.Modelagem
                     }
                 }
             }
+            
             double[] indice = new double[mDados.GetLength(0)];
             for (int i = 0; i < mDados.GetLength(0); i++)
             {
@@ -71,9 +71,7 @@ namespace IpeaGeo.Modelagem
             }
 
             return (indice);
-
         }
-
 
         /// <summary>
         /// Método para o Cálculo do índice Componentes principais,
@@ -112,6 +110,7 @@ namespace IpeaGeo.Modelagem
             double[,] Autovetor = PrincipalComponents.Eigenvectors;
             double[] indice = new double[mDados.GetLength(0)];
             double[] Primeiro_Autovetor = new double[mDados.GetLength(1)];
+            
             for (int i = 0; i < mDados.GetLength(1); i++)
             {
                 Primeiro_Autovetor[i] = Autovetor[i, 0];
@@ -146,8 +145,8 @@ namespace IpeaGeo.Modelagem
             }
 
             return (indice);
-
         }
+        
         public string imprimirComponentesPrincipais(double[] dblIndice, string[] strVariavelID, string strNomeDoMetodo, string strVariavelIdentificadora, string[] strVariaveisSelecionadas, double[] dblPesos, bool[] blPadronizado)
         {
             string outText = "\n============================================================================================================================\n\n";
@@ -165,7 +164,6 @@ namespace IpeaGeo.Modelagem
             int max2 = maximoLetras(strVariavelID);
             int max = Math.Max(max1, max2);
             max = Math.Max(max, 23);
-
 
             outText += "Variáveis" + PreencheEspacos(max - 9) + "\tPeso" + PreencheEspacos(20) + "\tPadronizado\r\n\n";
             for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
@@ -213,7 +211,6 @@ namespace IpeaGeo.Modelagem
             int max2 = maximoLetras(strVariavelID);
             int max = Math.Max(max1, max2);
             max = Math.Max(max, 23);
-
 
             outText += "Variáveis" + PreencheEspacos(max - 9) + "\tPeso\tPadronizado\r\n\n";
             for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
@@ -357,7 +354,6 @@ namespace IpeaGeo.Modelagem
             }
 
             return (indice);
-
         }
 
         public string imprimirHierarquicoClassico(double[] dblIndice, string[] strVariavelID, string strNomeDoMetodo, string strVariavelIdentificadora, string[] strVariaveisSelecionadas, double[,] dblPesos, double lambdaMax, double IC, double RC)
@@ -378,11 +374,9 @@ namespace IpeaGeo.Modelagem
             int max = Math.Max(max1, max2);
             max = Math.Max(max, 23);
 
-
             outText += "Variáveis" + PreencheEspacos(max - 9) + "\tPeso\r\n\n";
             for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
             {
-
                 outText += strVariaveisSelecionadas[i] + PreencheEspacos(max - strVariaveisSelecionadas[i].Length) + "\t" + dblPesos[i, 0].ToString() + "\r\n\n";
             }
 
@@ -392,17 +386,15 @@ namespace IpeaGeo.Modelagem
             outText += "IC" + PreencheEspacos(22 - 2) + IC.ToString() + "\t\r\n\n";
             outText += "RC" + PreencheEspacos(22 - 2) + RC.ToString() + "\t\r\n\n";
 
-
-
             outText += "\n============================================================================================================================\n\n";
             outText += "Variável Identificadora" + PreencheEspacos(max - 23) + "\t" + strNomeDoMetodo + "\r\n\n";
             for (int i = 0; i < dblIndice.Length; i++)
             {
                 outText += strVariavelID[i] + PreencheEspacos(max - strVariavelID[i].Length) + "\t" + dblIndice[i].ToString() + "\r\n\n";
             }
+            
             return (outText);
         }
-
 
         /// <summary>
         /// Cálculo do índice usando Análise Hierárquica Multiplicativa
@@ -469,6 +461,7 @@ namespace IpeaGeo.Modelagem
                     pesosNormalizados[j, i] = pesos[j, i] / somas[i];
                 }
             }
+            
             //Passo 2.2: Calcula autovalores aproximados
             double[,] autoValores = new double[pesos.GetLength(0), 1];
             autoValores = m_clt.GeometricMeanl(pesosNormalizados);
@@ -561,11 +554,9 @@ namespace IpeaGeo.Modelagem
             int max = Math.Max(max1, max2);
             max = Math.Max(max, 23);
 
-
             outText += "Variáveis" + PreencheEspacos(max - 9) + "\tPeso\r\n\n";
             for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
             {
-
                 outText += strVariaveisSelecionadas[i] + PreencheEspacos(max - strVariaveisSelecionadas[i].Length) + "\t" + dblPesos[i, 0].ToString() + "\r\n\n";
             }
 
@@ -575,8 +566,6 @@ namespace IpeaGeo.Modelagem
             outText += "IC" + PreencheEspacos(22 - 2) + IC.ToString() + "\t\r\n\n";
             outText += "RC" + PreencheEspacos(22 - 2) + RC.ToString() + "\t\r\n\n";
 
-
-
             outText += "\n============================================================================================================================\n\n";
             outText += "Variável Identificadora" + PreencheEspacos(max - 23) + "\t" + strNomeDoMetodo + "\r\n\n";
             for (int i = 0; i < dblIndice.Length; i++)
@@ -585,8 +574,6 @@ namespace IpeaGeo.Modelagem
             }
             return (outText);
         }
-
-
 
         /// <summary>
         /// Cálculo do índice usando Análise Hierárquica B-G
@@ -712,7 +699,6 @@ namespace IpeaGeo.Modelagem
             }
 
             return (indice);
-
         }
 
         public string imprimirHierarquicoBG(double[] dblIndice, string[] strVariavelID, string strNomeDoMetodo, string strVariavelIdentificadora, string[] strVariaveisSelecionadas, double[,] dblPesos, double lambdaMax, double IC, double RC)
@@ -733,7 +719,6 @@ namespace IpeaGeo.Modelagem
             int max = Math.Max(max1, max2);
             max = Math.Max(max, 23);
 
-
             outText += "Variáveis" + PreencheEspacos(max - 9) + "\tPeso\r\n\n";
             for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
             {
@@ -747,8 +732,6 @@ namespace IpeaGeo.Modelagem
             outText += "IC" + PreencheEspacos(22 - 2) + IC.ToString() + "\t\r\n\n";
             outText += "RC" + PreencheEspacos(22 - 2) + RC.ToString() + "\t\r\n\n";
 
-
-
             outText += "\n============================================================================================================================\n\n";
             outText += "Variável Identificadora" + PreencheEspacos(max - 23) + "\t" + strNomeDoMetodo + "\r\n\n";
             for (int i = 0; i < dblIndice.Length; i++)
@@ -757,7 +740,6 @@ namespace IpeaGeo.Modelagem
             }
             return (outText);
         }
-
 
         private double[,] calculaMedidaTendenciaCentral(DataTable dtDados, string strVariavel, string strTipoMedida, bool blPadroniza)
         {
@@ -806,7 +788,6 @@ namespace IpeaGeo.Modelagem
             return (dblResultado);
         }
 
-
         /// <summary>
         /// Cálculo do índice usando Análise Hierárquica Referenciado
         /// </summary>
@@ -835,7 +816,6 @@ namespace IpeaGeo.Modelagem
                     pesos[i, j] = dblMedidas[i, 0] / dblMedidas[j, 0];
                 }
             }
-
             
             //Passo 2: Encontra os autovalores da matriz normalizada aproximados.
             //Passo 2.1: Normaliza as colunas.
@@ -855,6 +835,7 @@ namespace IpeaGeo.Modelagem
                     pesosNormalizados[j, i] = pesos[j, i] / somas[i];
                 }
             }
+
             //Passo 2.2: Calcula autovalores aproximados
             double[,] autoValores = new double[pesos.GetLength(0), 1];
             autoValores = m_clt.Meanl(pesosNormalizados);
@@ -916,7 +897,6 @@ namespace IpeaGeo.Modelagem
             }
 
             return (indice);
-
         }
 
         public string imprimirHierarquicoReferenciado(double[] dblIndice, string[] strVariavelID, string strNomeDoMetodo, string strVariavelIdentificadora, string[] strVariaveisSelecionadas, double[,] dblPesos, double lambdaMax, double IC, double RC, string[] strEstatistica, string[] strPadroniza)
@@ -937,11 +917,9 @@ namespace IpeaGeo.Modelagem
             int max = Math.Max(max1, max2);
             max = Math.Max(max, 23);
 
-
             outText += "Variáveis" + PreencheEspacos(max - 9) + "\tPeso"+ PreencheEspacos(20)+"\tEstatística\tPadronizado\r\n\n";
             for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
             {
-
                 outText += strVariaveisSelecionadas[i] + PreencheEspacos(max - strVariaveisSelecionadas[i].Length) + "\t" + dblPesos[i, 0].ToString() + PreencheEspacos(24 - dblPesos[i, 0].ToString().Length) + "\t" + strEstatistica[i] + PreencheEspacos(11 - strEstatistica[i].Length) + "\t" + strPadroniza[i] + "\r\n\n";
             }
 
@@ -951,58 +929,54 @@ namespace IpeaGeo.Modelagem
             outText += "IC" + PreencheEspacos(22 - 2) + IC.ToString() + "\t\r\n\n";
             outText += "RC" + PreencheEspacos(22 - 2) + RC.ToString() + "\t\r\n\n";
 
-
-
             outText += "\n============================================================================================================================\n\n";
             outText += "Variável Identificadora" + PreencheEspacos(max - 23) + "\t" + strNomeDoMetodo + "\r\n\n";
             for (int i = 0; i < dblIndice.Length; i++)
             {
                 outText += strVariavelID[i] + PreencheEspacos(max - strVariavelID[i].Length) + "\t" + dblIndice[i].ToString() + "\r\n\n";
             }
+            
             return (outText);
         }
 
-
         #region Métodos Prométheé
+        
         public double[] IndicePromethee1(ref ProgressBar progressBar1, ref DataTable m_dt_tabela_dados, DataGridView dataGridView1, string[] strVariaveisSelecionadas, out double[] variancias)
         {
-                    //Passo 1: Cria a matriz de decisão
-                    string[,] matDecisao = new string[strVariaveisSelecionadas.Length, 6];
-                    for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
-                    {
-                        try
-                        {
-                            matDecisao[i, 0] = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                            matDecisao[i, 1] = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value.ToString());
-                            matDecisao[i, 2] = Convert.ToString(dataGridView1.Rows[i].Cells[4].Value.ToString());
-                            matDecisao[i, 3] = Convert.ToString(dataGridView1.Rows[i].Cells[3].Value.ToString());
-                            matDecisao[i, 4] = dataGridView1.Rows[i].Cells[2].Value.ToString();
-                            matDecisao[i, 5] = dataGridView1.Rows[i].Cells[5].Value.ToString();
+            //Passo 1: Cria a matriz de decisão
+            string[,] matDecisao = new string[strVariaveisSelecionadas.Length, 6];
+            for (int i = 0; i < strVariaveisSelecionadas.Length; i++)
+            {
+                try
+                {
+                    matDecisao[i, 0] = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                    matDecisao[i, 1] = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value.ToString());
+                    matDecisao[i, 2] = Convert.ToString(dataGridView1.Rows[i].Cells[4].Value.ToString());
+                    matDecisao[i, 3] = Convert.ToString(dataGridView1.Rows[i].Cells[3].Value.ToString());
+                    matDecisao[i, 4] = dataGridView1.Rows[i].Cells[2].Value.ToString();
+                    matDecisao[i, 5] = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                }
+                catch
+                {
+                    matDecisao[i, 0] = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                    matDecisao[i, 1] = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value.ToString());
+                    matDecisao[i, 2] = Convert.ToString(dataGridView1.Rows[i].Cells[4].Value.ToString());
+                    matDecisao[i, 3] = Convert.ToString(dataGridView1.Rows[i].Cells[3].Value.ToString());
+                    matDecisao[i, 4] = Convert.ToString(dataGridView1.Rows[i].Cells[2].Value.ToString());
+                    matDecisao[i, 0] = "Verdadeiro Critério";
+                    matDecisao[i, 1] = "Maximizar";
+                }
+            }
 
+            //Passo 2: Cria a matriz de dados 
+            double[,] mDados = m_clt.GetMatrizFromDataTable(m_dt_tabela_dados, strVariaveisSelecionadas);
 
-                        }
-                        catch
-                        {
-                            matDecisao[i, 0] = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                            matDecisao[i, 1] = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value.ToString());
-                            matDecisao[i, 2] = Convert.ToString(dataGridView1.Rows[i].Cells[4].Value.ToString());
-                            matDecisao[i, 3] = Convert.ToString(dataGridView1.Rows[i].Cells[3].Value.ToString());
-                            matDecisao[i, 4] = Convert.ToString(dataGridView1.Rows[i].Cells[2].Value.ToString());
-                            matDecisao[i, 0] = "Verdadeiro Critério";
-                            matDecisao[i, 1] = "Maximizar";
-                        }
-
-                    }
-
-                //Passo 2: Cria a matriz de dados 
-                double[,] mDados = m_clt.GetMatrizFromDataTable(m_dt_tabela_dados, strVariaveisSelecionadas);
-
-                //Passo 3: Calcula o índice 
-                double[] dblVariancias = new double[strVariaveisSelecionadas.Length];
-                double[] indResultado = Promethee_I(mDados, matDecisao, ref progressBar1, out dblVariancias);
-                variancias = dblVariancias;
-                return(indResultado);
-
+            //Passo 3: Calcula o índice 
+            double[] dblVariancias = new double[strVariaveisSelecionadas.Length];
+            double[] indResultado = Promethee_I(mDados, matDecisao, ref progressBar1, out dblVariancias);
+            variancias = dblVariancias;
+            
+            return(indResultado);
         }
 
         public string imprimirPromethee1(DataGridView dataGridView1, DataTable m_dt_tabela_dados, double[] dblIndice, string[] strVariavelID, string strNomeDoMetodo, string strVariavelIdentificadora, string[] strVariaveisSelecionadas, double[] dblPesos,double[] variancias)
@@ -1064,7 +1038,6 @@ namespace IpeaGeo.Modelagem
                 outText += strVariaveisSelecionadas[i] + PreencheEspacos(max - strVariaveisSelecionadas[i].Length) + dblPesos[i].ToString() + PreencheEspacos(9 - dblPesos[i].ToString().Length) + dataGridView1.Rows[i].Cells[5].Value.ToString() + PreencheEspacos(1) +strLimiteIndiferenca + PreencheEspacos(22 -strLimiteIndiferenca.Length ) + strLimitePreferencia + PreencheEspacos(22 - strLimitePreferencia.Length) + dataGridView1.Rows[i].Cells[2].Value.ToString() + "\r\n\n";
             }
 
-
             outText += "\n============================================================================================================================\n\n";
             outText += "Variável Identificadora" + PreencheEspacos(max - 23) + "\t" + strNomeDoMetodo + "\r\n\n";
             for (int i = 0; i < dblIndice.Length; i++)
@@ -1109,8 +1082,8 @@ namespace IpeaGeo.Modelagem
             double[] dblVariancias = new double[strVariaveisSelecionadas.Length];
             double[] indResultado = Promethee_II(mDados, matDecisao, ref progressBar1, out dblVariancias);
             variancias = dblVariancias;
+            
             return (indResultado);
-
         }
 
         public double[] IndicePromethee3(ref ProgressBar progressBar1, ref DataTable m_dt_tabela_dados, DataGridView dataGridView1, string[] strVariaveisSelecionadas, double alfa, out double[] variancias)
@@ -1138,7 +1111,6 @@ namespace IpeaGeo.Modelagem
                     matDecisao[i, 0] = "Verdadeiro Critério";
                     matDecisao[i, 1] = "Maximizar";
                 }
-
             }
 
             //Passo 2: Cria a matriz de dados 
@@ -1149,7 +1121,6 @@ namespace IpeaGeo.Modelagem
             double[] indResultado = Promethee_III(mDados, matDecisao, ref progressBar1,alfa, out dblVariancias);
             variancias = dblVariancias;
             return (indResultado);
-
         }
 
         public string imprimirPromethee3(DataGridView dataGridView1, DataTable m_dt_tabela_dados, double[] dblIndice, string[] strVariavelID, string strNomeDoMetodo, string strVariavelIdentificadora, string[] strVariaveisSelecionadas, double[] dblPesos, double alfa, double[] variancias)
@@ -1212,7 +1183,6 @@ namespace IpeaGeo.Modelagem
                 outText += strVariaveisSelecionadas[i] + PreencheEspacos(max - strVariaveisSelecionadas[i].Length) + dblPesos[i].ToString() + PreencheEspacos(9 - dblPesos[i].ToString().Length) + dataGridView1.Rows[i].Cells[5].Value.ToString() + PreencheEspacos(1) + strLimiteIndiferenca + PreencheEspacos(22 - strLimiteIndiferenca.Length) + strLimitePreferencia + PreencheEspacos(22 - strLimitePreferencia.Length) + dataGridView1.Rows[i].Cells[2].Value.ToString() + "\r\n\n";
             }
 
-
             outText += "\n============================================================================================================================\n\n";
             outText += "Variável Identificadora" + PreencheEspacos(max - 23) + "\t" + strNomeDoMetodo + "\r\n\n";
             for (int i = 0; i < dblIndice.Length; i++)
@@ -1221,7 +1191,6 @@ namespace IpeaGeo.Modelagem
             }
             return (outText);
         }
-
 
         public double[] IndicePromethee4(ref ProgressBar progressBar1, ref DataTable m_dt_tabela_dados, DataGridView dataGridView1, string[] strVariaveisSelecionadas, out double[] variancias)
         {
@@ -1237,8 +1206,6 @@ namespace IpeaGeo.Modelagem
                     matDecisao[i, 3] = Convert.ToString(dataGridView1.Rows[i].Cells[3].Value.ToString());
                     matDecisao[i, 4] = dataGridView1.Rows[i].Cells[2].Value.ToString();
                     matDecisao[i, 5] = dataGridView1.Rows[i].Cells[5].Value.ToString();
-
-
                 }
                 catch
                 {
@@ -1250,7 +1217,6 @@ namespace IpeaGeo.Modelagem
                     matDecisao[i, 0] = "Verdadeiro Critério";
                     matDecisao[i, 1] = "Maximizar";
                 }
-
             }
 
             //Passo 2: Cria a matriz de dados 
@@ -1262,7 +1228,6 @@ namespace IpeaGeo.Modelagem
             variancias = dblVariancias;
 
             return (indResultado);
-
         }
 
         public string imprimirPromethee4(DataGridView dataGridView1, DataTable m_dt_tabela_dados, double[] dblIndice, string[] strVariavelID, string strNomeDoMetodo, string strVariavelIdentificadora, string[] strVariaveisSelecionadas, double[] dblPesos, double[] dblVariancias)
@@ -1324,7 +1289,6 @@ namespace IpeaGeo.Modelagem
                 outText += strVariaveisSelecionadas[i] + PreencheEspacos(max - strVariaveisSelecionadas[i].Length) + dblPesos[i].ToString() + PreencheEspacos(9 - dblPesos[i].ToString().Length) + dataGridView1.Rows[i].Cells[5].Value.ToString() + PreencheEspacos(1) + strLimiteIndiferenca + PreencheEspacos(22 - strLimiteIndiferenca.Length) + strLimitePreferencia + PreencheEspacos(22 - strLimitePreferencia.Length) + dataGridView1.Rows[i].Cells[2].Value.ToString() + "\r\n\n";
             }
 
-
             outText += "\n============================================================================================================================\n\n";
             outText += "Variável Identificadora" + PreencheEspacos(max - 23) + "\t" + strNomeDoMetodo + "\r\n\n";
             for (int i = 0; i < dblIndice.Length; i++)
@@ -1335,7 +1299,6 @@ namespace IpeaGeo.Modelagem
         }
 
         #endregion
-
         
         #region Ferramentas
         
@@ -1359,10 +1322,9 @@ namespace IpeaGeo.Modelagem
                 {
                     error++;
                 }
-
             }
+            
             return minimo;
-
         }
 
         public double Maximo(double[] data)
@@ -1375,7 +1337,6 @@ namespace IpeaGeo.Modelagem
             Array.Sort(sorted);
             for (int i = sorted.Length - 1; i > -1; i--)
             {
-
                 if (double.IsNaN(sorted[i]) == false)
                 {
                     maximo = sorted[i];
@@ -1436,7 +1397,6 @@ namespace IpeaGeo.Modelagem
                     }
                     catch
                     {
-
                     }
                 }
             }
@@ -1459,7 +1419,6 @@ namespace IpeaGeo.Modelagem
                 // Find the median of the lower half.
                 return Median(lowerHalf);
             }
-
         }
 
         public double UpperQuartile(DataTable dt, string Coluna)
@@ -1493,7 +1452,6 @@ namespace IpeaGeo.Modelagem
                     }
                     catch
                     {
-
                     }
                 }
             }
@@ -1562,7 +1520,6 @@ namespace IpeaGeo.Modelagem
             }
             else
             {
-
                 if (diferencaAbsoluta > limite_de_indiferenca_Q)
                 {
                     return 1;
@@ -1572,7 +1529,6 @@ namespace IpeaGeo.Modelagem
                     return 0;
                 }
             }
-
         }
 
         private double Pseudo_Criterio_Com_Preferencia_Linear(double diferencaAbsoluta, double limite_de_preferencia_P)
@@ -1592,7 +1548,6 @@ namespace IpeaGeo.Modelagem
                     return (diferencaAbsoluta / limite_de_preferencia_P);
                 }
             }
-
         }
 
         private double Criterio_de_Nivel(double diferencaAbsoluta, double limite_de_indiferenca_Q, double limite_de_preferencia_P)
@@ -1616,7 +1571,6 @@ namespace IpeaGeo.Modelagem
                     return 0;
                 }
             }
-
         }
 
         private double Criterio_com_Preferencia_Linear(double diferencaAbsoluta, double limite_de_indiferenca_Q, double limite_de_preferencia_P)
@@ -1640,7 +1594,6 @@ namespace IpeaGeo.Modelagem
                     return 0;
                 }
             }
-
         }
 
         private double Criterio_Gaussiano(double[] Vetor, double diferencaAbsoluta, int iColuna, ref double[] variancia)
@@ -1661,7 +1614,6 @@ namespace IpeaGeo.Modelagem
 
                 return Resultado;
             }
-
         }
 
         #endregion
@@ -1867,6 +1819,7 @@ namespace IpeaGeo.Modelagem
                     }
                 }
             }
+            
             double SomaPeso = 0;
             int Linhas_Matriz_de_Decisao = Matriz_De_Decisao.GetLength(0);
             for (int i = 0; i < Linhas_Matriz_de_Decisao; i++)
@@ -1914,17 +1867,14 @@ namespace IpeaGeo.Modelagem
                     {
                         if (double.IsNaN(Fluxo_de_superacao[i, j]) == true && double.IsNaN(Fluxo_de_superacao[i, j]) == true)
                         {
-
                         }
                         else if (double.IsNaN(Fluxo_de_superacao[i, j]) == true && double.IsNaN(Fluxo_de_superacao[i, j]) == false)
                         {
-
                             Avaliacao_Phi[i, 1] += Fluxo_de_superacao[j, i];
                         }
                         else if (double.IsNaN(Fluxo_de_superacao[i, j]) == false && double.IsNaN(Fluxo_de_superacao[i, j]) == true)
                         {
                             Avaliacao_Phi[i, 0] += Fluxo_de_superacao[i, j];
-
                         }
                         else
                         {
@@ -1990,7 +1940,6 @@ namespace IpeaGeo.Modelagem
                         }
                         else
                         {
-
                             if (Matriz_De_Decisao[coluna, 4] == "Verdadeiro Critério")
                             {
                                 if (Matriz_De_Decisao[coluna, 5] == "Maximizar" && ((matriz_de_entrada[linha1, coluna] > (matriz_de_entrada[linha2, coluna]))))
@@ -2018,8 +1967,6 @@ namespace IpeaGeo.Modelagem
                                     Pares_Ordenados[Posicao, 1] = linha2;
                                 }
                                 Posicao++;
-
-
                             }
 
                             else if (Matriz_De_Decisao[coluna, 4] == "Quase Critério")
@@ -2169,6 +2116,7 @@ namespace IpeaGeo.Modelagem
                     }
                 }
             }
+            
             double SomaPeso = 0;
             int Linhas_Matriz_de_Decisao = Matriz_De_Decisao.GetLength(0);
             for (int i = 0; i < Linhas_Matriz_de_Decisao; i++)
@@ -2305,8 +2253,6 @@ namespace IpeaGeo.Modelagem
                                     Pares_Ordenados[Posicao, 1] = linha2;
                                 }
                                 Posicao++;
-
-
                             }
 
                             else if (Matriz_De_Decisao[coluna, 4] == "Quase Critério")
@@ -2466,7 +2412,6 @@ namespace IpeaGeo.Modelagem
                 }
                 catch
                 {
-
                 }
             }
 
@@ -2501,17 +2446,14 @@ namespace IpeaGeo.Modelagem
                     {
                         if (double.IsNaN(Fluxo_de_superacao[i, j]) == true && double.IsNaN(Fluxo_de_superacao[i, j]) == true)
                         {
-
                         }
                         else if (double.IsNaN(Fluxo_de_superacao[i, j]) == true && double.IsNaN(Fluxo_de_superacao[i, j]) == false)
                         {
-
                             Avaliacao_Phi[i, 1] += Fluxo_de_superacao[j, i];
                         }
                         else if (double.IsNaN(Fluxo_de_superacao[i, j]) == false && double.IsNaN(Fluxo_de_superacao[i, j]) == true)
                         {
                             Avaliacao_Phi[i, 0] += Fluxo_de_superacao[i, j];
-
                         }
                         else
                         {
@@ -2595,11 +2537,8 @@ namespace IpeaGeo.Modelagem
                 double blMinimiza = 1.0;
                 for (int coluna = 0; coluna < (Coluna); coluna++)
                 {
-
-                    //Qual a função ?
                     if (Matriz_De_Decisao[coluna, 4] == "Verdadeiro Critério")
                     {
-
                         if (Matriz_De_Decisao[coluna, 5] == "Minimizar") blMinimiza = -1.0;
                         double limite = (Math.Max(Math.Abs(a[0, coluna]), Math.Abs(b[0, coluna]))) * 2;
 
@@ -2753,12 +2692,12 @@ namespace IpeaGeo.Modelagem
                         DefiniteIntegral integral = new DefiniteIntegral(Criterio_de_Nivel, new Integral(-limite, 2 * Math.Abs(limite)));
                         double phi = integral.Approximate(ApproximationMethod.Simpson, 1000);
                         Resultado[linha1] += phi * Convert.ToDouble(Matriz_De_Decisao[coluna, 1]);
-
                     }
                     else if (Matriz_De_Decisao[coluna, 4] == "Critério com preferência linear")
                     {
                         if (Matriz_De_Decisao[coluna, 5] == "Minimizar") blMinimiza = -1.0;
                         double limite = (Math.Max(Math.Abs(a[0, coluna]), Math.Abs(b[0, coluna]))) * 2;
+                        
                         //Define o integrando
                         double constante = matriz_de_entrada[linha1, coluna];
                         Func<double, double> Criterio_com_preferencia_linear;
@@ -2798,7 +2737,6 @@ namespace IpeaGeo.Modelagem
                         DefiniteIntegral integral = new DefiniteIntegral(Criterio_com_preferencia_linear, new Integral(-limite, 2 * Math.Abs(limite)));
                         double phi = integral.Approximate(ApproximationMethod.Simpson, 1000);
                         Resultado[linha1] += phi * Convert.ToDouble(Matriz_De_Decisao[coluna, 1]);
-
                     }
                     else if (Matriz_De_Decisao[coluna, 4] == "Critério Gaussiano")
                     {
@@ -2806,6 +2744,7 @@ namespace IpeaGeo.Modelagem
                         double limite = (Math.Max(Math.Abs(a[0, coluna]), Math.Abs(b[0, coluna]))) * 2;
                         double sigma2 = Math.Pow(2 * Math.Max(Math.Abs(a[0, coluna]), Math.Abs(b[0, coluna])), 2) / 12.0;
                         dblVariancias[coluna] = sigma2;
+                        
                         //Define o integrando
                         double constante = matriz_de_entrada[linha1, coluna];
                         Func<double, double> Criterio_Gaussiano;
@@ -2822,7 +2761,6 @@ namespace IpeaGeo.Modelagem
                         DefiniteIntegral integral = new DefiniteIntegral(Criterio_Gaussiano, new Integral(-limite, 2 * Math.Abs(limite)));
                         double phi = integral.Approximate(ApproximationMethod.Simpson, 1000);
                         Resultado[linha1] += phi * Convert.ToDouble(Matriz_De_Decisao[coluna, 1]);
-
                     }
                     pBar.Increment(1);
                     Application.DoEvents();
@@ -3238,8 +3176,7 @@ namespace IpeaGeo.Modelagem
                             {
                                 matrizComparacao[i, j] = BLogicDecisaoMulticriterios.lootsma2saaty(matrizComparacao[i, j]);
                                 matrizComparacao[j, i] = 1.0 / matrizComparacao[i, j];
-                            }
-                                
+                            }                               
                     }
 
                     private void multiplicativo2classicoArvore()
@@ -3645,7 +3582,6 @@ namespace IpeaGeo.Modelagem
                         for (int i = 0; i < v.GetLength(0); i++)
                             vNorm[i, 0] = v[i, 0] / totalSoma;
 
-
                         return vNorm;
                     }
 
@@ -3688,7 +3624,6 @@ namespace IpeaGeo.Modelagem
                     }
 
                     #endregion
-
 
                 #endregion
             }
@@ -3793,7 +3728,6 @@ namespace IpeaGeo.Modelagem
                     outText += "============================================================================================================================\n";
 
                     this.outText = outText;
-
                 }
 
                 #endregion
@@ -3812,7 +3746,6 @@ namespace IpeaGeo.Modelagem
 
             public class Entrada
             {
-
                 #region Variaveis internas
 
                 private Metodo m_metodo;
@@ -3821,7 +3754,6 @@ namespace IpeaGeo.Modelagem
                     get { return m_metodo; }
                     set { m_metodo = value; }
                 }
-
 
                 private string[,] m_nomeCriterios;
                 public string[,] nomeCriterios
@@ -3918,7 +3850,6 @@ namespace IpeaGeo.Modelagem
                 calcularPesosAcumuladosClassico(this.arvore);
 
                 calcularIndicesHierarquicoClassico();
-
             }
 
             public void executarHierarquicoMultiplicativo()
@@ -4034,8 +3965,7 @@ namespace IpeaGeo.Modelagem
                     {
                         this.resultado.indices[i, 0] = indices[i, 0] / somaTotal;
                         this.resultado.valoresVariavelIdentificadora[i, 0] = arvore.alternativas[i];
-                    }
-                        
+                    }                       
                 }
 
                 private double calcularPesosAcumuladosMultiplicativo(elementoArvore no, int alternativa)
@@ -4052,7 +3982,6 @@ namespace IpeaGeo.Modelagem
                         peso *= Math.Pow(calcularPesosAcumuladosMultiplicativo(no.filhos[i], alternativa),no.filhos[i].peso);
 
                     return peso;
-
                 }
 
                 private void calcularPesosArvoreMultiplicativo(elementoArvore arvore)
@@ -4129,7 +4058,6 @@ namespace IpeaGeo.Modelagem
                 else b = 0.0;
                 
                 return b;
-
             }
 
             static public string double2saaty(double a)
@@ -4370,11 +4298,9 @@ namespace IpeaGeo.Modelagem
             #endregion
 
             #region Demais métodos
-
             
             #endregion
 
         #endregion
-
     }
 }
