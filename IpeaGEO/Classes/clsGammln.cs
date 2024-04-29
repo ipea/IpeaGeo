@@ -6,13 +6,10 @@ namespace IpeaGeo
 	/// Summary description for Gammln.
 	/// </summary>
 	[Obsolete("Use MathNet.Numerics instead.")]
-    public class Gammln
+        public class Gammln
 	{
 		public Gammln()
 		{
-			//
-			// TODO: Add constructor logic here
-			//
 		}
 
 		//Retorna o valor do ln(gama(x)) onde x > 0
