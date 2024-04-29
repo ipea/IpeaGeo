@@ -116,7 +116,6 @@ namespace IpeaGeo.Modelagem
         {
             clsUtilTools clt = new clsUtilTools();
 
-
             double[,] X = clt.GetMatrizFromDataTable(m_dt_tabela_dados, VariaveisIndependentes);
             double[,] varcovar = new double[X.GetLength(1), X.GetLength(1)];
             double[,] correlmatrix = new double[X.GetLength(1), X.GetLength(1)];
@@ -147,8 +146,6 @@ namespace IpeaGeo.Modelagem
             if (ckbcorrel || ckbbartlet)
                 correlmatrix = clt.CorrSampleMatrix(X);
 
-        #endregion
-
             #region Estimação de Coeficientes;
 
             double[,] matrizXnormalizada = new double[X.GetLength(0), X.GetLength(1)];
@@ -158,6 +155,7 @@ namespace IpeaGeo.Modelagem
             double[,] hi2 = new double[p, 1];
 
             #region componentes Principais
+            
             if (cmbtipoestimacao == "Componentes Principais")
             {
                 for (int i = 0; i < autovetorcorte.GetLength(0); i++)
@@ -286,10 +284,10 @@ namespace IpeaGeo.Modelagem
 
             #endregion
 
-
             #endregion
 
             #region Estimação dos Escores
+            
             double[,] ksichapeudiagonalizado = clt.MatrizDiagonal(diagonalksichapeu);
 
             double[,] temp1a = new double[numcomponentes, X.GetLength(1)];
@@ -320,6 +318,7 @@ namespace IpeaGeo.Modelagem
             #endregion
 
             #region Matriz Residual
+            
             double[,] matrizresidual = new double[p, p];
             double[,] temp1 = clt.MatrizSoma(clt.MatrizMult(rij, clt.MatrizTransp(rij)), ksichapeudiagonalizado);
 
@@ -697,8 +696,11 @@ namespace IpeaGeo.Modelagem
                 m_output_variaveis_geradas += GeraTabelaNovasVariaveis(variaveis_geradas, nomes_variaveis);
                 AdicionaNovasVariaveisToDataTable(variaveis_geradas, nomes_variaveis);
             } // if
+            
             #endregion
         } // EstimarAnaliseFatorial()
+
+        #endregion
 
         public void vgq(double[,] L, ref double Q, ref double[,] Gq, string Tiporotacao)
         {
