@@ -17,17 +17,20 @@ namespace IpeaGeo.Forms
         {
             InitializeComponent();
         }
+        
         //funcao para fechar a janela de AvisoLink
         private void btnAvisoLink_Click(object sender, EventArgs e)
         {
             Close();
         }
+        
         //funcao para passar o url da pagina da web para o link da janela de AvisoLink
         public string Link (string texto_link)
         {
             llbAvisoLink.Text = texto_link;
             return texto_link;
         }
+        
         //funcao para passar o url da pagina da web para o link da janela de AvisoLink
         public string Label(string texto_label)
         {
@@ -46,8 +49,6 @@ namespace IpeaGeo.Forms
             {
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        
+        }      
     }
 }
