@@ -47,6 +47,7 @@ namespace IpeaGeo
                 dblPseudoT = value;
             }
         }
+        
         private double[] dblPseudoF;
         public double[] PseudoF
         {
@@ -59,6 +60,7 @@ namespace IpeaGeo
                 dblPseudoF = value;
             }
         }
+        
         private double[] dblRSquare;
         public double[] RSquare
         {
@@ -84,6 +86,7 @@ namespace IpeaGeo
                 dblRSquarePartial = value;
             }
         }
+        
         private double[] dblRSquareExpected;
         public double[] RSquareExpected
         {
@@ -96,6 +99,7 @@ namespace IpeaGeo
                 dblRSquareExpected = value;
             }
         }
+        
         private double[] dblCCC;
         public double[] CCC
         {
@@ -125,6 +129,7 @@ namespace IpeaGeo
                 shapeAlex = value;
             }
         }
+
         private string[] strVariaveis;
         public string[] Variaveis
         {
@@ -137,6 +142,7 @@ namespace IpeaGeo
                 strVariaveis = value;
             }
         }
+        
         private DataTable tabela_congl;
         public DataTable tabela_congl_
         {
@@ -149,6 +155,7 @@ namespace IpeaGeo
                 tabela_congl = value;
             }
         }
+        
         private string[] strVariaveisSelecionadas;
         public string[] VariaveisSelecionadas
         {
@@ -161,6 +168,7 @@ namespace IpeaGeo
                 strVariaveisSelecionadas = value;
             }
         }
+        
         private int[] classePoligonos;
         public int[] vetorPoligonos
         {
@@ -173,6 +181,7 @@ namespace IpeaGeo
                 classePoligonos = value;
             }
         }
+        
         private string strIDmapa;
         public string IdentificadorMapa
         {
@@ -185,6 +194,7 @@ namespace IpeaGeo
                 strIDmapa = value;
             }
         }
+        
         private string strNumCluster;
         public string NumeroDeConglomerados
         {
@@ -197,6 +207,7 @@ namespace IpeaGeo
                 strNumCluster = value;
             }
         }
+        
         private bool blEspacial;
         public bool IsSpatialCluster
         {
@@ -354,11 +365,9 @@ namespace IpeaGeo
 
         private void UsaApenasMatrizWPredefinida()
         {
-
             m_dados_concatenados = true;
 
             this.tabControl1.SelectedTab = tabPage1;
-
         }
 
         #endregion
@@ -435,7 +444,6 @@ namespace IpeaGeo
 
                     m_vizinhanca_definida = false;
                     m_dados_concatenados = false;
-
                 }
             }
             catch (Exception er)
@@ -815,7 +823,6 @@ namespace IpeaGeo
             }
         }
 
-
         private void estatísticasDescritivasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -906,8 +913,7 @@ namespace IpeaGeo
 
         /// <summary>
         /// tabela de dados botoes acabam aqui
-        /// </summary>
-                   
+        /// </summary>                 
         private string strEnderecoMapa;
         public string EnderecoMapa
         {
@@ -920,6 +926,7 @@ namespace IpeaGeo
                 strEnderecoMapa = value;
             }
         }
+
         private string strDistancia;
         public string Distancia
         {
@@ -945,6 +952,7 @@ namespace IpeaGeo
                 strMetodo = value;
             }
         }
+        
         private string strFatorMinkowsky;
         public string FatorMinkowsky
         {
@@ -957,6 +965,7 @@ namespace IpeaGeo
                 strFatorMinkowsky = value;
             }
         }
+        
         public string[] strVetorPesos;
         public string[] VetorDePesos
         {
@@ -986,8 +995,8 @@ namespace IpeaGeo
             {
                 get { return ColorName; }
             }
-
         }
+        
         private Brush[] classeCor;
         public Brush[] CoresParaMapa
         {
@@ -1000,6 +1009,7 @@ namespace IpeaGeo
                 classeCor = value;
             }
         }
+        
         private string[] strCoresRGB;
         public string[] CoresRGB
         {
@@ -1117,7 +1127,6 @@ namespace IpeaGeo
                 {
                     numMaxClusters.Maximum = shapeAlex.Count - 1;
 
-
                     //checkedListBox1.Items.AddRange(strVariaveis);
                     //PopulaDataGridView(ref dataGridView2, strVariaveis.Length);
                     PopulaDataGridView(ref dataGridView2, strVariaveis.Length);
@@ -1185,7 +1194,6 @@ namespace IpeaGeo
                     }
                 }
 
-                //dai vc seta a fonte pro combobox
                 this.cmbCores.DataSource = colorList;
                 this.cmbCores.DisplayMember = "Nome";
                 this.cmbCores.ValueMember = "Nome";
@@ -1250,12 +1258,13 @@ namespace IpeaGeo
                     colors[0] = coresVetor2[iTem, 0];
                     colors[1] = coresVetor2[iTem, 1];
 
-
                     //Cria o objeto cor
                     Color mCor0 = new Color();
+                    
                     //Set the color
                     mCor0 = Color.FromArgb(colors[0].ToArgb());
                     strCoresRGB[0] = System.Drawing.ColorTranslator.ToHtml(mCor0);
+                    
                     //Cria o objeto cor
                     Color mCor1 = new Color();
                     mCor1 = Color.FromArgb(colors[1].ToArgb());
@@ -1305,6 +1314,7 @@ namespace IpeaGeo
                 else
                 {
                     Random rnd = new Random();
+                    
                     //Gerando vetor de cores aleatórias
                     for (int l = 0; l < cores.Length; l++)
                     {
@@ -1961,6 +1971,7 @@ namespace IpeaGeo
                             //    pfList.Add(i, dblPseudoF[iTotal]);
                             //    iTotal--;
                             //}
+                            
                             for (int i = 0; i < dblRSquare.Length /*iObs*/; i++)
                             {
                                 rsList.Add(i + 2, dblRSquare[iTotal]);
@@ -1972,29 +1983,37 @@ namespace IpeaGeo
 
                             // Generate a red curve with diamond symbols, and "PseudoT" in the legend
                             LineItem myCurve = myPane.AddCurve("Pseudo T", ptList, Color.Red, SymbolType.Diamond);
+                            
                             // Fill the symbols with white
                             myCurve.Symbol.Fill = new Fill(Color.White);
 
                             // Generate a blue curve with circle symbols, and "RSquare" in the legend
                             myCurve = myPane.AddCurve("R-Square", rsList, Color.Blue, SymbolType.Circle);
+                            
                             // Fill the symbols with white
                             myCurve.Symbol.Fill = new Fill(Color.White);
+                            
                             // Associate this curve with the Y2 axis
                             myCurve.IsY2Axis = true;
 
                             // Generate a green curve with square symbols, and "PseudoF" in the legend
                             myCurve = myPane.AddCurve("Pseudo F", pfList, Color.Green, SymbolType.Square);
+                            
                             // Fill the symbols with white
                             myCurve.Symbol.Fill = new Fill(Color.White);
+                            
                             // Associate this curve with the second Y axis
                             myCurve.YAxisIndex = 1;
 
                             // Generate a Black curve with triangle symbols, and "CCC" in the legend
                             myCurve = myPane.AddCurve("CCC", cccList, Color.Black, SymbolType.Triangle);
+                            
                             // Fill the symbols with white
                             myCurve.Symbol.Fill = new Fill(Color.White);
+                            
                             // Associate this curve with the Y2 axis
                             myCurve.IsY2Axis = true;
+                            
                             // Associate this curve with the second Y2 axis
                             myCurve.YAxisIndex = 1;
 
@@ -2004,22 +2023,28 @@ namespace IpeaGeo
                             // Make the Y axis scale red
                             myPane.YAxis.Scale.FontSpec.FontColor = Color.Red;
                             myPane.YAxis.Title.FontSpec.FontColor = Color.Red;
+                            
                             // turn off the opposite tics so the Y tics don't show up on the Y2 axis
                             myPane.YAxis.MajorTic.IsOpposite = false;
                             myPane.YAxis.MinorTic.IsOpposite = false;
+                            
                             // Don't display the Y zero line
                             myPane.YAxis.MajorGrid.IsZeroLine = false;
 
                             // Enable the Y2 axis display
                             myPane.Y2Axis.IsVisible = true;
+                            
                             // Make the Y2 axis scale blue
                             myPane.Y2Axis.Scale.FontSpec.FontColor = Color.Blue;
                             myPane.Y2Axis.Title.FontSpec.FontColor = Color.Blue;
+                            
                             // turn off the opposite tics so the Y2 tics don't show up on the Y axis
                             myPane.Y2Axis.MajorTic.IsOpposite = false;
                             myPane.Y2Axis.MinorTic.IsOpposite = false;
+                            
                             // Display the Y2 axis grid lines
                             myPane.Y2Axis.MajorGrid.IsVisible = true;
+                            
                             // Align the Y2 axis labels so they are flush to the axis
                             myPane.Y2Axis.Scale.Align = AlignP.Inside;
 
@@ -2029,22 +2054,26 @@ namespace IpeaGeo
                             yAxis3.Scale.FontSpec.FontColor = Color.Green;
                             yAxis3.Title.FontSpec.FontColor = Color.Green;
                             yAxis3.Color = Color.Green;
+                            
                             // turn off the opposite tics so the Y2 tics don't show up on the Y axis
                             yAxis3.MajorTic.IsInside = false;
                             yAxis3.MinorTic.IsInside = false;
                             yAxis3.MajorTic.IsOpposite = false;
                             yAxis3.MinorTic.IsOpposite = false;
+                            
                             // Align the Y2 axis labels so they are flush to the axis
                             yAxis3.Scale.Align = AlignP.Inside;
 
                             Y2Axis yAxis4 = new Y2Axis("CCC");
                             yAxis4.IsVisible = true;
                             myPane.Y2AxisList.Add(yAxis4);
+                            
                             // turn off the opposite tics so the Y2 tics don't show up on the Y axis
                             yAxis4.MajorTic.IsInside = false;
                             yAxis4.MinorTic.IsInside = false;
                             yAxis4.MajorTic.IsOpposite = false;
                             yAxis4.MinorTic.IsOpposite = false;
+                            
                             // Align the Y2 axis labels so they are flush to the axis
                             yAxis4.Scale.Align = AlignP.Inside;
 
@@ -2059,11 +2088,8 @@ namespace IpeaGeo
                             zedGraphControl1.GraphPane = myPane;
                             zedGraphControl1.Refresh();
 
-
-
                             #endregion
-
-
+                            
                             #endregion
 
                             label7.Text = "";
@@ -2072,14 +2098,11 @@ namespace IpeaGeo
 
                         #endregion
 
-
                         /*string out_text = "==============================================================================================================\n\n";
                         out_text += "Resultado do Cluster Espacial Hierarquico  \n\n";
                         out_text += "Data: " + System.DateTime.Now.ToLongDateString() + "\n";
                         out_text += "Hora: " + System.DateTime.Now.ToLongTimeString() + "\n\n";
                         out_text += "Número de Observações:" + dTable.Rows.Count.ToString();
-
-
 
                         userControlRichTextOutput1.Texto = out_text;*/
 
@@ -2127,20 +2150,22 @@ namespace IpeaGeo
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        
         private frmMapa mainForm = null;
         public frmCluster (Form callingForm)
         {
             mainForm = callingForm as frmMapa; 
             InitializeComponent();
         }
+        
         private void button2_Click(object sender, EventArgs e)
         {
             try
-            {
-                
+            {           
                 this.Cursor = Cursors.WaitCursor;
                 this.GerarCongromerados();
                 this.btnRedefinirClusters.Enabled = true;
+                
                 //this.btnOK.Enabled = true;
                 this.Cursor = Cursors.Default;
             }
@@ -2171,6 +2196,7 @@ namespace IpeaGeo
             {
                 //DataTable dsTemp = (DataTable)dataGridView1.DataSource;
                 DataTable dsTemp = tabela_congl_;
+                
                 //dsTemp.Tables[0].Columns.Remove("Mapa"+strIDmapa);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.InitialDirectory = "C:\\";
@@ -2207,7 +2233,6 @@ namespace IpeaGeo
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         
         private void dataGridView2_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
