@@ -48,6 +48,7 @@ namespace IpeaGeo.Forms
                 coresVetor = value;
             }
         }
+        
         public Color[,] coresVetor2_
         {
             get
@@ -59,6 +60,7 @@ namespace IpeaGeo.Forms
                 coresVetor2 = value;
             }
         }
+        
         private DataTable dTable;
         public DataTable DataTableDados
         {
@@ -71,6 +73,7 @@ namespace IpeaGeo.Forms
                 dTable = value;
             }
         }
+        
         private string strIDmapa;
         public string IdentificadorMapa
         {
@@ -83,6 +86,7 @@ namespace IpeaGeo.Forms
                 strIDmapa = value;
             }
         }
+        
         private string strVariavelMapa;
         public string Variavel
         {
@@ -95,6 +99,7 @@ namespace IpeaGeo.Forms
                 strVariavelMapa = value;
             }
         }
+        
         private string[] strCoresRGB;
         public string[] CoresRGB
         {
@@ -107,6 +112,7 @@ namespace IpeaGeo.Forms
                 strCoresRGB = value;
             }
         }
+        
         private string[] varsMapa;
         public string[] varsMapa_
         {
@@ -119,6 +125,7 @@ namespace IpeaGeo.Forms
                 varsMapa = value;
             }
         }
+
         private string[] metodosMapa;
         public string[] metodosMapa_
         {
@@ -131,6 +138,7 @@ namespace IpeaGeo.Forms
                 metodosMapa = value;
             }
         }
+        
         private int[] classesMapa;
         public int[] classesMapa_
         {
@@ -143,6 +151,7 @@ namespace IpeaGeo.Forms
                 classesMapa = value;
             }
         }
+        
         private string strID;
         public string IdentificadorDados
         {
@@ -155,6 +164,7 @@ namespace IpeaGeo.Forms
                 strID = value;
             }
         }
+        
         private bool blGeraRelatorio;
         public bool GeraRelatorio
         {
@@ -167,6 +177,7 @@ namespace IpeaGeo.Forms
                 blGeraRelatorio = value;
             }
         }
+        
         private bool blGuardaClassificacao;
         public bool GuardaClassificacao
         {
@@ -179,6 +190,7 @@ namespace IpeaGeo.Forms
                 blGuardaClassificacao = value;
             }
         }
+        
         private string strMetodo;
         public string Metodologia
         {
@@ -191,6 +203,7 @@ namespace IpeaGeo.Forms
                 strMetodo = value;
             }
         }
+        
         private int[] classePoligonos;
         public int[] vetorPoligonos
         {
@@ -203,6 +216,7 @@ namespace IpeaGeo.Forms
                 classePoligonos = value;
             }
         }        
+        
         private double[] classeMapaVetor;
         public double[] ClasseDoMapa
         {
@@ -216,7 +230,6 @@ namespace IpeaGeo.Forms
             }
         }
 
-
         private Brush[] classeCor;
         public Brush[] CoresParaMapa
         {
@@ -229,8 +242,6 @@ namespace IpeaGeo.Forms
                 classeCor = value;
             }
         }
-
-
 
         public struct GradientColor
         {
@@ -248,8 +259,8 @@ namespace IpeaGeo.Forms
             {
                 get { return ColorName; }
             }
-
         }
+        
         private void PopulaDataGridView(ref DataGridView dataGridView1, string[] strVariaveis)
         {
             //Cria as colunas do DataGridView
@@ -304,7 +315,6 @@ namespace IpeaGeo.Forms
             dataGridView1.Columns.Insert(4, combo);
 
             //Cores           
-
             Color[] vetorCores = new Color[11];
             vetorCores[0] = Color.Black;
             vetorCores[1] = Color.Yellow;
@@ -332,8 +342,7 @@ namespace IpeaGeo.Forms
             vetorBrush[9] = Brushes.Brown;
             vetorBrush[10] = Brushes.White;           
 
-            //cria uma list com os item do combobox
-            
+            //cria uma list com os item do combobox          
             List<GradientColor> colorList = new List<GradientColor>();
             int contador = 0;
 
@@ -350,7 +359,6 @@ namespace IpeaGeo.Forms
                         coresVetor2[contador, 0] = vetorCores[i];
                         coresVetor2[contador, 1] = vetorCores[j];
                         contador++;
-
                     }
                 }
             }
@@ -412,21 +420,14 @@ namespace IpeaGeo.Forms
                 dataGridView1.Rows[i].Cells[3].Value = "Inserir fonte";
 
                 dataGridView1.Rows[i].Cells[4].Value = "Quantil";
-                dataGridView1.Rows[i].Cells[5].Value = "5";
-                
-            }
-            
+                dataGridView1.Rows[i].Cells[5].Value = "5";               
+            }            
         }
 
-
-
-
         private void frmMultiMapas_Load(object sender, EventArgs e)
-        {
-            
+        {            
             //Preenchendo os objetos do formulário
-            string[] strvariaveis = new string[dTable.Columns.Count];
-            
+            string[] strvariaveis = new string[dTable.Columns.Count];           
 
             for (int i = 0; i < dTable.Columns.Count; i++)
             {
@@ -434,13 +435,8 @@ namespace IpeaGeo.Forms
             }
             
             //checkedListBox1.Items.AddRange(strvariaveis);
-            
-
+         
             PopulaDataGridView(ref dataGridView1, strvariaveis);
-
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -500,192 +496,114 @@ namespace IpeaGeo.Forms
                 //TODO:
                 //Iniciar os dois for, para cada by e para cada variavel
                 
-                //Fazendo o for somente por variavel//////////////////////////////////////////////////////
-                //Gerar um mapa para cada variavel e exportar////////////////////////////////////////////
-                
-
                 varsMapa = new string[numVar];
                 classesMapa = new int[numVar];
                 metodosMapa = new string[numVar];
 
                 for (int vars = 0; vars < numVar; vars++)                
                 {                    
-
                     //Variáveis de interesse
-
                     int numClasses = Convert.ToInt32(dataGridView1.Rows[indicesvar[vars]].Cells[5].Value);
                     string cmbVariavel = dataGridView1.Rows[indicesvar[vars]].Cells[0].Value.ToString();
                     string cmbMetodo = dataGridView1.Rows[indicesvar[vars]].Cells[4].Value.ToString();
-
-
-
                     varsMapa[vars] = dataGridView1.Rows[indicesvar[vars]].Cells[0].Value.ToString();
                     classesMapa[vars] = Convert.ToInt32(dataGridView1.Rows[indicesvar[vars]].Cells[5].Value);
                     metodosMapa[vars] = dataGridView1.Rows[indicesvar[vars]].Cells[4].Value.ToString();
-
-
-                    /*
-                    //Cópia do mapa temático////////////////////////////////////////////////////////////////////
-                    this.Cursor = Cursors.WaitCursor;
-                    double[] desvios = new double[7] { 1, 0.8, 0.6, 0.5, 0.4, 0.2, 0.1 };
-                    //Guarda as classes do mapa
-                    double[] dblClasseMapa = new double[(int)numClasses];
-
-                    //Tipo do dados
-                    string strTipo = dTable.Columns[cmbVariavel].DataType.ToString();
-
-                    if (strTipo != "System.String")
+                               
+                    Brush[] cores = new Brush[(int)numClasses];
+                    Color[] coresRGB = new Color[(int)numClasses];
+                    strCoresRGB = new string[cores.Length];
+                
+                    if (checkBox1.Checked == false)
                     {
-                        clsMapa classeMapa = new clsMapa();
-                        if (cmbMetodo == "Quantil")
-                        {
-                            classePoligonos = classeMapa.criaQuantis(dTable, cmbVariavel, strIDmapa, strID, (int)numClasses, ref dblClasseMapa);
+                        //Item escolhido do ComboBox de cores
+                        int iTem = comboBox1.SelectedIndex;
 
-                        }
-                        else if (cmbMetodo == "Jenks")
-                        {
-                            classePoligonos = classeMapa.criaJenks(dTable, cmbVariavel, strIDmapa, strID, (int)numClasses, ref dblClasseMapa);
-                        }
-                        else if (cmbMetodo == "Desvio Padrão")
-                        {
-                            int numero_class = 0;
-                            classePoligonos = classeMapa.criaDesvios(dTable, cmbVariavel, strIDmapa, strID, numClasses, ref dblClasseMapa, ref numero_class);
-                            numClasses = numero_class;
-                        }
-                        else if (cmbMetodo == "Geométrico")
-                        {
-                            classePoligonos = classeMapa.criaGeometric(dTable, cmbVariavel, strIDmapa, strID, (int)numClasses, ref dblClasseMapa);
-                        }
+                        //Inicializa as cores
+                        cores[0] = coresVetor[iTem, 0];
+                        cores[cores.Length - 1] = coresVetor[iTem, 1];
 
-                        else if (cmbMetodo == "Equal")
-                        {
-                            classePoligonos = classeMapa.criaEqual(dTable, cmbVariavel, strIDmapa, strID, (int)numClasses, ref dblClasseMapa);
-                        }
-                        else if (cmbMetodo == "Valores Únicos")
-                        {
-                            int numero_classes = 0;
-                            ArrayList valores_diferentes = new ArrayList();
-                            for (int i = 0; i < dTable.Rows.Count; i++)
-                            {
-                                if (!valores_diferentes.Contains(dTable.Rows[i][cmbVariavel]))
-                                {
-                                    valores_diferentes.Add(dTable.Rows[i][cmbVariavel]);
-                                }
-                            }
-                            numero_classes = valores_diferentes.Count;
-                            numClasses = numero_classes;
-                            dblClasseMapa = new double[numero_classes];
+                        //Converte para COLOR
+                        Color[] colors = new Color[2];
+                        colors[0] = coresVetor2[iTem, 0];
+                        colors[1] = coresVetor2[iTem, 1];
 
-
-                            classePoligonos = classeMapa.criaValoresUnicos(dTable, cmbVariavel, strIDmapa, strID, numero_classes, ref dblClasseMapa);
-                        }                        
-
-                        //Tipo de mapa temático
-                        strMetodo = cmbMetodo;
-
-                        //Guarda a variável
-                        strVariavelMapa = cmbVariavel;
-
-                        //Guarda a classe
-                        classeMapaVetor = ClasseDoMapa;                        
-
-                        //Cores
-                        //Cores*/                   
-               
-                        Brush[] cores = new Brush[(int)numClasses];
-                        Color[] coresRGB = new Color[(int)numClasses];
+                        //Cores para HTML
                         strCoresRGB = new string[cores.Length];
-                    
-                        if (checkBox1.Checked == false)
+                        //Cria o objeto cor
+                        Color mCor0 = new Color();
+                        //Set the color
+                        mCor0 = Color.FromArgb(colors[0].ToArgb());
+                        strCoresRGB[0] = System.Drawing.ColorTranslator.ToHtml(mCor0);
+                        //Cria o objeto cor
+                        Color mCor1 = new Color();
+                        mCor1 = Color.FromArgb(colors[1].ToArgb());
+                        strCoresRGB[cores.Length - 1] = System.Drawing.ColorTranslator.ToHtml(mCor1);
+
+                        //Valores RGB
+                        double R0 = Convert.ToDouble(colors[0].R);
+                        double G0 = Convert.ToDouble(colors[0].G);
+                        double B0 = Convert.ToDouble(colors[0].B);
+                        double R1 = Convert.ToDouble(colors[1].R);
+                        double G1 = Convert.ToDouble(colors[1].G);
+                        double B1 = Convert.ToDouble(colors[1].B);
+
+                        //Número de classes
+                        double nClasses = Convert.ToDouble(numClasses);
+
+                        for (int i = 1; i < cores.Length - 1; i++)
                         {
-                            //Item escolhido do ComboBox de cores
-                            int iTem = comboBox1.SelectedIndex;
+                            double fator1 = 1 - (Convert.ToDouble(i + 1) / nClasses);
+                            double fator2 = 1 - (Convert.ToDouble(nClasses - i - 1) / nClasses);
 
-                            //Inicializa as cores
-                            cores[0] = coresVetor[iTem, 0];
-                            cores[cores.Length - 1] = coresVetor[iTem, 1];
+                            //Convert o Brush para Color
+                            double Rf = R0 * fator1 + R1 * fator2;
+                            double Gf = G0 * fator1 + G1 * fator2;
+                            double Bf = B0 * fator1 + B1 * fator2;
 
-                            //Converte para COLOR
-                            Color[] colors = new Color[2];
-                            colors[0] = coresVetor2[iTem, 0];
-                            colors[1] = coresVetor2[iTem, 1];
-
-                            //Cores para HTML
-                            strCoresRGB = new string[cores.Length];
                             //Cria o objeto cor
-                            Color mCor0 = new Color();
+                            Color MyColor = new Color();
+
                             //Set the color
-                            mCor0 = Color.FromArgb(colors[0].ToArgb());
-                            strCoresRGB[0] = System.Drawing.ColorTranslator.ToHtml(mCor0);
-                            //Cria o objeto cor
-                            Color mCor1 = new Color();
-                            mCor1 = Color.FromArgb(colors[1].ToArgb());
-                            strCoresRGB[cores.Length - 1] = System.Drawing.ColorTranslator.ToHtml(mCor1);
+                            MyColor = Color.FromArgb((int)Rf, (int)Gf, (int)Bf);
 
-                            //Valores RGB
-                            double R0 = Convert.ToDouble(colors[0].R);
-                            double G0 = Convert.ToDouble(colors[0].G);
-                            double B0 = Convert.ToDouble(colors[0].B);
-                            double R1 = Convert.ToDouble(colors[1].R);
-                            double G1 = Convert.ToDouble(colors[1].G);
-                            double B1 = Convert.ToDouble(colors[1].B);
-
-                            //Número de classes
-                            double nClasses = Convert.ToDouble(numClasses);
-
-                            for (int i = 1; i < cores.Length - 1; i++)
-                            {
-                                double fator1 = 1 - (Convert.ToDouble(i + 1) / nClasses);
-                                double fator2 = 1 - (Convert.ToDouble(nClasses - i - 1) / nClasses);
-
-                                //Convert o Brush para Color
-                                double Rf = R0 * fator1 + R1 * fator2;
-                                double Gf = G0 * fator1 + G1 * fator2;
-                                double Bf = B0 * fator1 + B1 * fator2;
-
-                                //Cria o objeto cor
-                                Color MyColor = new Color();
-
-                                //Set the color
-                                MyColor = Color.FromArgb((int)Rf, (int)Gf, (int)Bf);
-
-                                //Guarda a cor
-                                cores[i] = new SolidBrush(MyColor);
-                                coresRGB[i] = MyColor;
-                            }
-
-                            //Guarda cores
-                            classeCor = cores;
-
-                            //Converte para RGB
-                            for (int k = 1; k < cores.Length - 1; k++)
-                            {
-                                strCoresRGB[k] = System.Drawing.ColorTranslator.ToHtml((Color)coresRGB[k]);
-                            }
+                            //Guarda a cor
+                            cores[i] = new SolidBrush(MyColor);
+                            coresRGB[i] = MyColor;
                         }
-                        else
+
+                        //Guarda cores
+                        classeCor = cores;
+
+                        //Converte para RGB
+                        for (int k = 1; k < cores.Length - 1; k++)
                         {
-                            Random rnd = new Random();
-                            //Gerando vetor de cores aleatórias
-                            for (int l = 0; l < cores.Length; l++)
-                            {
-                                int r = rnd.Next(0, 256);
-                                int g = rnd.Next(0, 256);
-                                int b = rnd.Next(0, 256);
-                                Color rndColor = Color.FromArgb(r, g, b);
-                                cores[l] = new SolidBrush(rndColor);
-                                coresRGB[l] = rndColor;
-                            }
-
-                            //Guarda cores
-                            classeCor = cores;
-
-                            //Converte para RGB
-                            for (int k = 0; k < cores.Length; k++)
-                            {
-                                strCoresRGB[k] = System.Drawing.ColorTranslator.ToHtml((Color)coresRGB[k]);
-                            }
+                            strCoresRGB[k] = System.Drawing.ColorTranslator.ToHtml((Color)coresRGB[k]);
                         }
+                    }
+                    else
+                    {
+                        Random rnd = new Random();
+                        //Gerando vetor de cores aleatórias
+                        for (int l = 0; l < cores.Length; l++)
+                        {
+                            int r = rnd.Next(0, 256);
+                            int g = rnd.Next(0, 256);
+                            int b = rnd.Next(0, 256);
+                            Color rndColor = Color.FromArgb(r, g, b);
+                            cores[l] = new SolidBrush(rndColor);
+                            coresRGB[l] = rndColor;
+                        }
+
+                        //Guarda cores
+                        classeCor = cores;
+
+                        //Converte para RGB
+                        for (int k = 0; k < cores.Length; k++)
+                        {
+                            strCoresRGB[k] = System.Drawing.ColorTranslator.ToHtml((Color)coresRGB[k]);
+                        }
+                    }
                 }
 
                 frmMapa mm = new frmMapa();
@@ -758,8 +676,7 @@ namespace IpeaGeo.Forms
                 {
                     dataGridView1.Rows[i].Cells[1].Value = false;
                 }
-            }
-            
+            }           
         }
     }
 }
