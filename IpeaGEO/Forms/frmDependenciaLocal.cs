@@ -21,6 +21,7 @@ namespace IpeaGeo
                 ShapeInclude = value;
             }
         }
+        
         public RegressoesEspaciais.clsIpeaShape EstruturaShape
         {
             get
@@ -32,6 +33,7 @@ namespace IpeaGeo
                 shapeAlex = value;
             }
         }
+        
         private Brush[] classeCor;
         public Brush[] CoresParaMapa
         {
@@ -44,6 +46,7 @@ namespace IpeaGeo
                 classeCor = value;
             }
         }
+        
         private string[] strVariaveisQualitativas;
         public string[] VariaveisQualitativas
         {
@@ -56,6 +59,7 @@ namespace IpeaGeo
                 strVariaveisQualitativas = value;
             }
         }
+        
         private string[] strVariaveisQuantitativas;
         public string[] VariaveisQuantitativas
         {
@@ -82,7 +86,6 @@ namespace IpeaGeo
             }
         }
 
-
         private int[] classePoligonos;
         public int[] vetorPoligonos
         {
@@ -95,6 +98,7 @@ namespace IpeaGeo
                 classePoligonos = value;
             }
         }
+        
         private string strIDmapa;
         public string IdentificadorMapa
         {
@@ -133,6 +137,7 @@ namespace IpeaGeo
                 strID = value;
             }
         }
+        
         private DataTable dTable;
         public DataTable DataTableDados
         {
@@ -171,6 +176,7 @@ namespace IpeaGeo
                 aPintaLISA = value;
             }
         }
+        
         private ArrayList aPintaGETIS;
         public ArrayList GETISmapa
         {
@@ -183,6 +189,7 @@ namespace IpeaGeo
                 aPintaGETIS = value;
             }
         }
+        
         private ArrayList aEspalhamento;
         public ArrayList ESPALHAMENTOmapa
         {
@@ -195,6 +202,7 @@ namespace IpeaGeo
                 aEspalhamento = value;
             }
         }
+
         private ArrayList aPintaESCORE;
         public ArrayList ESCOREmapa
         {
@@ -207,6 +215,7 @@ namespace IpeaGeo
                 aPintaESCORE = value;
             }
         }
+        
         private string strCorrecao;
         public string CorrecaoProbabilidade
         {
@@ -219,6 +228,7 @@ namespace IpeaGeo
                 strCorrecao = value;
             }
         }
+        
         private string strTipoVizinhanca;
         public string TipoDeVizinhanca
         {
@@ -231,6 +241,7 @@ namespace IpeaGeo
                 strTipoVizinhanca = value;
             }
         }
+
         private string strNivelConfianca;
         public string Confiabilidade
         {
@@ -243,6 +254,7 @@ namespace IpeaGeo
                 strNivelConfianca = value;
             }
         }
+        
         private string strTipoCorrecao;
         public string TipoDeCorrecao
         {
@@ -255,6 +267,7 @@ namespace IpeaGeo
                 strTipoCorrecao = value;
             }
         }
+        
         private string strVarPOP;
         public string Populacao
         {
@@ -267,6 +280,7 @@ namespace IpeaGeo
                 strVarPOP = value;
             }
         }
+        
         private string[] strCoresRGB;
         public string[] CoresRGB
         {
@@ -293,11 +307,11 @@ namespace IpeaGeo
             }
         }
 
-
         public frmDependenciaLocal()
         {
             InitializeComponent();
         }
+
         private double[,] mDadosQuanti;
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -307,7 +321,6 @@ namespace IpeaGeo
                 progressBar1.Visible = true;
                 this.Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-
 
                 #region Guarda as variáveis
                 int cSelected1 = 0;
@@ -335,7 +348,6 @@ namespace IpeaGeo
                 }
                 else
                 {
-
                     #region Encontra a matriz de vizinhança
                     clsIpeaShape shp_dados = new clsIpeaShape();
                     if (shapeAlex.TipoVizinhanca == "")
@@ -372,51 +384,6 @@ namespace IpeaGeo
                         //RegressoesEspaciais.clsIpeaShape ShapeInclude = new RegressoesEspaciais.clsIpeaShape();
 
                         cps.DefinicaoVizinhos(ref shapeAlex, tipo_vizinhanca, ref progressBar1);
-
-
-                     // Comentado por Gabriela: Dezembro de 2011
-                    //    shp_dados = shapeAlex;
-                    //    double[,] matriz_vizinhos_ordem_1 = new double[shapeAlex.Count, shapeAlex.Count];
-                    //    for (int i = 0; i < shapeAlex.Count; i++)
-                    //    {
-                    //        for (int j = 0; j < shapeAlex.Count; j++)
-                    //        {
-                    //            if (shapeAlex[i].EstaNaListaVizinhos(j))
-                    //            {
-                    //                matriz_vizinhos_ordem_1[i, j] = 1;
-                    //                shp_dados[i].DeleteVizinho(j);
-                    //            }
-                    //            else matriz_vizinhos_ordem_1[i, j] = 0;
-                    //        }
-                    //    }
-                    //    if (tipo_vizinhanca == 3 || tipo_vizinhanca == 4)
-                    //    {
-                    //        for (int i = 0; i < matriz_vizinhos_ordem_1.GetLength(0); i++)
-                    //        {
-                    //            double somalinha = 0;
-                    //            for (int j = 0; j < matriz_vizinhos_ordem_1.GetLength(1); j++)
-                    //            {
-                    //                somalinha += matriz_vizinhos_ordem_1[i, j];
-                    //            }
-                    //            for (int j = 0; j < matriz_vizinhos_ordem_1.GetLength(1); j++)
-                    //            {
-                    //                matriz_vizinhos_ordem_1[i, j] = matriz_vizinhos_ordem_1[i, j] / somalinha;
-                    //            }
-
-                    //        }
-                    //    }
-                    //    //Adicionando os vizinhos ao shapealex
-                    //    for (int i = 0; i < matriz_vizinhos_ordem_1.GetLength(0); i++)
-                    //    {
-                    //        for (int j = 0; j < matriz_vizinhos_ordem_1.GetLength(1); j++)
-                    //        {
-                    //            clsAreaPerimetroCentroide clsa = new clsAreaPerimetroCentroide();
-
-                    //            double distancia = clsa.distancia(shapeAlex[i].YCentroide, shapeAlex[i].XCentroide, shapeAlex[j].YCentroide, shapeAlex[j].XCentroide, false);
-                    //            if (matriz_vizinhos_ordem_1[i, j] != 0) shp_dados[i].AddVizinho(shp_dados[j].Nome, j, distancia, matriz_vizinhos_ordem_1[i, j]);
-                    //        }
-
-                    //    }
                     }
 
                     #endregion
@@ -474,8 +441,8 @@ namespace IpeaGeo
                                 mDadosQuanti[j, mDadosQuanti.GetLength(1) - 1] = double.NaN;
                             }
                         }
-
                     }
+                    
                     #endregion
 
                     //clsIndicesLocaisDeDependenciaEspacial clsLocal = new clsIndicesLocaisDeDependenciaEspacial();
@@ -489,7 +456,6 @@ namespace IpeaGeo
                     {
                         clsLocal = new clsIndicesLocaisDeDependenciaEspacial(IpeaGeo.RegressoesEspaciais.TipoMatrizVizinhanca.Original);
                     }
-
 
                     ArrayList arEspalhamento = new ArrayList();
                     ArrayList arPintaMapaLisa = new ArrayList();
@@ -510,7 +476,6 @@ namespace IpeaGeo
                         strCorrecao = "Sidák";
                     }
 
-
                     int numColunas = mDadosQuanti.GetLength(1);
                     if (cmbPop.SelectedItem != null) numColunas--;
                     for (int i = 0; i < numColunas; i++)
@@ -522,14 +487,14 @@ namespace IpeaGeo
                             clsLocal.LISA(ref dTable, strIDmapa, mDadosQuanti, strVariaveisSelecionadasQuantitativas[i], i, shapeAlex, dblSig, ref arEspalhamento,
                             ref arPintaMapaLisa, ref progressBar1, ref labelProgress);
                         }
+                        
                         if (chkGetis.Checked)
                         {
-
                             ShapeInclude = shapeAlex.Clone();
                             for (int i2 = 0; i2 < shapeAlex.Count; i2++)
                             {
-                                ShapeInclude[i2].AddVizinho(i2);// o principal agora é adicionar o vizinho, mesmo que os pesos
-                                                              // estejam errados por hora, quando passar para esparsa vamos consertar.
+                                ShapeInclude[i2].AddVizinho(i2);  // o principal agora é adicionar o vizinho, mesmo que os pesos
+                                                                  // estejam errados por hora, quando passar para esparsa vamos consertar.
                             }
 
                             //Indice Getis
@@ -537,6 +502,7 @@ namespace IpeaGeo
                             clsLocal.Getis_Ord_Gi(ref dTable, strIDmapa, mDadosQuanti, strVariaveisSelecionadasQuantitativas[i], i, shapeAlex, ShapeInclude, dblSig,
                             ref arPintaMapaGetis, ref progressBar1, ref labelProgress);
                         }
+                        
                         if (chkGetis2.Checked)
                         {
                             //Indice Getis
@@ -552,7 +518,6 @@ namespace IpeaGeo
                             ref arPintaMapaEscore, ref progressBar1, ref labelProgress);
                         }
                     }
-
 
                     //OK
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -574,7 +539,6 @@ namespace IpeaGeo
                     #region Cores
                     classeCor = new Brush[5];
                     strCoresRGB = new string[5];
-
 
                     Color mCor0 = new Color();
                     mCor0 = Color.FromArgb(Color.White.ToArgb());
@@ -618,7 +582,6 @@ namespace IpeaGeo
             }
         }
 
-
         private void frmDependenciaLocal_Load(object sender, EventArgs e)
         {
             try
@@ -643,8 +606,6 @@ namespace IpeaGeo
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-  
 
         private void txtAltoAlto_MouseDown(object sender, MouseEventArgs e)
         {
@@ -679,7 +640,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 ColorDialog MyDialog = new ColorDialog();
 
                 // Keeps the user from selecting a custom color.
@@ -709,7 +669,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 ColorDialog MyDialog = new ColorDialog();
 
                 // Keeps the user from selecting a custom color.
@@ -739,7 +698,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 ColorDialog MyDialog = new ColorDialog();
 
                 // Keeps the user from selecting a custom color.
@@ -858,7 +816,6 @@ namespace IpeaGeo
             {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
     }
 }
