@@ -33,7 +33,6 @@ namespace IpeaGeo
             double distancia = Math.Acos(a + b) * 6371.0072;
 
             return (distancia);
-
         }
 
         /// <summary>
@@ -55,7 +54,6 @@ namespace IpeaGeo
             double distancia = Math.Acos(a + b) * 6371.0072;
 
             return (distancia);
-
         }
     }
 }
