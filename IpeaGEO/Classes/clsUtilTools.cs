@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace IpeaGeo
 {
-    #region Enumerações
+    #region EnumeraÃ§Ãµes
 
     public enum TipoMatrizVizinhanca : int
     {
@@ -27,3 +27,4 @@ namespace IpeaGeo
 
     #endregion
 }
+
