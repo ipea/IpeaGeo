@@ -16,6 +16,7 @@ namespace IpeaGeo
         {
             InitializeComponent();
         }
+        
         private bool blGeraRelatorio;
         public bool GeraRelatorio
         {
@@ -28,6 +29,7 @@ namespace IpeaGeo
                 blGeraRelatorio = value;
             }
         }
+        
         private DataTable dTable;
         public DataTable DataTableDados
         {
@@ -40,6 +42,7 @@ namespace IpeaGeo
                 dTable = value;
             }
         }
+        
         private string[] strCoresRGB;
         public string[] CoresRGB
         {
@@ -65,6 +68,7 @@ namespace IpeaGeo
                 classePoligonos = value;
             }
         }
+        
         private int numeroClusters;
         public int NumeroDeClusters
         {
@@ -77,6 +81,7 @@ namespace IpeaGeo
                 numeroClusters = value;
             }
         }
+
         private double[] vetPvalor;
         public double[] vetorPvalor
         {
@@ -89,6 +94,7 @@ namespace IpeaGeo
                 vetPvalor = value;
             }
         }
+        
         private double[] vetMonteCarlo;
         public double[] MonteCarlo
         {
@@ -127,6 +133,7 @@ namespace IpeaGeo
                 classeCor = value;
             }
         }
+        
         private string strIDmapa;
         public string IdentificadorMapa
         {
@@ -139,6 +146,7 @@ namespace IpeaGeo
                 strIDmapa = value;
             }
         }
+        
         private string strID;
         public string IdentificadorBase
         {
@@ -177,6 +185,7 @@ namespace IpeaGeo
                 varBase = value;
             }
         }
+        
         private string varEvento;
         public string VariavelEvento
         {
@@ -189,6 +198,7 @@ namespace IpeaGeo
                 varEvento = value;
             }
         }
+        
         private string strDistribuicao;
         public string Distribuicao
         {
@@ -214,6 +224,7 @@ namespace IpeaGeo
                 strSimulacoes = value;
             }
         }
+        
         private string strPontosGrid;
         public string NumeroDePontosGrid
         {
@@ -226,6 +237,7 @@ namespace IpeaGeo
                 strPontosGrid = value;
             }
         }
+
         private string strRaioMaximo;
         public string RaioMaximo
         {
@@ -238,6 +250,7 @@ namespace IpeaGeo
                 strRaioMaximo = value;
             }
         }
+        
         private string strRaioMinimo;
         public string RaioMinimo
         {
@@ -250,6 +263,7 @@ namespace IpeaGeo
                 strRaioMinimo = value;
             }
         }
+        
         private string strProporcaoMaxima;
         public string ProporcaoMaxima
         {
@@ -269,8 +283,8 @@ namespace IpeaGeo
         {
             try
             {
-
                 lblStatus.Text = "";
+                
                 //Cores
                 Color[] vetorCores = new Color[11];
                 vetorCores[0] = Color.White;
@@ -318,12 +332,11 @@ namespace IpeaGeo
                             coresVetor2[contador, 1] = vetorCores[j];
 
                             contador++;
-
                         }
                     }
                 }
 
-                //dai vc seta a fonte pro combobox
+                // seta a fonte pro combobox
                 this.cmbCores.DataSource = colorList;
                 this.cmbCores.DisplayMember = "Nome";
                 this.cmbCores.ValueMember = "Nome";
@@ -342,7 +355,6 @@ namespace IpeaGeo
                 cmbCores.SelectedIndex = 0;
                 cmbBase.SelectedIndex = 0;
                 cmbEvento.SelectedIndex = 0;
-
             }
             catch (Exception ex)
             {
@@ -366,14 +378,12 @@ namespace IpeaGeo
             {
                 get { return ColorName; }
             }
-
         }
 
         private void cmbCores_DrawItem_1(object sender, DrawItemEventArgs e)
         {
             try
             {
-
                 // Pega o item a ser pintado
                 GradientColor selectedItem = (GradientColor)this.cmbCores.Items[e.Index];
 
@@ -401,7 +411,6 @@ namespace IpeaGeo
                 Brush[] cores = new Brush[(int)numCluster.Value + 1];
                 Color[] coresRGB = new Color[(int)numCluster.Value + 1];
 
-
                 //Item escolhido do ComboBox de cores
                 int iTem = cmbCores.SelectedIndex;
 
@@ -416,11 +425,14 @@ namespace IpeaGeo
 
                 //Cores para HTML
                 strCoresRGB = new string[cores.Length];
+                
                 //Cria o objeto cor
                 Color mCor0 = new Color();
+                
                 //Set the color
                 mCor0 = Color.FromArgb(colors[0].ToArgb());
                 strCoresRGB[0] = System.Drawing.ColorTranslator.ToHtml(mCor0);
+                
                 //Cria o objeto cor
                 Color mCor1 = new Color();
                 mCor1 = Color.FromArgb(colors[1].ToArgb());
