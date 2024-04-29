@@ -21,15 +21,19 @@ namespace IpeaGeo
         public Jacobi()
         {
         }
+        
         public double[] Eigenvalues
         {
             get { return d; }
         }
+        
         public double[,] Eigenvectors
         {
             get { return v; }
         }
+        
         private double tresh, theta, tau, t, sm, s, h, g, c;
+        
         private void Rotate(double[,] a, int i, int j, int k, int l)
         {
             g = a[i, j];
@@ -37,6 +41,7 @@ namespace IpeaGeo
             a[i, j] = g - s * (h + g * tau);
             a[k, l] = h + s * (g - h * tau);
         }
+        
         public void jacobi(double[,] a) //only input parameters
         {
             int n = Convert.ToInt32(Math.Sqrt(a.Length));
@@ -56,6 +61,7 @@ namespace IpeaGeo
                 z[ip] = 0.0;   // This vector will accumulate terms of the form tapq.
             }
             nrot = 0;
+            
             try
             {
                 for (i = 1; i <= 50; i++)
@@ -120,11 +126,11 @@ namespace IpeaGeo
             } // end of try 
             catch (GeneralException)
             {
-                MessageBox.Show("O método de Jacobinão funciona para encontrar os autovetores e autovalores. É necessário usar outros métodos",
-                            "Método Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error,MessageBoxDefaultButton.Button1,
+                MessageBox.Show("O mÃ©todo de JacobinÃ£o funciona para encontrar os autovetores e autovalores. Ã‰ necessÃ¡rio usar outros mÃ©todos",
+                            "MÃ©todo InvÃ¡lido", MessageBoxButtons.OK, MessageBoxIcon.Error,MessageBoxDefaultButton.Button1,
                             MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
             }
         } // end of jacobi
     }
-
 }
+
