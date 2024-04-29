@@ -8,7 +8,7 @@ using IpeaGeo.RegressoesEspaciais;
 
 namespace IpeaGeo.GIS
 {
-#warning Broke this inheritance in the end of implementation.
+    #warning Broke this inheritance in the end of implementation.
     public class Map : clsMapa
     {
     } // class
