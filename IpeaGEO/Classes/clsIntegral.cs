@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace IpeaGeo
 {
-
     public class Integral
     {
         public Integral(double leftEndpoint, double size)
@@ -57,7 +56,6 @@ namespace IpeaGeo
         Simpson
     }
 
-
     public class DefiniteIntegral
     {
         public DefiniteIntegral(Func<double, double> integrand, Integral domain)
@@ -103,3 +101,4 @@ namespace IpeaGeo
         }
     }
 }
+
