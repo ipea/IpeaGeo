@@ -140,10 +140,8 @@ namespace IpeaGeo.Modelagem
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (ckbIncluirNovasVariaveisTabelaDados.Checked)
                 {
                     MessageBox.Show("Tabela de dados Atualizada", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -160,22 +158,18 @@ namespace IpeaGeo.Modelagem
                     lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
 
                     Cursor = Cursors.Default;
-
                 }
-
                 else
                 {
                     MessageBox.Show("Selecione a opção 'Mostrar novas variáveis na tabela de dados', localizada na aba Especificações", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     DialogResult = DialogResult.OK;
                 }
             }
-
             catch (Exception er)
             {
                 Cursor = Cursors.Default;
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-                               
+            }                               
         }
 
         private void FormBaseModelagem_Load(object sender, EventArgs e)
@@ -214,16 +208,12 @@ namespace IpeaGeo.Modelagem
                         tabControl1.TabPages.Remove(tabPage0);
                     }
                 }
-
-
-
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         
         private void btnExecutar_Click(object sender, EventArgs e)
         {
