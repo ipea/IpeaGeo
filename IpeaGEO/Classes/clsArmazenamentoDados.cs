@@ -51,8 +51,7 @@ namespace IpeaGeo.Classes
             legendas = legenda;
             variaveis = variavel;
             metodo_u = metodo;
-            cor1 = cor_selecioanda;
-                       
+            cor1 = cor_selecioanda;                     
         }
 
         public void CapturaDados(string nomeShape, string nomeBase, string nomedatafile, double zoom, double[] posicao_map, string endshape)
@@ -77,11 +76,10 @@ namespace IpeaGeo.Classes
             //salvarStatus();
         }
 
-
         #region Salvar xml
+            
         public void salvarStatus(string nome, string salvo)
         {
-
             // cria um XML com o status da base e malha abertos.
             // observar a pasta em que o arquivo deverá ser salvo.
             XmlTextWriter xml = new XmlTextWriter(nome + ".xml", null);
@@ -148,7 +146,6 @@ namespace IpeaGeo.Classes
                 xml.WriteEndElement();
             }
 
-
             // setimo elemento 
             if (legendas != null)
             {
@@ -167,6 +164,7 @@ namespace IpeaGeo.Classes
                 xml.WriteElementString("Titulo_Legenda", variaveis);
                 xml.WriteEndElement();
             }
+            
             if (metodo_u != null)
             {
                 xml.WriteStartElement("Metodo_Utilizado");
@@ -180,6 +178,7 @@ namespace IpeaGeo.Classes
                 xml.WriteElementString("Cor_Selecionada", cor1.ToString());
                 xml.WriteEndElement();
             }
+            
             if (zoom_mapa != null)
             {
                 xml.WriteStartElement("Zoom");
@@ -213,7 +212,6 @@ namespace IpeaGeo.Classes
 
             //encerra o xml
             xml.Close();
-
         }
 
         #endregion
@@ -276,7 +274,6 @@ namespace IpeaGeo.Classes
                     cores[i] = Color.FromArgb(Convert.ToInt32(xmlfile[i].InnerXml));
                 }
 
-
                 // retorna o vetor de legendas salvo
                 xmlfile = xml.GetElementsByTagName("Lista_de_Legendas");
                 legendas = new String[xmlfile.Count];
@@ -327,7 +324,6 @@ namespace IpeaGeo.Classes
                 else
                     mapa_tem = false;
 
-
                 GerenciaDados_XML();
             }
             catch
@@ -336,9 +332,7 @@ namespace IpeaGeo.Classes
                 Leitura_efetuada = false;
                 MessageBox.Show("Erro na leitura do arquivo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
-
 
         #endregion
 
@@ -352,7 +346,7 @@ namespace IpeaGeo.Classes
             Leitura = true;
             Leitura_efetuada = true;
 
-            string FileName = FileName = enderecoMapa;//path + @"\malhas\" + Shape + @".shp";
+            string FileName = FileName = enderecoMapa; //path + @"\malhas\" + Shape + @".shp";
             frmMapa Mapa = new frmMapa();
             Mapa.Text = "Layer Principal [" + Path.GetFileNameWithoutExtension(FileName) + "]";
             Mapa.Name = Path.GetFileNameWithoutExtension(FileName);
@@ -383,7 +377,6 @@ namespace IpeaGeo.Classes
             Leitura_efetuada = false;
 
             #endregion
-
         }
 
         #endregion 
@@ -413,9 +406,3 @@ namespace IpeaGeo.Classes
  * 
  * 
  */
-
-
-
-
-
-
