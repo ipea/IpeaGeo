@@ -7,7 +7,6 @@ namespace IpeaGeo.Modelagem
 {
     public class BLogicComponentesPrincipais : BLogicBaseModelagem
     {
-
         #region variáveis internas
 
         private double[] percentuais = new double[0];
@@ -108,16 +107,12 @@ namespace IpeaGeo.Modelagem
             if (ckbcorrel || ckbbartlet)
                 correlmatrix = clt.CorrSampleMatrix(X);
 
-        #endregion
-
             double[,] rij = new double[autovetorcorte.GetLength(0), autovetorcorte.GetLength(1)];
             #region Correlação entre componentes e Variáveis selecionadas;
 
             for (int i = 0; i < autovetorcorte.GetLength(0); i++)
                 for (int j = 0; j < autovetorcorte.GetLength(1); j++)
                     rij[i, j] = ((autovetorcorte[i, j]) * (Math.Sqrt(autovalorDcorte[j]))) / (Math.Sqrt(matrizbase[i, i]));
-
-            #endregion
 
             double soma = 0;
             string[] labelsautovalores = new string[p];
@@ -282,6 +277,7 @@ namespace IpeaGeo.Modelagem
             #endregion
 
             #region adicionando variveis base de dados
+            
             double[,] observacoes = new double[X.GetLength(0), 1];
 
             for (int i = 0; i < X.GetLength(0); i++)
@@ -307,6 +303,8 @@ namespace IpeaGeo.Modelagem
             AdicionaNovasVariaveisToDataTable(variaveis_geradas, nomes_variaveis);
 
             #endregion
-        } // EstimarComponentesPrincipais()
+        }  // EstimarComponentesPrincipais()
+
+        #endregion 
     } // class
 } // namespace
