@@ -70,3 +70,4 @@ namespace IpeaGeo.Modelagem
         abstract public void HabilitarDadosExternos();
     }
 }
+
