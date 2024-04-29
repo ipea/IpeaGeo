@@ -329,8 +329,7 @@ namespace IpeaGeo.Modelagem
         private static string tipodist_;
         public string tipodist = tipodist_;
         private void ExecutaTestes()
-        {
-            
+        {            
             clsUtilTools clt = new clsUtilTools();
             BLogicNonParametricTests blnp = new BLogicNonParametricTests();
             BLogicBaseModelagem blbm = new BLogicBaseModelagem();
@@ -866,14 +865,11 @@ namespace IpeaGeo.Modelagem
 
                 if (dados1.GetLength(0) < 2)
                 {
-
                     blnp.KS_Test(dados, out tstat_ks, out pvalor_ks);
 
                     for (int i = 0; i < dados.GetLength(1); i++)
                     {
-
                         out_text += "\n===================  Kolmogorov Smirnov - " + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + " " + cmbTipoDist.Text + " \n\n";
-
 
                         switch (cmbTipoDist.Text)
                         {
@@ -883,8 +879,6 @@ namespace IpeaGeo.Modelagem
                                 out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ N(" + clt.Double2Texto(clt.Mean(clt.SubColumnArrayDouble(dados, i)), 1) + ";" + clt.Double2Texto((clt.Despadc(clt.SubColumnArrayDouble(dados, i))[0, 0]) * Math.Sqrt((dados.GetLength(0)) / (dados.GetLength(0) - 1.0)), 2) + ").\n\n";
                                 out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks[i], 6) + "\n";
                                 out_text += "P-valor: " + clt.Double2Texto(pvalor_ks[i], 6) + "\n";
-
-
                                 break;
 
                             case "Exponencial":
@@ -893,7 +887,6 @@ namespace IpeaGeo.Modelagem
                                 out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ Exp(" + clt.Double2Texto(clt.Mean(clt.SubColumnArrayDouble(dados, i)), 1) + ").\n\n";
                                 out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks[i], 6) + "\n";
                                 out_text += "P-valor: " + clt.Double2Texto(pvalor_ks[i], 6) + "\n";
-
                                 break;
 
                             case "Uniforme":
@@ -902,7 +895,6 @@ namespace IpeaGeo.Modelagem
                                 out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ U(" + clt.Double2Texto(clt.Min(clt.SubColumnArrayDouble(dados, i)), 1) + ";" + clt.Double2Texto(clt.Maxc(clt.SubColumnArrayDouble(dados, i))[0, 0], 2) + ").\n\n";
                                 out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks[i], 6) + "\n";
                                 out_text += "P-valor: " + clt.Double2Texto(pvalor_ks[i], 6) + "\n\n\n\n";
-
                                 break;
 
                             case "Poisson":
@@ -911,25 +903,16 @@ namespace IpeaGeo.Modelagem
                                 out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ Pois(" + clt.Double2Texto(clt.Mean(clt.SubColumnArrayDouble(dados, i)), 1) + ").\n\n";
                                 out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks[i], 6) + "\n";
                                 out_text += "P-valor: " + clt.Double2Texto(pvalor_ks[i], 6) + "\n";
-
                                 break;
-
-
                         }
-
                     }
-
                 }
-
                 else
                 {
-
-
                     blnp.KS_Test2(dados, dados1, out tstat_ks2, out pvalor_ks2, out par1, out par2);
 
                     for (int i = 0; i < dados.GetLength(1); i++)
                     {
-
                         out_text += "\n===================  Kolmogorov Smirnov - " + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + " " + cmbTipoDist.Text + " \n\n";
 
                         for (int j = 0; j < tstat_ks2.GetLength(0); j++)
@@ -942,7 +925,6 @@ namespace IpeaGeo.Modelagem
                                     out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ N(" + clt.Double2Texto(par1[j, i], 2) + ";" + clt.Double2Texto(par2[j, i], 2) + ").\n\n";
                                     out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks2[j, (i + 1)], 6) + "\n";
                                     out_text += "P-valor: " + clt.Double2Texto(pvalor_ks2[j, (i + 1)], 6) + "\n\n\n";
-
                                     break;
 
                                 case "Exponencial":
@@ -951,7 +933,6 @@ namespace IpeaGeo.Modelagem
                                     out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ Exp(" + clt.Double2Texto(par1[j, i], 1) + ").\n\n";
                                     out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks2[j, (i + 1)], 6) + "\n";
                                     out_text += "P-valor: " + clt.Double2Texto(pvalor_ks2[j, (i + 1)], 6) + "\n\n\n";
-
                                     break;
 
                                 case "Uniforme":
@@ -960,7 +941,6 @@ namespace IpeaGeo.Modelagem
                                     out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ U(" + clt.Double2Texto(par1[j, i], 1) + ";" + clt.Double2Texto(par2[j, i], 2) + ").\n\n";
                                     out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks2[j, (i + 1)], 6) + "\n";
                                     out_text += "P-valor: " + clt.Double2Texto(pvalor_ks2[j, (i + 1)], 6) + "\n\n\n";
-
                                     break;
 
                                 case "Poisson":
@@ -969,23 +949,11 @@ namespace IpeaGeo.Modelagem
                                     out_text += "H1: f(" + userControlSelecaoDoisBlocosVariaveis1.VariaveisBlocoSuperior[i] + ") !~ Pois(" + clt.Double2Texto(par1[j, i], 1) + ").\n\n";
                                     out_text += "Estatística do Teste: " + clt.Double2Texto(tstat_ks2[j, (i + 1)], 6) + "\n";
                                     out_text += "P-valor: " + clt.Double2Texto(pvalor_ks2[j, (i + 1)], 6) + "\n\n\n";
-
                                     break;
-
-
                             }
-
-
                     }
-
-
                 }
             }
-                //
-                //
-
-
-
 
             if (ckbQQajust.Checked)
             {
@@ -1232,8 +1200,7 @@ namespace IpeaGeo.Modelagem
                     tabControl1.TabPages.Add(tabPage2);
 
             #endregion
-
-            
+           
         }// ExecutaTestes()
 
         #endregion
@@ -1254,9 +1221,6 @@ namespace IpeaGeo.Modelagem
                 MessageBox.Show(er.Message, "Teste não paramétrico", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } // catch
         } // btnExecutar_Click()
-        //}
-        //{
-
         //}
 
         private bool marcar = false;
@@ -1296,7 +1260,6 @@ namespace IpeaGeo.Modelagem
             }
         }
     }
-
 
     //private void cmbTipoTestT_SelectedIndexChanged_1(object sender, EventArgs e)
 }
