@@ -32,9 +32,9 @@ namespace IpeaGeo
             }
             return (iConta);
         }
-       
-
-        Random rnd = new Random(2125);
+     
+        Random rnd = new Random(2104);
+        
         private void PreencheComConglomerados(ref clsIpeaShape mShape,int iPreenche,int indiceCluster)
         {
             //Escolhe-se um poligono inicial aleatoriamente
@@ -85,7 +85,6 @@ namespace IpeaGeo
                     }
                 }
             } while (arVizinhos.Count > 0 && iConta < iPreenche);
-
         }
 
         public clsIpeaShape PopulacaoInicial(clsIpeaShape mShape, int nClusters)
@@ -105,7 +104,6 @@ namespace IpeaGeo
                 PreencheComConglomerados(ref mShapeInicial, iPreenche, i);
             }
 
-            //TODO:DELETAR ESSE CODIGO
             FileInfo t0 = new FileInfo(@"F:\IpeaGEO e Componentes\IpeaGEO1.txt");
             StreamWriter Tex0 = t0.CreateText();
             Tex0.WriteLine("ID_\tCLUSTER");
@@ -115,7 +113,6 @@ namespace IpeaGeo
             }
             Tex0.Close();
 
-            //Concerta Brancos
             int[] iBrancos = VetorPoligonosSemConglomerados(mShapeInicial);
             if (iBrancos.Length > 0)
             {
@@ -132,7 +129,6 @@ namespace IpeaGeo
                 }
             }
 
-            //TODO:DELETAR ESSE CODIGO
             FileInfo t = new FileInfo(@"F:\IpeaGEO e Componentes\IpeaGEO2.txt");
             StreamWriter Tex = t.CreateText();
             Tex.WriteLine("ID_\tCLUSTER");
@@ -144,8 +140,7 @@ namespace IpeaGeo
 
             return (mShapeInicial);
         }
-
-
+        
         #endregion
     }
 }
