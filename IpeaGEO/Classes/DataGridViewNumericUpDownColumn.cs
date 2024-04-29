@@ -5,12 +5,9 @@ using System.Windows.Forms;
 
 namespace IpeaGeo
 {
-
     public class DataGridViewNumericUpDownColumn : DataGridViewColumn
     {
-
         public DataGridViewNumericUpDownColumn() : base(new DataGridViewNumericUpDownCell()) { }
-
     }
 
     public class DataGridViewNumericUpDownCell : DataGridViewTextBoxCell
@@ -58,12 +55,10 @@ namespace IpeaGeo
             base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
             ((DataGridViewNumericUpDownControl)this.DataGridView.EditingControl).Value = decimal.Parse(this.Value.ToString());
         }
-
     }
 
     public class DataGridViewNumericUpDownControl : NumericUpDown, IDataGridViewEditingControl
     {
-
         private DataGridView _dataGridView;
         private int _rowIndex;
         private bool _valueChanged = false;
@@ -376,5 +371,4 @@ namespace IpeaGeo
     //        base.OnValueChanged(eventargs);
     //    }
     //}
-
 }
