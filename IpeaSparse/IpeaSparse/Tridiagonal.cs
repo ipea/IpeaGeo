@@ -46,7 +46,5 @@ namespace IpeaSparse
                 (1.0 + z[0] + beta * z[n - 1] / gamma);
             for (i = 0; i < n; i++) x[i] -= fact * z[i];
         }
-
-
     }
 }
