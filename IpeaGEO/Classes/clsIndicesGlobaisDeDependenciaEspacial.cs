@@ -49,11 +49,11 @@ namespace IpeaGeo
             mMedias = clsUtil.VetorMedias(mDados);
 
             //Variável
-
             for (int j = 0; j < mDados.GetLength(1); j++)
             {
                 double dblSomaQuadrados = 0;
                 double somaPeso = 0;
+                
                 //Polígono
                 for (int i = 0; i < mDados.GetLength(0); i++)
                 {
@@ -88,6 +88,7 @@ namespace IpeaGeo
             double[] pValor = new double[mDados.GetLength(1)];
             Random rnd = new Random();
             pBar.Maximum = mDados.GetLength(1) * mDados.GetLength(0);
+            
             //Guarda os dados que serão randomizados
             int[] intDadosTemp = new int[mDados.GetLength(0)];
             for (int r = 0; r < intDadosTemp.Length; r++) intDadosTemp[r] = r;
@@ -136,6 +137,7 @@ namespace IpeaGeo
                                 mMoran[j] += (desvio1 * (mDados[iVizinhoBase, j] - mMedias[j])) * peso;
                                 somaPeso += peso;
                             }
+                            
                             //Incrementa a progress bar
                             pBar.Increment(1);
                             Application.DoEvents();
