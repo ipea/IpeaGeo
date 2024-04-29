@@ -15,7 +15,7 @@ namespace IpeaGeo.Classes
         public static string[] ListaEstilosLinha = new string[] { "Padrão", "Traço", "Traço ponto", "Traço ponto ponto", "Ponto", "Sólido" };
         public static string[] ListaEstilosFill = new string[] { "Sólido", "Hachureado - zigzag", "Hachureado - diagonal", "Hachureado - diagonal invertido" };
         public static string[] ListaEstilosMarcadores = new string[] { "Ponto pequeno", "Ponto médio", "Ponto grande", 
-            "Quadrado pequeno", "Quadrado médio", "Quadrado grande", "X pequeno", "X médio", "X grande", "Círculo e X" };
+                                                                       "Quadrado pequeno", "Quadrado médio", "Quadrado grande", "X pequeno", "X médio", "X grande", "Círculo e X" };
 
         private Color _iFillColor;
         private double _iLineWidth;
@@ -45,6 +45,7 @@ namespace IpeaGeo.Classes
                     return i;
                 }
             }
+            
             return indice;
         }
 
@@ -92,6 +93,7 @@ namespace IpeaGeo.Classes
         {
             StringBuilder v = new StringBuilder();
             object[] itens = dr.ItemArray;
+            
             for (int i=0; i<_colunasChave.Count; i++)
             {
                 v.Append(itens[(int)_colunasChave[i]].ToString());
