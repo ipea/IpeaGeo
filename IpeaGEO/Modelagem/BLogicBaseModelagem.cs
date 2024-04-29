@@ -940,14 +940,12 @@ namespace IpeaGeo.Modelagem
             if ("P-valor".Length > max_length_pvalue) max_length_pvalue = "P-valor".Length;
             if ("Odds Ratio".Length > max_length_oddsratio) max_length_oddsratio = "Odds Ratio".Length;
 
-
             max_length_variaveis += 2;
             max_length_beta += 6;
             max_length_pvalue += 6;
             max_length_stderror += 6;
             max_length_tstat += 6;
             max_length_oddsratio += 6;
-
 
             string res = "";
 
@@ -972,8 +970,6 @@ namespace IpeaGeo.Modelagem
 
             return res;
         }
-
-        //TODO: mudei a visibilidade desse método e o declarei como static. Poderiamos mudar também para os metodos do clsUtilTools(Cauê)
 
         public static string PreencheEspacos(int n)
         {
@@ -1112,17 +1108,14 @@ namespace IpeaGeo.Modelagem
             return out_text + a;
         }
 
-
         #region Output Correlação;
 
         public string Analisedecorrelacao()
         {
             clsUtilTools clt = new clsUtilTools();
 
-
             double[,] X = clt.GetMatrizFromDataTable(this.m_dt_tabela_dados, VariaveisIndependentes);
-          
-
+         
             double[,] corr_mat = clt.CorrSampleMatrix(X);
 
             string out_text = "";
@@ -1131,16 +1124,12 @@ namespace IpeaGeo.Modelagem
 
             out_text += this.GeraTabelaCovMatrix(corr_mat, VariaveisIndependentes, false);
 
-            out_text += "\n";
-
-            
+            out_text += "\n";            
             
             return out_text; 
         }
 
         #endregion
-
-
 
         #endregion
     }
