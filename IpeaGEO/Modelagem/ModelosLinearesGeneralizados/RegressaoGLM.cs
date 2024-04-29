@@ -140,7 +140,6 @@ namespace IpeaGeo.Modelagem
         {
             try
             {
-
                 if (ckbIncluirNovasVariaveisTabelaDados.Checked)
                 {
                     MessageBox.Show("Tabela de dados Atualizada", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -157,16 +156,13 @@ namespace IpeaGeo.Modelagem
                     lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
 
                     Cursor = Cursors.Default;
-
                 }
-
                 else
                 {
                     MessageBox.Show("Selecione a opção 'Mostrar novas variáveis na tabela de dados', localizada na aba Especificações", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     DialogResult = DialogResult.OK;
                 }
             }
-
             catch (Exception er)
             {
                 Cursor = Cursors.Default;
@@ -358,13 +354,11 @@ namespace IpeaGeo.Modelagem
                             {
                                 MessageBox.Show("A variável dependente deve ser positiva.","Modelos Lineares Generalizados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
-                            }
-                        
+                            }                        
                         }
                         break;
 
                     case "Bernoulli":
-
                         blglm.Distribuicao = BLogicRegressaoGLM.DistribuicoesGLM.Bernoulli;
 
                         clt.FrequencyTable(ref num_cat, Y);
@@ -377,6 +371,7 @@ namespace IpeaGeo.Modelagem
                         }
 
                         break;
+                        
                     case "Gamma":
                         blglm.Distribuicao = BLogicRegressaoGLM.DistribuicoesGLM.Gamma;
 
@@ -387,9 +382,9 @@ namespace IpeaGeo.Modelagem
                                 MessageBox.Show("A variável dependente deve ser positiva.", "Modelos Lineares Generalizados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-
                         }
                         break;
+                        
                     case "Geométrica":
                         blglm.Distribuicao = BLogicRegressaoGLM.DistribuicoesGLM.Geometrica;
 
@@ -403,6 +398,7 @@ namespace IpeaGeo.Modelagem
 
                         }
                         break;
+                        
                     case "Gaussiana Inversa":
                         blglm.Distribuicao = BLogicRegressaoGLM.DistribuicoesGLM.InverseGaussian;
 
@@ -413,9 +409,9 @@ namespace IpeaGeo.Modelagem
                                 MessageBox.Show("A variável dependente deve ser positiva.", "Modelos Lineares Generalizados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-
                         }
                         break;
+                        
                     case "Binomial Negativa":
                         blglm.Distribuicao = BLogicRegressaoGLM.DistribuicoesGLM.BinomialNegativa;
                         for (int i = 0; i < Y.GetLength(0); i++)
@@ -425,9 +421,9 @@ namespace IpeaGeo.Modelagem
                                 MessageBox.Show("A variável dependente deve ser positiva.", "Modelos Lineares Generalizados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-
                         }
                         break;
+                        
                     default:
                         break;
                 }
@@ -473,13 +469,11 @@ namespace IpeaGeo.Modelagem
                     {
                         blg.GerarDummies(ref m_dt_tabela_dados, variavel_dependente);
 
-                         DialogResult disp = MessageBox.Show("Deseja utilizar a categoria " + num_cat[0, 0].ToString() + " como 'sucesso' (valor 1 na variável de Bernoulli)? Caso deseje usar a outra categoria selecione 'Não'.", "Modelos Lineares Generalizados", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult disp = MessageBox.Show("Deseja utilizar a categoria " + num_cat[0, 0].ToString() + " como 'sucesso' (valor 1 na variável de Bernoulli)? Caso deseje usar a outra categoria selecione 'Não'.", "Modelos Lineares Generalizados", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                         if (disp == DialogResult.Yes)
+                        if (disp == DialogResult.Yes)
                         {
-
-                            blglm.VariaveisDependentes[0] = variavel_dependente[0] + "_" + num_cat[0, 0].ToString();
-                        
+                            blglm.VariaveisDependentes[0] = variavel_dependente[0] + "_" + num_cat[0, 0].ToString();                        
                         }
 
                         else
@@ -487,14 +481,11 @@ namespace IpeaGeo.Modelagem
                             blglm.VariaveisDependentes[0] = variavel_dependente[0] + "_" + num_cat[1, 0].ToString();
                         }
                     }
-
-
                 }
 
                 blglm.TabelaDados = this.m_dt_tabela_dados;
 
                 blglm.EstimaModeloGLM(ref residuos_brutos, estima_phi, Convert.ToDouble(m_k_binomialneg), Convert.ToDouble(m_alphapower));
-
 
                 this.userControlRichTextOutput1.Texto += blglm.ResultadoEstimacao + "\n\n";
                 this.userControlRichTextOutput2.Texto = blglm.VariaveisGeradas + "\n\n";
@@ -505,17 +496,16 @@ namespace IpeaGeo.Modelagem
                 zedGraphControl1.GraphPane.CurveList.Clear();
                 zedGraphControl1.GraphPane.GraphObjList.Clear();
 
-
                 GraphPane myPane2 = zedGraphControl2.GraphPane;
                 PointPairList listPP = new PointPairList();
                 PointPairList retaPP = new PointPairList();
                 zedGraphControl2.GraphPane.CurveList.Clear();
                 zedGraphControl2.GraphPane.GraphObjList.Clear();
 
-
                 if (ckbAnaliseGrafica.Checked)
                 {
                     #region Histograma dos Erros
+                    
                     //Calcula o número de classes segundo Regra de Sturges numclass = 1 + 3.3 log(n)
                     int numclassesSturges = new int();
                     double amplitudehist = new double();
@@ -530,6 +520,7 @@ namespace IpeaGeo.Modelagem
                         Xhist[i] = ((clt.Minc(residuos_brutos)[0, 0]) + (incrementohist * ((double)i)));
                     }
                     double temp = new double();
+                    
                     for (int i = 0; i < residuos_brutos.GetLength(0); i++)
                     {
                         for (int j = 0; j < numclassesSturges; j++)
@@ -553,11 +544,7 @@ namespace IpeaGeo.Modelagem
                         myPane.YAxis.Scale.Max = (double)clt.Max(Yhist) + (((double)clt.Max(Yhist) - (double)clt.Min(Yhist)) / (double)Yhist.GetLength(0));
                         myPane.XAxis.Scale.Min = (double)clt.Min(Xhist) - (((double)clt.Max(Xhist) - (double)clt.Min(Xhist)) / (double)Xhist.GetLength(0));
                         myPane.XAxis.Scale.Max = (double)clt.Max(Xhist) + (((double)clt.Max(Xhist) - (double)clt.Min(Xhist)) / (double)Xhist.GetLength(0));
-
                     }
-
-
-
 
                     myPane.Title.Text = "Histograma dos Erros";
                     myPane.XAxis.Title.Text = "Resíduos";
@@ -565,8 +552,6 @@ namespace IpeaGeo.Modelagem
                     zedGraphControl1.AxisChange();
                     zedGraphControl1.Update();
                     zedGraphControl1.Refresh();
-
-
 
                     if (!this.tabControl1.TabPages.Contains(tabPage3))
                     {
@@ -579,14 +564,12 @@ namespace IpeaGeo.Modelagem
 
                     if (cmbDistribuicao.SelectedItem.ToString() == "Normal")
                     {
-
                         //double mediaX = (clt.Meanc(erro))[0, 0];
                         //double varianX = clt.Varianciac(erro)[0, 0];
                         double[,] acumuladanormal = new double[residuos_brutos.GetLength(0), 1];
                         double[,] acumuladadados = new double[residuos_brutos.GetLength(0), 1];
                         double[] retaponto = new double[residuos_brutos.GetLength(0)];
                         retaponto[0] = 0;
-
 
                         //MathNormaldist norm = new MathNormaldist(mediaX, Math.Sqrt(varianX));
                         residuos_brutos = clt.SortcDoubleArray(residuos_brutos);
@@ -612,7 +595,6 @@ namespace IpeaGeo.Modelagem
                         myCurve1.Symbol.Fill.Color = Color.Blue;
                         myCurve1.Label.IsVisible = false;
 
-
                         myPane2.YAxis.Scale.Min = 0.0;
                         myPane2.YAxis.Scale.Max = 1.0;
                         myPane2.XAxis.Scale.Min = 0.0;
@@ -626,13 +608,12 @@ namespace IpeaGeo.Modelagem
                             tabControl1.TabPages.Add(tabPage5);
                         }
                     }
+                    
                     /*
                     if (cmbDistribuicao.SelectedItem.ToString() == "Poisson")
                     {
-                    
                         PointPairList list1 = new PointPairList();
-                        PointPairList reta = new PointPairList();
-                   
+                        PointPairList reta = new PointPairList();                   
 
                         zedGraphControl1.GraphPane.CurveList.Clear();
                         zedGraphControl1.GraphPane.GraphObjList.Clear();
@@ -649,7 +630,6 @@ namespace IpeaGeo.Modelagem
                         MathPoissondist poisson = new MathPoissondist(mediaX);
                         //bnp.PP_plot_1Variavel(variavelpp, out qqdadosv, out  qqnormalv);
 
-
                         double[,] sdados = clt.SortcDoubleArray(residuos_brutos);
 
                         int n = sdados.GetLength(0);
@@ -660,7 +640,6 @@ namespace IpeaGeo.Modelagem
                             qqdadosv[i, 0] = ((double)i / (double)n);
                             qqpoissonv[i, 0] = poisson.cdf(sdados[i, 0]);
                         }
-
 
                         for (int i = 0; i < qqdadosv.GetLength(0); i++)
                         {
@@ -703,10 +682,7 @@ namespace IpeaGeo.Modelagem
                     zedGraphControl1.Refresh();
 
                     #endregion
-
-
                 }
-
 
                 #endregion
 
@@ -746,14 +722,10 @@ namespace IpeaGeo.Modelagem
                 //deletar colunas criadas
                 if (num_cat.GetLength(0) == 2 && cmbDistribuicao.SelectedItem.ToString() == "Bernoulli")
                 {
-
                     m_dt_tabela_dados.Columns.Remove(variavel_dep_aux + "_" + num_cat[0, 0]);
-                    m_dt_tabela_dados.Columns.Remove(variavel_dep_aux + "_" + num_cat[1, 0]); 
-                    
+                    m_dt_tabela_dados.Columns.Remove(variavel_dep_aux + "_" + num_cat[1, 0]);                     
                 }
             }
-
-
             catch (Exception er)
             {
                 if (num_cat.GetLength(0) == 2 && cmbDistribuicao.SelectedItem.ToString() == "Bernoulli")
@@ -766,7 +738,6 @@ namespace IpeaGeo.Modelagem
                 }
                 Cursor = Cursors.Default;
                 MessageBox.Show(er.Message, "Modelos Lineares Generalizados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
             }
         }
 
@@ -791,7 +762,6 @@ namespace IpeaGeo.Modelagem
         {
             try
             {
-
                 if (cmbDistribuicao.SelectedItem.ToString() == "Binomial Negativa")
                 {
                     numericUpDown1.Visible = true;
@@ -802,9 +772,7 @@ namespace IpeaGeo.Modelagem
                 {
                     numericUpDown1.Visible = false;
                     label3.Visible = false;
-                }
-
-               
+                }               
             }
             catch (Exception er)
             {
