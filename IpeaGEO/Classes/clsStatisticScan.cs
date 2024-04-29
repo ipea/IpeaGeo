@@ -10,13 +10,12 @@ using SharpMap.Data.Providers;
 using System.Drawing;
 using System.Collections;
 
-
 namespace IpeaGeo
 {
     class clsStatisticScan
     {
-
         #region Funções operacionais
+            
         /// <summary>
         /// Calcula a distancia pelo método de Haversine
         /// </summary>
@@ -50,10 +49,12 @@ namespace IpeaGeo
                 p3 = (C - cz) * (Math.Log(C - cz) - Math.Log(N - nz));
                 p4 = (N - nz - C + cz) * (Math.Log(N - nz - C + cz) - Math.Log(N - nz));
                 numerador = p1 + p2 + p3 + p4;
+                
                 //denominador
                 d1 = C * Math.Log(C);
                 d2 = (N - C) * Math.Log(N - C) - N * Math.Log(N);
                 denominador = d1 + d2;
+                
                 //saida
                 return (numerador / denominador);
             }
@@ -62,6 +63,7 @@ namespace IpeaGeo
                 return 0.0;
             }
         }
+        
         private double lambdaZpoisson(double N, double C, double nz, double cz)
         {
             if (cz > (nz * (C / N)))
@@ -86,6 +88,7 @@ namespace IpeaGeo
                     iIndex = i;
                 }
             }
+            
             return (iIndex);
         }
 
@@ -101,11 +104,11 @@ namespace IpeaGeo
                     iIndex = i;
                 }
             }
+            
             return (min);
         }
 
         #endregion
-
 
         #region Inferência Estatística
 
@@ -146,16 +149,13 @@ namespace IpeaGeo
             double p1 = (mu - p) / beta;
             double p2 = -Math.Exp(p1);
             double p3 = Math.Exp(p2);
+            
             return (1 - p3);
         }
 
         #endregion
 
-
         #region Estatística Scan
-
-
-
 
         private void guardaMelhorP(double dblRazaoVerossimilhanca, ArrayList iPoligonos, ref int[,] strRegioes, ref double[] maxLLR, int numCluster)
         {
@@ -234,6 +234,7 @@ namespace IpeaGeo
                         {
                             pX = bBox.Min.X;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -241,6 +242,7 @@ namespace IpeaGeo
                         {
                             pX += fatorX;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -255,6 +257,7 @@ namespace IpeaGeo
                         {
                             pX = bBox.Min.X;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -262,6 +265,7 @@ namespace IpeaGeo
                         {
                             pX += fatorX;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -280,7 +284,6 @@ namespace IpeaGeo
             ArrayList listaDistancias = new ArrayList();
             int[] listaPoligonos = new int[dataTable.Rows.Count];
             ArrayList listaPoligonosID = new ArrayList();
-
 
             double N = 0, C = 0;
 
@@ -309,6 +312,7 @@ namespace IpeaGeo
                         {
                             C += Convert.ToDouble(dataTable.Rows[j][strCasos]);
                         }
+                        
                         if (dataTable.Rows[j][strTotal].ToString() != "")
                         {
                             N += Convert.ToDouble(dataTable.Rows[j][strTotal]);
@@ -397,7 +401,6 @@ namespace IpeaGeo
                 //Incrementa a progress bar
                 progressBar.Increment(1);
             }
-
 
             //Guarda o vetor de clusters
             int[] iVetor = new int[strRegioes.GetLength(0)];
@@ -566,6 +569,7 @@ namespace IpeaGeo
                         {
                             pX = bBox.Min.X;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -573,6 +577,7 @@ namespace IpeaGeo
                         {
                             pX += fatorX;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -587,6 +592,7 @@ namespace IpeaGeo
                         {
                             pX = bBox.Min.X;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -594,6 +600,7 @@ namespace IpeaGeo
                         {
                             pX += fatorX;
                             pontosGrid.Add(new PointF((float)pX, (float)pY));
+                            
                             //Incrementa a progress bar
                             progressBar.Increment(1);
                         }
@@ -612,7 +619,6 @@ namespace IpeaGeo
             ArrayList listaDistancias = new ArrayList();
             int[] listaPoligonos = new int[dataTable.Rows.Count];
             ArrayList listaPoligonosID = new ArrayList();
-
 
             double N = 0, C = 0;
 
@@ -724,9 +730,9 @@ namespace IpeaGeo
                 progressBar.Increment(1);
             }
 
-
             //Guarda o vetor de clusters
             int[] iVetor = new int[strRegioes.GetLength(0)];
+            
             for (int c = 0; c < numCluster; c++)
             {
                 for (int i = 0; i < strRegioes.GetLength(0); i++)
@@ -842,6 +848,5 @@ namespace IpeaGeo
             return (iVetor);
         }
         #endregion
-
     }
 }
