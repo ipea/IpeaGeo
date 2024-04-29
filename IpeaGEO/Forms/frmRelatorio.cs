@@ -286,7 +286,6 @@ namespace IpeaGeo
         {
             try
             {
-                //http://www.gutgames.com/post/HTML-to-PDF.aspx
                 //TODO:http://www.codeproject.com/KB/graphics/iTextSharpTutorial.aspx
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -349,7 +348,6 @@ namespace IpeaGeo
                             else
                             {
                                 pdf.RelatorioPDF_MapaTematico(FileName, enderecoBase, enderecoMapa, endMapa, shapeCount, metodo, classesMapaReg, coresMapaReg, varMapa);
-
                             }
                         }
                         
