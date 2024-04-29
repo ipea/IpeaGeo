@@ -41,7 +41,6 @@ namespace IpeaGeo.Modelagem
             }
         }
 
-
         protected double tolerancia = 0.0;
         public double ValorTolerancia
         {
@@ -395,9 +394,7 @@ namespace IpeaGeo.Modelagem
             med_resumos[3] = "Desvio";
             med_resumos[4] = "Mínimo";
             med_resumos[5] = "Máximo";
-
-            
-
+          
             for (int j = 0; j < svar.Length; j++)
             {
                 int contador1 = 0;
@@ -408,8 +405,7 @@ namespace IpeaGeo.Modelagem
                     aux[contador1, 2] = resumos[1, i];
                     aux[contador1, 3] = resumos[2, i];
                     aux[contador1, 4] = resumos[3, i];
-                    aux[contador1, 5] = resumos[4, i];
-                    
+                    aux[contador1, 5] = resumos[4, i];                    
 
                     contador1 += 1;
                 }
@@ -422,13 +418,8 @@ namespace IpeaGeo.Modelagem
                 m_medidas_resumo += "\n";
 
                 m_medidas_resumo += resultado2;
-                m_medidas_resumo += "\n";
-
-                
-
+                m_medidas_resumo += "\n";              
             }
-
-
 
             #endregion
 
@@ -1378,12 +1369,9 @@ namespace IpeaGeo.Modelagem
                     taxa[i, 0] = taxa[i, 0] * m_valor_multiplicador_taxas;
                 }
             }
-
-
+            
             return (taxa);
         }
-
-
 
         private double[,] TaxaBayesClaytonLogNEsp(double[] populacao, double[] casos)
         {
@@ -1402,7 +1390,6 @@ namespace IpeaGeo.Modelagem
                 somacasos += casos[i];
             }
             double taxaglobal = somacasos / somapop;
-
                  
             for (int i = 0; i < populacao.GetLength(0); i++)
             {
@@ -1410,6 +1397,7 @@ namespace IpeaGeo.Modelagem
                 valores_observados[i] = casos[i];
                 risco[i] = (valores_observados[i] + 0.5) / (valores_esperados[i] + 0.000001);
             }
+            
             double[] b_new = new double[populacao.GetLength(0)];
             double sigma2_old = 0.0;
             double phi_old = 0.0;
@@ -1436,7 +1424,6 @@ namespace IpeaGeo.Modelagem
                 sigma2_old += Math.Pow((b_new[i] - phi_old), 2);
             }
             sigma2_old /= (double)(populacao.GetLength(0) - 1);
-
 
             double aux3 = 0.0;
             for (int i = 0; i < populacao.GetLength(0); i++)
@@ -1466,7 +1453,6 @@ namespace IpeaGeo.Modelagem
             while ((Math.Abs(sigma2_old - sigma2_new) > (Math.Abs(sigma2_old - sigma2_new) * tolerancia) || Math.Abs(phi_old - phi_new) > (Math.Abs(phi_old - phi_new) * tolerancia)) &&
                    (num_iterations <= simulacoes))
             {
-
                 sigma2_old = sigma2_new;
                 phi_old = phi_new;
                 phi_new = m_clt.Mean(b_new);
@@ -1511,8 +1497,6 @@ namespace IpeaGeo.Modelagem
 
                 taxa[i, 0] = soma / (shape[i].NumeroVizinhos + 1);
             }
-
-
 
             if (m_usa_multiplicador_taxas)
             {
