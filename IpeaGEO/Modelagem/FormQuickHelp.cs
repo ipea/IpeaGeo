@@ -18,7 +18,6 @@ namespace IpeaGeo.Modelagem
 
         private void FormQuickHelp_Load(object sender, EventArgs e)
         {
-
         }
 
         public string TipoModelo
