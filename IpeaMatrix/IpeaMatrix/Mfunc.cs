@@ -45,7 +45,6 @@ namespace IpeaMatrix
             return res;
         }
 
-        //TODO: Conferir com o Alex se essa é a definição formal de A^p
         public static Matrix Pow(Matrix a,double p)
         {
             for (int i = 0; i < a.GetLength(0); i++)
