@@ -156,6 +156,7 @@ namespace IpeaGeo.Modelagem
                     }
                     nmedias[ind_seed[i]]++;
                 }
+                
                 for (int k = 0; k < medias.GetLength(0); k++)
                 {
                     for (int j = 0; j < medias.GetLength(1); j++)
