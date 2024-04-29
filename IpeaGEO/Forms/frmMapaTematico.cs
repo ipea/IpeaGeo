@@ -479,11 +479,13 @@ namespace IpeaGeo
                 { value = (int)numClasses.Value; }
 
                 double[] desvios = new double[7] { 1, 0.8, 0.6, 0.5, 0.4, 0.2, 0.1 };
+                
                 //Guarda as classes do mapa
                 double[] dblClasseMapa = new double[value /*(int)numClasses.Value*/];
 
                 //Tipo do dados
                 string strTipo = dTable.Columns[VariavelEscolhida].DataType.ToString();
+                
                 if (bool_quantitativo)
                 {
                     if (strTipo != "System.String")
@@ -493,7 +495,6 @@ namespace IpeaGeo
                         if (MetodoEscolhido == "Quantil")
                         {
                             classePoligonos = classeMapa.criaQuantis(dTable, VariavelEscolhida, strIDmapa, strID, value /*(int)numClasses.Value*/, ref dblClasseMapa);
-
                         }
                         else if (MetodoEscolhido == "Jenks (Natural Breaks)")
                         {
@@ -548,7 +549,6 @@ namespace IpeaGeo
                         }
 
                         //Cores
-
                         cores = new Brush[(int)numClasses.Value];
                         coresRGB = new Color[(int)numClasses.Value];
                         strCoresRGB = new string[cores.Length];
@@ -558,7 +558,6 @@ namespace IpeaGeo
                         {
                             if (armazena.Leitura_efetuada == false)
                             {                               
-
                                 //Item escolhido do ComboBox de cores
                                 int iTem = cor/*cmbCores.SelectedIndex*/;
 
@@ -573,11 +572,14 @@ namespace IpeaGeo
 
                                 //Cores para HTML
                                 strCoresRGB = new string[cores.Length];
+                                
                                 //Cria o objeto cor
                                 Color mCor0 = new Color();
+                                
                                 //Set the color
                                 mCor0 = Color.FromArgb(colors[0].ToArgb());
                                 strCoresRGB[0] = System.Drawing.ColorTranslator.ToHtml(mCor0);
+                                
                                 //Cria o objeto cor
                                 Color mCor1 = new Color();
                                 mCor1 = Color.FromArgb(colors[1].ToArgb());
@@ -615,8 +617,7 @@ namespace IpeaGeo
                                     cores[i] = new SolidBrush(MyColor);
                                     coresRGB[i] = MyColor;
                                 }
-                            
-
+                         
                                 //Guarda cores
                                 classeCor = cores;
                             }
@@ -649,6 +650,7 @@ namespace IpeaGeo
                         else
                         {
                             Random rnd = new Random();
+                            
                             //Gerando vetor de cores aleatórias
                             for (int l = 0; l < cores.Length; l++)
                             {
@@ -700,10 +702,6 @@ namespace IpeaGeo
 
                     if (MetodoEscolhido == "Valores Únicos")
                     {
-                        /*-----------------------------------------------------------------------------------------------------------*/
-                        /*-- criando uma coluna auxiliar temporário, com valores numéricos para utilizarmos a programação do Pedro --*/
-                        /*-----------------------------------------------------------------------------------------------------------*/
-
                         string col_selected = VariavelEscolhida;
                         var_selecionada = VariavelEscolhida;
                         string nome_col_temp = ("Coluna_temp_" + 1).Trim();
@@ -749,14 +747,14 @@ namespace IpeaGeo
                         dTable.Columns.Remove(nome_col_temp);
 
                         //Guarda a classe
-                            strClasseDoMapa = scats;
+                        strClasseDoMapa = scats;
 
                         //Gera vetor com as legendas
-                            Legenda = new string[(int)numClasses.Value];
-                            for (int i = 0; i < (int)numClasses.Value; i++)
-                            {
-                                Legenda[i] = scats[i];
-                            }
+                        Legenda = new string[(int)numClasses.Value];
+                        for (int i = 0; i < (int)numClasses.Value; i++)
+                        {
+                            Legenda[i] = scats[i];
+                        }
                     }
 
                     //Tipo de mapa temático
@@ -793,11 +791,14 @@ namespace IpeaGeo
 
                             //Cores para HTML
                             strCoresRGB = new string[cores.Length];
+                            
                             //Cria o objeto cor
                             Color mCor0 = new Color();
+                            
                             //Set the color
                             mCor0 = Color.FromArgb(colors[0].ToArgb());
                             strCoresRGB[0] = System.Drawing.ColorTranslator.ToHtml(mCor0);
+                            
                             //Cria o objeto cor
                             Color mCor1 = new Color();
                             mCor1 = Color.FromArgb(colors[1].ToArgb());
@@ -854,6 +855,7 @@ namespace IpeaGeo
 
                             classeCor = cores;
                         }
+                        
                         //Converte para RGB
                         for (int k = 1; k < cores.Length - 1; k++)
                         {
@@ -863,6 +865,7 @@ namespace IpeaGeo
                     else
                     {
                         Random rnd = new Random();
+                        
                         //Gerando vetor de cores aleatórias
                         for (int l = 0; l < cores.Length; l++)
                         {
@@ -902,8 +905,6 @@ namespace IpeaGeo
                 GuardaLegendasIniciais();
 
                 this.Cursor = Cursors.Default;
-
-
             }
             catch (Exception ex)
             {
@@ -969,6 +970,7 @@ namespace IpeaGeo
             try
             {
                 erromanual = false;
+                
                 //Checar se as classes são plausíveis
                 double[] classesmanuais = new double[dataGridView1.Rows.Count];
 
@@ -1008,6 +1010,7 @@ namespace IpeaGeo
                     if (classe_manual)
                     {
                         double[] desvios = new double[7] { 1, 0.8, 0.6, 0.5, 0.4, 0.2, 0.1 };
+                        
                         //Guarda as classes do mapa
                         double[] dblClasseMapa = new double[(int)numClasses.Value];
 
@@ -1040,6 +1043,7 @@ namespace IpeaGeo
                                 {
                                     strMetodo = "Manual";
                                 }
+                                
                                 //Guarda a variável
                                 strVariavelMapa = cmbVariavel.SelectedItem.ToString();
 
@@ -1137,7 +1141,6 @@ namespace IpeaGeo
                     Legenda = new string[m_legendas_manuais.GetLength(0)];
                     for (int i = 0; i < Legenda.GetLength(0); i++) Legenda[i] = m_legendas_manuais[i];
                 }
-
 
                 if (armazena.Leitura_efetuada == false)
                 {
@@ -1274,9 +1277,7 @@ namespace IpeaGeo
                         }
                     }
                     legendas = m_legendas_manuais;
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -1311,6 +1312,7 @@ namespace IpeaGeo
 
                 int num_classes = Convert.ToInt32(this.numClasses.Value);
                 tabControl1.SelectedTab = tabPage2;
+                
                 //Caso o usuário tenha selecionado manual antes de executar algum outro método, criar um vetor de classes de exemplo
                 if (classeMapaVetor == null)
                 {
@@ -1549,6 +1551,7 @@ namespace IpeaGeo
                 if (e.ColumnIndex == 2 && editaNumObs)
                 {
                     classe_manual = true;
+                    
                     //Averigua se as classes são disjuntas, crescentes e união igual total
                     double[] classesmanuais = new double[dataGridView1.Rows.Count];
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -1728,6 +1731,7 @@ namespace IpeaGeo
             btnExecutar_Click(this, new EventArgs());
             button1_Click(this, new EventArgs());
         }
+        
         //public void SalvarXML()
         //{
         //    Classes.clsArmazenamentoDados salvar = new Classes.clsArmazenamentoDados();
