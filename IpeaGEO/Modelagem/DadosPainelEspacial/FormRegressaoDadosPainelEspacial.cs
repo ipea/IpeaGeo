@@ -921,7 +921,6 @@ namespace IpeaGeo.RegressoesEspaciais
                 #endregion
 
                 #region modelos SAR (via MLE), SEM (via MLE) e SAC (via MLE)
-
                  
                 #region SAR via MLE
 
