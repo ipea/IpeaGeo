@@ -15,7 +15,6 @@ namespace IpeaGeo.Modelagem
         Triangular,
         Retangular,
         Stratification
-
     };
 
     public enum TipoDeAverage : int
@@ -33,7 +32,6 @@ namespace IpeaGeo.Modelagem
             m_outbin[0] = "";
             m_outbin[1] = "";
         }
-
 
         protected double [,,] m_matrizDif;
 
@@ -88,7 +86,6 @@ namespace IpeaGeo.Modelagem
             set { m_bandwidth = value; }
         }
 
-
         protected double m_VARate;
 
         protected double[] m_outcome;
@@ -126,17 +123,17 @@ namespace IpeaGeo.Modelagem
              else return(0);
         }
 
-         private double biweightKernel(double u)
-         {
-             if (Math.Abs(u) < 1) return (0.9375 * Math.Pow((1 - Math.Pow(u, 2)),2));
-             else return 0;
-         }
+        private double biweightKernel(double u)
+        {
+            if (Math.Abs(u) < 1) return (0.9375 * Math.Pow((1 - Math.Pow(u, 2)),2));
+            else return 0;
+        }
 
-         private double triangularKernel(double u)
-         {
-             if (Math.Abs(u) < 1) return (1 - Math.Abs(u));
-             else return 0;
-         }
+        private double triangularKernel(double u)
+        {
+            if (Math.Abs(u) < 1) return (1 - Math.Abs(u));
+            else return 0;
+        }
 
         protected double[] m_categorias;
         public double[] categorias
@@ -165,18 +162,15 @@ namespace IpeaGeo.Modelagem
             R = (((double)aux[3 * q, 0]) - ((double)aux[q, 0]))/1.34;
 
             //calcula o minimo
-
             double[] vet = { dv, R };
-
             A = m_clt.Min(vet);
-
             bd = 0.9*A*(Math.Pow(valoresPreditos.GetLength(0),-0.2));
 
             return bd;
         }
 
-         public string ChecaNumeroCategorias(int n)
-         {
+        public string ChecaNumeroCategorias(int n)
+        {
              string mensagem = "";
              double[,] y = m_clt.GetMatrizFromDataTable(m_dt_tabela_dados, m_variaveis_dependentes);
              object[,] yo = new object[y.GetLength(0), 1];
@@ -199,10 +193,10 @@ namespace IpeaGeo.Modelagem
                  m_categorias[i] = (double)categoriasO[i];
 
              return mensagem;
-         }
+        }
 
-         public double[,] RespostaDiscreta(double[,] y, int n)
-         {
+        public double[,] RespostaDiscreta(double[,] y, int n)
+        {
              int i,j,k;
              
              double[,] corte = new double[(n+1),1];
@@ -255,9 +249,7 @@ namespace IpeaGeo.Modelagem
              m_outbin[1] +="============================================================================================================================\n\n";
              m_outbin[1] += "Resultado da regrecao binaria entre os tratamentos " + m_clt.Double2Texto(m_categorias[categoriaBase]) + " e " + m_clt.Double2Texto(m_categorias[categoriaComparada]) + ":\n\n";
              m_outbin[1] += est;
-
          }
-
 
          public void imprimirResultadoPropensityScore(string nomeOutcome)
          {
@@ -453,11 +445,8 @@ namespace IpeaGeo.Modelagem
              this.m_output_text = out_text;
          }
 
-
-
-        //TODO: esta certo? (caue)
          private double[] AverageTreatmentEffect(ArrayList arLista, out int numeroComparacoes)
-        {
+         {
             double dblSomaDasDiferencas = 0;
             double dblSomaDasDiferencasAoQuadrado = 0;
 
@@ -504,8 +493,7 @@ namespace IpeaGeo.Modelagem
 
             double[] resultados = new double[] { dblATE, dblVarianciaATE };
             return (resultados);
-        }
-
+         }
 
          public void GeraMatching(double[,] valoresPreditos, int categoriaBase, int categoriaComp)
          {
@@ -519,6 +507,7 @@ namespace IpeaGeo.Modelagem
              int M = 5;
 
              for (int i = 0; i < valoresPreditos.GetLength(0); i++) if (m_participante[i] == 1) iParticipa++;
+             
              //Separa em dois Grupos: Participantes e Não Participantes
              int iContaParticipa = 0;
              int iContaNaoParticipa = 0;
@@ -541,6 +530,7 @@ namespace IpeaGeo.Modelagem
 
              double tau = 0.0;
              double v_tau = 0.0;
+             
              //Estatísticas dos participantes e não participantes
              double m_part = 0.0;
              double v_part = 0.0;
@@ -553,6 +543,7 @@ namespace IpeaGeo.Modelagem
              double media_part = 0.0;
 
              double m_tot = 0.0;
+             
              //Media
              for (int i = 0; i < valoresPreditos.GetLength(0); i++)
              {
@@ -560,13 +551,13 @@ namespace IpeaGeo.Modelagem
                  if (m_participante[i] == 1)
                  {
                      m_part += m_outcome[i] / intParticipantes.Length;
-
                  }
                  else
                  {
                      m_npart += m_outcome[i] / intNaoParticipantes.Length;
                  }
              }
+             
              //Variancia
              double v_tot = 0.0;
              for (int i = 0; i < valoresPreditos.GetLength(0); i++)
@@ -575,12 +566,10 @@ namespace IpeaGeo.Modelagem
                  if (m_participante[i] == 1)
                  {
                      v_part += Math.Pow((m_outcome[i] - m_part), 2) / (intParticipantes.Length - 1);
-
                  }
                  else
                  {
                      v_npart += Math.Pow((m_outcome[i] - m_npart), 2) / (intNaoParticipantes.Length - 1);
-
                  }
              }
 
@@ -632,19 +621,21 @@ namespace IpeaGeo.Modelagem
                          {
                              VetorSomaPeso[j, 0] += peso[j, 0] / somapeso;
                          }
+                         
                          // Estimando valor nos não participantes do participante "i"
                          for (int j = 0; j < difNaoParticipa.GetLength(0); j++)
                          {
                              media_n_part += m_outcome[intNaoParticipantes[j]] * peso[j, 0] / somapeso;
                          }
+                         
                          // Estatistica do teste do participante "i"
                          tau += (m_outcome[intParticipantes[i]] - media_n_part) / intParticipantes.Length;
                      }
+                     
                      for (int i = 0; i < intNaoParticipantes.Length; i++)
                      {
                          somapesoquadrado += Math.Pow(VetorSomaPeso[i, 0], 2.0);
                      }
-
 
                      //variancia especifica caso especifico de ATT ou ATE. Para o cas do ATE, o erro padrão e a estatísticas são somadas no output.
                      //Para o cálculo de medida de erro associada ao PSM, é necessário fazer suposições sobre a variabilidade
@@ -663,7 +654,6 @@ namespace IpeaGeo.Modelagem
 
                          //REFERÊNCIA DADA PELO ALEXANDRE
                          //v_tau = v_part / intParticipantes.Length + (v_npart / Math.Pow(intParticipantes.Length, 2.0)) * somapesoquadrado;
-
                      }
                      else
                      {
@@ -671,7 +661,6 @@ namespace IpeaGeo.Modelagem
                          {
                              v_r += (Math.Pow(1 + (VetorSomaPeso[i, 0]), 2) * (v_npart)) / Math.Pow(valoresPreditos.Length, 2);
                          }
-
                      }
                      v_tau = v_r;
                      break;
@@ -708,11 +697,13 @@ namespace IpeaGeo.Modelagem
                          {
                              VetorSomaPeso[j, 0] += peso[j, 0] / somapeso;
                          }
+                         
                          // Estimando valor nos não participantes do participante "i"
                          for (int j = 0; j < difNaoParticipa.GetLength(0); j++)
                          {
                              media_n_part += m_outcome[intNaoParticipantes[j]] * peso[j, 0] / somapeso;
                          }
+                         
                          // Estatistica do teste do participante "i"
                          tau += (m_outcome[intParticipantes[i]] - media_n_part) / intParticipantes.Length;
                      }
@@ -738,7 +729,6 @@ namespace IpeaGeo.Modelagem
 
                          //REFERÊNCIA DADA PELO ALEXANDRE
                          //v_tau = v_part / intParticipantes.Length + (v_npart / Math.Pow(intParticipantes.Length, 2.0)) * somapesoquadrado;
-
                      }
                      else
                      {
@@ -746,7 +736,6 @@ namespace IpeaGeo.Modelagem
                          {
                              v_r += (Math.Pow(1 + (VetorSomaPeso[i, 0]), 2) * (v_npart)) / Math.Pow(valoresPreditos.Length, 2);
                          }
-
                      }
                      v_tau = v_r;
                      break;
@@ -812,7 +801,6 @@ namespace IpeaGeo.Modelagem
 
                          //REFERÊNCIA DADA PELO ALEXANDRE
                          //v_tau = v_part / intParticipantes.Length + (v_npart / Math.Pow(intParticipantes.Length, 2.0)) * somapesoquadrado;
-
                      }
                      else
                      {
@@ -820,7 +808,6 @@ namespace IpeaGeo.Modelagem
                          {
                              v_r += (Math.Pow(1 + (VetorSomaPeso[i, 0]), 2) * (v_npart)) / Math.Pow(valoresPreditos.Length, 2);
                          }
-
                      }
                      v_tau = v_r;
                      break;
@@ -885,7 +872,6 @@ namespace IpeaGeo.Modelagem
 
                          //REFERÊNCIA DADA PELO ALEXANDRE
                          //v_tau = v_part / intParticipantes.Length + (v_npart / Math.Pow(intParticipantes.Length, 2.0)) * somapesoquadrado;
-
                      }
                      else
                      {
@@ -893,7 +879,6 @@ namespace IpeaGeo.Modelagem
                          {
                              v_r += (Math.Pow(1 + (VetorSomaPeso[i, 0]), 2) * (v_npart)) / Math.Pow(valoresPreditos.Length, 2);
                          }
-
                      }
                      v_tau = v_r;
                      break;
@@ -959,7 +944,6 @@ namespace IpeaGeo.Modelagem
 
                          //REFERÊNCIA DADA PELO ALEXANDRE
                          //v_tau = v_part / intParticipantes.Length + (v_npart / Math.Pow(intParticipantes.Length, 2.0)) * somapesoquadrado;
-
                      }
                      else
                      {
@@ -967,7 +951,6 @@ namespace IpeaGeo.Modelagem
                          {
                              v_r += (Math.Pow(1 + (VetorSomaPeso[i, 0]), 2) * (v_npart)) / Math.Pow(valoresPreditos.Length, 2);
                          }
-
                      }
                      v_tau = v_r;
                      break;
@@ -1033,7 +1016,6 @@ namespace IpeaGeo.Modelagem
 
                          //REFERÊNCIA DADA PELO ALEXANDRE
                          //v_tau = v_part / intParticipantes.Length + (v_npart / Math.Pow(intParticipantes.Length, 2.0)) * somapesoquadrado;
-
                      }
                      else
                      {
@@ -1041,7 +1023,6 @@ namespace IpeaGeo.Modelagem
                          {
                              v_r += (Math.Pow(1 + (VetorSomaPeso[i, 0]), 2) * (v_npart)) / Math.Pow(valoresPreditos.Length, 2);
                          }
-
                      }
                      v_tau = v_r;
                      break;
@@ -1124,7 +1105,6 @@ namespace IpeaGeo.Modelagem
                      break;
              }
 
-
              //Passo 2: Calcula a média das diferenças.
              double[] resultados = AverageTreatmentEffect(arrayMatching, out numeroComparacoes);
              m_ate = resultados[0];
@@ -1135,7 +1115,6 @@ namespace IpeaGeo.Modelagem
              m_VARate = v_tau;
 
              #region testes
-
 
              double desvio_padrao = 0.0;
              if (cbxAT == TipoDeAverage.ATT)
@@ -1165,9 +1144,7 @@ namespace IpeaGeo.Modelagem
 
              #region gerando o output para resultado das estimaes
 
-
              #endregion
-
          }
     }
 }
