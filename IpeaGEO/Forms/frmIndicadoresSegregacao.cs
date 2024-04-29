@@ -32,6 +32,7 @@ namespace IpeaGeo.Forms
                 dblPseudoT = value;
             }
         }
+        
         private double[] dblPseudoF;
         public double[] PseudoF
         {
@@ -44,6 +45,7 @@ namespace IpeaGeo.Forms
                 dblPseudoF = value;
             }
         }
+        
         private double[] dblRSquare;
         public double[] RSquare
         {
@@ -56,6 +58,7 @@ namespace IpeaGeo.Forms
                 dblRSquare = value;
             }
         }
+        
         private double[] dblRSquarePartial;
         public double[] RSquarePartial
         {
@@ -68,6 +71,7 @@ namespace IpeaGeo.Forms
                 dblRSquarePartial = value;
             }
         }
+        
         private double[] dblRSquareExpected;
         public double[] RSquareExpected
         {
@@ -80,6 +84,7 @@ namespace IpeaGeo.Forms
                 dblRSquareExpected = value;
             }
         }
+
         private double[] dblCCC;
         public double[] CCC
         {
@@ -107,6 +112,7 @@ namespace IpeaGeo.Forms
                 shapeAlex = value;
             }
         }
+        
         private string[] strVariaveis;
         public string[] Variaveis
         {
@@ -119,6 +125,7 @@ namespace IpeaGeo.Forms
                 strVariaveis = value;
             }
         }
+
         private bool HouveSegregacao_;
         public bool HouveSegregacao
         {
@@ -131,6 +138,7 @@ namespace IpeaGeo.Forms
                 HouveSegregacao_ = value;
             }
         }
+        
         private bool relatoriosegregacao_;
         public bool relatoriosegregacao
         {
@@ -156,6 +164,7 @@ namespace IpeaGeo.Forms
                 strX = value;
             }
         }
+        
         private string[] strY;
         public string[] strY_
         {
@@ -181,6 +190,7 @@ namespace IpeaGeo.Forms
                 strVariaveisSelecionadas = value;
             }
         }
+        
         private int[] classePoligonos;
         public int[] vetorPoligonos
         {
@@ -193,6 +203,7 @@ namespace IpeaGeo.Forms
                 classePoligonos = value;
             }
         }
+        
         private string strIDmapa;
         public string IdentificadorMapa
         {
@@ -205,6 +216,7 @@ namespace IpeaGeo.Forms
                 strIDmapa = value;
             }
         }
+        
         private string strNumCluster;
         public string NumeroDeConglomerados
         {
@@ -217,6 +229,7 @@ namespace IpeaGeo.Forms
                 strNumCluster = value;
             }
         }
+        
         private bool blEspacial;
         public bool IsSpatialCluster
         {
@@ -255,6 +268,7 @@ namespace IpeaGeo.Forms
                 strID = value;
             }
         }
+        
         private DataTable dTable;
         public DataTable DataTableDados
         {
@@ -280,6 +294,7 @@ namespace IpeaGeo.Forms
                 strEnderecoMapa = value;
             }
         }
+        
         private string strDistancia;
         public string Distancia
         {
@@ -305,6 +320,7 @@ namespace IpeaGeo.Forms
                 strMetodo = value;
             }
         }
+        
         private string strFatorMinkowsky;
         public string FatorMinkowsky
         {
@@ -317,6 +333,7 @@ namespace IpeaGeo.Forms
                 strFatorMinkowsky = value;
             }
         }
+        
         public string[] strVetorPesos;
         public string[] VetorDePesos
         {
@@ -342,6 +359,7 @@ namespace IpeaGeo.Forms
                 matrizIndicesSegregacao_ = value;
             }
         }
+        
         public string[] nomesIndicesSegregacao_;
         public string[] nomesIndicesSegregacao
         {
@@ -354,6 +372,7 @@ namespace IpeaGeo.Forms
                 nomesIndicesSegregacao_ = value;
             }
         }
+        
         public bool multi_=false;
         public bool multi
         {
@@ -366,6 +385,7 @@ namespace IpeaGeo.Forms
                 multi_ = value;
             }
         }
+        
         public string[] nomesVariaveis_;
         public string[] nomesVariaveis
         {
@@ -378,7 +398,6 @@ namespace IpeaGeo.Forms
                 nomesVariaveis_ = value;
             }
         }
-
 
         public struct GradientColor
         {
@@ -398,6 +417,7 @@ namespace IpeaGeo.Forms
             }
 
         }
+        
         private Brush[] classeCor;
         public Brush[] CoresParaMapa
         {
@@ -410,6 +430,7 @@ namespace IpeaGeo.Forms
                 classeCor = value;
             }
         }
+        
         private string[] strCoresRGB;
         public string[] CoresRGB
         {
@@ -439,7 +460,6 @@ namespace IpeaGeo.Forms
         {
             try
             {
-
                 //Cria as colunas do DataGridView
                 DataGridViewTextBoxColumn txtbox = new DataGridViewTextBoxColumn();
                 txtbox = new DataGridViewTextBoxColumn();
@@ -490,7 +510,6 @@ namespace IpeaGeo.Forms
             }
         }
 
-
         private string[] m_tipos_grupos_indicadores = new string[] { "One-group", "Two-group", "Multi-group" };
 
         private string[] m_indicadores_onegroup_eveness = new string[] {"Índice de Segregação (Segregation Index)", "Índice de Segregação Ajustado por Contiguidade (Contiguity Adjusted Segregation Index)",
@@ -511,19 +530,16 @@ namespace IpeaGeo.Forms
         private string[] m_indicadores_multigroup_exposition = new string[] {"Exposição Normalizada (Normalized exposure)", "Diversidade Relativa (Relative diversity)", 
             "Coeficiente de Variação ao Quadrado (Squared coefficient of variation)"};  
 
-
         private void frmCluster_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (checkBox1.Checked == true) relatoriosegregacao_ = true;
                 else relatoriosegregacao_ = false;
 
                 this.cmbTipoIndicador.Items.Clear();
                 this.cmbTipoIndicador.Items.AddRange(this.m_tipos_grupos_indicadores);
                 this.cmbTipoIndicador.SelectedIndex = 0;
-
 
                 //Filtrando variaveis populacionais (somente permitir numéricas)
                 #region Filtro
@@ -533,6 +549,7 @@ namespace IpeaGeo.Forms
                 for (int i = 0; i < dTable.Columns.Count; i++)
                 {                    
                      Type tipo = dTable.Columns[i].DataType;
+                     
                      //Salva o tipo de interesse
                      string strTipo = tipo.ToString();
 
@@ -540,7 +557,6 @@ namespace IpeaGeo.Forms
                      {
                          numvar++;
                      }                    
-
                 }
 
                 string[] strVarPop = new string[numvar];
@@ -549,6 +565,7 @@ namespace IpeaGeo.Forms
                 for (int i = 0; i < dTable.Columns.Count; i++)
                 {
                     Type tipo = dTable.Columns[i].DataType;
+                    
                     //Salva o tipo de interesse
                     string strTipo = tipo.ToString();
 
@@ -557,8 +574,8 @@ namespace IpeaGeo.Forms
                         strVarPop[count] = strVariaveis[i];
                         count++;
                     }
-
                 }                
+
                 #endregion;
 
                 strVariaveis = strVarPop;
@@ -630,12 +647,11 @@ namespace IpeaGeo.Forms
                             coresVetor2[contador, 1] = vetorCores[j];
 
                             contador++;
-
                         }
                     }
                 }
 
-                //dai vc seta a fonte pro combobox
+                // seta a fonte pro combobox
                 this.cmbCores.DataSource = colorList;
                 this.cmbCores.DisplayMember = "Nome";
                 this.cmbCores.ValueMember = "Nome";
@@ -646,7 +662,6 @@ namespace IpeaGeo.Forms
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
 
         private void btnCancela_Click(object sender, EventArgs e)
         {
@@ -746,6 +761,7 @@ namespace IpeaGeo.Forms
                         }
                     }
                 }
+                
                 if (cmbTipoIndicador.SelectedItem.ToString() == "Two-group")
                 {
                     for (int i = 0; i < dTable.Rows.Count; i++)
@@ -784,7 +800,6 @@ namespace IpeaGeo.Forms
                         shapeAlex.GerarMatrizTodasDistancias();
                     }
 
-
                     BLIndicesSegregacaoSpacial bli = new BLIndicesSegregacaoSpacial();
 
                     bli.Dados = this.dTable;
@@ -806,7 +821,6 @@ namespace IpeaGeo.Forms
 
                     if (cmbTipoIndicador.SelectedItem.ToString() == "One-group")
                     {
-
                         //Eveness
                         if (ckbListaIndicadoresEveness.GetItemChecked(0)) { aux = bli.GeraIndiceSegregacaoOneGroup(TipoIndiceSegregacaoOneGroup.SegregationIndex); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Índice de Segregação"; Application.DoEvents(); }
                         if (ckbListaIndicadoresEveness.GetItemChecked(1)) { aux = bli.GeraIndiceSegregacaoOneGroup(TipoIndiceSegregacaoOneGroup.SegregationIndexAdjustedContiguity); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Índice de Segregação Ajustado por Contiguidade"; Application.DoEvents(); }
@@ -823,7 +837,6 @@ namespace IpeaGeo.Forms
                         if (ckbListaIndicadoresClustering.GetItemChecked(1)) { aux = bli.GeraIndiceSegregacaoOneGroup(TipoIndiceSegregacaoOneGroup.MeanProximityBetweenMembersOfGroupX); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Índice de Proximidade Média"; Application.DoEvents(); }
                         if (ckbListaIndicadoresClustering.GetItemChecked(2)) { aux = bli.GeraIndiceSegregacaoOneGroup(TipoIndiceSegregacaoOneGroup.MeanProximityBetweenOfOneGroupExp); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Índice de Proximidade (EXP) Média"; Application.DoEvents(); }
                         if (ckbListaIndicadoresClustering.GetItemChecked(3)) { aux = bli.GeraIndiceSegregacaoOneGroup(TipoIndiceSegregacaoOneGroup.DistanceDecayIsolationIndex); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Índice de Distância de Decaimento"; Application.DoEvents(); }
-
 
                         //Populando o datatable
                         DTIndices.Columns.Add("Variáveis", System.Type.GetType("System.String"));
@@ -845,10 +858,7 @@ namespace IpeaGeo.Forms
                         dataGridView1.ReadOnly = true;
                         dataGridView1.Refresh();
                         dataGridView1.Update();
-
                     }
-
-
 
                     else if (cmbTipoIndicador.SelectedItem.ToString() == "Two-group")
                     {
@@ -892,12 +902,10 @@ namespace IpeaGeo.Forms
                             aux = bli.GeraIndiceSegregacaoTwoGroup(TipoIndiceSegregacaoTwoGroup.DistanceDecayInteractionIndex); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Índice de Distância de Decaimento"; Application.DoEvents();
                         }
 
-
                         //Gera dataGridView
                         DataTable tabela2group = new DataTable();
                         tabela2group.Columns.Add("Grupo 1");
                         tabela2group.Columns.Add("Grupo 2");
-
 
                         //dataGridView1.Columns.Add("vClasse1", "Grupo 1");
                         //dataGridView1.Columns.Add("vClasse2", "Grupo 2");
@@ -930,16 +938,14 @@ namespace IpeaGeo.Forms
                         dataGridView1.Update();
                         //dataGridView1.AllowUserToAddRows = false;
                         //dataGridView1.ReadOnly = true;
-
-
                     }
 
-                        /*Dissimilarity = 1,
-            CoeficienteDeGini = 2,
-            InformationTheory = 3,
-            NormalizedExposure = 4,
-            RelativeDiversity = 5,
-            SquaredcoefficientOfVariation = 6 */
+                    /*Dissimilarity = 1,
+                    CoeficienteDeGini = 2,
+                    InformationTheory = 3,
+                    NormalizedExposure = 4,
+                    RelativeDiversity = 5,
+                    SquaredcoefficientOfVariation = 6 */
                     else if (cmbTipoIndicador.SelectedItem.ToString() == "Multi-group")
                     {
                         multi_ = true;
@@ -949,17 +955,14 @@ namespace IpeaGeo.Forms
                         if (ckbListaIndicadoresEveness.GetItemChecked(1)) { aux = bli.GeraIndiceSegregacaoMultiGroup(TipoIndiceSegregacaoMultiGroup.CoeficienteDeGini); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Coeficiente de Gini"; Application.DoEvents(); }
                         if (ckbListaIndicadoresEveness.GetItemChecked(2)) { aux = bli.GeraIndiceSegregacaoMultiGroup(TipoIndiceSegregacaoMultiGroup.InformationTheory); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Teoria da Informação"; Application.DoEvents(); }
 
-
                         //Exposition
                         if (ckbListaIndicadoresExposition.GetItemChecked(0)) { aux = bli.GeraIndiceSegregacaoMultiGroup(TipoIndiceSegregacaoMultiGroup.NormalizedExposure); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Exposição Normalizada"; Application.DoEvents(); }
                         if (ckbListaIndicadoresExposition.GetItemChecked(1)) { aux = bli.GeraIndiceSegregacaoMultiGroup(TipoIndiceSegregacaoMultiGroup.RelativeDiversity); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Diversidade Relativa"; Application.DoEvents(); }
                         if (ckbListaIndicadoresExposition.GetItemChecked(2)) { aux = bli.GeraIndiceSegregacaoMultiGroup(TipoIndiceSegregacaoMultiGroup.SquaredcoefficientOfVariation); v = clt.Concateh(v, aux); progressBar1.Increment(1); toolStripStatusLabel1.Text = "Gerando Coeficiente de Variação ao Quadrado"; Application.DoEvents(); }
 
-
                         //Gera dataGridView
                         DataTable tabela3group = new DataTable();
                         tabela3group.Columns.Add("Grupo");
-
 
                         //dataGridView1.Columns.Add("vClasse", "Grupo");
                         for (int i = 0; i < v.GetLength(1); i++)
@@ -973,7 +976,6 @@ namespace IpeaGeo.Forms
                         Object[] mLinha = new Object[v.GetLength(1) + 1];
                         string nome = "Grupo";
 
-
                         mLinha[0] = (Object)nome;
                         for (int j = 0; j < v.GetLength(1); j++) mLinha[j + 1] = (Object)v[0, j];
                         //dataGridView1.Rows.Add(mLinha);
@@ -986,9 +988,7 @@ namespace IpeaGeo.Forms
                         dataGridView1.ReadOnly = true;
                         dataGridView1.Refresh();
                         dataGridView1.Update();
-
                     }
-
 
                     toolStripStatusLabel1.Text = ".";
                     progressBar1.Value = 0;
@@ -997,9 +997,7 @@ namespace IpeaGeo.Forms
 
                     int t = 0;
 
-
-                    //Programação para enviar variaveis para gerar o relatorio///////////////////////////
-                    ////////////////////////////////////////////////////////////////////////////////////
+                    //Programação para enviar variaveis para gerar o relatorio
                     HouveSegregacao_ = true;
                     if (checkBox1.Checked == true) relatoriosegregacao_ = true;
                     matrizIndicesSegregacao_ = v;
@@ -1009,9 +1007,6 @@ namespace IpeaGeo.Forms
                         nomesIndicesSegregacao_[i] = Convert.ToString(arIndices[i]);
                     }
                     nomesVariaveis_ = strSelecionadas;
-                    ///////////////////////////////////////////////////////////////////////////////////
-                    //////////////////////////////////////////////////////////////////////////////////
-
 
                     tabControl1.TabIndex = 1;
                     tabControl1.SelectedIndex = 1;
@@ -1141,11 +1136,8 @@ namespace IpeaGeo.Forms
 
                     for (int i = 0; i < dataGridView2.Rows.Count; i++)
                     {
-
-
                         if (dataGridView2.Rows[i].Cells[0].Value.ToString() == cmbVariavelTotalPopulacao.SelectedItem.ToString())
                         {
-
                             bool test = (bool)dataGridView2.Rows[i].Cells[1].Value;
                             if (test == true)
                             {
@@ -1178,7 +1170,6 @@ namespace IpeaGeo.Forms
             {
                 if (ckbTudoOuNada.Checked)
                 {
-
                     for (int i = 0; i < ckbListaIndicadoresEveness.Items.Count; i++)
                     {
                         ckbListaIndicadoresEveness.SetItemChecked(i, true);
@@ -1227,14 +1218,12 @@ namespace IpeaGeo.Forms
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-
                 DataTable dsTemp = (DataTable)dataGridView1.DataSource;
                 //dsTemp.Tables[0].Columns.Remove("Mapa"+strIDmapa);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
