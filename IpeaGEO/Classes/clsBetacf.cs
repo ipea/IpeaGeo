@@ -7,7 +7,7 @@ namespace IpeaGeo
 	/// Summary description for Betacf.
 	/// </summary>
 	[Obsolete("Use MathNet.Numerics instead.")]
-    public class Betacf
+        public class Betacf
 	{
 		int MAXIT = 10000;
 		double EPS = 3.0e-7;
@@ -16,7 +16,7 @@ namespace IpeaGeo
 		{
 		}
 
-		//Algoritimo melhor usado para a fraÁ„o da finÁ„o beta incompleta
+		//Algoritimo melhor usado para a fra√ß√£o da fun√ß√£o beta incompleta
 		public double betacf(double a, double b, double x)
 		{
 			int m,m2;
@@ -53,8 +53,8 @@ namespace IpeaGeo
 			if (m > MAXIT) try{throw new Exception();}
 						   catch (Exception)
 						   {
-							   MessageBox.Show("a ou b È muito grande, ou MAXIT È muito pequeno na classe betacf",
-								   "MÈtodo Inv·lido",MessageBoxButtons.OK, MessageBoxIcon.Error );
+							   MessageBox.Show("a ou b √© muito grande, ou MAXIT √© muito pequeno na classe betacf",
+								   "M√©todo Inv√°lido",MessageBoxButtons.OK, MessageBoxIcon.Error );
 						   }
 			return h;
 		}
