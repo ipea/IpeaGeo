@@ -19,13 +19,14 @@ namespace IpeaGeo
 
         const double OneOverRootTwoPi = 0.398942280401433;
 
-         private double SomaColuna(double[,] mDados, int coluna)
+        private double SomaColuna(double[,] mDados, int coluna)
         {
             double dblSoma = 0;
             for (int k = 0; k < mDados.GetLength(0); k++)
             {
                 dblSoma += mDados[k, coluna];
             }
+            
             return (dblSoma);
         }
 
@@ -41,6 +42,7 @@ namespace IpeaGeo
                 dblSig = 1 - normal.CumulativeDistribution(mValor);
             }
             dblSig = 2 * dblSig;
+            
             return (dblSig);
         }
 
@@ -69,6 +71,7 @@ namespace IpeaGeo
             string nome3 = strVariavel + "_LC";
             string nome4 = strVariavel + "_LN";
             string nome5 = strVariavel + "_LM"; // não será criada aqui, embora seja removida, porque está sendo criada no frmapa.
+            
             if (dsTable.Columns.Contains(nome1) == true | dsTable.Columns.Contains(nome2) == true | dsTable.Columns.Contains(nome3) == true | dsTable.Columns.Contains(nome4) == true | dsTable.Columns.Contains(nome5) == true)
             {
                 dsTable.Columns.Remove(nome1);
@@ -99,7 +102,6 @@ namespace IpeaGeo
             {
                 this.MatrizWesparsaFromVizinhos();
             }
-
 
             double[,] y = clt.GetMatrizFromDataTable(dsTable, strVariavel);
             double[,] z = new double[y.GetLength(0), 1];
@@ -226,7 +228,6 @@ namespace IpeaGeo
             dsTable.Columns.Add(nome1, Type.GetType("System.Double"));// colocando as variáveis numéricas como tal, e não como string.
             dsTable.Columns.Add(nome2, Type.GetType("System.Double"));
             dsTable.Columns.Add(nome3, Type.GetType("System.String"));
-
 
             // Modificação Gabriela dezembro de 2011
             clsFuncoesMatrizEsparsa fme = new clsFuncoesMatrizEsparsa();
@@ -360,7 +361,6 @@ namespace IpeaGeo
                 this.MatrizWesparsaFromVizinhos();
             }
 
-
             double[,] y = clt.GetMatrizFromDataTable(dsTable, strVariavel);
             int n = y.GetLength(0);
             double[,] dblMedia_i = new double[y.GetLength(0), 1];
@@ -368,7 +368,6 @@ namespace IpeaGeo
             double sum_y = clt.Sum(clt.MatrizDotPower(y,2))/(double)(y.GetLength(0)-1);
             double[,] dblVariancia_i = new double[y.GetLength(0),1];
             double[,] z = new double[y.GetLength(0), 1];
-
 
             for (int i = 0; i < y.GetLength(0); i++)
             {
@@ -430,7 +429,6 @@ namespace IpeaGeo
             arPintaMapa.Add(iPinta);
             lblStatus.Text = "";
             Application.DoEvents();
-
         }
 
         /// <summary>
@@ -458,6 +456,7 @@ namespace IpeaGeo
             string nome3 = strVariavel + "_EC";
             string nome4 = strVariavel + "_EN";
             string nome5 = strVariavel + "_EM"; // não será criada aqui, embora seja removida, porque está sendo criada no frmapa.
+            
             if (dsTable.Columns.Contains(nome1) == true | dsTable.Columns.Contains(nome2) == true | dsTable.Columns.Contains(nome3) == true | dsTable.Columns.Contains(nome4) == true | dsTable.Columns.Contains(nome5) == true)
             {
                 dsTable.Columns.Remove(nome1);
@@ -479,7 +478,7 @@ namespace IpeaGeo
             //Encontra a média
             double dblMedia = SomaColuna(mDados, iVariavel) / mDados.GetLength(0);
 
-            // Início alterações Gabriela: dezembro de 2011
+            // Início alterações em dezembro de 2011
             clsFuncoesMatrizEsparsa fme = new clsFuncoesMatrizEsparsa();
             clsUtilTools clt = new clsUtilTools();
 
@@ -506,7 +505,6 @@ namespace IpeaGeo
                 dblEsperado[k,0] = mDados[k, mDados.GetLength(1) - 1] / (dblSomaPop); //pi
                 dblValor[k,0] = (mDados[k, iVariavel] - dblMedia);
             }
-
 
             double[,] diff = clt.MatrizSubtracao(dblObservado, dblEsperado);
             double[,] dblESCORE = clt.MatrizMult(mDados.GetLength(0), fme.MatrizMult(m_W_esparsa, diff));
@@ -557,10 +555,10 @@ namespace IpeaGeo
                 }
                 pbBar.Increment(1);
             }
+            
             arPintaMapa.Add(iPinta);
             lblStatus.Text = "";
             Application.DoEvents();
         }
-
     }
 }
