@@ -45,8 +45,6 @@ namespace IpeaGeo
         SquaredcoefficientOfVariation = 6
     };
 
-
-
     #endregion
 
     class clsIndicesDeSegregacao
@@ -316,15 +314,9 @@ namespace IpeaGeo
             return (Eta2);
         }
 
-
-
-
-
-
         #endregion
 
         #region Indices de Segregacao One Group Clustering
-
 
         /// <summary>
         /// Retorna o indicador One group Absolute Clustering Index
@@ -335,7 +327,6 @@ namespace IpeaGeo
         /// <param name="strTotal">Variável com o total da população na região</param>
         /// <param name="strGrupo">Variável com o total do grupo</param>
         /// <returns></returns>
-
 
         public double Absolute_Clustering_index(clsIpeaShape mShape, int tipo_vizinhanca, DataTable tabela, string strTotal, string strGrupo)
         {
@@ -361,7 +352,6 @@ namespace IpeaGeo
             double ACL2 = 0;
             double ACL1 = 0;
             double ACL3 = 0;
-
 
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
@@ -397,8 +387,8 @@ namespace IpeaGeo
                 tj = 0;
             }
             ACL2 = (X * somavizinho / (municipios * municipios));
+            
             return ((ACL1 - ACL2) / (ACL3 - ACL2));
-
         }
 
         /// <summary>
@@ -442,19 +432,14 @@ namespace IpeaGeo
                     {
                         A1 += (xi * xj * dij[i, j]) / (X * X);
                     }
-
                 }
-
             }
 
             double A2 = A1 * 2;
 
-
-
             double MPBMGX = A2;
 
             return (MPBMGX);
-
         }
 
         /// <summary>
@@ -484,7 +469,6 @@ namespace IpeaGeo
 
                 for (int j = i + 1; j < tabela.Rows.Count - 1; j++)
                 {
-
                     if (!mShape.TipoDistancia)
                     {
                         mShape.GerarMatrizTodasDistancias();
@@ -497,15 +481,15 @@ namespace IpeaGeo
                     {
                         A1 += (xi * xj * (Math.Exp(-dij[i, j]))) / (X * X);
                     }
-
                 }
-
             }
+            
             double A2 = A1 * 2;
             double MPBMGXE = A2;
+            
             return (MPBMGXE);
-
         }
+        
         //TODO: Indice NaN
         /// <summary>
         /// Retorna o indicador Distance Decay isolation Index"
@@ -531,7 +515,6 @@ namespace IpeaGeo
                 X += (double)tabela.Rows[i][strGrupo];
             }
 
-
             double[,] kij = new double[tabela.Rows.Count, tabela.Rows.Count];
             double[] denominador_kij = new double[tabela.Rows.Count];
 
@@ -539,7 +522,6 @@ namespace IpeaGeo
             {
                 mShape.GerarMatrizTodasDistancias();
             }
-
 
             for (int j = 0; j < tabela.Rows.Count; j++)
             {
@@ -556,13 +538,11 @@ namespace IpeaGeo
                         A1 += nome;
                     }
                 }
+                
                 denominador_kij[j] = A1;
                 A1 = 0;
             }
-
-
-
-
+            
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
                 A2 = 0;
@@ -585,22 +565,16 @@ namespace IpeaGeo
                 A3 += (xi / X) * A2;
 
                 //i = guarda_i;
-
             }
-
 
             //Codigo antigo
 
             /*
-
-
-
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
                 for (int j = 0; j < tabela.Rows.Count; j++)
                 {
                     double tj = (double)tabela.Rows[j][strTotal];
-
 
                     dij[i, j] = funcao.distancia(mShape[i].YCentroide, mShape[i].XCentroide, mShape[j].YCentroide, mShape[j].XCentroide, false);
 
@@ -609,10 +583,9 @@ namespace IpeaGeo
                         double q = tj * Math.Exp(-dij[i, j]) / A1;
                         kij[i, j] = q;
                     }
-
                 }
-
             }
+            
             double B1 = 0;
             double B2 = 0;
             for (int i = 0; i < tabela.Rows.Count; i++)
@@ -622,8 +595,7 @@ namespace IpeaGeo
                     double tj = (double)tabela.Rows[j][strTotal];
                     double xj = (double)tabela.Rows[j][strGrupo];
 
-                    B1 += ((kij[i,j] * xj)/tj);
-                           
+                    B1 += ((kij[i,j] * xj)/tj);                         
                 }
                 double xi = (double)tabela.Rows[i][strGrupo];
                 B2 += (xi / X) * B1;
@@ -631,10 +603,7 @@ namespace IpeaGeo
             }*/
 
             return (A3);
-
         }
-
-
 
         #endregion
 
@@ -643,6 +612,7 @@ namespace IpeaGeo
         #region  Indices Two Group;
 
         #region Indices de Segregacao Two Group Evenness;
+        
         /// <summary>
         /// Retorna o índice "Index of Dissimilarity entre os grupos X e Y"
         /// </summary>
@@ -673,7 +643,6 @@ namespace IpeaGeo
 
             return (IDi / 2);
         }
-
 
         /// <summary>
         /// Retorna o índice "Dissimilarity Adjusted for Tract Contiguity" entre os grupos X e Y
@@ -716,22 +685,17 @@ namespace IpeaGeo
                     int jShape = mShape[i].ListaIndicesVizinhos[j];
                     int jbase = mShape[jShape].PosicaoNoDataTable;
 
-
-
                     double xj = (double)tabela.Rows[jbase][nomeX];
                     double tj = (double)tabela.Rows[jbase][strTotal];
 
-
                     corretor += Math.Abs((xi / ti) - (xj / tj));
                     somavizinho++;
-
                 }
-
             }
 
             return (IDi - (corretor / somavizinho));
-
         }
+        
         #endregion;
 
         #region Indices de Segregacao Two Group Exposition;
@@ -742,7 +706,6 @@ namespace IpeaGeo
             double T = 0;
             double X = 0;
             double Y = 0;
-
 
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
@@ -756,20 +719,10 @@ namespace IpeaGeo
                 double ti = (double)tabela.Rows[i][strTotal];
 
                 Interaction += (xi / X) * (yi / ti);
-
             }
 
             return (Interaction);
         }
-
-
-
-
-
-
-
-
-
 
         #endregion;
 
@@ -809,12 +762,11 @@ namespace IpeaGeo
                         A1 += (xi * yj * dij[i, j]);
                     }
                 }
-
             }
 
             double MPBMGX = A1 / (X * Y);
+            
             return (MPBMGX);
-
         }
 
         public double Mean_Proximity_Between_Members_of_one_group_X_and_members_of_group_Y(clsIpeaShape mShape, DataTable tabela, string nomeX, string nomeY)
@@ -824,6 +776,7 @@ namespace IpeaGeo
             double X = 0;
             double Y = 0;
             double A1 = 0;
+            
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
                 X += (double)tabela.Rows[i][nomeX];
@@ -836,7 +789,6 @@ namespace IpeaGeo
 
                 for (int j = 0; j < tabela.Rows.Count; j++)
                 {
-
                     if (!mShape.TipoDistancia)
                     {
                         mShape.GerarMatrizTodasDistancias();
@@ -850,14 +802,12 @@ namespace IpeaGeo
                         A1 += (xi * yj * Math.Exp(-dij[i, j]));
                     }
                 }
-
             }
+            
             double MPBMGX = A1 / (X * Y);
+            
             return (MPBMGX);
-
         }
-
-
 
         public double Spatial_Proximity_Index(clsIpeaShape mShape, DataTable tabela, string nomeX, string nomeY)
         {
@@ -869,6 +819,7 @@ namespace IpeaGeo
             double A2 = 0;
             double A3 = 0;
             double SP = 0;
+            
             if (!mShape.TipoDistancia)
             {
                 mShape.GerarMatrizTodasDistancias();
@@ -885,22 +836,21 @@ namespace IpeaGeo
                 double xi = (double)tabela.Rows[i][nomeX];
                 double yi = (double)tabela.Rows[i][nomeY];
 
-
                 for (int j = 0; j < tabela.Rows.Count; j++)
                 {
                     dij[i, j] = mShape.MatrizAllDistances[i, j];
                     double yj = (double)tabela.Rows[j][nomeY];
                     double xj = (double)tabela.Rows[j][nomeX];
+                    
                     if (!double.IsNaN(dij[i, j]))
                     {
                         A1 += ((xi + yi) * (xj + yj) * Math.Exp(-dij[i, j]));
                     }
                 }
-
             }
+            
             double P00 = A1 / (X * Y);
-
-
+            
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
                 double xi = (double)tabela.Rows[i][nomeX];
@@ -914,8 +864,8 @@ namespace IpeaGeo
                         A2 += (xi * xj * Math.Exp(-dij[i, j]));
                     }
                 }
-
             }
+            
             double Pxx = A2 / (X * X);
 
             for (int i = 0; i < tabela.Rows.Count; i++)
@@ -931,18 +881,14 @@ namespace IpeaGeo
                         A3 += (yi * yj * Math.Exp(-dij[i, j]));
                     }
                 }
-
             }
+            
             double Pyy = A3 / (Y * Y);
-
 
             SP = (((X * Pxx) + (Y * Pyy)) / ((X + Y) * P00));
 
-
             return (SP);
-
         }
-
 
         public double Relative_Clustering_Index(clsIpeaShape mShape, DataTable tabela, string nomeX, string nomeY)
         {
@@ -954,6 +900,7 @@ namespace IpeaGeo
             double A2 = 0;
             double A3 = 0;
             double RCI = 0;
+            
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
                 X += (double)tabela.Rows[i][nomeX];
@@ -966,7 +913,6 @@ namespace IpeaGeo
 
                 for (int j = 0; j < tabela.Rows.Count; j++)
                 {
-
                     if (!mShape.TipoDistancia)
                     {
                         mShape.GerarMatrizTodasDistancias();
@@ -974,13 +920,14 @@ namespace IpeaGeo
 
                     dij[i, j] = mShape.MatrizAllDistances[i, j];
                     double xj = (double)tabela.Rows[j][nomeX];
+                    
                     if (!double.IsNaN(dij[i, j]))
                     {
                         A2 += (xi * xj * Math.Exp(-dij[i, j]));
                     }
                 }
-
             }
+            
             double Pxx = A2 / (X * X);
 
             for (int i = 0; i < tabela.Rows.Count; i++)
@@ -989,7 +936,6 @@ namespace IpeaGeo
 
                 for (int j = 0; j < tabela.Rows.Count; j++)
                 {
-
                     if (!mShape.TipoDistancia)
                     {
                         mShape.GerarMatrizTodasDistancias();
@@ -1002,17 +948,15 @@ namespace IpeaGeo
                         A3 += (yi * yj * Math.Exp(-dij[i, j]));
                     }
                 }
-
             }
+            
             double Pyy = A3 / (Y * Y);
-
 
             RCI = (Pxx / Pyy) - 1;
 
-
             return (RCI);
-
         }
+        
         //TODO: Checar a formula. B2 tende a infinito pois B1 tende a zero.
         public double Distance_Decay_Interation_Index(clsIpeaShape mShape, DataTable tabela, string strTotal, string nomeX, string nomeY)
         {
@@ -1025,7 +969,6 @@ namespace IpeaGeo
             {
                 X += (double)tabela.Rows[i][nomeX];
             }
-
 
             double[,] kij = new double[tabela.Rows.Count, tabela.Rows.Count];
 
@@ -1042,7 +985,6 @@ namespace IpeaGeo
                     centroidej[0] = mShape[j].YCentroide * emrad;
                     centroidej[1] = mShape[j].XCentroide * emrad;
 
-
                     if (!mShape.TipoDistancia)
                     {
                         mShape.GerarMatrizTodasDistancias();
@@ -1055,10 +997,9 @@ namespace IpeaGeo
                         double nome = ti * Math.Exp(-dij[i, j]);
                         A1 += nome;
                     }
-
                 }
-
             }
+            
             A1 = A1 * 2;
 
             for (int i = 0; i < tabela.Rows.Count; i++)
@@ -1074,10 +1015,9 @@ namespace IpeaGeo
                         double q = tj * Math.Exp(-dij[i, j]) / A1;
                         kij[i, j] = q;
                     }
-
                 }
-
             }
+            
             double B1 = 0;
             double B2 = 0;
             for (int i = 0; i < tabela.Rows.Count; i++)
@@ -1093,26 +1033,25 @@ namespace IpeaGeo
                     {
                         B1 += conta;
                     }
-
                 }
                 double xi = (double)tabela.Rows[i][nomeX];
                 B2 += (xi * B1) / (X);
                 B1 = 0;
             }
+            
             B2 = B2 * 2;
+            
             return (B2);
-
         }
 
         #endregion;
-
 
         #endregion;
 
         #region Indices Multigroup;
 
-
         #region Multigroup Eveness;
+        
         /// <summary>
         /// Retorna o indicador Multigroup "Dissimilarity"
         /// </summary>
@@ -1163,7 +1102,6 @@ namespace IpeaGeo
             return (D);
         }
 
-
         /// <summary>
         /// Retorna o indicador Multigroup "Gini Coefficient"
         /// </summary>
@@ -1199,10 +1137,6 @@ namespace IpeaGeo
                 I += PIm[i] * (1 - PIm[i]);
             }
 
-
-
-
-
             for (int i = 0; i < PIjm.GetLength(0); i++)
             {
                 int ilinha = shape[i].PosicaoNoDataTable;
@@ -1218,11 +1152,11 @@ namespace IpeaGeo
                     }
                 }
             }
+            
             Gini = ((1 / (2 * T * T * I)) * tmp1);
 
             return (Gini);
         }
-
 
         /// <summary>
         /// Retorna o indicador Multigroup "Information Theory"
@@ -1248,7 +1182,6 @@ namespace IpeaGeo
                 {
                     PIjm[i, j] = Convert.ToDouble(tabela.Rows[ilinha][nomes[j]]) / Convert.ToDouble(tabela.Rows[ilinha][total]);
                     PIm[j] += Convert.ToDouble(tabela.Rows[ilinha][nomes[j]]);
-
                 }
                 T += Convert.ToDouble(tabela.Rows[ilinha][total]);
             }
@@ -1275,7 +1208,6 @@ namespace IpeaGeo
         }
 
         #endregion;
-
 
         #region Multigroup Exposition;
 
@@ -1327,7 +1259,6 @@ namespace IpeaGeo
 
             return (P);
         }
-
 
         /// <summary>
         /// Retorna o indicador Multigroup "Relative Diversity"
@@ -1431,6 +1362,5 @@ namespace IpeaGeo
         #endregion;
 
         #endregion;
-
     }
 }
