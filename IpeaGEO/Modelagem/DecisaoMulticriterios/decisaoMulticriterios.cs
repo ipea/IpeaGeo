@@ -148,7 +148,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
 
                     this.DataSetExterno.Tables.Clear();
                     this.DataSetExterno.Tables.Add(((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy());
-
                    
                     lblProgressBar.Visible = true;
                     lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
@@ -506,6 +505,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     {
                         m_dt_tabela_dados.Columns.Remove("Índice Algébrico");
                     }
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Algébrico"))
                     {
                         for (int i = 0; i < m_dt_tabela_dados.Rows.Count; i++)
@@ -523,6 +523,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+                    
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
                     this.userControlRichTextOutput2.Texto += bldm.imprimirAlgebrico(indiceAlgebrico, strVariavelID, "Índice Algébrico", nomeVariavelIdentificadora, strVariaveisSelecionadas, pesos, padronizados);
 
@@ -540,9 +541,9 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     tabControl1.SelectedTab = tabPage5;
 
                 }
+                
                 if (rbComponentesPrincipais.Checked)
                 {
-
                     BLogicDecisaoMulticriterios bldm = new BLogicDecisaoMulticriterios("Índice Componentes Principais", BLogicDecisaoMulticriterios.Metodo.Geral);
 
                     //Passo 1: Passa a lista de variáveis para criar o indice
@@ -561,10 +562,12 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
 
                     //Verifica se a variável indice algebrico existe no dataTable
                     string[] strVariavelID = new string[m_dt_tabela_dados.Rows.Count];
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Componentes Principais"))
                     {
                         m_dt_tabela_dados.Columns.Remove("Índice Componentes Principais");
                     }
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Componentes Principais"))
                     {
                         for (int i = 0; i < m_dt_tabela_dados.Rows.Count; i++)
@@ -582,6 +585,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+                    
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
                     this.userControlRichTextOutput2.Texto += bldm.imprimirComponentesPrincipais(indiceCompPrin, strVariavelID, "Índice Componentes Principais", nomeVariavelIdentificadora, strVariaveisSelecionadas, pesos, padronizados);
 
@@ -596,11 +600,10 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         lblProgressBar.Visible = true;
                         lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
                     }
-
                   
                     tabControl1.SelectedTab = tabPage5;
-
                 }
+                
                 if (radioButtonHierarquico.Checked)
                 {
                     BLogicDecisaoMulticriterios bldm = new BLogicDecisaoMulticriterios("Análise Hierárquica Clássica", BLogicDecisaoMulticriterios.Metodo.Geral);
@@ -638,6 +641,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+                    
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
                     this.userControlRichTextOutput2.Texto += bldm.imprimirHierarquicoClassico(indiceHierar, strVariavelID, "Índice Análise Hierárquica Clássica", nomeVariavelIdentificadora, strVariaveisSelecionadas, pesos, lambdaMAX, IC, RC);
                     if (ckbIncluirNovasVariaveisTabelaDados.Checked)
@@ -646,7 +650,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
 
                         this.DataSetExterno.Tables.Clear();
                         this.DataSetExterno.Tables.Add(((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy());
-
                        
                         lblProgressBar.Visible = true;
                         lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
@@ -673,6 +676,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     {
                         m_dt_tabela_dados.Columns.Remove("Índice Análise Hierárquica Multiplicativa");
                     }
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Análise Hierárquica Multiplicativa"))
                     {
                         for (int i = 0; i < m_dt_tabela_dados.Rows.Count; i++)
@@ -690,15 +694,16 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+                    
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
                     this.userControlRichTextOutput2.Texto += bldm.imprimirHierarquicoMultiplicativo(indiceHierar, strVariavelID, "Índice Análise Hierárquica Multiplicativa", nomeVariavelIdentificadora, strVariaveisSelecionadas, pesos, lambdaMAX, IC, RC);
+                    
                     if (ckbIncluirNovasVariaveisTabelaDados.Checked)
                     {
                         m_gridview_externo.DataSource = ((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy();
 
                         this.DataSetExterno.Tables.Clear();
                         this.DataSetExterno.Tables.Add(((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy());
-
                        
                         lblProgressBar.Visible = true;
                         lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
@@ -727,6 +732,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     {
                         m_dt_tabela_dados.Columns.Remove("Índice Análise Hierárquica Referenciada");
                     }
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Análise Hierárquica Referenciada"))
                     {
                         for (int i = 0; i < m_dt_tabela_dados.Rows.Count; i++)
@@ -744,9 +750,11 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+                    
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
                     string[] strEstatistica = new string[dataGridView1.RowCount];
                     string[] strPadroniza = new string[dataGridView1.RowCount];
+                    
                     for (int i = 0; i < dataGridView1.RowCount; i++)
                     {
                         strEstatistica[i] = dataGridView1.Rows[i].Cells[1].Value.ToString();
@@ -760,7 +768,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         }
                     }
 
-
                     this.userControlRichTextOutput2.Texto += bldm.imprimirHierarquicoReferenciado(indiceHierar, strVariavelID, "Índice Análise Hierárquica Referenciada", nomeVariavelIdentificadora, strVariaveisSelecionadas, pesos, lambdaMAX, IC, RC, strEstatistica, strPadroniza);
                     if (ckbIncluirNovasVariaveisTabelaDados.Checked)
                     {
@@ -768,13 +775,13 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
 
                         this.DataSetExterno.Tables.Clear();
                         this.DataSetExterno.Tables.Add(((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy());
-
                        
                         lblProgressBar.Visible = true;
                         lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
                     }
                     tabControl1.SelectedTab = tabPage5;
                 }
+                
                 if (rbAHPbg.Checked)
                 {
                     BLogicDecisaoMulticriterios bldm = new BLogicDecisaoMulticriterios("Análise Hierárquica B-G", BLogicDecisaoMulticriterios.Metodo.Geral);
@@ -813,8 +820,10 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
                     this.userControlRichTextOutput2.Texto += bldm.imprimirHierarquicoBG(indiceHierar, strVariavelID, "Índice Análise Hierárquica B-G", nomeVariavelIdentificadora, strVariaveisSelecionadas, pesos, lambdaMAX, IC, RC);
+                    
                     if (ckbIncluirNovasVariaveisTabelaDados.Checked)
                     {
                         m_gridview_externo.DataSource = ((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy();
@@ -847,6 +856,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     {
                         m_dt_tabela_dados.Columns.Remove("Índice Prométhée 1");
                     }
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Prométhée 1"))
                     {
                         for (int i = 0; i < m_dt_tabela_dados.Rows.Count; i++)
@@ -864,6 +874,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+                    
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
 
                     //Passa os pesos:
@@ -879,13 +890,13 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
 
                         this.DataSetExterno.Tables.Clear();
                         this.DataSetExterno.Tables.Add(((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy());
-
                        
                         lblProgressBar.Visible = true;
                         lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
                     }
                     tabControl1.SelectedTab = tabPage5;
                 }
+                
                 if (rbPromethe2.Checked)
                 {
                     BLogicDecisaoMulticriterios bldm = new BLogicDecisaoMulticriterios("Prométhée 2", BLogicDecisaoMulticriterios.Metodo.Geral);
@@ -904,6 +915,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     {
                         m_dt_tabela_dados.Columns.Remove("Índice Prométhée 2");
                     }
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Prométhée 2"))
                     {
                         for (int i = 0; i < m_dt_tabela_dados.Rows.Count; i++)
@@ -921,6 +933,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             strVariavelID[i] = m_dt_tabela_dados.Rows[i][nomeVariavelIdentificadora].ToString();
                         }
                     }
+                    
                     if (checkBoxLimparResultado.Checked) this.userControlRichTextOutput2.Texto = "";
 
                     //Passa os pesos:
@@ -936,13 +949,13 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
 
                         this.DataSetExterno.Tables.Clear();
                         this.DataSetExterno.Tables.Add(((DataTable)this.userControlDataGrid1.Datagridview.DataSource).Copy());
-
                       
                         lblProgressBar.Visible = true;
                         lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
                     }
                     tabControl1.SelectedTab = tabPage5;
                 }
+                
                 if (radioButton5.Checked)
                 {
                     BLogicDecisaoMulticriterios bldm = new BLogicDecisaoMulticriterios("Prométhée 3", BLogicDecisaoMulticriterios.Metodo.Geral);
@@ -1002,6 +1015,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     }
                     tabControl1.SelectedTab = tabPage5;
                 }
+                
                 if (rbPromethe4.Checked)
                 {
                     BLogicDecisaoMulticriterios bldm = new BLogicDecisaoMulticriterios("Prométhée 4", BLogicDecisaoMulticriterios.Metodo.Geral);
@@ -1020,6 +1034,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     {
                         m_dt_tabela_dados.Columns.Remove("Índice Prométhée 4");
                     }
+                    
                     if (m_dt_tabela_dados.Columns.Contains("Índice Prométhée 4"))
                     {
                         for (int i = 0; i < m_dt_tabela_dados.Rows.Count; i++)
@@ -1257,7 +1272,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
 
         private void radioButtonHierarquicoMultiplicativo_CheckedChanged(object sender, EventArgs e)
         {
-
             if (bldm != null)
                 if (radioButtonHierarquicoMultiplicativo.Checked)
                     if (bldm.entrada.metodo != BLogicDecisaoMulticriterios.Metodo.HierarquicoMultiplicativo)
@@ -1322,7 +1336,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     dataGridViewAlgebrico.Rows[i].Cells[1].Value = "1.0";
                 }
             }
-
         }
 
         #endregion
@@ -1733,11 +1746,11 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                     {
                         dataGridView1.Columns.Clear();
                         dataGridView1.Rows.Clear();
-
                     }
                     else
                     {
                         buttonExecutar.Enabled = true;
+                        
                         //Preenche a legenda do Mapa
                         if (dataGridView1.ColumnCount == 0)
                         {
@@ -1772,7 +1785,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             txtCor2.DisplayIndex = 2;
                             txtCor2.DefaultCellStyle.BackColor = Color.White;
                             dataGridView1.Columns.Insert(2, txtCor2);
-
                         }
 
                         int contador = 0;
@@ -1944,7 +1956,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             txtCor2.DisplayIndex = 2;
                             txtCor2.DefaultCellStyle.BackColor = Color.White;
                             dataGridView1.Columns.Insert(2, txtCor2);
-
                         }
 
                         int contador = 0;
@@ -2037,7 +2048,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                             txtCor2.DisplayIndex = 2;
                             txtCor2.DefaultCellStyle.BackColor = Color.White;
                             dataGridView1.Columns.Insert(2, txtCor2);
-
                         }
 
                         int contador = 0;
@@ -2288,7 +2298,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                          txtCor1.Items.Add("Critério Gaussiano");
                          dataGridView1.Columns.Insert(2, txtCor1);
 
-
                         //Adiciona Limite de indiferença
                         DataGridViewTextBoxColumn txtCor2 = new DataGridViewTextBoxColumn();
                         txtCor2 = new DataGridViewTextBoxColumn();
@@ -2322,8 +2331,7 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         txtDirecao.DisplayIndex = 2;
                         txtDirecao.Items.Add("Maximizar");
                         txtDirecao.Items.Add("Minimizar");
-                        dataGridView1.Columns.Insert(5, txtDirecao);
-        
+                        dataGridView1.Columns.Insert(5, txtDirecao);       
                     }
 
                     BLogicDecisaoMulticriterios blogic = new BLogicDecisaoMulticriterios();
@@ -2417,7 +2425,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         txtCor1.Items.Add("Critério Gaussiano");
                         dataGridView1.Columns.Insert(2, txtCor1);
 
-
                         //Adiciona Limite de indiferença
                         DataGridViewTextBoxColumn txtCor2 = new DataGridViewTextBoxColumn();
                         txtCor2 = new DataGridViewTextBoxColumn();
@@ -2452,7 +2459,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         txtDirecao.Items.Add("Maximizar");
                         txtDirecao.Items.Add("Minimizar");
                         dataGridView1.Columns.Insert(5, txtDirecao);
-
                     }
 
                     BLogicDecisaoMulticriterios blogic = new BLogicDecisaoMulticriterios();
@@ -2550,7 +2556,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         txtCor1.Items.Add("Critério Gaussiano");
                         dataGridView1.Columns.Insert(2, txtCor1);
 
-
                         //Adiciona Limite de indiferença
                         DataGridViewTextBoxColumn txtCor2 = new DataGridViewTextBoxColumn();
                         txtCor2 = new DataGridViewTextBoxColumn();
@@ -2585,7 +2590,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         txtDirecao.Items.Add("Maximizar");
                         txtDirecao.Items.Add("Minimizar");
                         dataGridView1.Columns.Insert(5, txtDirecao);
-
                     }
 
                     BLogicDecisaoMulticriterios blogic = new BLogicDecisaoMulticriterios();
@@ -2670,7 +2674,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         txtCor1.Items.Add("Critério Gaussiano");
                         dataGridView1.Columns.Insert(2, txtCor1);
 
-
                         //Adiciona Limite de indiferença
                         DataGridViewTextBoxColumn txtCor2 = new DataGridViewTextBoxColumn();
                         txtCor2 = new DataGridViewTextBoxColumn();
@@ -2705,7 +2708,6 @@ namespace IpeaGeo.Modelagem.decisaoMulticriterios
                         txtDirecao.Items.Add("Maximizar");
                         txtDirecao.Items.Add("Minimizar");
                         dataGridView1.Columns.Insert(5, txtDirecao);
-
                     }
 
                     BLogicDecisaoMulticriterios blogic = new BLogicDecisaoMulticriterios();
