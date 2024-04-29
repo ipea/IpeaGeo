@@ -36,6 +36,7 @@ namespace IpeaGeo
                 for (int j = 0; j < shapeAlex.Count; j++)
                     shapeAlex[i].AddListaDistancias(j, distancias[i, j]);
             } // for
+		
         } // Preenche_Distancias_Poligonos()
 
         #region Mudanças Alexandre
@@ -869,8 +870,8 @@ namespace IpeaGeo
                         pol.TiposSubpoligonos = tipos_poligonos;
 
                         #endregion
-                        
-						pol.IndiceCluster = -1;
+                      
+			pol.IndiceCluster = -1;
                         m_shape.AddPoligono(pol);
 
                         #endregion
@@ -918,7 +919,7 @@ namespace IpeaGeo
             shapefile.Close();
 
             //Cor do mapa
-			layMapa.Style.Fill = new SolidBrush(Color.Transparent);
+    	    layMapa.Style.Fill = new SolidBrush(Color.Transparent);
 
             //Cor da linha
             layMapa.Style.Outline = System.Drawing.Pens.Black;
@@ -1095,7 +1096,6 @@ namespace IpeaGeo
 
             //Captura o FeatureDataRow
             FeatureDataRow feature = shapefile.GetFeature(0);
-
 
             //Captura a geometria
             SharpMap.Geometries.Geometry geoMetria = feature.Geometry.Envelope();
@@ -1370,7 +1370,7 @@ namespace IpeaGeo
                         } // if
                         else
                         {
-							erro = true;
+   			    erro = true;
 
                             MessageBox.Show("Não há correspondência entre as variáveis de união entre base e malha.",
                             "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -1378,8 +1378,9 @@ namespace IpeaGeo
                             break;
                         } // else
 
-						#warning Implementar usando threads.
-                        //Incrementa a progressbar.
+			#warning Implementar usando threads.
+				
+                        //Incrementa a progressbar.				
                         pBar.Increment(1);
                         Application.DoEvents();
                     } // for
@@ -1851,7 +1852,7 @@ namespace IpeaGeo
             } // for
 			
             double variancia = vetornovo.Average();
-            double desvio = Math.Sqrt(variancia);                            //Até aqui o que fiz foi só calcular o desvio padrão do vetor dado
+            double desvio = Math.Sqrt(variancia);                            //Até aqui, cálculo o desvio padrão do vetor dado
             double[] vetorfinal = new double[vetor.Length];
             for (int i = 0; i < vetor.Length - 1; i++)
                 vetorfinal[i] = (vetor[i] - media) / desvio;                   //Agora o vetor está em termos da sua distância para a média em desvios padrão
