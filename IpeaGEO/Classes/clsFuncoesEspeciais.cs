@@ -5,6 +5,7 @@ using System.Text;
 namespace IpeaGeo
 {
     #region Base class Gauleg18
+	    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class Gauleg18
     {
@@ -25,9 +26,11 @@ namespace IpeaGeo
                                                 0.079687828912071670,0.082187266704339706,0.084078218979661945,
                                                 0.085346685739338721,0.085983275670394821};
     }
+	
     #endregion
 
     #region Special functions
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathSpecialFunctions
     {
@@ -110,9 +113,11 @@ namespace IpeaGeo
             return Math.Exp(gammln(z) + gammln(w) - gammln(z + w));
         }
     }
+	
     #endregion
 
     #region Classe MathBeta
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathBeta : Gauleg18
     {
@@ -235,9 +240,11 @@ namespace IpeaGeo
             return x;
         }
     }
+    
     #endregion
 
     #region Classe MathGamma
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathGamma : Gauleg18
     {
@@ -413,9 +420,11 @@ namespace IpeaGeo
             return x;
         }
     }
+    
     #endregion
 
     #region Classe MathGammadist
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathGammadist : MathGamma
     {
@@ -454,9 +463,11 @@ namespace IpeaGeo
             return invgammp(p, alph) / bet;
         }
     }
+    
     #endregion
 
     #region Classe MathStudenttdist
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathStudenttdist : MathBeta
     {
@@ -504,9 +515,11 @@ namespace IpeaGeo
             return (p >= 0.5 ? mu + x : mu - x);
         }
     }
+    
     #endregion
 
     #region Classe MathPoissondist
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathPoissondist : MathGamma
     {
@@ -571,9 +584,11 @@ namespace IpeaGeo
             return nl;
         }
     }
+    
     #endregion
 
     #region Classe MathChisqdist
+    
     //[Obsolete("Use MathNet.Numerics.Distributions instead.")]
     //public class MathChisqdist : MathGamma
     //{
@@ -604,9 +619,11 @@ namespace IpeaGeo
     //        return 2.0 * invgammp(p, 0.5 * nu);
     //    }
     //}
+    
     #endregion
 
     #region Classe MathErf
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathErf
     {
@@ -679,9 +696,11 @@ namespace IpeaGeo
             return (x >= 0.0 ? ans : 2.0 - ans);
         }
     }
+	
     #endregion
 
     #region Classe MathNormaldist
+    
     //[Obsolete("Use MathNet.Numerics.Distributions instead.")]
     //public class MathNormaldist : MathErf
     //{
@@ -692,14 +711,14 @@ namespace IpeaGeo
     //        double ssig = 1.0;
     //        mu = mmu;
     //        sig = ssig;
-    //        if (sig <= 0.0) throw new Exception("Variância menor que 0");
+    //        if (sig <= 0.0) throw new Exception("VariÃ¢ncia menor que 0");
     //    }
 
     //    public MathNormaldist(double mmu, double ssig)
     //    {
     //        mu = mmu;
     //        sig = ssig;
-    //        if (sig <= 0.0) throw new Exception("Variância menor que 0");
+    //        if (sig <= 0.0) throw new Exception("VariÃ¢ncia menor que 0");
     //    }
 
     //    public double p(double x)
@@ -718,9 +737,11 @@ namespace IpeaGeo
     //        return -1.41421356237309505 * sig * inverfc(2.0 * p) + mu;
     //    }
     //}
+    
     #endregion
 
     #region Classe MathExpondist
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathExpondist
     {
@@ -746,9 +767,11 @@ namespace IpeaGeo
             return -Math.Log(1.0 - p) / bet;
         }
     }
+	
     #endregion
 
     #region Classe MathKSdist
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathKSdist
     {
@@ -812,26 +835,27 @@ namespace IpeaGeo
 
         public double invpks(double p) { return invqks(1.0 - p); }
     }
+	
     #endregion
 
     #region Classe MathKSdist_N
+    
     [Obsolete("Use MathNet.Numerics.Distributions instead.")]
     public class MathKSdist_N
-        {
-
-            public void ks(double d, int n, out double pvalor)
-            {
-                double x = d * Math.Sqrt(n);
-                double crit=1000000;
-                double acum = 0.0;
-                for(int i = 1;i<crit;i++)
-                {
-                    acum += Math.Exp((-Math.Pow((2.0 * (double)i - 1.0), 2.0) * Math.Pow(Math.PI, 2.0)) / (8.0 * Math.Pow(x, 2.0)));
-                }
-                pvalor = 1-(Math.Sqrt(2.0 * Math.PI) / x) * acum;
-            }
-        }
+    {   
+	    public void ks(double d, int n, out double pvalor)
+	    {
+		double x = d * Math.Sqrt(n);
+		double crit=1000000;
+		double acum = 0.0;
+		for(int i = 1;i<crit;i++)
+		{
+		    acum += Math.Exp((-Math.Pow((2.0 * (double)i - 1.0), 2.0) * Math.Pow(Math.PI, 2.0)) / (8.0 * Math.Pow(x, 2.0)));
+		}
+		pvalor = 1-(Math.Sqrt(2.0 * Math.PI) / x) * acum;
+	    }
+    }
+	
     #endregion
-
 }
 
