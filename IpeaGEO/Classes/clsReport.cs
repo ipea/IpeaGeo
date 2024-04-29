@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Data;
+
 namespace IpeaGeo
 {
     class clsReport
@@ -35,7 +36,6 @@ namespace IpeaGeo
 
         public string MapaTematicoRelatorio(string strBase, string strMapa, string strMapaImagem, int numPoligonos, string strMetodo, double[] strClasses, string[] strCores, string strVariavel)
         {
-
             string strHTML = @"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>" +
             @"<html xmlns='http://www.w3.org/1999/xhtml'>" +
             @"<head>" +
@@ -105,15 +105,12 @@ namespace IpeaGeo
                 size = strClasses[0].ToString().Length;
             }
 
-
-
             strHTML +=
             @"    <tr>" +
             @"      <td>Classe 0 </td>" +
             @"      <td bgcolor='" + strCores[0] + "'>&nbsp;</td>" +
             @"      <td><div align='center'> Menor que " + strClasses[0].ToString().Substring(0, size) + "</div></td>" +
             @"    </tr>";
-
 
             for (int i = 1; i < strClasses.Length - 1; i++)
             {
@@ -158,12 +155,7 @@ namespace IpeaGeo
                 @"      <td bgcolor='" + strCores[i] + "'>&nbsp;</td>" +
                 @"      <td><div align='center'>" + strClasses[i - 1].ToString().Substring(0, size) + " --| " + strClasses[i].ToString().Substring(0, size2) + "</div></td>" +
                 @"    </tr>";
-
-
-
             }
-
-
 
             //Definindo tamanhos para as classes
             tamanho = strClasses[strClasses.Length - 2].ToString().IndexOf(",");
@@ -200,7 +192,6 @@ namespace IpeaGeo
                 size3 = strClasses[strClasses.Length - 1].ToString().Length;
             }
 
-
             strHTML +=
             @"    <tr>" +
             @"      <td>Classe" + Convert.ToString(strClasses.Length - 1) + "</td>" +
@@ -219,7 +210,6 @@ namespace IpeaGeo
 
         public string MapaTematicoRelatorio(string strBase, string strMapa, string strMapaImagem, int numPoligonos, string strMetodo, double[] strClasses, string[] strCores, string strVariavel, string[] legenda)
         {
-
             string strHTML = @"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>" +
             @"<html xmlns='http://www.w3.org/1999/xhtml'>" +
             @"<head>" +
@@ -290,15 +280,12 @@ namespace IpeaGeo
                 size = strClasses[0].ToString().Length;
             }
 
-
-
             strHTML +=
             @"    <tr>" +
             @"      <td>" + legenda[0].ToString() + "</td>" +
             @"      <td bgcolor='" + strCores[0] + "'>&nbsp;</td>" +
             @"      <td><div align='center'> Menor que " + strClasses[0].ToString().Substring(0, size) + "</div></td>" +
             @"    </tr>";
-
 
             for (int i = 1; i < strClasses.Length - 1; i++)
             {
@@ -337,7 +324,6 @@ namespace IpeaGeo
                     size2 = strClasses[i].ToString().Length;
                 }
 
-
                 strHTML +=
                 @"    <tr>" +
                 @"      <td>" + legenda[i].ToString() + "</td>" +
@@ -345,8 +331,6 @@ namespace IpeaGeo
                 @"      <td><div align='center'>" + strClasses[i - 1].ToString().Substring(0, size) + " --| " + strClasses[i].ToString().Substring(0, size2) + "</div></td>" +
                 @"    </tr>";
             }
-
-
 
             //Definindo tamanhos para as classes
             tamanho = strClasses[strClasses.Length - 2].ToString().IndexOf(",");
@@ -383,7 +367,6 @@ namespace IpeaGeo
                 size3 = strClasses[strClasses.Length - 1].ToString().Length;
             }
 
-
             strHTML +=
             @"    <tr>" +
             @"      <td>" + legenda[legenda.Length - 1].ToString() + "</td>" +
@@ -398,16 +381,10 @@ namespace IpeaGeo
             @"</html>";
 
             return (strHTML);
-        }
-        
-
-        /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-        /*---------------------------------------------------------------------------------alterações marina 29/08/2011--------------------------------------------------------------------------*/
-        /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-       
+        }     
+      
         public string MapaTematicoQualiRelatorio(string strBase, string strMapa, string strMapaImagem, int numPoligonos, string strMetodo, string[] strClasses, string[] strCores, string strVariavel, string[] legenda)
         {
-
             string strHTML = @"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>" +
             @"<html xmlns='http://www.w3.org/1999/xhtml'>" +
             @"<head>" +
@@ -478,10 +455,8 @@ namespace IpeaGeo
                 size = strClasses[0].ToString().Length;
             }
 
-
             for (int i = 0; i < strClasses.Length ; i++)
             {
-
                 strHTML +=
                 @"    <tr>" +
                 @"      <td>" + legenda[i].ToString() + "</td>" +
@@ -499,10 +474,8 @@ namespace IpeaGeo
             return (strHTML);
         }
 
-
         public string MapaTematicoQualiRelatorio(string strBase, string strMapa, string strMapaImagem, int numPoligonos, string strMetodo, string[] strClasses, string[] strCores, string strVariavel)
         {
-
             string strHTML = @"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>" +
             @"<html xmlns='http://www.w3.org/1999/xhtml'>" +
             @"<head>" +
@@ -581,7 +554,6 @@ namespace IpeaGeo
                 @"      <td bgcolor='" + strCores[i] + "'>&nbsp;</td>" +
                 @"      <td><div align='center'>" + strClasses[i] + "</div></td>" +
                 @"    </tr>";
-
             }
 
             strHTML += @"  </table>" +
@@ -593,15 +565,8 @@ namespace IpeaGeo
             return (strHTML);
         }
 
-        /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-        /*---------------------------------------------------------------------------------fim alterações marina---------------------------------------------------------------------------------*/
-        /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-
         public string SegregacaoRelatorio(double[,] matrizindices, string[] nomes_variaveis, string[] nomes_indices, string[] nomesX, string[] nomesY, bool multigroup)
         {
-
             string strHTML = @"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>" +
             @"<html xmlns='http://www.w3.org/1999/xhtml'>" +
             @"<head>" +
@@ -630,7 +595,6 @@ namespace IpeaGeo
                 for (int i = 0; i < nomes_indices.Length; i++)
                 {
                     strHTML += @"    <td>" + nomes_indices[i].ToString() + "</td>";
-
                 }
                 strHTML += @"  </tr>";
                 if (!multigroup)
@@ -873,6 +837,7 @@ namespace IpeaGeo
                     @"  </tr>";
                 }
             }
+            
             if (dg.dblIndiceMoranSimples[0] != 0)
             {
                 strHTML += @"<table width='650' border='1' align='center'>" +
@@ -1012,7 +977,6 @@ namespace IpeaGeo
             for (int i = 0; i < strVariaveisSelecionadas.Length - 1; i++) strVariaveis += strVariaveisSelecionadas[i] + ", ";
             strVariaveis += strVariaveisSelecionadas[strVariaveisSelecionadas.Length - 1];
 
-
             string strHTML = @"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>" +
             @"<html xmlns='http://www.w3.org/1999/xhtml'>" +
             @"<head>" +
@@ -1060,6 +1024,7 @@ namespace IpeaGeo
             @"    <td><strong>N&uacute;mero de conglomerados</strong></td>" +
             @"    <td>" + numClusters + "</td>" +
             @"  </tr>";
+            
             if (strDistancia == "Minkowsky")
             {
                 strHTML += @"  <tr>" +
@@ -1067,6 +1032,7 @@ namespace IpeaGeo
                 @"    <td>" + iMinkowsky + "</td>" +
                 @"  </tr>";
             }
+            
             if (strMetodo == "EML")
             {
                 strHTML += @"  <tr>" +
@@ -1074,6 +1040,7 @@ namespace IpeaGeo
                 @"    <td>" + strEML + "</td>" +
                 @"  </tr>";
             }
+            
             strHTML += @"  <tr>" +
             @"    <td><strong>Conglomerado espacial</strong></td>" +
             @"    <td>" + blEspacial.ToString() + "</td>" +
@@ -1163,6 +1130,7 @@ namespace IpeaGeo
             @"    <td width='615'>" + dep.strTipoCorrecao + "</td>" +
             @"  </tr>"
             ;
+            
             if (dep.strPopulacao != null)
             {
                 strHTML +=
