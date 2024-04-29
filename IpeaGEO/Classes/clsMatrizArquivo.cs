@@ -8,7 +8,7 @@ namespace IpeaGeo
 {
     public class MatrizArquivo
     {
-        #region Vari·veis internas
+        #region Vari√°veis internas
 
         private int m_num_linhas_corte = 1000;
         private int m_num_cols_corte = 1000;
@@ -34,7 +34,7 @@ namespace IpeaGeo
          
         #endregion 
 
-        #region Limpando o diretÛrio dos arquivos tempor·rios de matrizes
+        #region Limpando o diret√≥rio dos arquivos tempor√°rios de matrizes
 
         public static void LimpaMatrizesArquivosTemporarios()
         {
@@ -139,7 +139,7 @@ namespace IpeaGeo
             get
             {
                 if (i < 0 || i >= this.m_numero_linhas || j < 0 || j >= this.m_numero_colunas)
-                    throw new Exception("Õndices fora das dimensıes da matriz");
+                    throw new Exception("√çndices fora das dimens√µes da matriz");
 
                 if (i >= m_num_linhas_corte || j >= m_num_cols_corte)
                 {
@@ -154,7 +154,7 @@ namespace IpeaGeo
             set
             {
                 if (i < 0 || i >= this.m_numero_linhas || j < 0 || j >= this.m_numero_colunas)
-                    throw new Exception("Õndices fora das dimensıes da matriz");
+                    throw new Exception("√çndices fora das dimens√µes da matriz");
 
                 if (i >= m_num_linhas_corte || j >= m_num_cols_corte)
                 {
@@ -200,3 +200,4 @@ namespace IpeaGeo
         #endregion 
     }
 }
+
