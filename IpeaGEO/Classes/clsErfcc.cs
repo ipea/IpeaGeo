@@ -6,7 +6,7 @@ namespace IpeaGeo
 	/// Summary description for Erfcc.
 	/// </summary>
 	[Obsolete("Use of MathNet.Numerics.")]
-    public class Erfcc
+        public class Erfcc
 	{
 		public Erfcc()
 		{
@@ -15,7 +15,7 @@ namespace IpeaGeo
 			//
 		}
 
-		//Retorna a função erro complementar com um erro fracionário de 1.2 *10^-7
+		//Retorna a funÃ§Ã£o erro complementar com um erro fracionÃ¡rio de 1.2 *10^-7
 		
 		public double erfcc(double x)
 		{
@@ -27,7 +27,6 @@ namespace IpeaGeo
 				t*(-0.18628806+t*(0.27886807+t*(-1.13520398+t*(1.48851587+
 				t*(-0.82215223+t*0.17087277)))))))));
 			return x >= 0.0 ? ans : 2.0-ans;
-		}
-	
+		}	
 	}
 }
