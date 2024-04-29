@@ -78,7 +78,6 @@
             this.Text = "frmAvisoLink";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
