@@ -133,8 +133,6 @@ namespace IpeaGeo.Modelagem.ComponentesPrincipais
             #region checando valores inválidos
 
             int[] indicadores_val_invalidos;
-
-
             
             //for (int i = 0; i < userControlSelecaoVariaveis1.VariaveisIndependentes.GetLength(0); i++)
             //{
@@ -153,8 +151,7 @@ namespace IpeaGeo.Modelagem.ComponentesPrincipais
             {
                 throw new Exception("O número de componentes deve ser menor ou igual ao número de variáveis.");
             }
-           
-            
+                      
             #endregion
 
             double[] perc = new double[0];
@@ -200,7 +197,6 @@ namespace IpeaGeo.Modelagem.ComponentesPrincipais
             }
 
             #region Scree PLot
-
             
             // Set the Titles
             myPane.Title.Text = "Scree Plot";
@@ -210,23 +206,18 @@ namespace IpeaGeo.Modelagem.ComponentesPrincipais
             myPane.YAxis.Scale.Min = 0;
             myPane.YAxis.Scale.Max = 1;
             myPane.XAxis.Scale.Min = 0;
-            
-
+          
             // Make up some data arrays based on the Sine function
             double x, y;
             double[] X = new double[perc.GetLength(0)];
 
             PointPairList list1 = new PointPairList();
-            
-
+           
             for (int i = 0; i < perc.GetLength(0); i++)
             {
-
                 X[i] = i + 1;
                 list1.Add(X[i], perc[i]);
-            }
-
-            
+            }           
 
             // Generate a blue curve with circle
             // symbols, and "Piper" in the legend
@@ -238,14 +229,12 @@ namespace IpeaGeo.Modelagem.ComponentesPrincipais
             //// Add a background gradient fill to the axis frame
             //myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 210), -45F);
 
-
             // Tell ZedGraph to refigure the
             // axes since the data have changed
             zedGraphControl1.AxisChange();
 
             zedGraphControl1.Update();
             zedGraphControl1.Refresh();
-
 
             #endregion
             
@@ -378,7 +367,6 @@ namespace IpeaGeo.Modelagem.ComponentesPrincipais
         {
             try
             {
-
                 if (ckbIncluirNovasVariaveisTabelaDados.Checked)
                 {
                     MessageBox.Show("Tabela de dados Atualizada", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -395,9 +383,7 @@ namespace IpeaGeo.Modelagem.ComponentesPrincipais
                     lblProgressBar.Text = "Tabela atualizada no formulário de mapas";
 
                     Cursor = Cursors.Default;
-
                 }
-
                 else
                 {
                     MessageBox.Show("Selecione a opção 'Mostrar escores na tabela de dados', localizada na aba Especificações", "Atualização", MessageBoxButtons.OK, MessageBoxIcon.Warning);
