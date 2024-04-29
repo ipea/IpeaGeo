@@ -216,7 +216,6 @@ namespace IpeaGeo.Modelagem
 
             #endregion
 
-
             EstimaModeloSEMPooledReg();
         }
 
@@ -275,8 +274,6 @@ namespace IpeaGeo.Modelagem
             rho_new = opt.MinBrentSearch(func, m_xmin, m_xmax, ref fval);
 
             double minus_loglik = minusloglikSEMPainel(rho_new);
-
-
         }
 
         #endregion 
