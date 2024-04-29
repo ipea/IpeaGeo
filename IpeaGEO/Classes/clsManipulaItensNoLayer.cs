@@ -19,6 +19,7 @@ namespace IpeaGeo.Classes
             ref int[] rows_hachureados)
         {
             string var_chave = var_chave_in;
+            
             if (var_chave == "")
             {
                 clsUtilTools clt = new clsUtilTools();
@@ -33,6 +34,7 @@ namespace IpeaGeo.Classes
             Brush auxb1;
             Type tipo;
             string[] elementos_chave = new string[dt_shape.Rows.Count];
+            
             for (int i = 0; i < colors.GetLength(0); i++)
             {
                 elementos_chave[i] = dt_shape.Rows[i][var_chave].ToString();
@@ -87,3 +89,4 @@ namespace IpeaGeo.Classes
         }
     }
 }
+
