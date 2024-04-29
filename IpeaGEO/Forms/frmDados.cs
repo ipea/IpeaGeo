@@ -11,7 +11,6 @@ namespace IpeaGeo.Forms
 {
     public partial class frmDados : Form
     {
-
         private System.Data.OleDb.OleDbConnection m_cnn = new System.Data.OleDb.OleDbConnection();
         private System.Data.OleDb.OleDbDataAdapter m_dap = new System.Data.OleDb.OleDbDataAdapter();
         private string strExtensao = "";
@@ -47,11 +46,7 @@ namespace IpeaGeo.Forms
                     dt1.Rows.Add(row);
                 }
             }
-
-
         }
-
-
 
         #endregion
 
@@ -106,7 +101,6 @@ namespace IpeaGeo.Forms
                     ds_tabelas_csv.Tables.Add(dt1);
                 }
 
-
                 #region Combobox
 
                 //--- preenchendo o combobox ---//
@@ -132,7 +126,6 @@ namespace IpeaGeo.Forms
                 // DataTable dt2 = (DataTable)ds_tabelas_csv.Tables[2];
                 // DataTable dt3 = (DataTable)ds_tabelas_csv.Tables[3];
 
-
                 treeView1.Nodes.Clear();
                 checkedListBox1.Items.Clear();
 
@@ -147,7 +140,6 @@ namespace IpeaGeo.Forms
                         treeView1.Nodes[i].Nodes.Add((string)ds_tabelas_csv.Tables[i + 1].Rows[j][1]);
                         checkedListBox1.Items.Add((string)ds_tabelas_csv.Tables[i + 1].Rows[j][1]);
                     }
-
                 }
 
                 #endregion
@@ -165,17 +157,13 @@ namespace IpeaGeo.Forms
                 #endregion
 
                 // --- linkando o treeview com o checklist box ---
-
             }
 
             catch (Exception er)
             {
                 MessageBox.Show(er.Message);
-
             }
-
         }
-
 
         #region Importar
 
@@ -189,14 +177,9 @@ namespace IpeaGeo.Forms
             {
                 progressBar1.Value = i;
             }
-
-
         }
 
         #endregion
-
-
-
 
         bool txtBox = false;
         private void txtPesquisar_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -208,7 +191,6 @@ namespace IpeaGeo.Forms
                 txtPesquisar.Text = "";
                 txtBox = true;
             }
-
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -222,8 +204,6 @@ namespace IpeaGeo.Forms
             Cursor = Cursors.Default;
             //cmbListaTemas.Text = "Pesquisar em";
         }
-
-
 
         private bool m_cmbtemas_iniciado = false;
 
@@ -274,7 +254,6 @@ namespace IpeaGeo.Forms
                         }
                     }
                 }
-
             }
 
             catch (Exception er)
@@ -302,10 +281,9 @@ namespace IpeaGeo.Forms
             return res;
         }
 
-        // --- tecla enter ligada ao botao pesquisar --- 
+        //--- tecla enter ligada ao botao pesquisar --- 
         private void frmDados_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-
             {
                 if (e.KeyCode == System.Windows.Forms.Keys.Enter)
                 {
@@ -315,9 +293,4 @@ namespace IpeaGeo.Forms
         }
     }
 }
-
-
-
-
-
 
