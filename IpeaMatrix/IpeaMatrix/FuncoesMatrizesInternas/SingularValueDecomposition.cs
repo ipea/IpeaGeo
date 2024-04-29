@@ -7,12 +7,12 @@ namespace IpeaMatrix
 {
     internal class SingularValueDecomposition
     {
-	    private int m,n;
-	    private Matrix u,v;
-	    private Matrix w;
-	    private double eps, tsh;
-
+	private int m,n;
+	private Matrix u,v;
+	private Matrix w;
+	private double eps, tsh;
         private double thresh = 1.0e-6;
+	    
         //public double Threshold
         //{
         //    get { return this.thresh; }
@@ -31,20 +31,22 @@ namespace IpeaMatrix
             v = new Matrix(n,n);
             w = new Matrix(n,1);
 
-		    eps = 1.0e-8;
+	    eps = 1.0e-8;
 
-		    decompose();
-		    reorder();
-		    tsh = 0.5*Math.Sqrt((double)(m+n+1.0))*w[0]*eps;
-	    }
+	    decompose();
+	    reorder();
+	    tsh = 0.5*Math.Sqrt((double)(m+n+1.0))*w[0]*eps;
+	}
        
         private void solve(ref Matrix b, ref Matrix x) 
         {
 	        int i,j,jj;
 	        double s;
+		
         	if (b.size() != m || x.size() != n) throw new Exception("SVD::solve bad sizes");
 	        Matrix tmp = new Matrix(n);
 	        tsh = (thresh >= 0.0 ? thresh : 0.5*Math.Sqrt((double)(m+n+1.0))*w[0]*eps);
+		
 	        for (j=0;j<n;j++) {
 		        s=0.0;
 		        if (w[j] > tsh) {
@@ -298,7 +300,7 @@ namespace IpeaMatrix
 	        int i,j,k,s,inc=1;
 	        double sw;
 	        Matrix su = new Matrix(m);
-            Matrix sv = new Matrix(n);
+                Matrix sv = new Matrix(n);
 	        do { inc *= 3; inc++; } while (inc <= n);
 	        do {
 		        inc /= 3;
