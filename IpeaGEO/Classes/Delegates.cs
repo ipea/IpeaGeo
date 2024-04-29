@@ -12,8 +12,6 @@ namespace IpeaGeo
 		{
 		}
 
-
-
 		public delegate int FunctionIntToInt(int x);
 		public delegate double FunctionIntToDouble(int x);
 		public delegate int FunctionDoubleToInt(double x);
