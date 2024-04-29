@@ -8,7 +8,6 @@ namespace IpeaGeo.Modelagem.RotaOtima
 {
     public class clsDistanciaMinima
     {
-
     }
 
     public class LinhaFromShape
