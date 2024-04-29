@@ -35,6 +35,7 @@ namespace IpeaGeo
                     saveFileDialog1.Filter = "Excel (*.xls)|*.xls|Access (*.mdb)|*.mdb|XML (*.xml)|*.xml|Texto (*.txt)|*.txt";
                     saveFileDialog1.FilterIndex = 1;
                     saveFileDialog1.RestoreDirectory = true;
+                    
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         Cursor.Current = Cursors.WaitCursor;
@@ -81,8 +82,8 @@ namespace IpeaGeo
                             }
 
                             meustream.Close();
-
                         }
+                        
                         Cursor.Current = Cursors.Default;
                     }
                 }
@@ -186,10 +187,12 @@ namespace IpeaGeo
             try
             {
                 FormAberturaTabelaDados frm = new FormAberturaTabelaDados();
+                
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     tabela_dados = frm.TabelaDeDados;
                 }
+                
                 if (tabela_dados.Rows.Count > 0 && tabela_dados.Columns.Count > 0)
                 {
                     return true;
@@ -208,3 +211,4 @@ namespace IpeaGeo
         #endregion
     }
 }
+
