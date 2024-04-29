@@ -647,6 +647,7 @@ namespace IpeaGeo
 
             prBar.Value = 0;
             //prBar.Refresh();
+            
             Application.DoEvents();
         }
 
