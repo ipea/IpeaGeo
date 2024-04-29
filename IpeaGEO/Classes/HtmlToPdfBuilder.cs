@@ -19,7 +19,6 @@ using System.Text.RegularExpressions;
 
 namespace IpeaGEO
 {
-
     #region HtmlToPdfBuilder Class
 
     /// <summary>
@@ -143,7 +142,6 @@ namespace IpeaGEO
 
         }
 
-
         #endregion
 
         #region Document Navigation
@@ -167,7 +165,6 @@ namespace IpeaGEO
                 Math.Min(this._Pages.IndexOf(after) + 1, this._Pages.Count),
                 page);
         }
-
 
         #endregion
 
@@ -217,7 +214,6 @@ namespace IpeaGEO
                 reader.Dispose();
                 output.Dispose();
                 generate.Dispose();
-
             }
 
             //after rendering
@@ -228,15 +224,12 @@ namespace IpeaGEO
             //return the rendered PDF
             document.Close();
             return file.ToArray();
-
         }
 
         #endregion
-
     }
 
     #endregion
-
 
     #region HtmlPdfPage Class
 
@@ -273,11 +266,9 @@ namespace IpeaGEO
         }
 
         #endregion
-
     }
 
     #endregion
-
 
     #region Rendering Delegate
 
@@ -287,5 +278,4 @@ namespace IpeaGEO
     public delegate void RenderEvent(PdfWriter writer, Document document);
 
     #endregion
-
 }
