@@ -7,6 +7,7 @@ namespace IpeaGeo.Classes
     public class clsStat
     {
         #region Estatística Descritiva
+            
         /// <summary>
         /// Calcula a média da variável
         /// </summary>
@@ -69,7 +70,6 @@ namespace IpeaGeo.Classes
             return (((soma / ((double)dados.GetLength(0) - 1.0)) - (((double)dados.GetLength(0) / ((double)dados.GetLength(0) - 1.0)) * (Math.Pow(media(dados, coluna), 2.0)))));
         }
 
-
         /// <summary>
         /// Calcula a assimetria da distribuição dos dados da variável
         /// </summary>
@@ -84,7 +84,6 @@ namespace IpeaGeo.Classes
             }
             return (((double)dados.Length / ((double)dados.Length - 2.0)) * (1.0 / ((double)dados.Length - 1.0)) * soma);
         }
-
 
         /// <summary>
         /// Calcula a kurtose (achatamento) da distribuição dos dados da variável
@@ -104,8 +103,6 @@ namespace IpeaGeo.Classes
             double g2 = (Math.Pow(((double)dados.Length - 1.0), 2.0)) / (((double)dados.Length - 2.0) * ((double)dados.Length - 3.0));
 
             return ((g1 * soma) - (3.0 * g2));
-
-
         }
 
         /// <summary>
@@ -169,7 +166,6 @@ namespace IpeaGeo.Classes
             else
             {
                 return (double.MaxValue);
-
             }
         }
 
@@ -183,8 +179,8 @@ namespace IpeaGeo.Classes
         public double correlacao(double[,] x, int col1, int col2)
         {
             return (covariancia(x, col1, col2) / (Math.Sqrt(variancia(x, col1)) * Math.Sqrt(variancia(x, col2))));
-
         }
+        
         /// <summary>
         /// Calcula a matriz de covariância dos dados
         /// </summary>
@@ -200,11 +196,9 @@ namespace IpeaGeo.Classes
                 {
                     m[row, col] = covariancia(x, row, col);
                 }
-
             }
 
             return (m);
-
         }
 
         /// <summary>
@@ -222,12 +216,9 @@ namespace IpeaGeo.Classes
                     cor[row, col] = correlacao(x, row, col);
 
                 }
-
             }
             return (cor);
         }
-
-
 
         #endregion
 
@@ -258,7 +249,6 @@ namespace IpeaGeo.Classes
 
             for (int s = 0; s < x.GetLength(1); s++)
             {
-
                 for (int r = 0; r < x.GetLength(0); r++)
                 {
                     resultado[s] += Math.Abs((x[r, s] / soma_s[s]) - (soma_r[r] / soma_t));
@@ -267,7 +257,6 @@ namespace IpeaGeo.Classes
             }
 
             return (resultado);
-
         }
 
         /// <summary>
@@ -290,13 +279,11 @@ namespace IpeaGeo.Classes
                 {
                     soma_s[s] += x[r, s];
                     soma_r[r] += x[r, s];
-
                 }
-
             }
+            
             for (int s = 0; s < x.GetLength(1); s++)
             {
-
                 for (int r = 0; r < x.GetLength(0); r++)
                 {
 
@@ -304,7 +291,6 @@ namespace IpeaGeo.Classes
 
                     resultado[s] /= ((double)x.GetLength(0));
                 }
-
             }
 
             return (resultado);
@@ -331,31 +317,25 @@ namespace IpeaGeo.Classes
                 {
                     soma_s[s] += x[r, s];
                     soma_r[r] += x[r, s];
-
                 }
-
             }
+            
             for (int s = 0; s < x.GetLength(1); s++)
             {
-
                 for (int r = 0; r < x.GetLength(0); r++)
                 {
-
                     resultado[s] += (soma_r[r] / soma_t) * (Math.Pow(((x[r, s] / soma_s[s]) * (soma_t / soma_r[r])), y));
                     resultado[s] += (-1.0);
                     resultado[s] /= (Math.Pow(y, 2.0) - y);
-
                 }
-
             }
+            
             return (resultado);
         }
 
         #endregion
 
         #region Textmining
-
-
 
         /// <summary>
         /// The Levenshtein distance between two strings is given by the minimum number of operations needed to transform one string into the other, 
@@ -372,46 +352,35 @@ namespace IpeaGeo.Classes
             s = palavra1.ToCharArray();
             t = palavra2.ToCharArray();
 
-
             for (int i = 0; i <= palavra1.Length; i++)
             {
                 d[i, 0] = i;
-
             }
 
             for (int j = 0; j <= palavra2.Length; j++)
             {
                 d[0, j] = j;
-
             }
 
             for (int j = 1; j <= palavra2.Length; j++)
             {
                 for (int i = 1; i <= palavra1.Length; i++)
                 {
-
-
                     if (s[i - 1] == t[j - 1])
                     {
                         d[i, j] = d[i - 1, j - 1];
-
                     }
 
                     else
                     {
                         d[i, j] = Math.Min((d[i - 1, j] + 1), (d[i, j - 1] + 1));
                         d[i, j] = Math.Min(d[i, j], (d[i - 1, j - 1] + 1));
-
                     }
-
                 }
-
             }
 
             return d[palavra1.Length, palavra2.Length];
-
         }
-
 
         /// <summary>
         /// Is a "distance" (string metric) between two strings, i.e., 
@@ -433,30 +402,25 @@ namespace IpeaGeo.Classes
             for (int i = 0; i <= palavra1.Length; i++)
             {
                 d[i, 0] = i;
-
             }
 
             for (int j = 0; j <= palavra2.Length; j++)
             {
                 d[0, j] = j;
-
             }
 
             for (int i = 1; i <= palavra1.Length; i++)
             {
                 for (int j = 1; j <= palavra2.Length; j++)
                 {
-
                     if (s[i - 1] == t[j - 1])
                     {
                         cost = 0;
-
                     }
 
                     else
                     {
                         cost = 1;
-
                     }
 
                     d[i, j] = Math.Min((d[i - 1, j] + 1), (d[i, j - 1] + 1));
@@ -465,14 +429,11 @@ namespace IpeaGeo.Classes
                     if ((i > 1) && (j > 1) && (s[i - 1] == t[j - 2]) && (s[i - 2] == t[j - 1]))
                     {
                         d[i, j] = Math.Min(d[i, j], (d[i - 2, j - 2] + cost));
-
                     }
                 }
-
             }
 
             return d[palavra1.Length, palavra2.Length];
-
         }
 
         /// <summary>
@@ -490,21 +451,14 @@ namespace IpeaGeo.Classes
                 if (s[i].ToString() == " " || s[i].ToString() == "0")
                 {
                     weight = weight;
-
                 }
-
-
                 else
                 {
                     weight = weight + 1;
-
-
                 }
-
-
             }
+            
             return (weight);
-
         }
 
         public int hammingweight(int numero1)
@@ -514,28 +468,19 @@ namespace IpeaGeo.Classes
             s = numero2.ToCharArray();
             int weight = 0;
 
-
-
             for (int i = 0; i < numero2.Length; i++)
             {
                 if (s[i].ToString() == "0")
                 {
                     weight = weight;
-
                 }
-
                 else
                 {
-
                     weight = weight + 1;
-
                 }
-
-
             }
 
             return (weight);
-
         }
 
         /// <summary>
@@ -547,7 +492,6 @@ namespace IpeaGeo.Classes
         /// <returns>Hamming Distance</returns>
         public int hammingdistance(string palavra1, string palavra2)
         {
-
             if (palavra1.Length == palavra2.Length)
             {
                 char[] s = new char[palavra1.Length];
@@ -561,35 +505,21 @@ namespace IpeaGeo.Classes
                     if (s[i].ToString() == t[i].ToString())
                     {
                         d = d;
-
                     }
 
                     else
                     {
                         d = d + 1;
-
                     }
-
-
                 }
+                
                 return (d);
-
             }
-
             else
             {
                 return (99999);
-
             }
-
-
         }
-
-
-
-
-
-
 
         #endregion
 
@@ -597,16 +527,13 @@ namespace IpeaGeo.Classes
 
         public double[,] classes(double[,] x)
         {
-
             int num_clas = 1;
             for (int i = 1; i < x.GetLength(0); i++)
             {
                 if (x[i, 1] != x[i - 1, 1])
                 {
                     num_clas++;
-
                 }
-
             }
 
             double soma = 0;
@@ -614,6 +541,7 @@ namespace IpeaGeo.Classes
             double media = 0;
             double[] medias = new double[num_clas];
             int m = 0;
+
             for (int i = 0; i < x.GetLength(0); i++)
             {
                 count++;
@@ -635,7 +563,6 @@ namespace IpeaGeo.Classes
             m++;
             count = 0;
             soma = 0;
-
             int k = 0;
             //int v = 0;
 
@@ -646,7 +573,6 @@ namespace IpeaGeo.Classes
                     if (x[i, 0] < medias[k])
                     {
                         x[i, 1] = k;
-
                     }
                     else
                     {
@@ -658,11 +584,11 @@ namespace IpeaGeo.Classes
                 {
                     x[i, 1] = k;
                 }
-
             }
+            
             return (x);
-
         }
+        
         /// <summary>
         /// Retorna matriz de 2 colunas: dados e seus respectivos grupos
         /// </summary>
@@ -680,13 +606,11 @@ namespace IpeaGeo.Classes
             for (int i = 0; i < x.GetLength(0); i++)
             {
                 matriz[i, 0] = x[i, 0];
-
-
             }
+            
             for (int i = 0; i < y - 1; i++)
             {
                 matriz = classes(matriz);
-
             }
 
             return (matriz);
