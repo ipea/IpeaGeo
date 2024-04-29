@@ -18,10 +18,13 @@ namespace IpeaGeo
         private string strImagem = "";
 
         #region Métodos para a escolha do número de conglomerados
+        
         public double[] pseudoT, pseudoF, rSquare, partialRSquare, expectedRSquare, ccc;
+        
         #endregion
 
         // Public variables
+        
         public ArrayList mapaEspalhamento, mapaLisa, mapaGetis, mapaEscore, mapaGetis2;
 
         public bool isCluster, isGlobalDependence, isLocalDependence, isScan,
@@ -133,8 +136,6 @@ namespace IpeaGeo
                         dLinha[variaveisMapa[0, 1]] = variaveisMapa[i, 1];
                         dataSet1.Tables["Mapa"].Rows.Add(dLinha);
                     }
-
-
                 }
 
                 //Cluster espacial
@@ -186,94 +187,92 @@ namespace IpeaGeo
 
                 //Lisa
                 if (mapaLisa != null) if (mapaLisa.Count > 0)
+                {
+                    for (int v = 0; v < mapaLisa.Count; v++)
                     {
-                        for (int v = 0; v < mapaLisa.Count; v++)
+                        dataSet1.Tables.Add("Lisa_" + v.ToString());
+                        dataSet1.Tables["Lisa_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
+                        dataSet1.Tables["Lisa_" + v.ToString()].Columns.Add("LISA", Type.GetType("System.String"));
+                        int[] iPinta = (int[])mapaLisa[v];
+                        for (int i = 0; i < iPinta.Length; i++)
                         {
-                            dataSet1.Tables.Add("Lisa_" + v.ToString());
-                            dataSet1.Tables["Lisa_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
-                            dataSet1.Tables["Lisa_" + v.ToString()].Columns.Add("LISA", Type.GetType("System.String"));
-                            int[] iPinta = (int[])mapaLisa[v];
-                            for (int i = 0; i < iPinta.Length; i++)
-                            {
-                                DataRow dLinha = dataSet1.Tables["Lisa_" + v.ToString()].NewRow();
-                                dLinha["ID"] = id[i];
-                                dLinha["LISA"] = iPinta[i];
-                                dataSet1.Tables["Lisa_" + v.ToString()].Rows.Add(dLinha);
-                            }
-                            dataSet1.Tables.Add("Espalhamento_" + v.ToString());
-                            dataSet1.Tables["Espalhamento_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
-                            dataSet1.Tables["Espalhamento_" + v.ToString()].Columns.Add("X", Type.GetType("System.String"));
-                            dataSet1.Tables["Espalhamento_" + v.ToString()].Columns.Add("Y", Type.GetType("System.String"));
-                            double[,] dbEspalha = (double[,])mapaEspalhamento[v];
-                            for (int i = 0; i < iPinta.Length; i++)
-                            {
-                                DataRow dLinha = dataSet1.Tables["Espalhamento_" + v.ToString()].NewRow();
-                                dLinha["ID"] = id[i];
-                                dLinha["X"] = dbEspalha[i, 0];
-                                dLinha["Y"] = dbEspalha[i, 1];
-                                dataSet1.Tables["Espalhamento_" + v.ToString()].Rows.Add(dLinha);
-                            }
-
-
+                            DataRow dLinha = dataSet1.Tables["Lisa_" + v.ToString()].NewRow();
+                            dLinha["ID"] = id[i];
+                            dLinha["LISA"] = iPinta[i];
+                            dataSet1.Tables["Lisa_" + v.ToString()].Rows.Add(dLinha);
+                        }
+                        dataSet1.Tables.Add("Espalhamento_" + v.ToString());
+                        dataSet1.Tables["Espalhamento_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
+                        dataSet1.Tables["Espalhamento_" + v.ToString()].Columns.Add("X", Type.GetType("System.String"));
+                        dataSet1.Tables["Espalhamento_" + v.ToString()].Columns.Add("Y", Type.GetType("System.String"));
+                        double[,] dbEspalha = (double[,])mapaEspalhamento[v];
+                        for (int i = 0; i < iPinta.Length; i++)
+                        {
+                            DataRow dLinha = dataSet1.Tables["Espalhamento_" + v.ToString()].NewRow();
+                            dLinha["ID"] = id[i];
+                            dLinha["X"] = dbEspalha[i, 0];
+                            dLinha["Y"] = dbEspalha[i, 1];
+                            dataSet1.Tables["Espalhamento_" + v.ToString()].Rows.Add(dLinha);
                         }
                     }
+                }
 
                 //Getis*
                 if (mapaGetis != null) if (mapaGetis.Count > 0)
+                {
+                    for (int v = 0; v < mapaGetis.Count; v++)
                     {
-                        for (int v = 0; v < mapaGetis.Count; v++)
+                        dataSet1.Tables.Add("GetisAst_" + v.ToString());
+                        dataSet1.Tables["GetisAst_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
+                        dataSet1.Tables["GetisAst_" + v.ToString()].Columns.Add("GETIS_AST", Type.GetType("System.String"));
+                        int[] iPinta = (int[])mapaGetis[v];
+                        for (int i = 0; i < iPinta.Length; i++)
                         {
-                            dataSet1.Tables.Add("GetisAst_" + v.ToString());
-                            dataSet1.Tables["GetisAst_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
-                            dataSet1.Tables["GetisAst_" + v.ToString()].Columns.Add("GETIS_AST", Type.GetType("System.String"));
-                            int[] iPinta = (int[])mapaGetis[v];
-                            for (int i = 0; i < iPinta.Length; i++)
-                            {
-                                DataRow dLinha = dataSet1.Tables["GetisAst_" + v.ToString()].NewRow();
-                                dLinha["ID"] = id[i];
-                                dLinha["GETIS_AST"] = iPinta[i];
-                                dataSet1.Tables["GetisAst_" + v.ToString()].Rows.Add(dLinha);
-                            }
+                            DataRow dLinha = dataSet1.Tables["GetisAst_" + v.ToString()].NewRow();
+                            dLinha["ID"] = id[i];
+                            dLinha["GETIS_AST"] = iPinta[i];
+                            dataSet1.Tables["GetisAst_" + v.ToString()].Rows.Add(dLinha);
                         }
                     }
+                }
 
                 //Getis2 (Não asterisco)
                 if (mapaGetis2 != null) if (mapaGetis2.Count > 0)
+                {
+                    for (int v = 0; v < mapaGetis2.Count; v++)
                     {
-                        for (int v = 0; v < mapaGetis2.Count; v++)
+                        dataSet1.Tables.Add("Getis_" + v.ToString());
+                        dataSet1.Tables["Getis_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
+                        dataSet1.Tables["Getis_" + v.ToString()].Columns.Add("GETIS", Type.GetType("System.String"));
+                        int[] iPinta = (int[])mapaGetis2[v];
+                        for (int i = 0; i < iPinta.Length; i++)
                         {
-                            dataSet1.Tables.Add("Getis_" + v.ToString());
-                            dataSet1.Tables["Getis_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
-                            dataSet1.Tables["Getis_" + v.ToString()].Columns.Add("GETIS", Type.GetType("System.String"));
-                            int[] iPinta = (int[])mapaGetis2[v];
-                            for (int i = 0; i < iPinta.Length; i++)
-                            {
-                                DataRow dLinha = dataSet1.Tables["Getis_" + v.ToString()].NewRow();
-                                dLinha["ID"] = id[i];
-                                dLinha["GETIS"] = iPinta[i];
-                                dataSet1.Tables["Getis_" + v.ToString()].Rows.Add(dLinha);
-                            }
+                            DataRow dLinha = dataSet1.Tables["Getis_" + v.ToString()].NewRow();
+                            dLinha["ID"] = id[i];
+                            dLinha["GETIS"] = iPinta[i];
+                            dataSet1.Tables["Getis_" + v.ToString()].Rows.Add(dLinha);
                         }
                     }
+                }
 
                 //Escore
                 if (mapaEscore != null) if (mapaEscore.Count > 0)
+                {
+                    for (int v = 0; v < mapaEscore.Count; v++)
                     {
-                        for (int v = 0; v < mapaEscore.Count; v++)
+                        dataSet1.Tables.Add("Escore_" + v.ToString());
+                        dataSet1.Tables["Escore_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
+                        dataSet1.Tables["Escore_" + v.ToString()].Columns.Add("ESCORE", Type.GetType("System.String"));
+                        int[] iPinta = (int[])mapaEscore[v];
+                        for (int i = 0; i < iPinta.Length; i++)
                         {
-                            dataSet1.Tables.Add("Escore_" + v.ToString());
-                            dataSet1.Tables["Escore_" + v.ToString()].Columns.Add("ID", Type.GetType("System.String"));
-                            dataSet1.Tables["Escore_" + v.ToString()].Columns.Add("ESCORE", Type.GetType("System.String"));
-                            int[] iPinta = (int[])mapaEscore[v];
-                            for (int i = 0; i < iPinta.Length; i++)
-                            {
-                                DataRow dLinha = dataSet1.Tables["Escore_" + v.ToString()].NewRow();
-                                dLinha["ID"] = id[i];
-                                dLinha["ESCORE"] = iPinta[i];
-                                dataSet1.Tables["Escore_" + v.ToString()].Rows.Add(dLinha);
-                            }
+                            DataRow dLinha = dataSet1.Tables["Escore_" + v.ToString()].NewRow();
+                            dLinha["ID"] = id[i];
+                            dLinha["ESCORE"] = iPinta[i];
+                            dataSet1.Tables["Escore_" + v.ToString()].Rows.Add(dLinha);
                         }
                     }
+                }
             }
             catch (Exception er)
             {
@@ -287,7 +286,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 //http://www.gutgames.com/post/HTML-to-PDF.aspx
                 //TODO:http://www.codeproject.com/KB/graphics/iTextSharpTutorial.aspx
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -306,7 +304,7 @@ namespace IpeaGeo
 
                     if (eh_pdf == true)
                     {
-                        //Capturando os dados da regressao///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        // Capturando os dados da regressao
 
                         bool regressao = modelFit;
 
@@ -340,6 +338,7 @@ namespace IpeaGeo
                             enderecoMapa = reg.finalShape; enderecoBase = reg.database;
                             shapeCount = reg.polygons; metodo = reg.mapMethod;
                         }
+                        
                         if (isThematicMap && !isCluster)
                         {
                             IpeaGeo.Classes.clsReportPDF pdf = new IpeaGeo.Classes.clsReportPDF();
@@ -353,12 +352,13 @@ namespace IpeaGeo
 
                             }
                         }
+                        
                         if (isCluster)
                         {
                             IpeaGeo.Classes.clsReportPDF pdf = new IpeaGeo.Classes.clsReportPDF();
                             pdf.RelatorioPDF_Conglomerados(FileName, enderecoBase, enderecoMapa, endMapa, numeroConglomerados, fatorMinkowski, shapeCount, metodo, distancia, isSpatialCluster, nomeVariaveisMapa, tipoVizinhanca, coresMapaReg, endCCC);
-
                         }
+                        
                         if (isGlobalDependence)
                         {
                             IpeaGeo.Classes.clsReportPDF.GlobalDependence gd = new Classes.clsReportPDF.GlobalDependence();
@@ -399,27 +399,25 @@ namespace IpeaGeo
                             tango = gd.tangoIndex;
                             tangoP = gd.tangoPValue;
                         }
+                        
                         if (isLocalDependence)
                         {
                             IpeaGeo.Classes.clsReportPDF pdf = new IpeaGeo.Classes.clsReportPDF();
                             pdf.RelatorioPDF_DependenciaLocal(FileName, enderecoBase, enderecoMapa, shapeCount, strMapaLisa, strMapaGetis, strMapaGetis2, strMapaEscore, strMapaEspalhamento, tipoVizinhanca, tipoCorrecao, confiabilidade, populacao, variaveisSelecionadasQuant, coresMapaReg);
-
                         }
+                        
                         if (isScan)
                         {
                             IpeaGeo.Classes.clsReportPDF pdf = new IpeaGeo.Classes.clsReportPDF();
                             pdf.RelatorioPDF_Scan(FileName, enderecoBase, enderecoMapa, endMapa, shapeCount, metodo, pValor, coresMapaReg, variavelBase, variavelEvento, strNumeroSimulacoes, numeroPontosGrid, raioMaximo, raioMinimo, proporcaoMaxima, enderecoHistograma);
-
                         }
+                        
                         if (isSegregation)
                         {
                             IpeaGeo.Classes.clsReportPDF pdf = new IpeaGeo.Classes.clsReportPDF();
                             pdf.RelatorioPDF_Segregacao(FileName, segregacaoValores, segregacaoIndices, segregacaoVariaveis);
                         }
-
-
                     }
-
                 }
             }
             catch (Exception er)
@@ -458,9 +456,9 @@ namespace IpeaGeo
         {
             try
             {
-
                 //! Screen coordinates
                 Point ScreenCoord = new Point(MousePosition.X, MousePosition.Y);
+                
                 //! Browser coordinates
                 Point BrowserCoord = webBrowser1.PointToClient(ScreenCoord);
                 HtmlElement elem = webBrowser1.Document.GetElementFromPoint(BrowserCoord);
@@ -506,7 +504,6 @@ namespace IpeaGeo
         {
             try
             {
-
                 FileInfo fInfo = new FileInfo(strImagem);
                 string strImage = fInfo.Name;
                 string[] cPos = new string[2] { "_", "." };
@@ -552,11 +549,11 @@ namespace IpeaGeo
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        
         private void ExportaDadosEspalhamento(string strVariavel)
         {
             try
             {
-
                 FileInfo fInfo = new FileInfo(strImagem);
                 string strImage = fInfo.Name;
                 string[] cPos = new string[2] { "_", "." };
@@ -573,6 +570,7 @@ namespace IpeaGeo
                 saveFileDialog1.Filter = "Excel (*.xls)|*.xls|Access (*.mdb)|*.mdb|XML (*.xml)|*.xml";
                 saveFileDialog1.FilterIndex = 1;
                 saveFileDialog1.RestoreDirectory = true;
+                
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -602,11 +600,11 @@ namespace IpeaGeo
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        
         private void ExportaDadosGetis(string strVariavel)
         {
             try
             {
-
                 FileInfo fInfo = new FileInfo(strImagem);
                 string strImage = fInfo.Name;
                 string[] cPos = new string[2] { "_", "." };
@@ -652,11 +650,11 @@ namespace IpeaGeo
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        
         private void ExportaDadosEscore(string strVariavel)
         {
             try
             {
-
                 FileInfo fInfo = new FileInfo(strImagem);
                 string strImage = fInfo.Name;
                 string[] cPos = new string[2] { "_", "." };
@@ -673,6 +671,7 @@ namespace IpeaGeo
                 saveFileDialog1.Filter = "Excel (*.xls)|*.xls|Access (*.mdb)|*.mdb|XML (*.xml)|*.xml";
                 saveFileDialog1.FilterIndex = 1;
                 saveFileDialog1.RestoreDirectory = true;
+                
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -702,21 +701,17 @@ namespace IpeaGeo
                 MessageBox.Show(er.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        
         private void exportarDadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-
                 FileInfo fInfo = new FileInfo(strImagem);
                 string strImage = fInfo.Name;
 
                 frmSpatialRegression frmreg = new frmSpatialRegression();
 
                 DataTable residuos = frmreg.DataTable_Residuos;
-
-
-
-
 
                 if (strImage == "Mapa.jpeg" && modelFit == false)
                 {
@@ -726,6 +721,7 @@ namespace IpeaGeo
                     saveFileDialog1.Filter = "Excel (*.xls)|*.xls|Access (*.mdb)|*.mdb|XML (*.xml)|*.xml";
                     saveFileDialog1.FilterIndex = 1;
                     saveFileDialog1.RestoreDirectory = true;
+                    
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         Cursor.Current = Cursors.WaitCursor;
@@ -758,6 +754,7 @@ namespace IpeaGeo
                     saveFileDialog1.Filter = "Excel (*.xls)|*.xls|Access (*.mdb)|*.mdb|XML (*.xml)|*.xml";
                     saveFileDialog1.FilterIndex = 1;
                     saveFileDialog1.RestoreDirectory = true;
+                    
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         Cursor.Current = Cursors.WaitCursor;
@@ -790,6 +787,7 @@ namespace IpeaGeo
                     saveFileDialog1.Filter = "Excel (*.xls)|*.xls|Access (*.mdb)|*.mdb|XML (*.xml)|*.xml";
                     saveFileDialog1.FilterIndex = 1;
                     saveFileDialog1.RestoreDirectory = true;
+                    
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         Cursor.Current = Cursors.WaitCursor;
@@ -831,10 +829,8 @@ namespace IpeaGeo
                     ExportaDadosEscore(strImage);
                 }
 
-
                 //Caso queiramos exportar dados de regressao            
                 //DataTable residuos = frmreg.DataTable_Residuos;
-
 
                 if (modelFit == true)
                 {
@@ -844,6 +840,7 @@ namespace IpeaGeo
                     saveFileDialog1.Filter = "Excel (*.xls)|*.xls|Access (*.mdb)|*.mdb|XML (*.xml)|*.xml";
                     saveFileDialog1.FilterIndex = 1;
                     saveFileDialog1.RestoreDirectory = true;
+                    
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         Cursor.Current = Cursors.WaitCursor;
@@ -869,9 +866,6 @@ namespace IpeaGeo
                         }
                         Cursor.Current = Cursors.Default;
                     }
-
-
-
                 }
             }
             catch (Exception er)
@@ -882,7 +876,6 @@ namespace IpeaGeo
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-
         }
     }
 }
