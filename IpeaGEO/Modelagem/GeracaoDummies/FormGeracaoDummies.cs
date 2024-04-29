@@ -15,8 +15,7 @@ namespace IpeaGeo
 
         private DataTable m_dt_dados = new DataTable();
         public DataTable TabelaDados
-        {
-                        
+        {                        
             get { return m_dt_dados; }
             set 
             { 
