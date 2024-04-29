@@ -109,10 +109,7 @@ namespace IpeaGeo.Modelagem
                 string[] variaveis_numericas = clt.RetornaColunasNumericas(m_dt_tabela_dados);
                 this.userControlPropensityScoreMatching1.ZeraControle();
                 this.userControlPropensityScoreMatching1.VariaveisDB = clt.RetornaColunasNumericas(this.m_dt_tabela_dados);
-                this.userControlPropensityScoreMatching1.VariaveisList = clt.RetornaColunasNumericas(this.m_dt_tabela_dados);
-
-                                             
-                             
+                this.userControlPropensityScoreMatching1.VariaveisList = clt.RetornaColunasNumericas(this.m_dt_tabela_dados);                                                             
             }
 
             if (!this.tabControl1.TabPages.Contains(tabPage0))
@@ -204,10 +201,6 @@ namespace IpeaGeo.Modelagem
             BLogicRegressaoDadosBinarios blr = new BLogicRegressaoDadosBinarios();
             BLogicPropensityScoreMatching blrpsMatch = new BLogicPropensityScoreMatching();
 
-
-
-
-
             if (ckbLimpaJanelaOutput.Checked)
             {
                 this.userControlRichTextOutput1.Texto = "";
@@ -253,28 +246,27 @@ namespace IpeaGeo.Modelagem
             if (rdbNearestNeighbo.Checked) blrpsMatch.Matching = TipoDeMatching.NearestNeighbo;
             if (rdbStratification.Checked) blrpsMatch.Matching = TipoDeMatching.Stratification;
             if (rdbKernel.Checked)
-                switch (comboBoxListaKernel.SelectedIndex)
-                {
-                    case 0:
-                        blrpsMatch.Matching = TipoDeMatching.Gaussiano;
-                        break;
-                    case 1:
-                        blrpsMatch.Matching = TipoDeMatching.Epanechnikov;
-                        break;
-                    case 2:
-                        blrpsMatch.Matching = TipoDeMatching.Biweight;
-                        break;
-                    case 3:
-                        blrpsMatch.Matching = TipoDeMatching.Triangular;
-                        break;
-                    case 4:
-                        blrpsMatch.Matching = TipoDeMatching.Retangular;
-                        break;
-                    default:
-                        blrpsMatch.Matching = TipoDeMatching.Gaussiano;
-                        break;
-                }
-
+            switch (comboBoxListaKernel.SelectedIndex)
+            {
+                case 0:
+                    blrpsMatch.Matching = TipoDeMatching.Gaussiano;
+                    break;
+                case 1:
+                    blrpsMatch.Matching = TipoDeMatching.Epanechnikov;
+                    break;
+                case 2:
+                    blrpsMatch.Matching = TipoDeMatching.Biweight;
+                    break;
+                case 3:
+                    blrpsMatch.Matching = TipoDeMatching.Triangular;
+                    break;
+                case 4:
+                    blrpsMatch.Matching = TipoDeMatching.Retangular;
+                    break;
+                default:
+                    blrpsMatch.Matching = TipoDeMatching.Gaussiano;
+                    break;
+            }
 
             switch (cbxAT.SelectedIndex)
             {
@@ -289,12 +281,9 @@ namespace IpeaGeo.Modelagem
                     break;
             }
 
-
             double[,] variavelCategoria = clt.GetMatrizFromDataTable(blrpsMatch.TabelaDados, blrpsMatch.VariaveisDependentes);
 
             #endregion
-
-            //TODO: adicionei este teste de bandwidth
 
             #region Checa bandwidth
 
@@ -356,7 +345,6 @@ namespace IpeaGeo.Modelagem
                     }
                     else
                     {
-
                         blr.TabelaDados = blrpsMatch.TabelaDados.Copy();
 
                         for (int z = 0; z < variavelCategoria.GetLength(0); z++)
@@ -408,7 +396,6 @@ namespace IpeaGeo.Modelagem
                         for (int i = 0; i < blr.TabelaDados.Rows.Count; i++) dblOutocme[i] = (double)blr.TabelaDados.Rows[i][cmbOutcome.SelectedItem.ToString()];
                         blrpsMatch.Outcome = dblOutocme;
 
-
                         if (rdbStratification.Checked)
                         {
                             //Define o vetor de estrato
@@ -431,13 +418,13 @@ namespace IpeaGeo.Modelagem
 
                         #region Faz a análise do teste de médias
 
-
-
                         #endregion
                     }
                 }
             }
+            
             #endregion
+            
             if (cbxAT.Text=="ATT")
             {
                 blrpsMatch.imprimirResultadoPropensityScore(cmbOutcome.Text);
@@ -469,7 +456,6 @@ namespace IpeaGeo.Modelagem
                 comboBoxListaKernel.Visible = false;
                 gbxBandWidth.Visible = false;
             }
-
         }
 
         // Selecionando para o Outcome as variavis disponiveis menos as indep. e a dependente
@@ -501,6 +487,7 @@ namespace IpeaGeo.Modelagem
                     cmbOutcome.Items.Remove(texto);
                 }
         }
+        
         private void cmbEstrato_Click(object sender, EventArgs e)
         {
             int a = 0;
