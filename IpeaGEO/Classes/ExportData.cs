@@ -89,7 +89,6 @@ namespace IpeaGeo
                         string strExtensao = Path.GetExtension(saveFileDialog1.FileName).ToUpper();
                         string strFile = saveFileDialog1.FileName;
 
-
                         //ExportData exporta = new ExportData();
 
                         if (strExtensao == ".CSV")
@@ -137,7 +136,6 @@ namespace IpeaGeo
                             }
 
                             meustream.Close();
-
                         }
 
                         if (mapa.salvamento_efetuado == true)
@@ -221,7 +219,6 @@ namespace IpeaGeo
             cnt = 0;
             foreach (DataColumn dc in ds.Columns)
             {
-
                 insertSql += dc.ColumnName;
                 valueClause += "@" + dc.ColumnName;
 
@@ -233,7 +230,6 @@ namespace IpeaGeo
                 cnt++;
             }
             insertSql += ")" + valueClause + ")";
-
 
             cnt = 0;
             foreach (DataRow dr in ds.Rows)
